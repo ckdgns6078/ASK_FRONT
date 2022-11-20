@@ -4,9 +4,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import { useState , useEffect} from 'react';
+import Acom from '../component/Acom';
 function ATabs(props) {
   const { children, value, index, ...other } = props;
+  
+  useEffect(() =>{
+    console.log("useEffect실행");
+    
+  },[]);
 
   return (
     <div
@@ -74,7 +80,7 @@ export default function VerticalTabs() {
         회사 설정
       </ATabs>
       <ATabs value={value} index={1}>
-       사용자 관리
+        <Acom/>
       </ATabs>
       <ATabs value={value} index={2}>
       모바일관리

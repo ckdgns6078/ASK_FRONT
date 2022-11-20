@@ -1,56 +1,166 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
+import axios from "axios";
 
-const Login1 = () =>{
-    const [id , SetId] = useState();
-    const [com , SetCom] = useState();
-    const [pw , SetPw] = useState();
-    const [pwC , SetPwC] = useState();
-    const [email , SetEmail] = useState();
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import ask from '../img/ask.png';
+import { positions } from '@mui/system';
+const Login1 = () => {
+    //아이디
+    const [id, SetId] = useState();
+    //비밀번호
+    const [pw, SetPw] = useState();
 
-    //정규표현식 사용할 변수값
-    const idCheck = /^[a-zA-Z0-9]{6,20}$/; // 아이디 정규표현식
-    const comCheck = /^[가-힣a-zA-Z]+$/;//이름 또는 기업명 정규표현식
-    const pwCheck =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/; // 비밀번호 정규표현식
-    const emailCheck = /^[-A-Za-z0-9_]+[-A-Za-z0-9_.][@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.][.]{1}[A-Za-z]{1,5}$/; // email 정규표현식
-    
-    
     //id 검사 
-    const handleChangeId = (e) =>{
-
-        if(idCheck.test(e.target.value)){
-            SetId(e.target.value);
-        }
-    };
-    const handleChangeCom = (e) =>{
-        if(comCheck.test(e.target.value)){
-
-        }
-    };
-    
-    const handleChangePw = (e) =>{
-    };
-    const handleChangePwC = (e) =>{
-    };
-    const handleChangeEmail = (e) =>{
+    const handleChangeId = (e) => {
+        SetId(e.target.value);
+  
     };
 
-    
+    //비밀번호 검사
+    const handleChangePw = (e) => {
+        SetPw(e.target.value);
+    };
 
-    return(
-        <div>
+    // 로그인
+    const signUp = () => {
+            // window.alert("제대로 입력했어욥");
+            axios.post('http://192.168.2.82:5000/login', {
+                id: id,
+                pw: pw,
+            }).then(function (response) {
+                if(response.data){
+                    sessionStorage.setItem("id",id);
+                    window.location.href = "http://localhost:3000/Apage?id="+sessionStorage.getItem("id");
+                }else{
+                    window.alert("login failed");
+                }
+            }).catch(function (error) {
+                console.log("error :", error);
+            });
+ 
+    }
 
-            <p>아이디 : <input type = "text" onChange={handleChangeId}/></p>
-            <p>이름 또는 기업명 : <input type = "text"onChange ={handleChangeCom}/> </p>
-            <p>비밀번호 : <input type = "password" onChange ={handleChangePw}/> </p>
-            <p>비밀번호 확인 : <input type = "password" onChange ={handleChangePwC}/> </p>
-            <p>이메일 주소 : <input type = "text" onChange ={handleChangeEmail}/> </p>
-            
+
+
+
+
+    return (
+        <div >
+
+            <CssBaseline />
+            <Box
+                style={{ position: 'relative' }}
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+
+                }}
+            >
+
+                <img src={ask} style={{ width: '200px' }} />
+                <br />
+
+
+                {/* <Typography component="h1" variant="h5">
+           회원가입
+          </Typography> */}
+                <h3> <strong>로그인</strong></h3>
+
+                <br />
+                <br />
+
+
+
+
+
+
+                <Box component="form" noValidate sx={{ mt: 1 }}>
+
+
+
+                    <h5 style={{ position: 'absolute', top: '165px' }}><strong>아이디</strong>  </h5>
+
+
+
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="id"
+                        name="id"
+                        autoComplete="id"
+                        autoFocus
+                        onChange={handleChangeId}
+                    />
+                    <br />
+                    <br />
+
+
+
+
+                    <h5 style={{ position: 'absolute', top: '300px' }}><strong>비밀번호</strong>
+                    </h5>
+
+
+                    <TextField
+                        onChange={handleChangePw}
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                    />
+                    <br />
+
+
+
+
+
+
+                    <Button
+                        onClick={signUp}
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 3 }}
+                        style={{ backgroundColor: '#2F58B8', height: '55px', fontSize: '20px' }}
+                    >
+                        <strong>로그인</strong>
+                    </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link href="#" variant="body2">
+                                아이디 찾기
+                            </Link>
+                        </Grid>
+                        <Grid item xs>
+                            <Link href="#" variant="body2">
+                                {"비밀번호 찾기"}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Box>
+
+
         </div>
     );
-
-
-
 };
-export default Login1;
 
+export default Login1;
