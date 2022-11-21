@@ -123,7 +123,7 @@ const Member = () => {
                 console.log("response값" , response);
                 if(response.data){
                     window.alert("회원가입 완료");
-                    window.location.replace("http://localhost:3000/Login1");
+                    window.location.replace("http://localhost:3000/Login");
                 }else{
                     window.alert("회원가입 실패"); 
                 }

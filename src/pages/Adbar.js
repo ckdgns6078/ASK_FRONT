@@ -9,6 +9,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Abar from '../bar/Abar';
 import LoginIcon from '@mui/icons-material/Login';
 const AdBar = () => {
+    const login = () => {
+        window.location.href="/Login"
+      }
+      const Member = () => {
+        window.location.href="/Member"
+      }
     return (
         <div>
              <Navbar>
@@ -17,9 +23,9 @@ const AdBar = () => {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                    <Button variant="light"><LoginIcon/>로그인</Button>{' '}
+                    <Button variant="light" onClick={login}><LoginIcon/>로그인</Button>{' '}
                       
-                    <button className="button">회원가입</button>
+                    <button className="button" onClick={Member}>회원가입</button>
                         
                     </Navbar.Text>
                     </Navbar.Collapse>

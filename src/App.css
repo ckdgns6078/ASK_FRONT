@@ -122,9 +122,7 @@
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-  position: absolute;
-  left: 200px;
-  top: 450px;
+
 
   }
 
@@ -135,3 +133,63 @@
   transform: translateY(-7px);
 }
 
+
+.Atmp1{
+  width: 100px;
+  height: 65px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #2F58B8;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(236, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+
+  
+}
+.Atmp1:hover {
+  background-color: #ffffff;
+  box-shadow: 0px 15px 20px rgba(6, 6, 7, 0.4);
+  color: #000;
+  transform: translateY(-7px);
+}
+
+
+.AMo1{
+  width: 100px;
+  height: 65px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #2F58B8;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(236, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+ 
+  
+  
+
+}
+.AMo1:hover {
+  background-color: #ffffff;
+  box-shadow: 0px 15px 20px rgba(6, 6, 7, 0.4);
+  color: #000;
+  transform: translateY(-7px);
+}
+
+.td {
+  text-align: left;
+}

@@ -4,13 +4,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Grid from '@mui/material/Grid';
 import BTabs from '../pages/BTabs';
 import MiddleBar from '../pages/MiddleBar';
+import TopBar from '../pages/TopBar';
 const Bbar = () => {
     return (
         <div>
+                 <TopBar/>
                  <MiddleBar/>
                 <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'40px'}}>
            
-                    <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
+                    <Navbar.Brand href="#" style={{position:'absolute',left:'320px'}}>
                             <Grid container>
                                 <Grid item  xs>
                                 <Navbar.Brand href="#"><strong>사원 관리</strong></Navbar.Brand>
