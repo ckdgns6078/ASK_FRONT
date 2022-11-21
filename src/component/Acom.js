@@ -3,6 +3,7 @@ import axios from "axios";
 import { height } from "@mui/system";
 import { Button } from "react-bootstrap";
 import { UnpublishedTwoTone } from "@mui/icons-material";
+import { TextField } from "@mui/material";
 
 const Acom = () => {
     const [firstCheck, SetFirstCheck] = useState();
@@ -17,12 +18,34 @@ const Acom = () => {
         compEmail: '',  //이메일
     });
 
+    const [test1 , SetTest1] = useState();
+
+    
+
     // 로그인했는지 검사
     useEffect(() => {
-        if (sessionStorage.getItem("id") == null) {
+        if (sessionStorage.getItem("id") == null || sessionStorage.getItem("uid") == null) {
             window.alert("먼저 로그인을 해야합니다.");
             window.location.href = "http://localhost:3000/Login";
         }
+        axios.post('http://192.168.2.82:5000/readCompany', {
+            id: sessionStorage.getItem("id")
+
+        }).then(function (response) {
+            SetInput({
+                "compNum": response.data[0].compNum,    //사업자등록번호
+                "compName": response.data[0].compName,   //상호
+                "compCEO": response.data[0].compCEO,    //대표자명
+                "compAddress": response.data[0].compAddress,//주소
+                "compType": response.data[0].compType,   //업태
+                "compItems": response.data[0].compItems,  //종목
+                "compEmail": response.data[0].compEmail  //이메일
+            })
+
+        }).catch(function (error) {
+            console("readCompany error :", error);
+        });
+
     }, []);
 
     //입력값 onChange 함수
@@ -44,20 +67,21 @@ const Acom = () => {
             compAddress: input.compAddress,
             compType: input.compType,
             compItems: input.compItems,
-            compEmail: input.compEmail
+            compEmail: input.compEmail,
+            id: sessionStorage.getItem("id")
 
         }).then(function (response) {
-            if(!response.data){
+            if (!response.data) {
                 window.alert("저장된 데이터가 있습니다. 데이터를 바꿔주세요 \n수정을 원하시면 수정버튼을 눌러주세요");
             }
         }).catch(function (error) {
-            console.log("error",error);
+            console.log("error", error);
         });
     }
 
     //수정 버튼 눌렀을때 실행되는 함수
     const requestModify = () => {
-        axios.post('http://192.168.2.82:5000/updateCompany',{
+        axios.post('http://192.168.2.82:5000/updateCompany', {
             compNum: input.compNum,
             compName: input.compName,
             compCEO: input.compCEO,
@@ -65,13 +89,15 @@ const Acom = () => {
             compType: input.compType,
             compItems: input.compItems,
             compEmail: input.compEmail
-        }).then(function (response){
-            console.log("updateCompany response 값 :" , response);
-        }).catch(function (error){
-            console.log("updateCompany error :",error);
+
+        }).then(function (response) {
+            console.log("updateCompany response 값 :", response);
+        }).catch(function (error) {
+            console.log("updateCompany error :", error);
         });
 
     }
+
 
 
     return (
@@ -85,13 +111,15 @@ const Acom = () => {
                         <h6><strong>사업자등록번호</strong></h6>
                     </td>
                     <td>
-                        <input name='compNum' type="text" onChange={onChangeInput} value={input.compNum}></input>
+                        <input name='compNum' type="text" onChange={onChangeInput} value={input.compNum} ></input>
+                        
+                    
                     </td>
 
                     <td>
                         <h6><strong>대표자명</strong></h6>
                     </td>
-                   
+
                     <td>
                         <input name='compCEO' type="text" onChange={onChangeInput} value={input.compCEO}></input>
                     </td>
@@ -141,11 +169,10 @@ const Acom = () => {
 
             <div>
                 <button onClick={requestSave}>저장</button>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
                 <button onClick={requestModify}>수정</button>
-
             </div>
         </div>
     )

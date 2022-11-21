@@ -35,16 +35,22 @@ const Login1 = () => {
 
     // 로그인
     const signUp = () => {
-            // window.alert("제대로 입력했어욥");
             axios.post('http://192.168.2.82:5000/login', {
-                id: id,
-                pw: pw,
+                userId: id,
+                userPw: pw,
             }).then(function (response) {
                 if(response.data){
+                    axios.post('http://192.168.2.82:5000/getMaster', {
+                        userId : id
+                    }).then(function(response){
+                        sessionStorage.setItem("uid" , response.data);
+                    }).catch(function(error){
+                        console.log("getMaster error" , error);
+                    });
                     sessionStorage.setItem("id",id);
-                    window.location.href = "http://localhost:3000/Apage?id="+sessionStorage.getItem("id");
+                    window.location.href = "http://localhost:3000/Apage?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
                 }else{
-                    window.alert("login failed");
+                    window.alert("로그인 정보가 없습니다.");
                 }
             }).catch(function (error) {
                 console.log("error :", error);

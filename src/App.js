@@ -13,6 +13,7 @@ import Advertisement_1 from './pages/Advertisement_1';
 import Member from './pages/Member';
 import Login1 from './pages/Login1';
 import Acom from './component/Acom';
+import UserCom from './component/UserCom';
 function App() {
   return (
     <div className="App">
@@ -31,6 +32,7 @@ function App() {
     <Route path="Login" element={<Login1/>}></Route>
     <Route path="Acom" element={<Acom/>}></Route>
     <Route path="TopBar" element={<TopBar/>}></Route>
+    <Route path="UserCom" element={<UserCom/>}></Route>
   </Routes>
 </BrowserRouter>
 
