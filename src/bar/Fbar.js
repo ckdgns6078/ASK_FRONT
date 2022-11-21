@@ -4,10 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Grid from '@mui/material/Grid';
 import FTabs from '../pages/FTabs';
 import MiddleBar from '../pages/MiddleBar';
+import TopBar from '../pages/TopBar';
 
 const Fbar = () => {
     return (
         <div>
+                 <TopBar/>
                  <MiddleBar/>
                 <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
            

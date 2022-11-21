@@ -5,15 +5,17 @@ import Grid from '@mui/material/Grid';
 import ATabs from '../pages/ATabs';
 import MiddleBar from '../pages/MiddleBar';
 import { positions } from '@mui/system';
+import TopBar from '../pages/TopBar';
 const Abar = () => {
     return (
         <div>
+                    <TopBar/>
                  <MiddleBar/>
                 <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
            
                     <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
                             <Grid container  >
-                                
+                             
                                 <Grid item  xs >
                                 <Navbar.Brand href="#"> <strong>회사 설정</strong></Navbar.Brand>     
                                 </Grid>

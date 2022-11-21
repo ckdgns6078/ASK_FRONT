@@ -9,6 +9,11 @@ import Advertisement_2 from './Advertisement_2';
 
 
 const advertisement_1 = () => {
+
+    const back = () => {
+        window.location.href="/Apage"
+      }
+
     return (
         <div >
             <div className='main'>
@@ -16,7 +21,7 @@ const advertisement_1 = () => {
             <Grid container spacing={2} >
                 <Grid item xs={6} >
                     <img src={main_2_img} className='main_2_img' />
-                    <button className="button1" >ACCOUNTING 시작하기</button>
+                    <button className="button1" onClick={back} >ACCOUNTING 시작하기</button>
                 </Grid>
                 <Grid item xs={6}>
                 <img src={main_1_img} style={{width:'900px',height:'600px'}}/>

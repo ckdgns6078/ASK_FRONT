@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useState , useEffect} from 'react';
 import Acom from '../component/Acom';
+import TopBar from './TopBar';
+import Bcom from '../component/Bcom';
+import Ccom from '../component/Ccom';
 function ATabs(props) {
   const { children, value, index, ...other } = props;
   
@@ -53,40 +56,42 @@ export default function VerticalTabs() {
 
   return (
     <div>
-        
+      
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '700px' }}
     >
       
       <Tabs
         orientation="vertical"
-        variant="scrollable"
+        // variant="scrollable"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
+        style={{width:'300px'}}
       >
             <div>
                 <br/>
-        <h4  style={{color:'#2F58B8'}}> &nbsp; &nbsp; <strong >회사 설정</strong>  &nbsp; &nbsp; </h4>
+        <h2  style={{color:'#2F58B8'}}>&nbsp; &nbsp; <strong >회사 설정</strong> &nbsp; &nbsp; </h2>
         </div>
+ 
     
-        <Tab label="회사 설정" {...a11yProps(0)} />
-        <Tab label=" 시용자 관리" {...a11yProps(1)} />
-        <Tab label=" 모바일관리" {...a11yProps(2)} />
+        <Tab label="회사 설정" {...a11yProps(0)} style={{fontSize:'25px'}}  />
+        <Tab label=" 시용자 관리" {...a11yProps(1)} style={{fontSize:'25px'}} />
+        <Tab label=" 모바일관리" {...a11yProps(2)}  style={{fontSize:'25px'}}/>
 
       </Tabs>
       <ATabs value={value} index={0}>
-        회사 설정
+        <strong> 회사 설정</strong> 
       </ATabs>
       <ATabs value={value} index={1}>
         <Acom/>
       </ATabs>
       <ATabs value={value} index={2}>
-      모바일관리
+      사용자관리<Bcom/>
       </ATabs>
       <ATabs value={value} index={3}>
-        Item Four
+        모바일 관리<Ccom/>
       </ATabs>
 
     </Box>

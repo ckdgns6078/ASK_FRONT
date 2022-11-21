@@ -5,9 +5,11 @@ import Grid from '@mui/material/Grid';
 import DTabs from '../pages/DTabs';
 import MiddleBar from '../pages/MiddleBar';
 import { positions } from '@mui/system';
+import TopBar from '../pages/TopBar';
 const Dbar = () => {
     return (
         <div>
+                 <TopBar/>
                  <MiddleBar/>
                 <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
            
