@@ -58,7 +58,7 @@ export default function VerticalTabs() {
     <div>
       
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '700px' }}
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '700px'  }}
     >
       
       <Tabs
@@ -82,16 +82,16 @@ export default function VerticalTabs() {
 
       </Tabs>
       <ATabs value={value} index={0}>
-        <strong> 회사 설정</strong> 
+      <Acom/>
       </ATabs>
       <ATabs value={value} index={1}>
         <Acom/>
       </ATabs>
       <ATabs value={value} index={2}>
-      사용자관리<Bcom/>
+        <Bcom/>
       </ATabs>
       <ATabs value={value} index={3}>
-        모바일 관리<Ccom/>
+        <Ccom/>
       </ATabs>
 
     </Box>

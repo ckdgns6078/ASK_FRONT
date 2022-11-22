@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import SMAcom from '../salary_management/SMAcom';
 
 function ETabs(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +73,7 @@ export default function VerticalTabs() {
 
       </Tabs>
       <ETabs value={value} index={0}>
-       ????????
+       <SMAcom/>
       </ETabs>
       <ETabs value={value} index={1}>
        ??????????

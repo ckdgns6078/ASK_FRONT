@@ -3,14 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Checkbox from '@mui/material/Checkbox';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Container from '@mui/material/Container';
 
-
-
-
-const Ccom = () => {
+const PMDcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
- //모달 함수
+    //모달 함수
     const [DelShow, setMDelShow] = useState(false);
     const [ModifyShow, setModifyShow] = useState(false);
     const [show, setShow] = useState(false);
@@ -24,14 +22,15 @@ const Ccom = () => {
 
     const MdClose = () => setModifyShow(false);
     const MdShow = () => setModifyShow(true);
-
-
+    
+    //세금
+    const [taxdata, setTaxData] = useState();
 
 
 
     return (
         <div style={{width:'1080px' ,position:'relative'}}>
-             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>사용자 관리 </strong></h2>
+             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>세금 관리 </strong></h2>
             <br/>
             <br/>
             <br/>
@@ -44,22 +43,24 @@ const Ccom = () => {
                 position:'absolute',
                 left:'100px'
             }}>
-                <tr style={{backgroundColor:'#bdc3c7' , }}>
+                <tr style={{backgroundColor:'#f1f2f6' , }}>
                 <td style={{border:"1px solid gray"}}>
                     <Checkbox {...label} defaultChecked />
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>아이디</strong>
+                        <strong>세금 코드</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>비밀번호</strong>
+                        <strong>세금명</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>사원 코드</strong>
+                        <strong>세금 항목</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>사용자명</strong>
+                        <strong>비고</strong>
                     </td>
+                    
+                
                 </tr>  
        
                     
@@ -68,10 +69,12 @@ const Ccom = () => {
                         data && data.map((e, idx) =>
                         <tr >
                             <td><Checkbox {...label} defaultChecked /></td>
-                            <td>아이디 넣을거</td>
-                            <td>비번</td>
-                            <td>사용자 머시기 받아올거</td>
-                            <td>권한 머시기</td>
+                            <td>세금 코드 넣을곳</td>
+                            <td>세금명 넣을곳</td>
+                            <td> 세금 항목 받아올거</td>
+                            <td>비고 넣을곳 </td>
+                          
+                        
                         </tr>
                         )
                     }
@@ -80,17 +83,19 @@ const Ccom = () => {
                     <Checkbox {...label} defaultChecked />
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>wdfkr0630</strong>
+                        <strong>0001</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>159487z@</strong>
+                        <strong>4대보험@</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>2020315010</strong>
+                        <strong>국민연금</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>신종락</strong>
+                        <strong></strong>
                     </td>
+                   
+                
                 </tr>  
 
                     
@@ -121,7 +126,7 @@ const Ccom = () => {
                 <Grid   sx={{md:30}} > <button onClick={DeShow} className="Atmp1">  삭제</button></Grid>
             </Grid> */}
                 <div>
-                <button   style={{position:'absolute' ,left:"0px"}} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
+                <button   style={{position:'absolute' ,left:"0px"}} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button> 
                 <button style={{position:'absolute' ,left:"110px"}} onClick={MdShow} className="Atmp1">  <strong>수정</strong></button>
                 <button style={{position:'absolute' ,left:"220px"}} onClick={DeShow} className="Atmp1"> <strong>삭제</strong> </button>
 
@@ -139,13 +144,49 @@ const Ccom = () => {
              centered
              size="xl"
             show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',}}>
+                <Modal.Title style={{color:'#ffffff'}}><strong> 사원 등록</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>추가!</Modal.Body>
+                <Modal.Body style={{backgroundColor:'#f1f2f6'}}>
+             
+                <Container> 
+                <br/>
+                <table style={{border:'1px solid', width:'1000px', textAlign:"center", }}>
+                    <tr  style={{border:'1px solid'}}>
+                        <td  style={{border:'1px solid'}}> </td>
+                        <td  style={{border:'1px solid'}}>세금 목록</td>
+                        <td  style={{border:'1px solid'}}>  <Checkbox {...label} defaultChecked /> </td>
+                    </tr>
+                    
+                    { 
+                       
+                            taxdata && taxdata.map((e,idx) =>
+                        <tr>  
+                            <td  style={{border:'1px solid'}}>{idx + 1}</td>
+                            <td  style={{border:'1px solid'}}> 세금명 넣을거</td>
+                            <td  style={{border:'1px solid'}}>  <Checkbox {...label} defaultChecked /> </td>
+                        </tr>  
+
+                    )}
+
+                    <tr>
+                        <td  style={{border:'1px solid'}}>1</td>
+                        <td  style={{border:'1px solid'}}>소득세</td>
+                        <td  style={{border:'1px solid'}}><Checkbox {...label} defaultChecked /></td>
+                    </tr>
+                </table>
+               </Container>
+                    
+
+
+
+        
+
+
+                </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    취소
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
                    추가
@@ -156,7 +197,7 @@ const Ccom = () => {
             {/* 수정 */}
             <Modal 
              centered
-             size="xl"
+             size="lg"
             show={ModifyShow} onHide={MdClose} animation={false}>
                 <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
@@ -200,4 +241,4 @@ const Ccom = () => {
     );
 };
 
-export default Ccom;
+export default PMDcom;
