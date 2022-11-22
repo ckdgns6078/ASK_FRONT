@@ -4,6 +4,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import ATGAcom from '../component/ATGAcom';
+import ATGBcom from '../component/ATGBcom';
+import ATGccom from '../component/ATGccom';
+import ATGDcom from '../component/ATGDcom';
+import ATGEcom from '../component/ATGEcom';
 
 function CTabs(props) {
   const { children, value, index, ...other } = props;
@@ -72,20 +77,20 @@ export default function VerticalTabs() {
         <Tab label=" 출퇴근 현황" {...a11yProps(4)} />
 
       </Tabs>
-      <CTabs value={value} index={0}>
-       ????????
-      </CTabs>
-      <CTabs value={value} index={1}>
-       ??????????
-      </CTabs>
       <CTabs value={value} index={2}>
-      ????????????
+        <ATGAcom/>
       </CTabs>
       <CTabs value={value} index={3}>
-        Item Four
+        <ATGBcom/>
       </CTabs>
       <CTabs value={value} index={4}>
-        Item Four
+      <ATGccom/>
+      </CTabs>
+      <CTabs value={value} index={5}>
+       <ATGDcom/>
+      </CTabs>
+      <CTabs value={value} index={6}>
+        <ATGEcom/>
       </CTabs>
 
     </Box>

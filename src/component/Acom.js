@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import { height } from "@mui/system";
 import { Button } from "react-bootstrap";
 import { UnpublishedTwoTone } from "@mui/icons-material";
-
 import Nav from 'react-bootstrap/Nav';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
-import { TextField } from "@mui/material";
-
 
 const Acom = () => {
     const [firstCheck, SetFirstCheck] = useState();
@@ -108,42 +105,29 @@ const Acom = () => {
 
 
     return (
-        
         <div style={{width:'1300px', position:'relative' ,height:'650px', top:'50px'}}>
            <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'-50px'}}><strong>회사 설정</strong></h2>
            <hr/>
            <br/>
 
             <table style={{ width: '1080px', height: '200px', position:'absolute' ,left:'150px',}} >
-            
-              
+
+
 
                 <tr>
                 <td style={{textAlign:'left'}}>
                         <h6 style={{fontSize:'25px'}} ><strong>사업자등록번호</strong></h6>
                     </td>
-
                     <td style={{textAlign:'left'}}>
                         <input style={{width:'300px'}} name='compNum' type="text" onChange={onChangeInput} value={input.compNum}></input>
-
-                    <td>
-                        <input name='compNum' type="text" onChange={onChangeInput} value={input.compNum} ></input>
-                        
-
                     </td>
 
                     <td style={{textAlign:'left'}}>
                         <h6 style={{fontSize:'25px'}}><strong>대표자명</strong></h6>
                     </td>
 
-                   
                     <td >
                         <input style={{width:'300px'}} name='compCEO' type="text" onChange={onChangeInput} value={input.compCEO}></input>
-
-
-                    <td>
-                        <input name='compCEO' type="text" onChange={onChangeInput} value={input.compCEO}></input>
-
                     </td>
                 </tr>
 
@@ -181,22 +165,21 @@ const Acom = () => {
 
                 <tr>
                 <td style={{textAlign:'left', }}>
-                    
+
                         <h6 style={{fontSize:'25px'}} ><strong>주소</strong></h6>
                     </td>
                     <td style={{textAlign:'left'}}>
-              
-                 
+
+
                         <input style={{width:'300px' ,}} name='compAddress' type="text" onChange={onChangeInput} value={input.compAddress}></input>
-                       
+
                     </td>
                 </tr>
             </table>
-      
-        
+
+
 
             <div>
-
             <br/>
             <br/>
             <br/>
@@ -219,16 +202,16 @@ const Acom = () => {
             <hr></hr>
 
             <Grid container style={{position:'absolute', bottom:'75px'}}>
-                
+
                 <Grid item >  <button sx={{md:30}} onClick={requestSave} className="Atmp1">저장</button> </Grid>
                 <Grid  sx={{ml:-73}}item xs>  <button onClick={requestModify} className="AMo1">수정</button> </Grid>
 
             </Grid>
-          
+
 
 
             </div>
-            
+
         </div>
     )
 

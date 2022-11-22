@@ -9,21 +9,21 @@ const UserCom = () =>{
     const [show ,setShow] = useState(false);
 
 
-    useEffect(() => {
-        if (sessionStorage.getItem("id") == null || sessionStorage.getItem("uid") == null) {
-            window.alert("먼저 로그인을 해야합니다.");
-            window.location.href = "http://localhost:3000/Login";
-        }
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("id") == null || sessionStorage.getItem("uid") == null) {
+    //         window.alert("먼저 로그인을 해야합니다.");
+    //         window.location.href = "http://localhost:3000/Login";
+    //     }
 
-        axios.post('http://192.168.2.82:5000/readUser',{
-            compNum : sessionStorage.getItem("uid")
-        }).then(function(response){
-            console.log(response.data);
+    //     axios.post('http://192.168.2.82:5000/readUser',{
+    //         compNum : sessionStorage.getItem("uid")
+    //     }).then(function(response){
+    //         console.log(response.data);
 
-        }).catch(function(error){
-            console.log("readUser error" , error);
-        });
-    },[]);
+    //     }).catch(function(error){
+    //         console.log("readUser error" , error);
+    //     });
+    // },[]);
 
 
     

@@ -4,6 +4,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import OWAcom from '../onework/OWAcom';
+import OWBcom from '../onework/OWBcom';
+import Success from '../alert/Success';
+import OWCcom from '../onework/OWCcom';
+import OWDcom from '../onework/OWDcom';
 
 function DTabs(props) {
   const { children, value, index, ...other } = props;
@@ -72,18 +77,27 @@ export default function VerticalTabs() {
 
       </Tabs>
       <DTabs value={value} index={0}>
-       DTabs
+      <OWAcom/>
       </DTabs>
       <DTabs value={value} index={1}>
-       ??????????
+      <OWAcom/>
       </DTabs>
       <DTabs value={value} index={2}>
-      ????????????
+      <OWAcom/>
       </DTabs>
       <DTabs value={value} index={3}>
-        Item Four
+        <OWBcom/>
+      </DTabs>
+      <DTabs value={value} index={4}>
+        <OWCcom/>
+      </DTabs>
+      <DTabs value={value} index={5}>
+        <OWDcom/>
       </DTabs>
 
+
+
+      
     </Box>
     </div>
   );

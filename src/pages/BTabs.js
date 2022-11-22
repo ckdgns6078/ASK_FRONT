@@ -4,6 +4,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import PMAcom from '../component/PMAcom';
+import PMBcom from '../component/PMBcom';
+import PMCcom from '../component/PMCcom';
+import PMDcom from '../component/PMDcom';
+
 
 function BTabs(props) {
   const { children, value, index, ...other } = props;
@@ -63,24 +68,26 @@ export default function VerticalTabs() {
             <div>
         <h4  style={{Color:'#2F58B8'}}> &nbsp; &nbsp; <strong >인사 관리</strong>  &nbsp; &nbsp; </h4>
         </div>
-    
-        <Tab label="사원 관리" {...a11yProps(0)} />
-        <Tab label=" 수당 관리" {...a11yProps(1)} />
-        <Tab label=" 부서 관리" {...a11yProps(2)} />
-        <Tab label=" 세금 관리" {...a11yProps(3)} />
+        <Tab label="사원 관리" {...a11yProps(1)} />
+        <Tab label=" 수당 관리" {...a11yProps(2)} />
+        <Tab label=" 부서 관리" {...a11yProps(3)} />
+        <Tab label=" 세금 관리" {...a11yProps(4)} />
 
       </Tabs>
       <BTabs value={value} index={0}>
-       ????????
+      <PMAcom/>
       </BTabs>
       <BTabs value={value} index={1}>
-       ??????????
+      <PMAcom/>
       </BTabs>
       <BTabs value={value} index={2}>
-      ????????????
+        <PMBcom/>
       </BTabs>
       <BTabs value={value} index={3}>
-        Item Four
+       <PMCcom/>
+      </BTabs>
+      <BTabs value={value} index={4}>
+       <PMDcom/>
       </BTabs>
 
     </Box>
