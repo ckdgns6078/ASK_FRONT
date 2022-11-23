@@ -11,25 +11,25 @@ const Ebar = () => {
         <div>
                  <TopBar/>
                  <MiddleBar/>
-                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
+                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#005b9e',height:'70px', positions:'relative ',boxShadow:'5px 5px 5px '}}>
            
-                    <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
+                    <Navbar.Brand href="#" style={{position:'absolute'}}>
                             <Grid container  >
                                 
-                                <Grid item  xs>
-                                                <strong>통합 급여 관리</strong>
+                                <Grid item  xs ml={118}>
+                                                <strong>통합급여관리</strong>
                                 </Grid>
                                
-                                <Grid item xs>
-                                                <strong>임직원 급여 관리</strong>
+                                <Grid item xs ml={2}>
+                                                <strong>임직원급여관리</strong>
                                 </Grid>
                                
-                                <Grid item  xs>
-                                                <strong>일용직 관리</strong> 
+                                <Grid item  xs  ml={2}>
+                                                <strong>일용직관리</strong> 
                                 </Grid>
                         
-                                <Grid item  xs>
-                                                <strong>경비 관리</strong> 
+                                <Grid item  xs  ml={2}>
+                                                <strong>경비관리</strong> 
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>

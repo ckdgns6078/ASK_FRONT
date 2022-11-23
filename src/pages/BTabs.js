@@ -65,13 +65,14 @@ export default function VerticalTabs() {
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-            <div>
-        <h4  style={{Color:'#2F58B8'}}> &nbsp; &nbsp; <strong >인사 관리</strong>  &nbsp; &nbsp; </h4>
+          <div>
+            <br/>
+            <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >인사 관리</strong>  &nbsp; &nbsp; </h2>
         </div>
-        <Tab label="사원 관리" {...a11yProps(1)} />
-        <Tab label=" 수당 관리" {...a11yProps(2)} />
-        <Tab label=" 부서 관리" {...a11yProps(3)} />
-        <Tab label=" 세금 관리" {...a11yProps(4)} />
+        <Tab label="사원 관리" {...a11yProps(1)} style={{fontSize:'25px'}}/>
+        <Tab label=" 수당 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
+        <Tab label=" 부서 관리" {...a11yProps(3)} style={{fontSize:'25px'}}/>
+        <Tab label=" 세금 관리" {...a11yProps(4)} style={{fontSize:'25px'}}/>
 
       </Tabs>
       <BTabs value={value} index={0}>

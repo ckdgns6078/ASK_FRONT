@@ -11,9 +11,9 @@ const Abar = () => {
         <div>
                     <TopBar/>
                  <MiddleBar/>
-                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
+                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#005b9e',height:'70px', positions:'relative ',boxShadow:'5px 5px 5px '}}>
            
-                    <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
+                    <Navbar.Brand href="#" style={{position:'absolute',left:'90px',}}>
                             <Grid container  >
                              
                                 <Grid item  xs >

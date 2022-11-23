@@ -33,6 +33,7 @@ const SMAcom = () => {
             <br/>
             <br/>
             <br/>
+            <h3> <strong>임직원 급여 목록</strong></h3>
             <table style={{
                 width:"1000px",
                 // border:'1px solid black',
@@ -44,37 +45,34 @@ const SMAcom = () => {
             }}>
                 <tr style={{backgroundColor:'#f1f2f6' , }}>
                 <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>입사일자</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>사원번호</strong>
+                        <strong>사원코드</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
                         <strong>성명</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>부서명</strong>
+                        <strong>부서</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>직위/직급</strong>
+                        <strong>기본급</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>은행</strong>
+                        <strong>추가수당</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
+                        <strong>세금+경비</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>합계</strong>
+                    </td>
+                    {/* <td style={{border:"1px solid gray"}}>
                         <strong>계좌번호</strong>
-                    </td>
+                    </td> */}
                     {/* <td style={{border:"1px solid gray"}}>
                         <strong>Email</strong>
                     </td> */}
                 </tr>  
-                <tr>
-
-                </tr>
-       
+            
                     
 
                   {
@@ -92,7 +90,8 @@ const SMAcom = () => {
                         </tr>
                         )
                     }
-                    <tr >
+                 
+                 <tr >
                     <td style={{border:"1px solid gray"}}>
                     <Checkbox {...label} defaultChecked />
                     </td>
@@ -114,30 +113,123 @@ const SMAcom = () => {
                     <td style={{border:"1px solid gray"}}>
                         <strong>159487z@</strong>
                     </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>2020315010</strong>
-                    </td>
-                    {/* <td style={{border:"1px solid gray"}}>
-                        <strong>신종락</strong>
-                    </td> */}
+              
                 </tr>  
-
+                <tr  style={{backgroundColor:'#f1f2f6' , }}>    
+                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
+                    <td style={{border:"1px solid gray"}}></td>
+                    <td style={{border:"1px solid gray"}}></td>
+                    <td style={{border:"1px solid gray"}}> 기본급</td>
+                    <td style={{border:"1px solid gray"}}><strong>추가수당</strong></td>
+                    <td style={{border:"1px solid gray"}}><strong>세금 경비</strong></td>
+                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
+                </tr>
+       
                     
              
 
             </table> 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br/><br/> <br/><br/> <br/><br/> 
+           
+           
+
+            <h3> <strong>임직원 급여 목록</strong></h3>
+            <table style={{
+                width:"1000px",
+                // border:'1px solid black',
+                
+                solid:"#fffff",
+                // backgroundColor:'#bdc3c7'
+                position:'absolute',
+                left:'100px'
+            }}>
+                <tr style={{backgroundColor:'#f1f2f6' , }}>
+                <td style={{border:"1px solid gray"}}>
+                        <strong>사원코드</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>성명</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>직위/직급</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>기본급</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>추가수당</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>세금+경비</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>합계</strong>
+                    </td>
+                    {/* <td style={{border:"1px solid gray"}}>
+                        <strong>계좌번호</strong>
+                    </td> */}
+                    {/* <td style={{border:"1px solid gray"}}>
+                        <strong>Email</strong>
+                    </td> */}
+                </tr>  
+            
+                    
+
+                  {
+                        data && data.map((e, idx) =>
+                        <tr >
+                            <td><Checkbox {...label} defaultChecked /></td>
+                            <td>입사일자 데이터 넣을곳</td>
+                            <td>입사일자 데이터 넣을곳</td>
+                            <td>성명 머시기 받아올거</td>
+                            <td>부서명 데이터 넣을곳 </td>
+                            <td>직위/직급 데이터 넣을곳</td>
+                            <td>은행 데이터 넣을곳</td>
+                            <td>계좌번호 데이터 넣을곳</td>
+                            {/* <td>이메일 데이터 넣을곳</td> */}
+                        </tr>
+                        )
+                    }
+                 
+                 <tr >
+                    <td style={{border:"1px solid gray"}}>
+                    <Checkbox {...label} defaultChecked />
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>wdfkr0630</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>159487z@</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>2020315010</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>신종락</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>wdfkr0630</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
+                        <strong>159487z@</strong>
+                    </td>
+              
+                </tr>  
+                <tr  style={{backgroundColor:'#f1f2f6' , }}>    
+                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
+                    <td style={{border:"1px solid gray"}}></td>
+                    <td style={{border:"1px solid gray"}}></td>
+                    <td style={{border:"1px solid gray"}}> 기본급</td>
+                    <td style={{border:"1px solid gray"}}><strong>추가수당</strong></td>
+                    <td style={{border:"1px solid gray"}}><strong>세금 경비</strong></td>
+                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
+                </tr>
+       
+                    
+             
+
+            </table> 
+           
             <br/>
             <br/>
             <br/>

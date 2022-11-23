@@ -12,8 +12,8 @@ const Rsearch = () => {
   
     return (
         <div>
-             <Button variant="light" onClick={handleShow}>
-             <SearchIcon/>
+             <Button variant="light" onClick={handleShow} style={{width:'30px',height:'30px'}}>
+                <SearchIcon  style={{width:'20px'}}/>
              </Button>
 
       <Modal 

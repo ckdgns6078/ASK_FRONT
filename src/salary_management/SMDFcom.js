@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from '@mui/material/Container';
 import SearchIcon from '@mui/icons-material/Search';
-const SMCcom = () => {
+const SMDFcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
  //모달 함수
@@ -45,26 +45,21 @@ const SMCcom = () => {
             }}>
                 <tr style={{backgroundColor:'#f1f2f6' , }}>
                 <td style={{border:"1px solid gray"}}>
+                        <strong>날짜</strong>
+                    </td>
+                    <td style={{border:"1px solid gray"}}>
                         <strong>사원코드</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>성명</strong>
+                        <strong>사원명</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>부서</strong>
+                        <strong>금액</strong>
                     </td>
                     <td style={{border:"1px solid gray"}}>
-                        <strong>기본급</strong>
+                        <strong>비고</strong>
                     </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>추가수당</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>세금</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>합계</strong>
-                    </td>
+                
                     {/* <td style={{border:"1px solid gray"}}>
                         <strong>계좌번호</strong>
                     </td> */}
@@ -84,8 +79,7 @@ const SMCcom = () => {
                             <td>성명 머시기 받아올거</td>
                             <td>부서명 데이터 넣을곳 </td>
                             <td>직위/직급 데이터 넣을곳</td>
-                            <td>은행 데이터 넣을곳</td>
-                            <td>계좌번호 데이터 넣을곳</td>
+                      
                             {/* <td>이메일 데이터 넣을곳</td> */}
                         </tr>
                         )
@@ -107,31 +101,16 @@ const SMCcom = () => {
                     <td style={{border:"1px solid gray"}}>
                         <strong>신종락</strong>
                     </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>wdfkr0630</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>159487z@</strong>
-                    </td>
+             
               
                 </tr>  
-                <tr  style={{backgroundColor:'#f1f2f6' , }}>    
-                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
-                    <td style={{border:"1px solid gray"}}></td>
-                    <td style={{border:"1px solid gray"}}></td>
-                    <td style={{border:"1px solid gray"}}> 기본급</td>
-                    <td style={{border:"1px solid gray"}}><strong>추가수당</strong></td>
-                    <td style={{border:"1px solid gray"}}><strong>세금 경비</strong></td>
-                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
-                </tr>
-       
-                    
+           
              
 
             </table> 
             <br/><br/> <br/><br/> <br/><br/> 
            
-{/*             */}
+
            
             <br/>
             <br/>
@@ -349,4 +328,4 @@ const SMCcom = () => {
     );
 };
 
-export default SMCcom;
+export default SMDFcom;

@@ -293,7 +293,7 @@ const onPanelChange = (value, mode) => {
             <br/>
             <br/>
             <br/><br/><br/><br/>
-     
+       
           
             {/* <Grid componenter style={{position:'absolute', }}>
                 <Grid item  sx={{md:3}}><button  onClick={handleShow} className="Atmp1">  추가</button> </Grid>
