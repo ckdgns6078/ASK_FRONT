@@ -11,25 +11,25 @@ const Dbar = () => {
         <div>
                  <TopBar/>
                  <MiddleBar/>
-                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
+                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#005b9e',height:'70px', positions:'relative ',boxShadow:'5px 5px 5px '}}>
            
-                    <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
+                    <Navbar.Brand href="#" style={{position:'absolute',}}>
                             <Grid container  >
                                 
-                                <Grid item  xs>
-                                                <strong>일용직 등록</strong>
+                                <Grid item  xs ml={93}>
+                                                <strong>일용직등록</strong>
                                 </Grid>
                                
-                                <Grid item xs>
-                                                <strong>수당 등록</strong>
+                                <Grid item xs ml={2}>
+                                                <strong>수당등록</strong>
                                 </Grid>
                                
-                                <Grid item  xs>
-                                                <strong>출퇴근 관리</strong> 
+                                <Grid item  xs ml={2}>
+                                                <strong>출퇴근관리</strong> 
                                 </Grid>
                         
-                                <Grid item  xs>
-                                                <strong>출퇴근 현황</strong> 
+                                <Grid item  xs ml={2}>
+                                                <strong>출퇴근현황</strong> 
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>

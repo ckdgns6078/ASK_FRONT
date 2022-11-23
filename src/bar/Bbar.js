@@ -10,21 +10,21 @@ const Bbar = () => {
         <div>
                  <TopBar/>
                  <MiddleBar/>
-                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'40px'}}>
+                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#005b9e',height:'70px',boxShadow:'5px 5px 5px '}}>
            
-                    <Navbar.Brand href="#" style={{position:'absolute',left:'320px'}}>
+                    <Navbar.Brand href="#" style={{position:'absolute',left:'300px'}}>
                             <Grid container>
-                                <Grid item  xs>
-                                <Navbar.Brand href="#"><strong>사원 관리</strong></Navbar.Brand>
+                                <Grid item  xs >
+                                     <strong>사원 관리</strong>
                                 </Grid>
-                                <Grid item xs>
-                                       <strong>수당 관리</strong>
+                                <Grid item xs ml={2}>
+                                    <strong>수당관리</strong>
                                 </Grid>
-                                <Grid item  xs>
-                                    <strong>부서 관리</strong>
+                                <Grid item  xs ml={2}>
+                                    <strong>부서관리</strong>
                                 </Grid>
-                                <Grid item  xs>
-                                    <strong>세금 관리</strong>
+                                <Grid item  xs  ml={2}>
+                                    <strong>세금관리</strong>
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>

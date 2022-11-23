@@ -72,7 +72,7 @@ export default function VerticalTabs() {
       >
             <div>
                 <br/>
-        <h2  style={{color:'#2F58B8'}}>&nbsp; &nbsp; <strong >회사 설정</strong> &nbsp; &nbsp; </h2>
+        <h2  style={{color:'#005b9e'}}>&nbsp; &nbsp; <strong >회사 설정</strong> &nbsp; &nbsp; </h2>
         </div>
  
     

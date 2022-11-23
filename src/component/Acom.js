@@ -8,9 +8,10 @@ import Nav from 'react-bootstrap/Nav';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 const Acom = () => {
-    const [firstCheck, SetFirstCheck] = useState();
+    const [firstCheck, SetFirstCheck] = useState();    
 
     const [input, SetInput] = useState({
         compNum: '',    //사업자등록번호
@@ -105,9 +106,9 @@ const Acom = () => {
 
 
     return (
-        <div style={{width:'1300px', position:'relative' ,height:'650px', top:'50px'}}>
-           <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'-50px'}}><strong>회사 설정</strong></h2>
-           <hr/>
+        <div style={{width:'1300px', position:'relative' ,height:'600px', top:'50px'}}>
+           <h2  style={{color:' #005b9e' ,position:'absolute' ,left:'0' ,top:'-50px'}}><strong>회사 설정</strong></h2>
+          
            <br/>
 
             <table style={{ width: '1080px', height: '200px', position:'absolute' ,left:'150px',}} >
@@ -116,62 +117,66 @@ const Acom = () => {
 
                 <tr>
                 <td style={{textAlign:'left'}}>
-                        <h6 style={{fontSize:'25px'}} ><strong>사업자등록번호</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}} ><strong>사업자등록번호</strong></h6>
                     </td>
                     <td style={{textAlign:'left'}}>
-                        <input style={{width:'300px'}} name='compNum' type="text" onChange={onChangeInput} value={input.compNum}></input>
+                        {/* <input style={{width:'300px'}} name='compNum' type="text" onChange={onChangeInput} value={input.compNum}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.compNum}/>
                     </td>
 
                     <td style={{textAlign:'left'}}>
-                        <h6 style={{fontSize:'25px'}}><strong>대표자명</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}}><strong>대표자명</strong></h6>
                     </td>
 
                     <td >
-                        <input style={{width:'300px'}} name='compCEO' type="text" onChange={onChangeInput} value={input.compCEO}></input>
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compCEO' aria-describedby="btnGroupAddon"  onChange={onChangeInput} value={input.compCEO}></Form.Control>
                     </td>
                 </tr>
 
                 <tr>
                 <td style={{textAlign:'left'}}>
-                        <h6 style={{fontSize:'25px'}}><strong>상호</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}}><strong>상호</strong></h6>
                     </td>
                     <td style={{textAlign:'left'}}>
-                        <input style={{width:'300px'}} name='compName' type="text" onChange={onChangeInput} value={input.compName}></input>
+                        {/* <input style={{width:'300px'}} name='compName' type="text" onChange={onChangeInput} value={input.compName}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compName' aria-describedby="btnGroupAddon"  onChange={onChangeInput} value={input.compName}/>
                     </td>
 
                     <td style={{textAlign:'left'}}>
-                        <h6 style={{fontSize:'25px'}}><strong>업태</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}}><strong>업태</strong></h6>
                     </td>
                     <td >
-                        <input style={{width:'300px'}} name='compType' type="text" onChange={onChangeInput} value={input.compType}></input>
+                        {/* <input style={{width:'300px'}} name='compType' type="text" onChange={onChangeInput} value={input.compType}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compType' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.compType}/>
                     </td>
                 </tr>
 
                 <tr>
                     <td style={{textAlign:'left'}}>
-                        <h6 style={{fontSize:'25px'}}><strong>종목</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}}><strong>종목</strong></h6>
                     </td>
                     <td style={{textAlign:'left'}}>
-                        <input style={{width:'300px'}} name='compItems' type="text" onChange={onChangeInput} value={input.compItems}></input>
+                        {/* <input style={{width:'300px'}} name='compItems' type="text" onChange={onChangeInput} value={input.compItems}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compItems' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.compItems}/>
                     </td>
 
                     <td style={{textAlign:'left'}}>
-                        <h6 style={{fontSize:'25px'}}><strong>이메일</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}}><strong>이메일</strong></h6>
                     </td>
                     <td>
-                        <input style={{width:'300px'}} name='compEmail' type="text" onChange={onChangeInput} value={input.compEmail}></input>
+                        {/* <input style={{width:'300px'}} name='compEmail' type="text" onChange={onChangeInput} value={input.compEmail}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compEmail' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.compEmail}/>
                     </td>
                 </tr>
 
                 <tr>
                 <td style={{textAlign:'left', }}>
 
-                        <h6 style={{fontSize:'25px'}} ><strong>주소</strong></h6>
+                        <h6 style={{fontSize:'25px',color:'#777777'}} ><strong>주소</strong></h6>
                     </td>
                     <td style={{textAlign:'left'}}>
-
-
-                        <input style={{width:'300px' ,}} name='compAddress' type="text" onChange={onChangeInput} value={input.compAddress}></input>
+                        {/* <input style={{width:'300px' ,}} name='compAddress' type="text" onChange={onChangeInput} value={input.compAddress}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compAddress' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.compAddress}/>
 
                     </td>
                 </tr>
@@ -180,32 +185,16 @@ const Acom = () => {
 
 
             <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/><br/>
-            <hr></hr>
-            <br/><br/> <br/>
-            <hr></hr>
+                <Grid item xs={12} ml={-3} mt={60}>
+                    <hr style={{width:'1390px'}}/>
+                    </Grid>
+           
 
-            <Grid container style={{position:'absolute', bottom:'75px'}}>
+            <Grid container style={{position:'absolute', bottom:'10px'}}>
 
                 <Grid item >  <button sx={{md:30}} onClick={requestSave} className="Atmp1">저장</button> </Grid>
                 <Grid  sx={{ml:-73}}item xs>  <button onClick={requestModify} className="AMo1">수정</button> </Grid>
-
+                
             </Grid>
 
 

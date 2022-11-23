@@ -5,7 +5,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import SMAcom from '../salary_management/SMAcom';
-
+import SMBcom from '../salary_management/SMBcom';
+import SMCcom from '../salary_management/SMCcom';
+import SMDcom from '../salary_management/SMDcom';
+import SMDFcom from '../salary_management/SMDFcom';
 function ETabs(props) {
   const { children, value, index, ...other } = props;
 
@@ -70,20 +73,35 @@ export default function VerticalTabs() {
         <Tab label=" 임직원 급여 관리" {...a11yProps(1)} />
         <Tab label=" 일용직 급여 관리" {...a11yProps(2)} />
         <Tab label=" 경비 관리" {...a11yProps(3)} />
+        <Tab label=" 경비 처리" {...a11yProps(4)} />
+
 
       </Tabs>
       <ETabs value={value} index={0}>
        <SMAcom/>
       </ETabs>
-      <ETabs value={value} index={1}>
-       ??????????
-      </ETabs>
+      
       <ETabs value={value} index={2}>
-      ????????????
+      <SMAcom/>
       </ETabs>
       <ETabs value={value} index={3}>
-        Item Four
+      <SMBcom/>
       </ETabs>
+
+    
+      <ETabs value={value} index={4}>
+      <SMCcom/>
+      </ETabs>
+
+      <ETabs value={value} index={5}>
+       <SMDcom/>
+      </ETabs>
+      <ETabs value={value} index={6}>
+       <SMDFcom/>
+      </ETabs>
+
+
+
 
     </Box>
     </div>

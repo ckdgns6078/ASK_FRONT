@@ -11,24 +11,24 @@ const Fbar = () => {
         <div>
                  <TopBar/>
                  <MiddleBar/>
-                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
+                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#005b9e',height:'70px', positions:'relative ',boxShadow:'5px 5px 5px '}}>
            
-                    <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
+                    <Navbar.Brand href="#" style={{position:'absolute'}}>
                             <Grid container  >
                                 
-                                <Grid item  xs>
-                                                <strong>거래처 관리</strong>
+                                <Grid item  xs ml={155}> 
+                                                <strong>거래처관리</strong>
                                 </Grid>
                                
-                                <Grid item xs>
-                                                <strong>매입 관리</strong>
+                                <Grid item xs ml={2}>
+                                                <strong>매입관리</strong>
                                 </Grid>
                                
-                                <Grid item  xs>
-                                                <strong>매출 관리</strong> 
+                                <Grid item  xs  ml={2}>
+                                                <strong>매출관리</strong> 
                                 </Grid>
                         
-                                <Grid item  xs>
+                                <Grid item  xs  ml={2}>
                                                 <strong>조회</strong> 
                                 </Grid>
                             </Grid>

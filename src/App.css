@@ -1,6 +1,22 @@
+@font-face {
+  font-family: "GmarketSansMedium";
+ 
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") 
+  format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 전체 폰트 적용 */
+*{font-family: "GmarketSansMedium";}
+
+
 .App {
   text-align: center;
 }
+
+
+
 
 .App-logo {
   height: 40vmin;
@@ -143,7 +159,7 @@
   letter-spacing: 2.5px;
   font-weight: 500;
   color: #fff;
-  background-color: #2F58B8;
+  background-color: #005b9e;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 8px 15px rgba(236, 0, 0, 0.1);
@@ -171,7 +187,7 @@
   letter-spacing: 2.5px;
   font-weight: 500;
   color: #fff;
-  background-color: #2F58B8;
+  background-color:#005b9e ;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 8px 15px rgba(236, 0, 0, 0.1);
@@ -192,4 +208,30 @@
 
 .td {
   text-align: left;
+}
+
+/* 모달 추가 머튼 */
+.addButton{
+  width: 60px;
+  height: 38px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #005b9e;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(236, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+ 
+}
+.addButton:hover {
+  background-color: #ffffff;
+  box-shadow: 0px 15px 20px rgba(6, 6, 7, 0.4);
+  color: #000;
+  transform: translateY(-7px);
 }

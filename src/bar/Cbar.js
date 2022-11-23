@@ -11,27 +11,27 @@ const Cbar = () => {
         <div>
                  <TopBar/>
                  <MiddleBar/>
-                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#2F58B8',height:'70px', positions:'relative '}}>
+                <Navbar expand="lg" variant="dark"  style={{backgroundColor:'#005b9e',height:'70px', positions:'relative ',boxShadow:'5px 5px 5px '}}>
            
                     <Navbar.Brand href="#" style={{position:'absolute',left:'90px'}}>
                             <Grid container  >
                                 
-                                <Grid item  xs>
-                                                <strong>휴가 항목 등록</strong>
+                                <Grid item  xs ml={39}>
+                                                <strong>휴가항목등록</strong>
                                 </Grid>
                                
-                                <Grid item xs>
-                                                <strong>보유 휴가 현황</strong>
+                                <Grid item xs ml={2}>
+                                                <strong>보유휴가현황</strong>
                                 </Grid>
                                
-                                <Grid item  xs>
-                                                <strong>휴가 처리</strong> 
+                                <Grid item  xs ml={2}>
+                                                <strong>휴가처리</strong> 
                                 </Grid>
-                                <Grid item  xs>
-                                                <strong>출퇴근 관리</strong> 
+                                <Grid item  xs ml={2}>
+                                                <strong>출퇴근관리</strong> 
                                 </Grid>
-                                <Grid item  xs>
-                                                <strong>출퇴근 현황</strong> 
+                                <Grid item  xs ml={2}>
+                                                <strong>출퇴근현황</strong> 
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>

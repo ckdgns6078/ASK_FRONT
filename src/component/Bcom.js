@@ -11,14 +11,31 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert from '@mui/material/Alert';
-import Success from '../alert/Success';
 import Error from '../alert/Error';
-const Bcom = () => {
+import Success from '../alert/Success';
+import { AssuredWorkloadTwoTone } from '@mui/icons-material';
+import Table from 'react-bootstrap/Table';
+import Box from '@mui/material/Box';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+const Bcom = (props) => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
     const [DelShow, setMDelShow] = useState(false);
     const [ModifyShow, setModifyShow] = useState(false);
     const [show, setShow] = useState(false);
+    const [SH, setSh] = useState(false);
+
+
+    const ShClose = () => setSh(false);
+    const Shshow = () => setSh(true);
+
+
+
+
+    //권한 부여 맵핑 함수
+    const [Right, setRight] = useState();
+
     const [addData, setAddData] = useState({    //추가 관련 변수
         saveId: '',
         savePw: '',
@@ -39,7 +56,7 @@ const Bcom = () => {
     useEffect(() => {
         getData();
     }, []);
-
+    
     //useEffect에서 실행되는 함수 ( axios )
     const getData = () => {
         axios.post('http://192.168.2.82:5000/readUser', {
@@ -63,7 +80,7 @@ const Bcom = () => {
 
     //추가 모델에서 추가 눌렀을경우 함수
     const pushAddData = () => {
-
+        console.log("addData값 ",addData);
         if (addData.saveId == '' || addData.savePw == '' || addData.saveUser == '' || addData.saveAdvice == '') {
             window.alert("공란은 입력할 수 없습니다.");
         } else {
@@ -97,6 +114,7 @@ const Bcom = () => {
     //추가 모델에서 닫기 눌렀을 경우
     const closeAddData = () => {
         handleClose();
+        console.log("props 값 : " , props.advice);
         if (show) {
             setAddData({
                 "saveId": '',
@@ -163,8 +181,7 @@ const Bcom = () => {
             preUserId: modifyData.preUserId
         }).then(function (response) {
             if (response.data) {
-                window.alert("수정 완료");
-
+                asd();
                 MdClose();
                 getData();
             }
@@ -174,8 +191,14 @@ const Bcom = () => {
         }).catch(function (error) {
             console.log("updateUser error :", error);
         });
-
     }
+
+    const asd = () => {
+        return (
+            <Success name = "hello"></Success>
+        )
+    }
+
     //--------------------------------------------------------------------------
 
     //삭제 관련함수 -------------------------------------------------------------
@@ -236,6 +259,8 @@ const Bcom = () => {
         setModifyShow(false);
         checkedItems.clear();
     }
+
+
     const MdShow = () => setModifyShow(true);
     //권한
 
@@ -288,8 +313,6 @@ const Bcom = () => {
                 checkedall.checked = isChecked;
             }
         }
-        console.log("트루펄스값 ", isChecked);
-        console.log("checkedItems 전체체크 들어있는 값들", checkedItems);
         return checkedItems;
     }
 
@@ -315,223 +338,280 @@ const [open, setOpen] = React.useState(
   });
 
     return (
-        <div style={{width:'1000px' ,position:'relative'}}>
-             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>사용자 관리 </strong></h2>
+        <div style={{width:'1400px' ,position:'relative',}}>
+             <h2  style={{color:'#005b9e' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>사용자 관리 </strong></h2>
             <br/>
             <br/>
             <br/>
-            <table style={{
-                width:"1000px",
-                // border:"1px",
-                // solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#bdc3c7' , }}>
-                    <td style={{border:"1px solid gray"}}>
-                    <input type="checkbox" id="allCheck" value="allCheck" onChange={(e) => allHandler(e)}></input>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>아이디</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>비밀번호</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>사용자명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>권한</strong>
-                    </td>
-                </tr>  
-       
-                    
 
-                  {
+
+            <Table >
+                    <thead style={{height:'60px'}}>
+                    {/* #769FCD */}
+                    {/* ecf0f1 */}
+                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+                        <td style={{border:"1px solid #f1f2f6",fontSize:'22px'}}>
+                            <input type="checkbox" id="allCheck" value="allCheck" onChange={(e) => allHandler(e)}></input>
+                            </td>
+                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>아이디</strong>
+                            </td>
+                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>비밀번호</strong>
+                            </td>
+                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>사용자명</strong>
+                            </td>
+                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>권한</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
                         data && data.map((e, idx) =>
-                        <tr >
-                           <td><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
-                            <td>{e.userId}</td>
-                            <td>{e.userPw}</td>
-                            <td>{e.userName}</td>
-                            <td>{e.userGrant}</td>
+                        <tr style={{height:'60px'}} >
+                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong> </td>
+                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>  {e.userPw}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.userName} </strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userGrant}</strong></td>
                         </tr>
                         )
                     }
 
+                   
+                    </tbody>
+                    </Table>
+        
+                    <Grid item xs={12} ml={-3} mt={40}>
+                    <hr style={{width:'1440px'}}/>
+                    </Grid>
                     
-             
-
-            </table> 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/><br/><br/><br/>
-            <hr></hr>
-          
-            {/* <Grid componenter style={{position:'absolute', }}>
-                <Grid item  sx={{md:3}}><button  onClick={handleShow} className="Atmp1">  추가</button> </Grid>
-                <Grid   sx={{md:-50}}><button  onClick={MdShow} className="Atmp1">  수정</button></Grid>
-                <Grid   sx={{md:30}} > <button onClick={DeShow} className="Atmp1">  삭제</button></Grid>
-            </Grid> */}
-                <div>
-                <button   style={{position:'absolute' ,left:"0px"}} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
-                <button style={{position:'absolute' ,left:"110px"}}onClick={modifyShow} className="Atmp1">  <strong>수정</strong></button>
-                <button style={{position:'absolute' ,left:"220px"}} onClick={pushDeleteData} className="Atmp1"> <strong>삭제</strong> </button>
+                   
+                <Box >
               
-                </div>
-              <br/>  
-              <br/>  
-              <br/>  
-            <hr></hr>
+                <button   style={{position:'absolute' ,left:"0px",top:'600px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
+                <button style={{position:'absolute' ,left:"110px",top:'600px'}}onClick={modifyShow} className="Atmp1">  <strong>수정</strong></button>
+                <button style={{position:'absolute' ,left:"220px",top:'600px'}} onClick={pushDeleteData} className="Atmp1"> <strong>삭제</strong> </button>
+                  
+                </Box>
+              
+
 
 
 
 
             {/* 추가 */}
             <Modal
-           
-
+                
             centered
-            size="lg"
+            size="xsm"
+         
             show={show} onHide={handleClose} animation={false} id="AddModal">
-            <Modal.Header closeButton  style={{backgroundColor:'#2F58B8',}}>
+            <Modal.Header closeButton  style={{backgroundColor:'#005b9e', width:'500px',height:'70px'}}>
                 <Modal.Title style={{color:'#ffffff'}}><strong> 사용자관리 추가</strong></Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{backgroundColor:'#f1f2f6',}} >
+            <Modal.Body style={{backgroundColor:'#f1f2f6',  width:'500px' ,}} >
 
-            <br/>
-             <Container>
-                <Grid container spacing={4}>
-                    <Grid item xs={6} md={5} ml={20} style={{fontSize:'25px'}}>
-                        <strong>아이디</strong>
+            <Container>
+                    <Grid container spacing={4}>
+                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>아이디</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12}>
+                        {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon" name="saveId" type="text" onChange={onChangeAddData}/>
+                        
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>비밀번호</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        {/* <input style={{width:'250px',height:'40px'}} name="savePw" type="password" onChange={onChangeAddData}></input> */}
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon" name="savePw" type="password" onChange={onChangeAddData}/>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>사용자명</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveUser" type="text" onChange={onChangeAddData}></input> */}
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon" name="saveUser" type="text" onChange={onChangeAddData}/>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>권한</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                      
+                        <Form.Control
+                            type="text"
+                            name='compNum'
+                            aria-describedby="btnGroupAddon"
+                            style={{height:'40px'}}
+                            
+                        />
+                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                        </InputGroup>
+                        </Grid>
+                     
                     </Grid>
-                    <Grid item xs={6} md={5} ml={-20}>
-                    <input style={{width:'250px',height:'50px'}}name="saveId" type="text" onChange={onChangeAddData}></input>
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={20} style={{fontSize:'25px'}}>
-                        <strong>비밀번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={-28}>
-                    <input style={{width:'250px',height:'50px'}}name="savePw" type="password" onChange={onChangeAddData}></input>
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={20} style={{fontSize:'25px'}}>
-                        <strong>사용자명</strong>
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={-28}>
-                    <input style={{width:'250px',height:'50px'}}name="saveUser" type="text" onChange={onChangeAddData}></input>
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={20} style={{fontSize:'25px'}}>
-                        <strong>권한</strong>
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={-28}>
-                    <input style={{width:'250px',height:'50px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input>
-           
 
-                    </Grid>
-                    <Grid item xs={6} md={6} ml={63}  mt={-10}>
-                    <Rsearch />
-
-                    </Grid>
-                </Grid>
 
 
+                </Container>
 
-             </Container>
-             <br/>
+
 
                 
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{ width:'500px' ,backgroundColor:'#ffffff'}}>
                 <Button variant="secondary" onClick={closeAddData}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={pushAddData}>
+                <button className='addButton' variant="primary" onClick={pushAddData}>
                     추가
-                </Button>
-
-                {/* alert창 버튼 */}
-                {/* <Button onClick={AlClick} > alert추가</Button>
-                <Snackbar
-                    // style={{backgroundColor:'red'}}
-                    open={open}
-                    autoHideDuration={6000}
-                    onClose={AlClose}
-                >
-                    <Alert onClose={AlClose} severity="success" sx={{ width: '500px',top:'10px' }}>
-                      추가 했다 임마 ~~~~~~~~~~
-                    </Alert>
-                    
-                </Snackbar> */}
-
-                <Success/>
-                <Error/>
-
+                </button>
             </Modal.Footer>
         </Modal>
+
             {/* 수정 */}
             <Modal
                 centered
-                size="lg"
+                size="xsm"
+                // style={{width:'500px'}}
                 show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>사용자관리 수정</Modal.Title>
+                <Modal.Header closeButton style={{backgroundColor:'#005b9e', width:'500px',height:'70px'}}>
+                    <Modal.Title  style={{color:'#ffffff'}}><strong>사용자관리 수정</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <p><strong>아이디</strong></p>
-                    <input name="userId" type="text" onChange={onChangeModifyData} value={modifyData.userId}></input>
-                    <p><strong>비밀번호</strong></p>
-                    <input name="userPw" type="password" onChange={onChangeModifyData} value={modifyData.userPw}></input>
-                    <p><strong>사용자명</strong></p>
-                    <input name="userName" type="text" onChange={onChangeModifyData} value={modifyData.userName}></input>
-                    <p><strong>권한</strong></p>
-                    <input name="userGrant" type="text" onChange={onChangeModifyData} value={modifyData.userGrant}></input>
+                <Modal.Body style={{backgroundColor:'#f3f3f3', width:'500px'}}>
+                    <Container>
+                    <Grid container spacing={4}>
+                  
+
+                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>아이디</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12}>
+                        {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                        name="userId" type="text" onChange={onChangeModifyData} value={modifyData.userId}/>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>비밀번호</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                         name="userPw" type="password" onChange={onChangeModifyData} value={modifyData.userPw}/>
+                        </Grid>
+
+
+                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>사용자명</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                         name="userName" type="text" onChange={onChangeModifyData} value={modifyData.userName}/>
+                        </Grid>
+
+                   
+                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>권한</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                      
+                        <Form.Control
+                            type="text"
+                            name='userGrant'
+                            aria-describedby="btnGroupAddon"
+                            style={{height:'40px'}}
+                            onChange={onChangeModifyData} 
+                            value={modifyData.userGrant}       
+                        />
+                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                        </InputGroup>
+                        </Grid>
+
+
+                        
+                       
+                     </Grid>
+                </Container>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff' }}>
                     <Button variant="secondary" onClick={MdClose}>
                         닫기
                     </Button>
-                    <Button variant="primary" onClick={pushModifyData}>
+                    <button variant="primary" className='addButton' onClick={pushModifyData}>
                         저장
-                    </Button>
+                    </button>
                 </Modal.Footer>
             </Modal>
+
+       
+
+
 
             {/* 삭제 */}
             <Modal
                 centered
-                size="lg"
+                size="sm"
                 show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>사용자관리 삭제</Modal.Title>
+                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',width:'500px'}}>
+                    <Modal.Title  style={{color:'#ffffff',width:'500px'}}>사용자관리 삭제</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{checkedItems.size}개 항목을 삭제하시겠습니까?</Modal.Body>
-                <Modal.Footer>
+                <Modal.Body style={{backgroundColor:'#f1f2f6', width:'500px',}}>
+                    <strong>{checkedItems.size}개 항목을 삭제하시겠습니까?</strong></Modal.Body>
+                <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff'}}>
                     <Button variant="secondary" onClick={DelClose}>
                         닫기
                     </Button>
-                    <Button variant="primary" onClick={pushDeleteData2}>
+                    <button variant="primary" className='addButton' onClick={pushDeleteData2}>
                         삭제
-                    </Button>
+                    </button>
                 </Modal.Footer>
             </Modal>
 
 
 
             {/* 검색  */}
+            
+            {/* 부서 코드 둗보기 모달 */}
+            <Modal 
+                size="lg"
+                centered
+                show={SH} onHide={ShClose}>
+                <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
+                <Modal.Title  style={{color:'#ffffff'}}> <strong> 권한 부여</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{backgroundColor:'#f1f2f6'}}> 
+
+         
+                <table style={{
+                        textAlign:"center",
+                        width:"100%", border:"1px solid gray" ,}} >
+                    <tr style={{border:"1px solid gray",backgroundColor:'#a4b0be'}}>
+                    <td style={{border:"1px solid gray",fontSize:'30px',color:'#ffffff'}}><strong> 비고</strong></td>
+                    <td style={{fontSize:'30px',color:'#ffffff'}}> <strong> 권한명</strong></td>
+                    </tr>
+                    {
+                        Right && Right.map((e, idx) =>
+                        <tr style={{border:"1px solid gray"}}>
+                        <td style={{border:"1px solid gray",fontSize:'30px'}}>1</td>
+                        <td style={{border:"1px solid gray",fontSize:'30px'}}>Master</td>
+                        </tr>
+                        
+                        )
+                    }
+          
+                </table>
+              
+                </Modal.Body>
+
+                </Modal>
   
 
 
