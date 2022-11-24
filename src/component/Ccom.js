@@ -287,22 +287,22 @@ const Ccom = () => {
             <br />
             <br />
             <br />
-            <Table striped bordered hover >
+            <Table >
                     <thead style={{height:'60px'}}>
-                        <tr  style={{backgroundColor:'#005b9e' ,  }}>
-                        <td style={{border:"1px solid #f1f2f6",color:'#ffffff',fontSize:'22px'}}>
+                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                             <input type="checkbox" id="allCheck" value="allCheck" onChange={(e) => allHandler(e)}></input>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#ffffff',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                                 <strong>아이디</strong>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#ffffff',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                                 <strong>비밀번호</strong>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#ffffff',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                                 <strong>사원코드</strong>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#ffffff',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                                 <strong>사용자명</strong>
                             </td>
                         </tr>
@@ -311,11 +311,11 @@ const Ccom = () => {
                     {
                         data && data.map((e, idx) =>
                         <tr style={{height:'60px'}} >
-                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}><input type="checkbox" id={e.mb_id} value={e.mb_id} onChange={(e) => checkHandler(e)}/></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}><strong> {e.mb_id}</strong> </td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px'}}><strong> {e.mb_pw}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px'}}><strong>{e.mb_code} </strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px'}}><strong>{e.mb_name}</strong></td>
+                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><input type="checkbox" id={e.mb_id} value={e.mb_id} onChange={(e) => checkHandler(e)}/></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.mb_id}</strong> </td>
+                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong> {e.mb_pw}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.mb_code} </strong></td>
+                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.mb_name}</strong></td>
                             
                         </tr>
                         )
@@ -351,17 +351,7 @@ const Ccom = () => {
                     <Modal.Title style={{color:'#ffffff'}}><strong>모바일 추가</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{backgroundColor:'#f1f2f6',  width:'500px' ,}}>
-                    {/* <strong>아이디</strong>
-                    <input type ='text' name ="addId" onChange={onChangeAddData}></input>
-                    <br/>
-                    <strong>비밀번호</strong>
-                    <input type ='password' name="addPw" onChange={onChangeAddData}></input>
-                    <br/>
-                    <strong>사원코드</strong>
-                    <input type ='text' name="addCode" onChange={onChangeAddData}></input>
-                    <br/>
-                    <strong>사용자명</strong>
-                    <input type ='text' name="addName" onChange={onChangeAddData}></input> */}
+                  
                     <Container>
                     <Grid container spacing={4}>
                         <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
@@ -515,39 +505,6 @@ const Ccom = () => {
                     </button>
                 </Modal.Footer>
             </Modal>
-
-
-
-
-
-
-
-
-{/* 
-            <Modal
-                centered
-                size="sm"
-                show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',width:'500px'}}>
-                    <Modal.Title  style={{color:'#ffffff',width:'500px'}}>사용자관리 삭제</Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f1f2f6', width:'500px',}}>
-                    <strong>{checkedItems.size}개 항목을 삭제하시겠습니까?</strong></Modal.Body>
-                <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff'}}>
-                    <Button variant="secondary" onClick={DelClose}>
-                        닫기
-                    </Button>
-                    <button variant="primary" className='addButton' onClick={pushDeleteData2}>
-                        삭제
-                    </button>
-                </Modal.Footer>
-            </Modal> */}
-
-
-
-
-
-
 
             {/* 삭제 */}
             <Modal

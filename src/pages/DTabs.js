@@ -59,21 +59,22 @@ export default function VerticalTabs() {
       
       <Tabs
         orientation="vertical"
-        variant="scrollable"
+        // variant="scrollable"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
+        style={{width:'300px'}}
       >
         <br/>
             <div>
-        <h4  style={{color:'#2F58B8'}}> &nbsp; &nbsp; <strong >일용직 관리</strong>  &nbsp; &nbsp; </h4>
+        <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >일용직 관리</strong>  &nbsp; &nbsp; </h2>
         </div>
     
-        <Tab label="일용직 등록" {...a11yProps(0)} />
-        <Tab label=" 수당 등록" {...a11yProps(1)} />
-        <Tab label=" 출퇴근 관리" {...a11yProps(2)} />
-        <Tab label=" 출퇴근 현황" {...a11yProps(3)} />
+        <Tab label="일용직 등록" {...a11yProps(0)}style={{fontSize:'25px'}} />
+        <Tab label=" 수당 등록" {...a11yProps(1)} style={{fontSize:'25px'}}/>
+        <Tab label=" 출퇴근 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
+        <Tab label=" 출퇴근 현황" {...a11yProps(3)} style={{fontSize:'25px'}}/>
 
       </Tabs>
       <DTabs value={value} index={0}>

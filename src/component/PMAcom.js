@@ -10,6 +10,11 @@ import { message, Space } from 'antd';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
+
+
+
+
+
 const PMAcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [addCheck , setAddCheck] = useState(false);
@@ -430,31 +435,31 @@ const PMAcom = () => {
         <br />
 
             
-        <Table striped bordered hover >
+        <Table  >
                 <thead style={{height:'60px'}}>
-                <tr  style={{backgroundColor:'#005b9e' ,  }}>
-                <td style={{ border: "1px solid gray" ,color:'#ffffff',fontSize:'22px'}}>
+                <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+                <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
                     <strong>입사일자</strong>
                 </td>
-                <td style={{ border: "1px solid gray" ,color:'#ffffff',fontSize:'22px'}}>
+                <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
                     <strong>사원번호</strong>
                 </td>
-                <td style={{ border: "1px solid gray",color:'#ffffff',fontSize:'22px' }}>
+                <td style={{ border: "1px solid #f1f2f6",color:'#777777',fontSize:'22px' }}>
                     <strong>사원명</strong>
                 </td>
-                <td style={{ border: "1px solid gray" ,color:'#ffffff',fontSize:'22px'}}>
+                <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
                     <strong>부서명</strong>
                 </td>
-                <td style={{ border: "1px solid gray" ,color:'#ffffff',fontSize:'22px'}}>
+                <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
                     <strong>직위/직급</strong>
                 </td>
-                <td style={{ border: "1px solid gray" ,color:'#ffffff',fontSize:'22px'}}>
+                <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
                     <strong>은향</strong>
                 </td>
-                <td style={{ border: "1px solid gray",color:'#ffffff',fontSize:'22px' }}>
+                <td style={{ border: "1px solid #f1f2f6",color:'#777777',fontSize:'22px' }}>
                     <strong>계좌번호</strong>
                 </td>
-                <td style={{ border: "1px solid gray" ,color:'#ffffff',fontSize:'22px'}}>
+                <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
                     <strong>Email</strong>
                 </td>
             </tr>

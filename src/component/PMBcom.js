@@ -9,648 +9,569 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
+import { message, Space } from 'antd';
+import axios from 'axios';
+
 const PMBcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const [addCheck , setAddCheck] = useState(false);
+    const [modifyCheck , setModifyCheck] = useState(false);
     const [data, setData] = useState();
- //모달 함수
+    const [addData, setAddData] = useState({
+        addempPayID: null, //수당 리스트 PRIMARYKEY
+        addcompCode: null, // 회사 코드 (관리자 아이디)
+        addpayCode: null,  // 수당 코드
+        addpayName: null,  // 수당명
+        addtaxFreeCode: null, // 비과세 코드
+        addtaxFreeName: null, // 비과세 명
+        addpayType: null,  // 지급 유형
+        addpayCalc: null,  // 계산식
+    });
+    const [modifyData, setModifyData] = useState({
+        modifyempPayID: null, //수당 리스트 PRIMARYKEY
+        modifycompCode: null, // 회사 코드 (관리자 아이디)
+        modifypayCode: null,  // 수당 코드
+        modifypayName: null,  // 수당명
+        modifytaxFreeCode: null, // 비과세 코드
+        modifytaxFreeName: null, // 비과세 명
+        modifypayType: null,  // 지급 유형
+        modifypayCalc: null,  // 계산식
+    });
+    const [Right , setRight] = useState();
+
+    //모달 함수
     const [DelShow, setMDelShow] = useState(false);
     const [ModifyShow, setModifyShow] = useState(false);
-    const [show, setShow] = useState(false);   
+    const [show, setShow] = useState(false);
     const [SH, setSh] = useState(false);
+    const [CH, setCh] = useState(false);
 
-    
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
-    const DelClose = () => setMDelShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setAddCheck(false);
+        setAddData({
+            "addempPayID": null, //수당 리스트 PRIMARYKEY
+            "addcompCode": null, // 회사 코드 (관리자 아이디)
+            "addpayCode": null,  // 수당 코드
+            "addpayName": null,  // 수당명
+            "addtaxFreeCode": null, // 비과세 코드
+            "addtaxFreeName": null, // 비과세 명
+            "addpayType": null,  // 지급 유형
+            "addpayCalc": null,  // 계산식
+
+        })
+    }
+    const handleShow = () => 
+    {
+        setShow(true);
+        setAddCheck(true);
+    }
+
+    const DeClose = () => setMDelShow(false);
     const DeShow = () => setMDelShow(true);
 
-    const MdClose = () => setModifyShow(false);
-    const MdShow = () => setModifyShow(true);
+    const MdClose = () => {
+        setModifyShow(false);
+        setModifyCheck(false);
+    }
+    const MdShow = (e) => {
+        axios.post('http://192.168.2.82:5000/updateEmpPayModal ', {
+            empPayID : e.empPayID
+        }).then(function (response) {
+            setModifyData({
+                "modifyempPayID": response.data[0].empPayID, //수당 리스트 PRIMARYKEY
+                "modifycompCode": response.data[0].compCode, // 회사 코드 (관리자 아이디)
+                "modifypayCode": response.data[0].payCode,  // 수당 코드
+                "modifypayName": response.data[0].payName,  // 수당명
+                "modifytaxFreeCode": response.data[0].taxFreeCode, // 비과세 코드
+                "modifytaxFreeName": response.data[0].taxFreeName, // 비과세 명
+                "modifypayType": response.data[0].payType,  // 지급 유형
+                "modifypayCalc": response.data[0].payCalc,  // 계산식
+            });
+        }).catch(function (er) {
+            console.log("updataEmpModal error", er);
+            let contentText = "데이터를 가져오는데 실패했어요 다시 시도해주세요";
+            error(contentText);
+        });
+        setModifyShow(true);
+        setModifyCheck(true);
+    }
+
 
     const ShClose = () => setSh(false);
-    const Shshow = () => setSh(true);
+    const Shshow = () => {
+        axios.post('http://192.168.2.82:5000/readTaxFree',{
+            check : 1
+        }).then(function(response){
+            setRight(response.data);
+        }).catch(function(er){
+            console.log("readTaxFree error :" ,er);
+            let contentText = "데이터를 불러오는데 오류가 발생하였습니다. 다시 시도해주세요";
+            error(contentText);    
+        })
+        setSh(true);
+    }
+    const ShBtn = (e) => {
+        console.log("e pay " ,e)
+        if (modifyCheck) {
+            console.log("modify")
+            const temp = {...modifyData};
+            temp.modifytaxFreeName = e.taxFreeName;
+            setModifyData(temp);
+        }
+        if (addCheck) {
+            console.log("addCheck")
+            const temp = {...addData};
+            //비과세명
+            temp.addtaxFreeCode = e.taxFreeCode;
+            temp.addtaxFreeName = e.taxFreeName;
+            setAddData(temp);
+        }
+        ShClose();
+    }
 
+
+    const ChClose = () => setCh(false);
+    const Chshow = () => setCh(true);
+
+    //alert 창
+    const [messageApi, contextHolder] = message.useMessage();
+    //성공 alert
+    const success = (contentText) => {
+        messageApi.open({
+            type: 'success',
+            content: contentText,
+        });
+    };
+    //실패 alert
+    const error = (contentText) => {
+        messageApi.open({
+            type: 'error',
+            content: contentText,
+        });
+    };
+    //주의 alert
+    const warning = (contentText) => {
+        messageApi.open({
+            type: 'warning',
+            content: contentText,
+        });
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {    //초기값 가져오는 함수
+        axios.post('http://192.168.2.82:5000/readEmpPay', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (er) {
+            console.log("readDep error :", error);
+            let contentText = "데이터를 호출 에러 발생";
+            error(contentText);
+        });
+    }
+
+    //추가 onChange
+    const onChangeAddData = (e) => {
+        const { value, name } = e.target;
+        setAddData({
+            ...addData,
+            [name]: value
+        })
+        console.log("addData값 " , addData);
+    }
+    //수정 onChange
+    const onChangeModifyData = (e) => {
+        const { value, name } = e.target;
+        setModifyData({
+            ...modifyData,
+            [name]: value
+        })
+        console.log("modifyData" , modifyData);
+    }
+
+        // addempPayID: null, //수당 리스트 PRIMARYKEY
+    // addcompCode: null, // 회사 코드 (관리자 아이디)
+    // addpayCode: null,  // 수당 코드
+    // addpayName: null,  // 수당명
+    // addtaxFreeCode: null, // 비과세 코드
+    // addtaxFreeName: null, // 비과세 명
+    // addpayType: null,  // 지급 유형
+    // addpayClac: null,  // 계산식
+
+    //추가 데이터 넣기 함수
+    const pushAddData = () => {
+        if (addData.addtaxFreeName != "연장근로수당"
+            && addData.addtaxFreeName != "야간근로수당"
+            && addData.addtaxFreeName != "휴일근로수당"
+            && addData.addtaxFreeName != "식대"
+            && addData.addtaxFreeName != "차량유지보조금"
+            && addData.addtaxFreeName != "출산/보육수당") {
+            let contentText = "비과세 항목에 없는 데이터를 입력하셨습니다. 비과세항목에 맞는 데이터를 넣어주세요";
+            warning(contentText);
+        }
+        else {
+            axios.post('http://192.168.2.82:5000/createEmpPay ', {
+                compCode: sessionStorage.getItem("uid"),
+                payCode: addData.addpayCode,
+                payName: addData.addpayName,
+                taxFreeCode: addData.addtaxFreeCode,
+                taxFreeName: addData.addtaxFreeName,
+                payType: addData.addpayType,
+                payCalc: addData.addpayCalc,
+            }).then(function (response) {
+                if (response.data) {
+                    let contentText = "        수당 등록 완료        ";
+                    getData();
+                    success(contentText);
+                    handleClose();
+                }
+                if (!response.data) {
+                    let contentText = "        같은 수당코드가 존재합니다. 다른 코드로 변경하세요!       ";
+                    warning(contentText);
+                }
+            }).catch(function (er) {
+                console.log("createEmp error", er);
+                let contentText = "서버 연동 에러 발생";
+                error(contentText);
+            });
+        }
+
+    }
+    //수정 데이터 넣기
+    const pushModifyData = () => {
+        if (addData.addtaxFreeName != "연장근로수당"
+            && addData.addtaxFreeName != "야간근로수당"
+            && addData.addtaxFreeName != "휴일근로수당"
+            && addData.addtaxFreeName != "식대"
+            && addData.addtaxFreeName != "차량유지보조금"
+            && addData.addtaxFreeName != "출산/보육수당") {
+            let contentText = "비과세 항목에 없는 데이터를 입력하셨습니다. 비과세항목에 맞는 데이터를 넣어주세요";
+            warning(contentText);
+        } else {
+            axios.post('http://192.168.2.82:5000/updateEmpPay', {
+                empPayID: modifyData.modifyempPayID,
+                compCode: modifyData.modifycompCode,
+                payCode: modifyData.modifypayCode,
+                payName: modifyData.modifypayName,
+                taxFreeCode: modifyData.modifytaxFreeCode,
+                taxFreeName: modifyData.modifytaxFreeName,
+                payType: modifyData.modifypayType,
+                payCalc: modifyData.modifypayCalc
+            }).then(function (response) {
+                if (response.data) {
+                    getData();
+                    MdClose();
+                    let contentText = "        부서코드 수정 완료        ";
+                    success(contentText);
+                }
+                if (!response.data) {
+                    let contentText = "이미 존재하는 부서코드입니다. 다른 부서코드를 입력하세요.";
+                    warning(contentText);
+                }
+            }).catch(function (er) {
+                let contentText = "        에러 발생        ";
+                error(contentText);
+                console.log("updataEmp error", er);
+            });
+        }
+    }
+    //삭제 데이터 넣기
+    const pushDeleteData = () => {
+        axios.post('http://192.168.2.82:5000/deleteEmpPay ', {
+            empPayID : modifyData.modifyempPayID
+        }).then(function (response) {
+            if (response.data) {
+                getData();
+                MdClose();
+                DeClose();
+                let contentText = " 수당 삭제 완료";
+                success(contentText);
+            }
+            if (!response.data) {
+                let contentText = " 부서 삭제 실패 , 다시 실행해주세요";
+                warning(contentText);
+            }
+        }).catch(function (er) {
+            console.log("deleteEmp error", er);
+            let contentText = " 에러 발생 ";
+            error(contentText);
+        })
+    }
 
 
 
     return (
-        <div style={{width:'1400px' ,position:'relative'}}>
-             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>수당 관리 </strong></h2>
-            <br/>
-            <br/>
-            <br/>
-            {/* <table style={{
-                width:"1000px",
-                // border:'1px solid black',
-                
-                solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#f1f2f6' , }}>
-                <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>수당코드</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>수당명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>비고세</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>지급유형</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>계산식</strong>
-                    </td>
-                
-                </tr>  
-
-                  {
-                        data && data.map((e, idx) =>
-                        <tr >
-                            <td><Checkbox {...label} defaultChecked /></td>
-                            <td>수당 코드 넣을곳</td>
-                            <td>수당명 넣을곳</td>
-                            <td> 비과세 받아올거</td>
-                            <td>지급 유형 넣을곳 </td>
-                            <td>계산식 넣을곳</td>
-                        
-                        </tr>
-                        )
-                    }
-                    <tr >
-                    <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>wdfkr0630</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>159487z@</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>2020315010</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>신종락</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>wdfkr0630</strong>
-                    </td>
-                
-                </tr>  
-            </table>  */}
+        <div style={{ width: '1400px', position: 'relative' }}>
+            {contextHolder}
+            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>수당 관리 </strong></h2>
+            <br />
+            <br />
+            <br />
 
             <Table striped bordered hover >
-                    <thead style={{height:'60px'}}>
-                        <tr  style={{backgroundColor:'#005b9e' ,  }}>
-                        <td style={{border:"1px solid gray",color:'#ffffff',fontSize:'22px'}}>
-                        {/* onChange={(e) => allHandler(e)} */}
-                        <input type="checkbox" id="allCheck" value="allCheck" ></input>
-                            </td>
-                            <td style={{border:"1px solid gray",color:'#ffffff',fontSize:'22px'}}>
-                                <strong>수당코드</strong>
-                            </td>
-                            <td style={{border:"1px solid gray",color:'#ffffff',fontSize:'22px'}}>
-                                <strong>수당명</strong>
-                            </td>
-                            <td style={{border:"1px solid gray",color:'#ffffff',fontSize:'22px'}}>
-                                <strong>비고세</strong>
-                            </td>
-                            <td style={{border:"1px solid gray",color:'#ffffff',fontSize:'22px'}}>
-                                <strong>지급유형</strong>
-                            </td>
-                            <td style={{border:"1px solid gray",color:'#ffffff',fontSize:'22px'}}>
-                                <strong>계산식</strong>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <thead style={{ height: '60px' }}>
+                    <tr style={{ backgroundColor: '#005b9e', }}>
+                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                            <strong>수당코드</strong>
+                        </td>
+                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                            <strong>수당명</strong>
+                        </td>
+                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                            <strong>비과세</strong>
+                        </td>
+                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                            <strong>지급유형</strong>
+                        </td>
+                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                            <strong>계산식</strong>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
                     {
                         data && data.map((e, idx) =>
-                        <tr style={{height:'60px'}} >
-                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}><input type="checkbox" id={e.userId} value={e.userId} ></input></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}><strong> {e.userId}</strong> </td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px'}}><strong>  {e.userPw}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px'}}><strong>{e.userName} </strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}><strong> {e.userGrant}</strong></td>
-                        </tr>
+                            <tr style={{ height: '60px' }} >
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong> {e.payCode}</strong> </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><Button name={e.empPayID} onClick={() => MdShow(e)} variant="link"><strong>{e.payName}</strong></Button></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong>  {e.taxFreeName}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong>{e.payType} </strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong> {e.payCalc}</strong></td>
+                            </tr>
                         )
                     }
+                </tbody>
+            </Table>
+            <Grid item xs={12} ml={-3} mt={55}>
+                <hr style={{ width: '1440px' }} />
+            </Grid>
+            <Box >
+                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
+            </Box>
 
-                   
-                    </tbody>
-                    </Table>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-                    <Grid item xs={12} ml={-3} mt={55}>
-                    <hr style={{width:'1440px'}}/>
-                    </Grid>
-                    
-          
-      
-                {/* <div>
-                <button   style={{position:'absolute' ,left:"0px"}} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button> 
-                <button style={{position:'absolute' ,left:"110px"}} onClick={MdShow} className="Atmp1">  <strong>수정</strong></button>
-                <button style={{position:'absolute' ,left:"220px"}} onClick={DeShow} className="Atmp1"> <strong>삭제</strong> </button>
-
-                </div> */}
-
-                <Box >
-              
-              <button   style={{position:'absolute' ,left:"0px",top:'600px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
-              <button style={{position:'absolute' ,left:"110px",top:'600px'}}onClick={MdShow} className="Atmp1">  <strong>수정</strong></button>
-              <button style={{position:'absolute' ,left:"220px",top:'600px'}} onClick={DeShow} className="Atmp1"> <strong>삭제</strong> </button>
-                
-              </Box>
-            
-
-
-
-
-            {/* 추가 */}
-              {/* 등록 */}
-              <Modal 
-             centered
-             size="lg"
-         
-             
-            show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title style={{color:'#ffffff'}}><strong> 사원 등록</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f3f3f3',}}>
-             
-
-                <br/>
-              
-                    <Container>
-                    <Grid container spacing={4}>
-                    <Grid item xs={6} md={2} ml={-2} style={{fontSize:'15px' ,color:'#777777'}}>
-                        <strong>사원명</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} ml={2} >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-                    <Grid item xs={6} md={2} ml={-1} style={{fontSize:'15px' ,color:'#777777'}}>
-                        <strong>사원 번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} ml={0}>
-                    {/* outline:'1px solid #777777'/ */}
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-                    
-                    <Grid item xs={6} md={3} ml={-2} mt={-2} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>주민등록번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
-                    <Form.Control style={{width:'100px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-                    <Grid item xs={6} md={3} ml={-10} mt={-1.8} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>ㅡ</strong>
-                    </Grid>
-                    <Grid item xs={6} md={3} ml={-20.5} mt={-2} >
-                    <Form.Control style={{width:'100px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-
-
-
-
-                    <Grid item xs={6} md={2} ml={-10} mt={-1.5}  style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>전화 번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} ml={0} mt={-2} >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-
-
-
-                        
-                    <Grid item xs={6} md={3} ml={-2} mt={-2} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>이메일</strong>
-                    </Grid>
-                    <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-                    <Grid item xs={6} md={2} ml={6.5} mt={-1.5}  style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>부양 가족 수</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} ml={0} mt={-2} >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid> 
-
-                    <Grid item xs={10} md={5} mt={-1.5}ml={-2} style={{fontSize:'15px',color:'#777777'}} >
-                      <strong>주소</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={7}  ml={-21} mt={-2}  >
-
-
-
-                    <InputGroup   style={{width:'600px' ,height:'30px'}}>
-                      
-                      <Form.Control
-                          type="text"
-                          name='compNum'
-                          aria-describedby="btnGroupAddon"
-                          style={{height:'30px'}}
-                        
-                      />
-                        <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'40px' ,height:'30px'}}> <SearchIcon/></InputGroup.Text>
-                      </InputGroup>
-                    </Grid>
-                 
-
-                    <Grid item xs={12} ml={-5} mt={-2}>
-                    <hr style={{width:'800px'}}/>
-                    </Grid>
-
-
-                    <Grid item xs={6} md={4} mt={-1} ml={-2} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>부서코드</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-                    
-                      
-                    <InputGroup   style={{width:'230px' ,height:'30px'}}>
-                      
-                      <Form.Control
-                          type="text"
-                          name='compNum'
-                          aria-describedby="btnGroupAddon"
-                          style={{height:'30px'}}
-                        
-                      />
-                        <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'40px' ,height:'30px'}}> <SearchIcon/></InputGroup.Text>
-                      </InputGroup>
-                
-
-                    </Grid>
-                    <Grid item xs={6} md={2} ml={-1}  mt={-1} style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>부서명</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}  ml={0} mt={-2}  >
-                        <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-                    <Grid item xs={6} md={4} mt={-1} ml={-2} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>부서코드</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-                      <Form.Control style={{width:'230px' ,height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-                    <Grid item xs={6} md={2} ml={-1}  mt={-2} style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>직위/직급</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}  ml={0} mt={-2}  >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-                    
-                    
-                    <Grid item xs={2} md={2}ml={-2}  mt={-1.5} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>입사일</strong>
-                    </Grid>
-                    <Grid item xs={2} md={1} mt={-2} ml={2}>
-                     <Form.Control style={{width:'60px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-                    <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>/</strong>
-                    </Grid>
-
-                    <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                    <Form.Control style={{width:'60px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-                    <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>/</strong>
-                    </Grid>
-                    <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                    <Form.Control style={{width:'60px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-
-                  
-
-                    <Grid item xs={6} md={2} ml={1} mt={-1.5}  style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>휴가</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={2} ml={-10}mt={-2}  >
-                    <Form.Control style={{width:'100px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-                    <Grid item xs={6} md={2} ml={-1} mt={-1.5}  style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>잔여 휴가</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={1} ml={-4} mt={-2} >
-                    <Form.Control style={{width:'100px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid >
-                    
-                    
-                    <Grid item xs={6} md={4} mt={-2} ml={-2} style={{fontSize:'15px',color:'#777777'}}>
-                       <strong>퇴사일</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-                    <Grid item xs={6} md={2} ml={-1}  mt={-2} style={{fontSize:'15px',color:'#777777'}}>
-                        <strong>퇴사 사유</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}  ml={0} mt={-2}  >
-                    <Form.Control style={{width:'230px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-                    <Grid item xs={12} ml={-5} mt={-4}>
-                    <hr style={{width:'800px'}}/>
-                    </Grid>
-                    
-                    <Grid item xs={6} md={6} ml={16} mt={-3}  style={{fontSize:'15px',color:'#777777'}}>
-                      <strong> 은행</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={6} ml={-32}mt={-4}  >
-                    
-                    <Form.Control style={{width:'280px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-                    
-                    <Grid item xs={6} md={4}  ml={-2}mt={2}  style={{fontSize:'15px' ,color:'#777777'}}>
-                       <div ><strong> 급여 통장</strong></div>
-                    </Grid>
-
-
-
-                
-                    <Grid item xs={6} md={4} ml={-13.5} mt={-2}  style={{fontSize:'15px',color:'#777777'}}>
-                       <strong> 계좌 번호</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={4} ml={-16} mt={-2} >
-                    <Form.Control style={{width:'280px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-                    <Grid item xs={6} md={6} ml={16} mt={-5} style={{fontSize:'15px',color:'#777777'}} >
-                       <strong>예금주</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={6} ml={-31.5}mt={-5}  >
-                    <Form.Control style={{width:'280px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-                    
-                    <Grid item xs={6} md={6} ml={16} mt={-2} style={{fontSize:'15px',color:'#777777'}} >
-                       <strong>연봉</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={6} ml={-31.5}mt={-2}  >
-                    <Form.Control style={{width:'280px',height:'30px'}} type="text" name='compNum' aria-describedby="btnGroupAddon" />
-                    </Grid>
-
-
-              
-
-        
-                    </Grid>
-                </Container>
-
-
-                </Modal.Body>
-                <Modal.Footer style={{ backgroundColor:'#ffffff'}}>
-                <Button variant="secondary" onClick={handleClose}>
-                    <strong>취소</strong>
-                </Button>
-                <button className="addButton"  onClick={handleClose}>
-                    <strong>추가</strong>
-                </button>
-                </Modal.Footer>
-            </Modal>
-
-            {/* 수정 */}
-            {/* <Modal 
-             centered
-             size="lg"
-            show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>수정</Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={MdClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={MdClose}>
-                    Save Changes
-                </Button>
-                </Modal.Footer>
-            </Modal> */}
-
+            {/* 등록 */}
             <Modal
                 centered
-                size="xsm"
-                // style={{width:'500px'}}
-                show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#005b9e', width:'500px',height:'70px'}}>
-                    <Modal.Title  style={{color:'#ffffff'}}><strong>사용자관리 수정</strong></Modal.Title>
+                size="lg"
+
+
+                show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>수당등록</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f3f3f3', width:'500px'}}>
-                    <Container>
-                    <Grid container spacing={4}>
-                  
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
 
-                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>입사 일자</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12}>
-                        {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        name="userId" type="text"  />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>사원번호</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userPw" type="password"  />
-                        </Grid>
-
-
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>사원명</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userName" type="text"  />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>부서명</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userName" type="text"  />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>직위/직급</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userName" type="text"  />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>은행</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userName" type="text"  />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>계좌번호</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userName" type="text"  />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>Email</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name="userName" type="text"  />
-                        </Grid>
-
-                   
-                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>혹시 검색할게 있나?</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
-                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
-                      
+                    <p>수당코드</p>
+                    <input type="text" name='addpayCode' onChange={onChangeAddData}></input>
+                    <p>수당명</p>
+                    <input type="text" name = 'addpayName' onChange={onChangeAddData}></input>
+                    <p>비과세</p>
+                    <InputGroup style={{ width: '600px', height: '30px' }}>
                         <Form.Control
                             type="text"
-                            name='userGrant'
+                            name = 'addtaxFreeName'
+                            value={addData.addtaxFreeName}
                             aria-describedby="btnGroupAddon"
-                            style={{height:'40px'}}
-                             
-                                   
+                            style={{ height: '30px' }}
+                            onChange={onChangeAddData}
                         />
-                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
-                        </InputGroup>
-                        </Grid>
+                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                    </InputGroup>
+                    <p>지급유형</p>
+                    <input type="text" name='addpayType' onChange={onChangeAddData}></input>
 
+                    <p>계산식</p>
+                    <InputGroup style={{ width: '600px', height: '30px' }}>
+                        <Form.Control
+                            type="text"
+                            name = 'addpayCalc'
+                            aria-describedby="btnGroupAddon"
+                            value={addData.addpayCalc}
+                            style={{ height: '30px' }}
+                            onChange={onChangeAddData}
+                        />
+                        <InputGroup.Text id="btnGroupAddon" onClick={Chshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                    </InputGroup>
 
-                        
-                       
-                     </Grid>
-                </Container>
                 </Modal.Body>
-                <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff' }}>
-                    <Button variant="secondary" onClick={MdClose}>
-                        닫기
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={handleClose}>
+                        <strong>닫기</strong>
                     </Button>
-                    <button variant="primary" className='addButton' onClick={MdClose}>
-                        저장
+                    <button className="addButton" onClick={pushAddData}>
+                        <strong>추가</strong>
                     </button>
                 </Modal.Footer>
             </Modal>
 
 
 
-            {/* 수정 */}
-         
+            {/* 수정 모달 ShShow*/}
+            <Modal
+                centered
+                size="xsm"
+                // style={{width:'500px'}}
+                show={ModifyShow} onHide={MdClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px', height: '70px' }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>수당관리상세</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', width: '500px' }}>
+
+                <p>수당코드</p>
+                    <input type="text" name="modifypayCode" value={modifyData.modifypayCode} onChange={onChangeModifyData}></input>
+                    <p>수당명</p>
+                    <input type="text" name="modifypayName" value={modifyData.modifypayName} onChange={onChangeModifyData}></input>
+                    <p>비과세</p>
+                    <InputGroup style={{ width: '600px', height: '30px' }}>
+                        <Form.Control
+                            type="text"
+                            name="modifytaxFreeName"
+                            value={modifyData.modifytaxFreeName}
+                            aria-describedby="btnGroupAddon"
+                            style={{ height: '30px' }}
+                            onChange={onChangeModifyData}
+                        />
+                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                    </InputGroup>
+                    <p>지급유형</p>
+                    <input type="text" name="modifypayType" value={modifyData.modifypayType} onChange={onChangeModifyData}></input>
+                    <p>계산식</p>
+                    <InputGroup style={{ width: '600px', height: '30px' }}>
+                        <Form.Control
+                            type="addpayCalc"
+                            name="modifypayCalc"
+                            aria-describedby="btnGroupAddon"
+                            value={modifyData.modifypayCalc}
+                            style={{ height: '30px' }}
+                            onChange={onChangeModifyData}
+                        />
+                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                    </InputGroup>
+
+                </Modal.Body>
+                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={MdClose}>
+                        닫기
+                    </Button>
+                    <button variant="primary" className='addButton' onClick={DeShow}>
+                        삭제
+                    </button>
+                    <button variant="primary" className='addButton' onClick={pushModifyData}>
+                        수정
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
             {/* 삭제 */}
             <Modal
                 centered
                 size="xsm"
-                show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',width:'500px'}}>
-                    <Modal.Title style={{color:'#ffffff',width:'500px'}}><strong>모바일 삭제</strong></Modal.Title>
+                show={DelShow} onHide={DeClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', width: '500px' }}>
+                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>모바일 삭제</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f1f2f6', width:'500px',}}>
-                {/* {checkedItems.size} */}
-                    <strong>개 항목을 삭제하시겠습니까?</strong>
+                <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
+                    {/* {checkedItems.size} */}
+                    <strong>{modifyData.modifypayName}명의 수당을 삭제하시겠습니까?</strong>
                 </Modal.Body>
-                <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff'}}>
-                    <Button variant="secondary" onClick={DelClose}>
+                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={DeClose}>
                         닫기
                     </Button>
-                    <button className='addButton' variant="primary" onClick={DelClose}>
+                    <button className='addButton' variant="primary" onClick={pushDeleteData}>
                         삭제
                     </button>
                 </Modal.Footer>
             </Modal>
 
 
-            
 
-            {/* 부서 코드 둗보기 모달 */}
-            <Modal 
-                size="sm"
+
+            {/* 버튼 눌렀을때 나오는 Modal */}
+            <Modal
+                size="xl"
                 centered
                 show={SH} onHide={ShClose}>
-                <Modal.Header closeButton  style={{backgroundColor:'#2F58B8',}}>
-                <Modal.Title  style={{color:'#ffffff'}}> <strong> 권한 부여</strong></Modal.Title>
+                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>비과세항목</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f1f2f6'}}> 
+                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
+                    <table style={{
+                        textAlign: "center",
+                        width: "100%", height: '200px', border: "1px solid gray",
+                    }} >
+                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' ,width:'100px' ,height:'50px'}}><strong> 비과세코드</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong> 비과세명</strong></td>
+                            <td style={{ fontSize: '20px' }}> <strong> 비과세상세</strong></td>
+                        </tr>
 
-                <br/><br/><br/><br/>
-                <table style={{
-                        textAlign:"center",
-                        width:"100%",height:'200px', border:"1px solid gray" ,}} >
-                    <tr style={{border:"1px solid gray",backgroundColor:'#a4b0be'}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}><strong> 비고</strong></td>
-                    <td style={{fontSize:'30px'}}> <strong> 권한명</strong></td>
-                    </tr>
-                    <tr style={{border:"1px solid gray"}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>1</td>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>Master</td>
-                    </tr>
-                    <tr style={{border:"1px solid gray"}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>2</td>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>Manager</td>
-                    </tr>
-                </table>
-                <br/><br/><br/><br/><br/>    <br/><br/>
+                        {
+                        Right && Right.map((e, idx) =>
+                        <tr style={{border:"1px solid gray"}}>
+                        
+                        <td style={{border:"1px solid gray",fontSize:'20px'}}>{e.taxFreeCode}</td>
+                        <td style={{ border: "1px solid gray", fontSize: '20px' }}>
+                            <Button name={e.taxFreeCode} onClick={() => ShBtn(e)} variant="link">
+                                <strong>{e.taxFreeName}</strong>
+                            </Button></td>
+                        <td style={{border:"1px solid gray",fontSize:'20px'}}>{e.taxFreeDetail}</td>
+                        </tr>
+                        
+                        )
+                    }
+                    </table>
                 </Modal.Body>
 
-                </Modal>
+            </Modal>
 
+            {/* 계산식 Modal */}
+            <Modal
+                size="sm"
+                centered
+                show={CH} onHide={ChClose}>
+                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>수당계산</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
 
+                    <br /><br /><br /><br />
+                    <table style={{
+                        textAlign: "center",
+                        width: "100%", height: '200px', border: "1px solid gray",
+                    }} >
+                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
+                            <td style={{ border: "1px solid gray", fontSize: '30px' }}><strong> 비고</strong></td>
+                            <td style={{ fontSize: '30px' }}> <strong> 권한명</strong></td>
+                        </tr>
+                        <tr style={{ border: "1px solid gray" }}>
+                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>1</td>
+                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>Master</td>
+                        </tr>
+                        <tr style={{ border: "1px solid gray" }}>
+                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>2</td>
+                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>Manager</td>
+                        </tr>
+                        
+                    </table>
+                </Modal.Body>
+                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={ChClose}>
+                        닫기
+                    </Button>
+                    <button variant="primary" className='addButton' onClick={ChClose}>
+                        완료
+                    </button>
+                </Modal.Footer>
+
+            </Modal>
 
 
         </div>
