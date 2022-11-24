@@ -64,17 +64,18 @@ export default function VerticalTabs() {
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
+        style={{width:'300px'}}
       >
         <br/>
             <div>
-        <h4  style={{color:'#2F58B8'}}> &nbsp; &nbsp; <strong >근태 관리</strong>  &nbsp; &nbsp; </h4>
+        <h4  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >근태 관리</strong>  &nbsp; &nbsp; </h4>
         </div>
     
-        <Tab label="휴가 항목 등록" {...a11yProps(0)} />
-        <Tab label=" 보유 휴가 현황" {...a11yProps(1)} />
-        <Tab label=" 휴가 처리" {...a11yProps(2)} />
-        <Tab label=" 출퇴근 관리" {...a11yProps(3)} />
-        <Tab label=" 출퇴근 현황" {...a11yProps(4)} />
+        <Tab label="휴가 항목 등록" {...a11yProps(0)} style={{fontSize:'25px'}}/>
+        <Tab label=" 보유 휴가 현황" {...a11yProps(1)} style={{fontSize:'25px'}}/>
+        <Tab label=" 휴가 처리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
+        <Tab label=" 출퇴근 관리" {...a11yProps(3)} style={{fontSize:'25px'}}/>
+        <Tab label=" 출퇴근 현황" {...a11yProps(4)} style={{fontSize:'25px'}}/>
 
       </Tabs>
       <CTabs value={value} index={2}>

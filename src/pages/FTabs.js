@@ -59,16 +59,17 @@ export default function VerticalTabs() {
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
+        style={{width:'300px'}}
       >
         <br/>
             <div>
-        <h4  style={{color:'#2F58B8'}}> &nbsp; &nbsp; <strong >경리/회계</strong>  &nbsp; &nbsp; </h4>
+        <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >경리/회계</strong>  &nbsp; &nbsp; </h2>
         </div>
     
-        <Tab label="거래 관리" {...a11yProps(0)} />
-        <Tab label=" 매입 관리" {...a11yProps(1)} />
-        <Tab label=" 매출 관리" {...a11yProps(2)} />
-        <Tab label=" 조회" {...a11yProps(3)} />
+        <Tab label="거래 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/>
+        <Tab label=" 매입 관리" {...a11yProps(1)}style={{fontSize:'25px'}} />
+        <Tab label=" 매출 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
+        <Tab label=" 조회" {...a11yProps(3)}style={{fontSize:'25px'}} />
 
       </Tabs>
       <FTabs value={value} index={0}>

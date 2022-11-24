@@ -59,7 +59,10 @@ const Login1 = () => {
     }
 
 
-
+    const home =() =>{
+        window.location.href="/"
+      }
+    
 
 
 
@@ -78,7 +81,7 @@ const Login1 = () => {
                 }}
             >
 
-                <img src={ask} style={{ width: '200px' }} />
+                <img onClick={home} src={ask} style={{ width: '200px' }} />
                 <br />
 
 
@@ -87,14 +90,12 @@ const Login1 = () => {
           </Typography> */}
                 <h3> <strong>로그인</strong></h3>
 
-                <br />
-                <br />
+         
 
 
 
 
-
-                <Box component="form" noValidate sx={{ mt: 1 }}>
+                <Box component="form" noValidate sx={{ mt: 8 }}>
 
 
 
@@ -111,16 +112,15 @@ const Login1 = () => {
                         autoComplete="id"
                         autoFocus
                         onChange={handleChangeId}
+                       style={{width:'400px'}}
                     />
-                    <br />
-                    <br />
+                   
 
 
 
-
-                    <h5 style={{ position: 'absolute', top: '300px' }}><strong>비밀번호</strong>
-                    </h5>
-
+                    <Box mt={7}>
+                    <h5 style={{ position: 'absolute', top: '300px' }}><strong>비밀번호</strong></h5>
+                    </Box>
 
                     <TextField
                         onChange={handleChangePw}
