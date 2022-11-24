@@ -10,36 +10,70 @@ import Rsearch from './Rsearch';
 import Table from 'react-bootstrap/Table';
 import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
+import { message, Space } from 'antd';
 
 
 const ATGBcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-    const [data, setData] = useState();
-    const [OKdata, setOKData] = useState();
-    const [DelShow, setMDelShow] = useState(false);
+    const [Okdata, setOkdata] = useState("");
+    const [data, setData] = useState("");
+    const [DelShow, setDelShow] = useState(false);
     const [ModifyShow, setModifyShow] = useState(false);
     const [show, setShow] = useState(false);
+    const [check , setCheck] = useState(false);
+    const [value , setValue] = useState({});
+
     const [addData, setAddData] = useState({    //추가 관련 변수
-        saveId: '',
-        savePw: '',
-        saveUser: '',
-        saveAdvice: ''
+        adddepName: "",    //부서명
+        addempName: "",    //이름
+        addempNum: "",     //부서번호
+        addtotalVacation: "",  //총 휴가
+        addtakeVacation: "",   //사용휴가
+        addremindVacation: ""  //일반휴가
     });
 
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
-        axios.post('http://192.168.2.82:5000/readUser', {
+        getData();
+    }, []);
+
+    const getData = () => {    //초기값 가져오는 함수
+        axios.post('http://192.168.2.91:5000/read_Vactlist', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
-        }).catch(function (error) {
-            console.log("readUser error", error);
+        }).catch(function (er) {
+            console.log("readDep error :", error);
+            let contentText = "데이터를 호출 에러 발생";
+            error(contentText);
         });
-    }, []);
+    }
 
-
+    const [messageApi, contextHolder] = message.useMessage();
+    //성공 alert
+    const success = (contentText) => {
+        messageApi.open({
+            type: 'success',
+            content: contentText,
+        });
+    };
+    //실패 alert
+    const error = (contentText) => {
+        messageApi.open({
+            type: 'error',
+            content: contentText,
+        });
+    };
+    //주의 alert
+    const warning = (contentText) => {
+        messageApi.open({
+            type: 'warning',
+            content: contentText,
+        });
+    };
     //입력값 onChange 함수
-    const { saveId, savePw, saveUser, saveAdvice } = addData;
+
+
     const onChangeAddData = (e) => {
         const { value, name } = e.target;
         setAddData({
@@ -49,234 +83,90 @@ const ATGBcom = () => {
         console.log(addData);
     }
 
-    //추가 모델에서 추가 눌렀을경우 함수
-    const pushAddData = () => {
-
-        if (addData.saveId == '' || addData.savePw == '' || addData.saveUser == '' || addData.saveAdvice == '') {
-            window.alert("공란은 입력할 수 없습니다.");
-        } else {
-            axios.post('http://192.168.2.82:5000/createUser', {
-                userId: addData.saveId,
-                userPw: addData.savePw,
-                userName: addData.saveUser,
-                userGrant: addData.saveAdvice,
-                compCode: sessionStorage.getItem("uid")
-            }).then(function (response) {
-                if (!response.data) {
-                    window.alert("중복 아이디는 추가할 수 없습니다.");
-                } else {
-                    window.alert("추가 완료");
-                    handleClose();
-                    setAddData({
-                        "saveId": '',
-                        "savePw": '',
-                        "saveUser": '',
-                        "saveAdvice": '',
-                    })
-                }
-            }).catch(function (error) {
-                console.log("createUser error :", error);
-            });
-
-        }
-
-    }
 
 
     //추가 모델에서 닫기 눌렀을 경우
-    const closeAddData = () => {
-        handleClose();
-        if (show) {
-            console.log("if문 실행");
-            setAddData({
-                "saveId": '',
-                "savePw": '',
-                "saveUser": '',
-                "saveAdvice": '',
-            });
-        }
-    }
+    
 
     //저장
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     //수정
-    const DelClose = () => setMDelShow(false);
-    const DeShow = () => setMDelShow(true);
-    //삭제
-    const MdClose = () => setModifyShow(false);
-    const MdShow = () => setModifyShow(true);
-    //권한
-
-
-
-
-    //체크박스 관련 ---------------------------------------
-    const [isChecked, setIsChecked] = useState(false); //체크여부
-    const [checkedItems, setCheckedItems] = useState(new Set());
-
-    const checkHandler = ({ target }) => {
-        setIsChecked(!isChecked);
-        checkedItemHandle(target.value, target.checked);
-    }
-
-    const checkedItemHandle = (id, isChecked) => {
-        if (isChecked) {
-            checkedItems.add(id);
-            setCheckedItems(checkedItems);
-            console.log("if문 checked ", checkedItems);
-        } else if (!isChecked && checkedItems.has(id)) {
-            checkedItems.delete(id);
-            setCheckedItems(checkedItems);
-            console.log("else문 checked", checkedItems);
-        }
-        return checkedItems;
+    const DelClose = () => {
+        setValue({});
+        setDelShow(false);
     }
 
 
+    const DeShow = (e) => {
+        setValue(e);
+        
+        axios.post('http://192.168.2.91:5000/modal_Vaclist',{
+            compCode : sessionStorage.getItem("uid"),
+            empNum : e.empNum
+        }).then(function(response){
+            setOkdata(response.data);
+            setCheck(true);
+        }).catch(function(err){
+            console.log("read_Vactlist error :" , err);
+            let contentText = "상세정보를 가져오는데 오류가 발생했습니다. 다시 실행해주세요";
+            error(contentText);
+        })
+        setDelShow(true);
+    }
 
 
 
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
+            {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>보유휴가 현황 </strong></h2>
             <br />
             <br />
             <br />
-            
+
 
 
             <Table >
                 <thead style={{ height: '60px' }}>
-                    <tr style={{backgroundColor:'#ecf0f1' , textAlign:'center', border: "1px solid #f1f2f6" }}>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                        <Checkbox {...label} defaultChecked />
-                        </td>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
+                    <tr style={{ backgroundColor: '#ecf0f1', textAlign: 'center', border: "1px solid #f1f2f6" }}>
+
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>부서명</strong>
                         </td>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>사원명</strong>
                         </td>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                            <strong>총 휴가</strong>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>총휴가</strong>
                         </td>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                            <strong>사요 휴가</strong>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>사용휴가</strong>
                         </td>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                            <strong>잔여 휴가</strong>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>잔여휴가</strong>
                         </td>
-                        <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                            <strong>상세 확인</strong>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>상세확인</strong>
                         </td>
 
-                    </tr>                 
-                 </thead>
+                    </tr>
+                </thead>
                 <tbody>
-
-                {
+                    {
                         data && data.map((e, idx) =>
-                        <tr  style={{border:"1px solid gray"}} >
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}><Checkbox {...label} defaultChecked /></td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>부서명 넣을거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>사원명 넣을거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>총 휴가 머시기 받아올거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>사용 휴가 머시기</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>잔여 휴가 머시기 받아올거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}><Button  variant="link" onClick={DeShow}><strong>확인</strong></Button></td>
-                        </tr>
-                        )   
+                            <tr style={{ border: "1px solid gray" }}>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.depName}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.empName}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.totalVacation}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.takeVacation}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.remindVacation}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><Button variant="link" name={e.empNum} onClick={() => DeShow(e)}><strong>확인</strong></Button></td>
+                            </tr>
+                        )
                     }
                 </tbody>
             </Table>
- 
-
-            {/* 등록 */}  
-            <Modal 
-             centered
-             size="xsm"
-         
-             
-            show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title style={{color:'#ffffff'}}><strong>부서관리</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f3f3f3',}}>
-            
-                <Container>
-                    <Grid container spacing={4}>
-                  
-
-                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>부서명</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12}>
-                        {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                       type='text' name='adddepCode' onChange={onChangeAddData}/>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>사원명</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepName' onChange={onChangeAddData}/>
-                        </Grid>
-
-
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>총 휴가</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepDetail' onChange={onChangeAddData}/>
-                        </Grid>    
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>사용 휴가</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepDetail' onChange={onChangeAddData}/>
-                        </Grid>    
-
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>잔여 휴가</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepDetail' onChange={onChangeAddData}/>
-                        </Grid>    
-
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>상세 확인</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepDetail' onChange={onChangeAddData}/>
-                        </Grid>    
-
-
-
-
-
-
-
-
-                     </Grid>
-                </Container>
-            </Modal.Body>
-                <Modal.Footer style={{ backgroundColor:'#ffffff'}}>
-                <Button variant="secondary" onClick={handleClose}>
-                    <strong>취소</strong>
-                </Button>
-                <button className="addButton"  onClick={pushAddData}>
-                    <strong>추가</strong>
-                </button>
-                </Modal.Footer>
-            </Modal>
-            
-
 
             {/* 확인  */}
             <Modal
@@ -287,16 +177,17 @@ const ATGBcom = () => {
                     <Modal.Title style={{ color: '#ffffff' }}><strong> 상세 확인</strong> </Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
-                    <br></br>
-                    <Grid container>
+                        <Grid container>
                         <Grid item xs style={{ fontSize: '25px' }}>
-                            <strong> 이름 : 이름 넣을거</strong>
+                            <strong>
+                                이름 : {value &&DelShow && value.empName}
+                            </strong>
                         </Grid>
                         <Grid item xs style={{ fontSize: '25px' }}>
-                            <strong> 부서 : 부서 넣을거</strong>
+                            <strong> 부서 : { value && DelShow && value.depName}</strong>
                         </Grid>
                     </Grid>
-                    <br></br>
+                    <br/>
                     <div style={{ fontSize: '25px' }}><strong>휴가 내역</strong></div>
 
 
@@ -304,47 +195,121 @@ const ATGBcom = () => {
                         width: "100%", textAlign: 'center'
                     }}>
                         <tr style={{ border: "1px solid gray", backgroundColor: '#f1f2f6' }}>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>날짜</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가 기간</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가 항목</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>상세</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>시작일</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>종료일</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가기간</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가항목</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가상세</strong></td>
                         </tr>
+
                         {
-                            OKdata && OKdata.map((e, idx) =>
+                            Okdata && Okdata.map((e, idx) =>
                                 <tr style={{ border: "1px solid gray", fontSize: '20px' }}>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>부서명 넣을거</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>사원명 넣을거</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>총 휴가 머시기 받아올거</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>사용 휴가 머시기</td>
+                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactStartDate}</td>
+                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactEndDate}</td>
+                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactPeriod}</td>
+                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactDetail}</td>
+                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactDetail}</td>
                                 </tr>
                             )
 
                         }
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray" }}>더미Data</td>
-                            <td style={{ border: "1px solid gray" }}>휴가 기간</td>
-                            <td style={{ border: "1px solid gray" }}>휴가 항목</td>
-                            <td style={{ border: "1px solid gray" }}>상세</td>
-                        </tr>
-
-
+                       
                     </table>
+
+
                     <br></br>
                 </Modal.Body>
                 <Modal.Footer>
 
-                    <Button variant="primary" onClick={DelClose}>
-                        추가
-                    </Button>
-                    <Button variant="primary" onClick={DelClose}>
-                        저장
-                    </Button>
                     <Button variant="secondary" onClick={DelClose}>
                         닫기
                     </Button>
                 </Modal.Footer>
 
             </Modal>
+
+            {/* 등록 */}
+            <Modal
+                centered
+                size="xsm"
+
+
+                show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
+
+                    <Container>
+                        <Grid container spacing={4}>
+
+
+                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>부서명</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12}>
+                                {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepCode' onChange={onChangeAddData} />
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>사원명</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepName' onChange={onChangeAddData} />
+                            </Grid>
+
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>총 휴가</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>사용 휴가</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>잔여 휴가</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>상세 확인</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                            </Grid>
+
+
+                        </Grid>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={handleClose}>
+                        <strong>취소</strong>
+                    </Button>
+                    <button className="addButton" >
+                        <strong>추가</strong>
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
+
+
+
 
 
 

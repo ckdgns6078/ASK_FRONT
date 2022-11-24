@@ -454,7 +454,7 @@ const PMAcom = () => {
                     <strong>직위/직급</strong>
                 </td>
                 <td style={{ border: "1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>은향</strong>
+                    <strong>은행</strong>
                 </td>
                 <td style={{ border: "1px solid #f1f2f6",color:'#777777',fontSize:'22px' }}>
                     <strong>계좌번호</strong>
@@ -1086,8 +1086,8 @@ const PMAcom = () => {
                 centered
                 size="xsm"
                 show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', width: '500px' }}>
-                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}>삭제확인</Modal.Title>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
+                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>삭제확인</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
                     <strong>{modifyData.modifyempName}의 정보를 삭제하시겠습니까?</strong></Modal.Body>

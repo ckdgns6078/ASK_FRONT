@@ -244,12 +244,12 @@ const PMBcom = () => {
     }
     //수정 데이터 넣기
     const pushModifyData = () => {
-        if (addData.addtaxFreeName != "연장근로수당"
-            && addData.addtaxFreeName != "야간근로수당"
-            && addData.addtaxFreeName != "휴일근로수당"
-            && addData.addtaxFreeName != "식대"
-            && addData.addtaxFreeName != "차량유지보조금"
-            && addData.addtaxFreeName != "출산/보육수당") {
+        if (modifyData.modifytaxFreeName != "연장근로수당"
+            && modifyData.modifytaxFreeName != "야간근로수당"
+            && modifyData.modifytaxFreeName != "휴일근로수당"
+            && modifyData.modifytaxFreeName != "식대"
+            && modifyData.modifytaxFreeName != "차량유지보조금"
+            && modifyData.modifytaxFreeName != "출산/보육수당") {
             let contentText = "비과세 항목에 없는 데이터를 입력하셨습니다. 비과세항목에 맞는 데이터를 넣어주세요";
             warning(contentText);
         } else {
@@ -313,22 +313,22 @@ const PMBcom = () => {
             <br />
             <br />
 
-            <Table striped bordered hover >
+            <Table >
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#005b9e', }}>
-                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>수당코드</strong>
                         </td>
-                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>수당명</strong>
                         </td>
-                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>비과세</strong>
                         </td>
-                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>지급유형</strong>
                         </td>
-                        <td style={{ border: "1px solid gray", color: '#ffffff', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>계산식</strong>
                         </td>
                     </tr>
@@ -337,11 +337,11 @@ const PMBcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong> {e.payCode}</strong> </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><Button name={e.empPayID} onClick={() => MdShow(e)} variant="link"><strong>{e.payName}</strong></Button></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong>  {e.taxFreeName}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong>{e.payType} </strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' }}><strong> {e.payCalc}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.payCode}</strong> </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' , color: '#777777'}}><Button name={e.empPayID} onClick={() => MdShow(e)} variant="link"><strong>{e.payName}</strong></Button></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px' , color: '#777777'}}><strong>  {e.taxFreeName}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>{e.payType} </strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.payCalc}</strong></td>
                             </tr>
                         )
                     }
@@ -356,10 +356,13 @@ const PMBcom = () => {
 
 
 
+
+
+
             {/* 등록 */}
             <Modal
                 centered
-                size="lg"
+                size="xsm"
 
 
                 show={show} onHide={handleClose} animation={false}>
@@ -368,38 +371,85 @@ const PMBcom = () => {
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
 
-                    <p>수당코드</p>
-                    <input type="text" name='addpayCode' onChange={onChangeAddData}></input>
-                    <p>수당명</p>
-                    <input type="text" name = 'addpayName' onChange={onChangeAddData}></input>
-                    <p>비과세</p>
-                    <InputGroup style={{ width: '600px', height: '30px' }}>
-                        <Form.Control
-                            type="text"
-                            name = 'addtaxFreeName'
-                            value={addData.addtaxFreeName}
-                            aria-describedby="btnGroupAddon"
-                            style={{ height: '30px' }}
-                            onChange={onChangeAddData}
-                        />
-                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                    </InputGroup>
-                    <p>지급유형</p>
-                    <input type="text" name='addpayType' onChange={onChangeAddData}></input>
 
-                    <p>계산식</p>
-                    <InputGroup style={{ width: '600px', height: '30px' }}>
-                        <Form.Control
-                            type="text"
-                            name = 'addpayCalc'
-                            aria-describedby="btnGroupAddon"
-                            value={addData.addpayCalc}
-                            style={{ height: '30px' }}
-                            onChange={onChangeAddData}
-                        />
-                        <InputGroup.Text id="btnGroupAddon" onClick={Chshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                    </InputGroup>
 
+                    <Container>
+                    <Grid container spacing={4}>
+                  
+
+                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>수당코드</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                        type="text" name='addpayCode' onChange={onChangeAddData}/>
+                        </Grid>
+
+
+                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>수당명</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                        type="text" name = 'addpayName' onChange={onChangeAddData}/>
+                        </Grid> 
+
+                        
+                        
+                
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>비과세</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={19} mt={-5}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                        <Form.Control
+                           type="text"
+                           name = 'addtaxFreeName'
+                           value={addData.addtaxFreeName}
+                           aria-describedby="btnGroupAddon"
+                           style={{ height: '40px' }}
+                           onChange={onChangeAddData}
+                        />
+                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                        </InputGroup>
+
+
+
+                        <Grid item xs={6} md={6} ml={-16}mt={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>지급유형</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={0} mt={-5}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                        type="text" name='addpayType' onChange={onChangeAddData}/>
+                        </Grid>       
+
+
+
+                        
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>계산식</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={19} mt={-5}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                      
+                        <Form.Control
+                             type="text"
+                             name = 'addpayCalc'
+                             aria-describedby="btnGroupAddon"
+                             value={addData.addpayCalc}
+                             style={{ height: '40px' }}
+                             onChange={onChangeAddData}
+                            
+                        />
+                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                        </InputGroup>
+                    
+                     </Grid>
+                </Container>
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={handleClose}>
@@ -410,6 +460,10 @@ const PMBcom = () => {
                     </button>
                 </Modal.Footer>
             </Modal>
+
+
+
+
 
 
 
@@ -424,38 +478,88 @@ const PMBcom = () => {
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f3f3f3', width: '500px' }}>
 
-                <p>수당코드</p>
-                    <input type="text" name="modifypayCode" value={modifyData.modifypayCode} onChange={onChangeModifyData}></input>
-                    <p>수당명</p>
-                    <input type="text" name="modifypayName" value={modifyData.modifypayName} onChange={onChangeModifyData}></input>
-                    <p>비과세</p>
-                    <InputGroup style={{ width: '600px', height: '30px' }}>
+        
+
+                    <Container>
+                    <Grid container spacing={4}>
+                  
+
+                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>수당코드</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                        name="modifypayCode" value={modifyData.modifypayCode} onChange={onChangeModifyData}/>
+                        </Grid>
+
+
+                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>수당명</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                        type="text" name="modifypayName" value={modifyData.modifypayName} onChange={onChangeModifyData}/>
+                        </Grid> 
+
+                        
+                        
+                
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>비과세</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={19} mt={-5}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
                         <Form.Control
-                            type="text"
-                            name="modifytaxFreeName"
-                            value={modifyData.modifytaxFreeName}
-                            aria-describedby="btnGroupAddon"
-                            style={{ height: '30px' }}
-                            onChange={onChangeModifyData}
+                           type="text"
+                           name="modifytaxFreeName"
+                           value={modifyData.modifytaxFreeName}
+                           aria-describedby="btnGroupAddon"
+                           style={{ height: '40px' }}
+                           onChange={onChangeModifyData}
                         />
-                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                    </InputGroup>
-                    <p>지급유형</p>
-                    <input type="text" name="modifypayType" value={modifyData.modifypayType} onChange={onChangeModifyData}></input>
-                    <p>계산식</p>
-                    <InputGroup style={{ width: '600px', height: '30px' }}>
+                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                        </InputGroup>
+
+
+
+                        <Grid item xs={6} md={6} ml={-16}mt={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>지급유형</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={0} mt={-5}>
+                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
+                       type="text" name="modifypayType" value={modifyData.modifypayType} onChange={onChangeModifyData}/>
+                        </Grid>       
+
+
+
+                        
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={3} mt={3} style={{fontSize:'20px',color:'#777777'}}>
+                            <strong>계산식</strong>
+                        </Grid>
+                        <Grid item xs={6} md={6} ml={19} mt={-5}>
+                        {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                      
                         <Form.Control
                             type="addpayCalc"
                             name="modifypayCalc"
                             aria-describedby="btnGroupAddon"
                             value={modifyData.modifypayCalc}
-                            style={{ height: '30px' }}
+                            style={{ height: '40px' }}
                             onChange={onChangeModifyData}
+                            
                         />
-                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                    </InputGroup>
+                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                        </InputGroup>
+                    
+                     </Grid>
+                </Container>
 
                 </Modal.Body>
+
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={MdClose}>
                         닫기
@@ -474,12 +578,12 @@ const PMBcom = () => {
                 centered
                 size="xsm"
                 show={DelShow} onHide={DeClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', width: '500px' }}>
-                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>모바일 삭제</strong></Modal.Title>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
+                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>삭제확인</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
                     {/* {checkedItems.size} */}
-                    <strong>{modifyData.modifypayName}명의 수당을 삭제하시겠습니까?</strong>
+                    <strong>{modifyData.modifypayName}을 삭제하시겠습니까?</strong>
                 </Modal.Body>
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={DeClose}>
