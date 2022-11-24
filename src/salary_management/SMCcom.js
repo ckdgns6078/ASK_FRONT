@@ -5,6 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from '@mui/material/Container';
 import SearchIcon from '@mui/icons-material/Search';
+import Table from 'react-bootstrap/Table';
+import Box from '@mui/material/Box';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+
+
+
 const SMCcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
@@ -28,136 +35,94 @@ const SMCcom = () => {
 
 
     return (
-        <div style={{width:'1080px' ,position:'relative'}}>
-             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>임직원급여 관리</strong></h2>
+        <div style={{width:'1400px' ,position:'relative'}}>
+             <h2  style={{color:' #005b9e' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>임직원급여 관리</strong></h2>
             <br/>
             <br/>
             <br/>
-          
-            <table style={{
-                width:"1000px",
-                // border:'1px solid black',
-                
-                solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#f1f2f6' , }}>
-                <td style={{border:"1px solid gray"}}>
-                        <strong>사원코드</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>성명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>부서</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>기본급</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>추가수당</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>세금</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>합계</strong>
-                    </td>
-                    {/* <td style={{border:"1px solid gray"}}>
-                        <strong>계좌번호</strong>
-                    </td> */}
-                    {/* <td style={{border:"1px solid gray"}}>
-                        <strong>Email</strong>
-                    </td> */}
-                </tr>  
-            
-                    
+     
 
-                  {
-                        data && data.map((e, idx) =>
-                        <tr >
-                            <td><Checkbox {...label} defaultChecked /></td>
-                            <td>입사일자 데이터 넣을곳</td>
-                            <td>입사일자 데이터 넣을곳</td>
-                            <td>성명 머시기 받아올거</td>
-                            <td>부서명 데이터 넣을곳 </td>
-                            <td>직위/직급 데이터 넣을곳</td>
-                            <td>은행 데이터 넣을곳</td>
-                            <td>계좌번호 데이터 넣을곳</td>
-                            {/* <td>이메일 데이터 넣을곳</td> */}
-                        </tr>
-                        )
-                    }
-                 
-                 <tr >
-                    <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>wdfkr0630</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>159487z@</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>2020315010</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>신종락</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>wdfkr0630</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>159487z@</strong>
-                    </td>
-              
-                </tr>  
-                <tr  style={{backgroundColor:'#f1f2f6' , }}>    
-                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
-                    <td style={{border:"1px solid gray"}}></td>
-                    <td style={{border:"1px solid gray"}}></td>
-                    <td style={{border:"1px solid gray"}}> 기본급</td>
-                    <td style={{border:"1px solid gray"}}><strong>추가수당</strong></td>
-                    <td style={{border:"1px solid gray"}}><strong>세금 경비</strong></td>
-                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
-                </tr>
-       
-                    
+             
+        <Table >
+        <thead style={{height:'60px'}}>
+      
+            <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+
+             
+                <td style={{border:"1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
+                    <strong>사원코드</strong>
+                </td>
+                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                    <strong>성명</strong>
+                </td>
+                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                    <strong>부서</strong>
+                </td>
+                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                    <strong>기본급</strong>
+                </td>
+               
+                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                    <strong>추가수당</strong>
+                </td>
+                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                <strong>세금</strong>
+                </td>
+                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                <strong>합계</strong>
+                </td>
              
 
-            </table> 
-            <br/><br/> <br/><br/> <br/><br/> 
-           
-{/*             */}
-           
-            <br/>
-            <br/>
-            <br/>
-            <br/><br/><br/><br/>
-            <br/><br/><br/><br/>
-            {/* <hr style={{width:'1350px'}}></hr> */}
-          
-            {/* <Grid componenter style={{position:'absolute', }}>
-                <Grid item  sx={{md:3}}><button  onClick={handleShow} className="Atmp1">  추가</button> </Grid>
-                <Grid   sx={{md:-50}}><button  onClick={MdShow} className="Atmp1">  수정</button></Grid>
-                <Grid   sx={{md:30}} > <button onClick={DeShow} className="Atmp1">  삭제</button></Grid>
-            </Grid> */}
-                {/* <div>
-                <button   style={{position:'absolute' ,left:"0px"}} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button> 
-                <button style={{position:'absolute' ,left:"110px"}} onClick={MdShow} className="Atmp1">  <strong>수정</strong></button>
-                <button style={{position:'absolute' ,left:"220px"}} onClick={DeShow} className="Atmp1"> <strong>삭제</strong> </button>
 
-                </div> */}
-              <br/>  
-              <br/>  
+            </tr>
+        </thead>
+        <tbody>
+
+        {
+            data && data.map((e, idx) =>
+            <tr >
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                {/* <td>이메일 데이터 넣을곳</td> */}
+            </tr>
+            )
+        }
+                
+    <tr  style={{backgroundColor:'#f1f2f6' , }}>    
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong>합계</strong></td>
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}></td>
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}></td>
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}> <strong>기본급123</strong></td>
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong>추가수당123</strong></td>
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong>세금 경비123</strong></td>
+        <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong>합계123</strong></td>
+    </tr>
+
       
-                <br/><br/><br/><br/>
+       
+        </tbody>
+        </Table>
 
-              <hr style={{width:'1350px'}}></hr>
 
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+             
 
 
 

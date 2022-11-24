@@ -80,9 +80,9 @@ const PMCcom = () => {
             className: 'custom-class',
             style: {
                 marginTop: '20vh',
-               
-              },
-            
+
+            },
+
         });
     };
     //실패 alert
@@ -93,8 +93,8 @@ const PMCcom = () => {
             className: 'custom-class',
             style: {
                 marginTop: '20vh',
-                width:'500px'
-              },
+                width: '500px'
+            },
         });
     };
     //주의 alert
@@ -195,14 +195,14 @@ const PMCcom = () => {
         axios.post('http://192.168.2.82:5000/deleteDep', {
             depId: modifyData.modifydepId
         }).then(function (response) {
-            if(response.data) {
+            if (response.data) {
                 getData();
                 MdClose();
                 DeClose();
                 let contentText = " 부서 삭제 성공";
                 success(contentText);
             }
-            if(!response.data) {
+            if (!response.data) {
                 let contentText = " 부서 삭제 실패 , 다시 실행해주세요";
                 warning(contentText);
             }
@@ -243,7 +243,7 @@ const PMCcom = () => {
                             <tr style={{ height: '60px' }} >
                                 <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong> {e.depCode}</strong> </td>
                                 <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><Button name={e.depId} onClick={() => MdShow(e)} variant="link"><strong>{e.depName}</strong></Button></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px' , color: '#777777'}}><strong>{e.depDetail}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.depDetail}</strong></td>
                             </tr>
                         )
                     }
@@ -256,65 +256,66 @@ const PMCcom = () => {
 
             {/* 등록 */}
 
-            <Modal 
-             centered
-             size="xsm"
-         
-             
-            show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title style={{color:'#ffffff'}}><strong>부서관리</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f3f3f3',}}>
-            
-                <Container>
-                    <Grid container spacing={4}>
-                  
-
-                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>부서코드</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12}>
-                        {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                       type='text' name='adddepCode' onChange={onChangeAddData}/>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>부서명</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepName' onChange={onChangeAddData}/>
-                        </Grid>
-
-
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>부서상세</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                        type='text' name='adddepDetail' onChange={onChangeAddData}/>
-                        </Grid>                    
-                     </Grid>
-                </Container>
-            </Modal.Body>
-                <Modal.Footer style={{ backgroundColor:'#ffffff'}}>
-                <Button variant="secondary" onClick={handleClose}>
-                    <strong>취소</strong>
-                </Button>
-                <button className="addButton"  onClick={pushAddData}>
-                    <strong>추가</strong>
-                </button>
-                </Modal.Footer>
-            </Modal>
-
             <Modal
                 centered
                 size="xsm"
 
 
-                show={ModifyShow} onHide={MdClose} animation={false}>
+                show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
+
+                    <Container>
+                        <Grid container spacing={4}>
+
+
+                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>부서코드</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12}>
+                                {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepCode' onChange={onChangeAddData} />
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>부서명</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepName' onChange={onChangeAddData} />
+                            </Grid>
+
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>부서상세</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={handleClose}>
+                        <strong>취소</strong>
+                    </Button>
+                    <button className="addButton" onClick={pushAddData}>
+                        <strong>추가</strong>
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
+
+
+
+            <Modal
+                centered
+                size="xsm"
+                show={ModifyShow} onHide={MdClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width:'500px' }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>부서상세</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
@@ -375,7 +376,7 @@ const PMCcom = () => {
                 centered
                 size="xsm"
                 show={DelShow} onHide={DeClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', width: '500px' }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
                     <Modal.Title style={{ color: '#ffffff', width: '500px' }}>삭제확인</Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>

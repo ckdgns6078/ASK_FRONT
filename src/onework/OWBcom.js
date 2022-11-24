@@ -6,7 +6,10 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import SearchIcon from '@mui/icons-material/Search';
 import Container from '@mui/material/Container';
-
+import Table from 'react-bootstrap/Table';
+import Box from '@mui/material/Box';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const OWBcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -134,122 +137,68 @@ const checkedItemHandle = (id, isChecked) => {
 
 
     return (
-        <div style={{width:'1000px' ,position:'relative'}}>
-             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>사용자 관리 </strong></h2>
+        <div style={{width:'1400px' ,position:'relative'}}>
+             <h2  style={{color:' #005b9e' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>수당 등록 </strong></h2>
             <br/>
             <br/>
             <br/>
-            <table style={{
-                width:"1000px",
-                // border:"1px",
-                // solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#bdc3c7' , textAlign:'center', }}>
-                    <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>수당코드</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>수당 명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>비과세</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>지급유형</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>계산식</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>상세 확인</strong>
-                    </td>
+            
+                    <Table >
+                    <thead style={{height:'60px'}}>
+                    {/* #769FCD */}
+                    {/* ecf0f1 */}
+                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+                        
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>수당코드</strong>
+                            </td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>수당 명</strong>
+                            </td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>비과세</strong>
+                            </td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>지급유형</strong>
+                            </td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>계산식</strong>
+                            </td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                                <strong>상세 확인</strong>
+                            </td>
 
-                </tr>  
-       
-                    
 
-                  {
+
+
+
+
+                            
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {
                         data && data.map((e, idx) =>
-                        <tr  style={{border:"1px solid gray"}} >
-                            <td style={{border:"1px solid gray"}}><Checkbox {...label} defaultChecked /></td>
-                            <td style={{border:"1px solid gray"}}>부서명 넣을거</td>
-                            <td style={{border:"1px solid gray"}}>사원명 넣을거</td>
-                            <td style={{border:"1px solid gray"}}>총 휴가 머시기 받아올거</td>
-                            <td style={{border:"1px solid gray"}}>사용 휴가 머시기</td>
-                           
-                            <td style={{border:"1px solid gray"}}><Button  variant="link" onClick={DeShow}><strong>유저입력</strong></Button></td>
+                        <tr  style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}} >
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><Checkbox {...label} defaultChecked /></td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>수당명 넣을거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>비과세 넣을거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>자유횽 머시기 받아올거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>계산식 머시기</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><Button  variant="link" onClick={DeShow}><strong>유저입력</strong></Button></td>
                         </tr>
                         )   
                     }
-                    <tr>
-                      <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>01</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>기본급</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>전액과세</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>고정 </strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>고정 </strong>
-                    </td>
-                   
-                    <td style={{border:"1px solid gray"}}>
-                 
-                        <Button  variant="link" onClick={DeShow}><strong>유저입력</strong></Button>
-                   
-                    </td>
-                    </tr>
-                    
-             
 
-            </table> 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/><br/><br/><br/>
-            <hr></hr>
-          
-            {/* <Grid componenter style={{position:'absolute', }}>
-                <Grid item  sx={{md:3}}><button  onClick={handleShow} className="Atmp1">  추가</button> </Grid>
-                <Grid   sx={{md:-50}}><button  onClick={MdShow} className="Atmp1">  수정</button></Grid>
-                <Grid   sx={{md:30}} > <button onClick={DeShow} className="Atmp1">  삭제</button></Grid>
-            </Grid> */}
+                   
+                    </tbody>
+                    </Table>
+         
                 <div>
-      
-                <button style={{position:'absolute' ,left:"110px"}} onClick={handleShow} className="Atmp1">  <strong>수정</strong></button>
-              
-              
+                     <button style={{position:'absolute' ,left:"0px",top:'600px'}} onClick={handleShow} className="Atmp1">  <strong>수정</strong></button>
                 </div>
-              <br/>  
-              <br/>  
-              <br/>  
-            <hr></hr>
+        
 
 
             {/* 수정 */}

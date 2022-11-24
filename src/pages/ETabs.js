@@ -67,7 +67,7 @@ export default function VerticalTabs() {
       >
         <br/>
             <div>
-        <h2  style={{color:'#2F58B8'}}> &nbsp; &nbsp; <strong >급여 관리</strong>  &nbsp; &nbsp; </h2>
+        <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >급여 관리</strong>  &nbsp; &nbsp; </h2>
         </div>
     
         <Tab label="통합 급여 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/>

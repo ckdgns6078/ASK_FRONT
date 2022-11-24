@@ -180,7 +180,7 @@ const PMDcom = () => {
                 centered
                 size="xsm"
                 show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',width:'500px'}}>
+                <Modal.Header closeButton style={{backgroundColor:'#005b9e',width:'500px'}}>
                     <Modal.Title style={{color:'#ffffff',width:'500px'}}><strong>모바일 삭제</strong></Modal.Title>
                 </Modal.Header>              
                 <Modal.Body style={{backgroundColor:'#f1f2f6', width:'500px',}}>
@@ -205,7 +205,7 @@ const PMDcom = () => {
                 size="sm"
                 centered
                 show={SH} onHide={ShClose}>
-                <Modal.Header closeButton  style={{backgroundColor:'#2F58B8',}}>
+                <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
                 <Modal.Title  style={{color:'#ffffff'}}> <strong> 권한 부여</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{backgroundColor:'#f1f2f6'}}> 

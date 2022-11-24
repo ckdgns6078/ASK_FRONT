@@ -12,6 +12,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { UserOutlined } from '@ant-design/icons';
 import { AutoComplete, Input } from 'antd';
+import Table from 'react-bootstrap/Table';
+import Box from '@mui/material/Box';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const SMDcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -176,15 +180,15 @@ const onPanelChange = (value, mode) => {
   });
 
     return (
-        <div style={{width:'1200px' ,position:'relative'}}>
+        <div style={{width:'1400px' ,position:'relative'}}>
              <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>출퇴근 현황 </strong></h2>
             <br/>
             <br/>
             <br/>
 
 
-            <Grid container style={{width:'1200px'}}>
-                <Grid item sx ml={10}>
+            <Grid container style={{width:'1400px'}}>
+                <Grid item sx ml={0}>
                     <DropdownButton variant="Secondary" id="dropdown-basic-button" title="시간 날짜">
                         <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
 
@@ -206,7 +210,7 @@ const onPanelChange = (value, mode) => {
                 </Grid>
                 
 
-                <Grid item sx ml={60} >
+                <Grid item sx ml={143} mt={-5} >
                 <AutoComplete
                     popupClassName="certain-category-search-dropdown"
                     dropdownMatchSelectWidth={500}
@@ -220,105 +224,73 @@ const onPanelChange = (value, mode) => {
                 </Grid>
             </Grid>
             <br/>
-            <table style={{
-                width:"1000px",
-                // border:"1px",
-                // solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#bdc3c7' , }}>
-                    <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
+        
+
+
+            <Table >
+                    <thead style={{height:'60px'}}>
+              
+                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+                    
+
+
+                    <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                        <Checkbox {...label} defaultChecked />
                     </td>
-                    <td style={{border:"1px solid gray"}}>
+                    <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                         <strong>날짜</strong>
                     </td>
-                    <td style={{border:"1px solid gray"}}>
+                    <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                         <strong>사원코드</strong>
                     </td>
-                    {/* <td style={{border:"1px solid gray"}}>
-                        <strong>부서</strong>
-                    </td> */}
-                    <td style={{border:"1px solid gray"}}>
+              
+                    <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                         <strong>사원명</strong>
                     </td>
-                    <td style={{border:"1px solid gray"}}>
+                    <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                         <strong>항목</strong>
                     </td>
-                    <td style={{border:"1px solid gray"}}>
+                    <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                         <strong>금액</strong>
                     </td>
                  
-                </tr>  
-       
-                    
+                        </tr>
 
-                  {
+                    </thead>
+                    <tbody>
+                 
+                    {
                         data && data.map((e, idx) =>
                         <tr >
-                            <td style={{border:"1px solid gray"}}><Checkbox {...label} defaultChecked /></td>
-                            <td style={{border:"1px solid gray"}}>날짜 넣을거</td>
-                            <td style={{border:"1px solid gray"}}>휴가기간</td>
-                            <td style={{border:"1px solid gray"}}>항목 머시기 받아올거</td>
-                            <td style={{border:"1px solid gray"}}>싱세 머시기</td>
-                            <td style={{border:"1px solid gray"}}>상태 머시기 받아올거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><Checkbox {...label} defaultChecked /></td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>날짜 넣을거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>휴가기간</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>항목 머시기 받아올거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>싱세 머시기</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>상태 머시기 받아올거</td>
                       
                            
                  
                         </tr>
                         )
                     }
-                  <tr  style={{backgroundColor:'#f1f2f6' , }}>    
-                    <td style={{border:"1px solid gray"}}><strong></strong></td>
-                    <td style={{border:"1px solid gray"}}></td>
-                    <td style={{border:"1px solid gray"}}><strong>합계</strong></td>
-                    <td style={{border:"1px solid gray"}}></td>
-                   
-                    <td style={{border:"1px solid gray"}}><strong></strong></td>
-                    <td style={{border:"1px solid gray"}}><strong> </strong></td>
-                   
-                </tr>
-       
-                    
-             
 
-            </table> 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/><br/><br/><br/>
-       
+                    <tr  style={{backgroundColor:'#f1f2f6' , }}>    
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong></strong></td>
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}></td>
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>합계</strong></td>
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}></td>
+                    
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong></strong></td>
+                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong> </strong></td>
+                    
+                    </tr>
+                   
+                    </tbody>
+                    </Table>
+        
+
           
-            {/* <Grid componenter style={{position:'absolute', }}>
-                <Grid item  sx={{md:3}}><button  onClick={handleShow} className="Atmp1">  추가</button> </Grid>
-                <Grid   sx={{md:-50}}><button  onClick={MdShow} className="Atmp1">  수정</button></Grid>
-                <Grid   sx={{md:30}} > <button onClick={DeShow} className="Atmp1">  삭제</button></Grid>
-            </Grid> */}
-                <div>
-                {/* <button   style={{position:'absolute' ,left:"0px"}} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>  */}
-                {/* <button style={{position:'absolute' ,left:"110px"}} onClick={MdShow} className="Atmp1">  <strong>추가</strong></button>
-                <button style={{position:'absolute' ,left:"0px"}} onClick={DeShow} className="Atmp1"> <strong>저장</strong> </button>
-                 */}
-              
-                </div>
-              <br/>  
-              <br/>  
-              <br/>  
-            <hr></hr>
 
 
 
