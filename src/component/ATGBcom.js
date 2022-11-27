@@ -23,15 +23,7 @@ const ATGBcom = () => {
     const [check , setCheck] = useState(false);
     const [value , setValue] = useState({});
 
-    const [addData, setAddData] = useState({    //추가 관련 변수
-        adddepName: "",    //부서명
-        addempName: "",    //이름
-        addempNum: "",     //부서번호
-        addtotalVacation: "",  //총 휴가
-        addtakeVacation: "",   //사용휴가
-        addremindVacation: ""  //일반휴가
-    });
-
+    
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
         getData();
@@ -41,6 +33,7 @@ const ATGBcom = () => {
         axios.post('http://192.168.2.91:5000/read_Vactlist', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
+            console.log(response.data);
             setData(response.data);
         }).catch(function (er) {
             console.log("readDep error :", error);
@@ -74,14 +67,6 @@ const ATGBcom = () => {
     //입력값 onChange 함수
 
 
-    const onChangeAddData = (e) => {
-        const { value, name } = e.target;
-        setAddData({
-            ...addData,
-            [name]: value
-        });
-        console.log(addData);
-    }
 
 
 
@@ -100,6 +85,7 @@ const ATGBcom = () => {
 
     const DeShow = (e) => {
         setValue(e);
+        console.log("e value :" , e);
         
         axios.post('http://192.168.2.91:5000/modal_Vaclist',{
             compCode : sessionStorage.getItem("uid"),
@@ -178,17 +164,26 @@ const ATGBcom = () => {
                 </Modal.Header>
                 <Modal.Body >
                         <Grid container>
-                        <Grid item xs style={{ fontSize: '25px' }}>
+                        <Grid item xs style={{ fontSize: '20px' }}>
                             <strong>
                                 이름 : {value &&DelShow && value.empName}
                             </strong>
                         </Grid>
-                        <Grid item xs style={{ fontSize: '25px' }}>
+                        <Grid item xs style={{ fontSize: '20px' }}>
+                            <strong>
+                                사원코드 : {value &&DelShow && value.empNum}
+                            </strong>
+                        </Grid>
+                        <Grid item xs style={{ fontSize: '20px' }}>
                             <strong> 부서 : { value && DelShow && value.depName}</strong>
+                        </Grid>
+
+                        <Grid item xs style={{ fontSize: '20px' }}>
+                            <strong> 부서코드 : { value && DelShow && value.depCode}</strong>
                         </Grid>
                     </Grid>
                     <br/>
-                    <div style={{ fontSize: '25px' }}><strong>휴가 내역</strong></div>
+                    <div style={{ fontSize: '20px' }}><strong>휴가 내역</strong></div>
 
 
                     <table style={{
@@ -251,14 +246,14 @@ const ATGBcom = () => {
                             <Grid item xs={6} md={6} ml={-12}>
                                 {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' name='adddepCode' onChange={onChangeAddData} />
+                                    type='text'  />
                             </Grid>
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
                                 <strong>사원명</strong>
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' name='adddepName' onChange={onChangeAddData} />
+                                    type='text'  />
                             </Grid>
 
 
@@ -267,14 +262,14 @@ const ATGBcom = () => {
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                                    type='text'  />
                             </Grid>
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
                                 <strong>사용 휴가</strong>
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                                    type='text'  />
                             </Grid>
 
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
@@ -282,7 +277,7 @@ const ATGBcom = () => {
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                                    type='text'  />
                             </Grid>
 
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
@@ -290,7 +285,7 @@ const ATGBcom = () => {
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
+                                    type='text' />
                             </Grid>
 
 

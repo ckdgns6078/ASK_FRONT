@@ -4,7 +4,8 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert from '@mui/material/Alert';
-const Success = () => {
+
+const Success = (props) => {
 
 
 const [open, setOpen] = React.useState(false);
@@ -28,13 +29,13 @@ const [open, setOpen] = React.useState(false);
         <div>
         <Button onClick={handleClick}>퍼런 모달</Button>
         <Snackbar
-          open={open}
+          open='true'
           autoHideDuration={6000}
           onClose={handleClose}
         
         >
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            추가 했음 ㅇㅇ
+            {props.name}
             </Alert>
 
         </Snackbar>

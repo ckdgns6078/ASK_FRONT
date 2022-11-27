@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { message, Space } from 'antd';
 const Acom = () => {
     const [firstCheck, SetFirstCheck] = useState();    
 
@@ -21,22 +22,50 @@ const Acom = () => {
         compType: '',   //업태
         compItems: '',  //종목
         compEmail: '',  //이메일
+        lunchTime: '',
     });
 
-    const [test1 , SetTest1] = useState();
-
+    const [messageApi, contextHolder] = message.useMessage();
+    //성공 alert
+    const success = (contentText) => {
+        messageApi.open({
+            type: 'success',
+            content: contentText,
+            style: {
+                marginTop: '20vh',
+            },
+        });
+    };
+    //실패 alert
+    const error = (contentText) => {
+        messageApi.open({
+            type: 'error',
+            content: contentText,
+        });
+    };
+    //주의 alert
+    const warning = (contentText) => {
+        messageApi.open({
+            type: 'warning',
+            content: contentText,
+        });
+    };
     
-
     // 로그인했는지 검사
     useEffect(() => {
         if (sessionStorage.getItem("id") == null || sessionStorage.getItem("uid") == null) {
             window.alert("먼저 로그인을 해야합니다.");
             window.location.href = "http://localhost:3000/Login";
         }
+        getData();
+    }, []);
+
+    const getData = () =>{
         axios.post('http://192.168.2.82:5000/readCompany', {
             id: sessionStorage.getItem("id")
 
         }).then(function (response) {
+            console.log("response.data" ,response.data);
             SetInput({
                 "compNum": response.data[0].compNum,    //사업자등록번호
                 "compName": response.data[0].compName,   //상호
@@ -44,17 +73,17 @@ const Acom = () => {
                 "compAddress": response.data[0].compAddress,//주소
                 "compType": response.data[0].compType,   //업태
                 "compItems": response.data[0].compItems,  //종목
-                "compEmail": response.data[0].compEmail  //이메일
+                "compEmail": response.data[0].compEmail,  //이메일
+                "lunchTime": response.data[0].lunchTime   //점심시간
             })
-
         }).catch(function (error) {
             console("readCompany error :", error);
         });
 
-    }, []);
+    }
 
     //입력값 onChange 함수
-    const { compNum, compName, compCEO, compAddress, compType, compItems, compEmail } = input;
+    
     const onChangeInput = (e) => {
         const { value, name } = e.target;
         SetInput({
@@ -66,6 +95,7 @@ const Acom = () => {
     //저장 버튼 눌렀을때 실행되는 함수
     const requestSave = () => {
         axios.post('http://192.168.2.82:5000/createCompany', {
+            id : sessionStorage.getItem("uid"),
             compNum: input.compNum,
             compName: input.compName,
             compCEO: input.compCEO,
@@ -73,40 +103,53 @@ const Acom = () => {
             compType: input.compType,
             compItems: input.compItems,
             compEmail: input.compEmail,
-            id: sessionStorage.getItem("id")
-
+            lunchTime: input.lunchTime
         }).then(function (response) {
-            if (!response.data) {
-                window.alert("저장된 데이터가 있습니다. 데이터를 바꿔주세요 \n수정을 원하시면 수정버튼을 눌러주세요");
+            console.log("createCompany ", response.data);
+            if(response.data){
+                window.alert("회사정보 저장했습니다.");
+                window.location.reload();
+            }else{
+                let contentText = "이미 저장된 회사 정보가 있습니다. 수정을 원하시면 수정 버튼을 눌러주세요";
+                warning(contentText);
             }
         }).catch(function (error) {
-            console.log("error", error);
+            console.log("updateCompany error :", error);
         });
+        getData();
     }
 
     //수정 버튼 눌렀을때 실행되는 함수
     const requestModify = () => {
         axios.post('http://192.168.2.82:5000/updateCompany', {
+            id : sessionStorage.getItem("uid"),
             compNum: input.compNum,
             compName: input.compName,
             compCEO: input.compCEO,
             compAddress: input.compAddress,
             compType: input.compType,
             compItems: input.compItems,
-            compEmail: input.compEmail
-
+            compEmail: input.compEmail,
+            lunchTime: input.lunchTime
         }).then(function (response) {
-            console.log("updateCompany response 값 :", response);
+            if(response){
+                window.alert("회사정보 수정 완료");
+                window.location.reload();
+            }else{
+                let contentText = "회사정보 수정 실패";
+                warning(contentText);
+            }
+
         }).catch(function (error) {
             console.log("updateCompany error :", error);
         });
-
     }
 
 
 
     return (
         <div style={{width:'1300px', position:'relative' ,height:'600px', top:'50px'}}>
+            {contextHolder}
            <h2  style={{color:' #005b9e' ,position:'absolute' ,left:'0' ,top:'-50px'}}><strong>회사 설정</strong></h2>
           
            <br/>
@@ -179,6 +222,16 @@ const Acom = () => {
                         <Form.Control style={{width:'300px',height:'40px'}} type="text" name='compAddress' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.compAddress}/>
 
                     </td>
+
+                    <td style={{textAlign:'left', }}>
+
+                        <h6 style={{fontSize:'25px',color:'#777777'}} ><strong>점심시간</strong></h6>
+                    </td>
+                    <td style={{textAlign:'left'}}>
+                        {/* <input style={{width:'300px' ,}} name='compAddress' type="text" onChange={onChangeInput} value={input.compAddress}></input> */}
+                        <Form.Control style={{width:'300px',height:'40px'}} type="text" name='lunchTime' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.lunchTime}/>
+
+                    </td>
                 </tr>
             </table>
 
@@ -191,8 +244,8 @@ const Acom = () => {
            
 
             <Grid container style={{position:'absolute', bottom:'10px'}}>
-
-                <Grid item >  <button sx={{md:30}} onClick={requestSave} className="Atmp1">저장</button> </Grid>
+    
+                <Grid  sx={{ml:-73}}item xs>  <button onClick={requestSave} className="AMo1">저장</button> </Grid>
                 <Grid  sx={{ml:-73}}item xs>  <button onClick={requestModify} className="AMo1">수정</button> </Grid>
                 
             </Grid>

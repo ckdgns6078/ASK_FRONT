@@ -11,7 +11,11 @@ import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import { message, Space } from 'antd';
 import axios from 'axios';
+import Calculator from '../calculator/Calculator';
 
+
+let sign = "";
+let calculate = "";
 const PMBcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [addCheck , setAddCheck] = useState(false);
@@ -45,6 +49,13 @@ const PMBcom = () => {
     const [show, setShow] = useState(false);
     const [SH, setSh] = useState(false);
     const [CH, setCh] = useState(false);
+
+    // 계산기 함수
+    const [CF, setCf] = useState(false);
+
+    const CFClose = () => setCf(false);
+    const CFShow = () => setCf(true);
+
 
 
     const handleClose = () => {
@@ -303,6 +314,82 @@ const PMBcom = () => {
         })
     }
 
+    // 계산기
+    const number_buttons = [
+        "7",
+        "8",
+        "9",
+        "%",
+        "4",
+        "5",
+        "6",
+        "x",
+        "1",
+        "2",
+        "3",
+        "-",
+        "0",
+        "+",
+        "=",
+      ];
+      const [result, setResult] = useState("");
+    
+      const onClick = (e) => {
+        calculate += number_buttons[e.target.value];
+        if (isNaN(parseInt(number_buttons[e.target.value]))) {
+          if (number_buttons[e.target.value] === "+") {
+            sign = "+";
+            setResult("");
+          } else if (number_buttons[e.target.value] === "-") {
+            sign = "-";
+            setResult("");
+          } else if (number_buttons[e.target.value] === "%") {
+            sign = "/";
+            setResult("");
+          } else if (number_buttons[e.target.value] === "x") {
+            sign = "*";
+            setResult("");
+          } else {
+            let num = "";
+            let num_array = [];
+            let sign_array = [];
+            for (let i = 0; i < calculate.length; i++) {
+              if (!isNaN(calculate[i])) {
+                num += calculate[i];
+              } else {
+                sign_array.push(calculate[i]);
+                num_array.push(parseInt(num));
+                num = "";
+              }
+            }
+            num = num_array[0];
+            for (let i = 0; i < sign_array.length - 1; i++) {
+              if (sign_array[i] === "+") {
+                num += num_array[i + 1];
+              } else if (sign_array[i] === "-") {
+                num -= num_array[i + 1];
+              } else if (sign_array[i] === "%") {
+                num /= num_array[i + 1];
+              } else if (sign_array[i] === "x") {
+                num *= num_array[i + 1];
+              }
+            }
+    
+            setResult(num);
+          }
+        } else {
+          setResult(result + number_buttons[e.target.value]);
+        }
+        console.log(`sign: ${sign}`);
+        console.log(calculate);
+      };
+    
+      const buttons = number_buttons.map((btn, index) => (
+        <li key={btn} value={index} onClick={onClick}>
+          {btn}
+        </li>
+      ));
+
 
 
     return (
@@ -552,7 +639,7 @@ const PMBcom = () => {
                             onChange={onChangeModifyData}
                             
                         />
-                            <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
+                            <InputGroup.Text id="btnGroupAddon"   onClick={CFShow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
                         </InputGroup>
                     
                      </Grid>
@@ -636,6 +723,9 @@ const PMBcom = () => {
 
             </Modal>
 
+
+
+
             {/* 계산식 Modal */}
             <Modal
                 size="sm"
@@ -676,6 +766,52 @@ const PMBcom = () => {
                 </Modal.Footer>
 
             </Modal>
+            
+                    {/* 계산식 모달 */}
+            <Modal
+                size="lg"
+                centered
+                show={CF} onHide={CFClose}>
+                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>계산기</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f1f2f6' ,height:'350px'}}>
+                        <Grid>
+                          
+                        </Grid>
+                        <Grid>
+                        <Calculator/>
+                        </Grid>
+
+                        
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={CFClose}>
+                        닫기
+                    </Button>
+                    <button variant="primary" className='addButton' onClick={CFClose}>
+                        완료
+                    </button>
+                </Modal.Footer>
+
+            </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         </div>
