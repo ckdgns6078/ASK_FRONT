@@ -9,225 +9,557 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
+import { message, Space } from 'antd';
 const PMDcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const [add, setAdd] = useState(false);
     const [data, setData] = useState();
+    const [addData , setAddData] = useState({
+        taxCode : null,
+        taxInfoID : null,
+        taxItem : null,
+        taxName : null,
+        taxNote : null
+    });
+    const [modifyData , setModifyData] = useState({
+        taxCode : null,
+        taxInfoID : null,
+        taxItem : null,
+        taxName : null,
+        taxNote : null
+    });
+    const [magData , setMagData] = useState();
+
+   
+    //alert 창
+    const [messageApi, contextHolder] = message.useMessage();
+    //성공 alert
+    const success = (contentText) => {
+        messageApi.open({
+            type: 'success',
+            content: contentText,
+        });
+    };
+    //실패 alert
+    const error = (contentText) => {
+        messageApi.open({
+            type: 'error',
+            content: contentText,
+        });
+    };
+    //주의 alert
+    const warning = (contentText) => {
+        messageApi.open({
+            type: 'warning',
+            content: contentText,
+        });
+    };
+
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    //useEffect에서 실행되는 함수 ( axios )
+    const getData = () => {
+        axios.post('http://192.168.2.82:5000/readTax', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (er) {
+            console.log("readDailyEmp error", er);
+            let contentText = "데이터를 가져오는데 에러가 발생했어요 새로고침해주세요";
+            error(contentText);
+        });
+    }
+
+    //추가 onChange
+    const onChangeAddData = (e) => {
+        const { value, name } = e.target;
+        setAddData({
+            ...addData,
+            [name]: value
+        });
+    }
+    //수정 onChange
+    const onChangeModifyData = (e) => {
+        const { value, name } = e.target;
+        setModifyData({
+            ...modifyData,
+            [name]: value
+        });
+    }
+
+    const pushAddData = () => {
+        axios.post('http://192.168.2.82:5000/createTax', {
+            compCode : sessionStorage.getItem("uid"),
+            taxCode: addData.taxCode,
+            taxInfoID: addData.taxInfoID,
+            taxItem: addData.taxItem,
+            taxName: addData.taxName,
+            taxNote: addData.taxNote
+        }).then(function (response) {
+            if (response.data) {
+                let contentText = "세금 등록 완료";
+                getData();
+                success(contentText);
+                addClose();
+            }
+            if (!response.data) {
+                let contentText = "이미 등록되어 있는 코드가 있습니다. 코드 변경하세요.";
+                warning(contentText);
+            }
+        }).catch(function (er) {
+            console.log("createEmp error", er);
+            let contentText = "서버 연동 에러 발생";
+            error(contentText);
+        });
+    }
+    const pushModifyData = () =>{
+        axios.post('http://192.168.2.82:5000/updateTax', {
+            compCode : sessionStorage.getItem("uid"),
+            taxCode: modifyData.taxCode,
+            taxInfoID: modifyData.taxInfoID,
+            taxItem: modifyData.taxItem,
+            taxName: modifyData.taxName,
+            taxNote: modifyData.taxNote
+        }).then(function (response) {
+            if (response.data) {
+                let contentText = "세금 수정 완료";
+                getData();
+                success(contentText);
+                modifyClose();
+            }
+            if (!response.data) {
+                let contentText = "이미 등록되어 있는 코드가 있습니다. 코드 변경하세요.";
+                warning(contentText);
+            }
+        }).catch(function (er) {
+            console.log("createEmp error", er);
+            let contentText = "서버 연동 에러 발생";
+            error(contentText);
+        });
+
+    }
+    const pushDeleteData = (e)=>{
+        axios.post('http://192.168.2.82:5000/deleteTax', {
+            taxInfoID: modifyData.taxInfoID,
+        }).then(function (response) {
+            if (response.data) {
+                let contentText = "세금 삭제 완료";
+                getData();
+                success(contentText);
+                delClose();
+                modifyClose();
+                
+            }
+            if (!response.data) {
+                let contentText = "세금 삭제 실패";
+                warning(contentText);
+            }
+        }).catch(function (er) {
+            console.log("deleteTax error", er);
+            let contentText = "서버 연동 에러 발생";
+            error(contentText);
+        });
+        
+    }
+
+
+    // //수정 데이터 넣기
+    // const pushModifyData = () => {
+    //     axios.post('http://192.168.2.91:5000/updateTax', {
+    //         compCode: sessionStorage.getItem("uid"),
+    //         vactNameListId: modifyData.modifyvactNameListId,
+    //         vactCode: modifyData.modifyvactCode,
+    //         vactName: modifyData.modifyvactName,
+    //         vactDetail: modifyData.modifyvactDetail
+    //     }).then(function (response) {
+    //         if (response.data) {
+    //             getData();
+    //             MdClose();
+    //             let contentText = "        휴가정보 수정완료        ";
+    //             success(contentText);
+    //         }
+    //         if (!response.data) {
+    //             let contentText = "이미 존재하는 휴가코드입니다. 다른 휴가코드를 입력하세요.";
+    //             warning(contentText);
+    //         }
+    //     }).catch(function (er) {
+    //         let contentText = "        에러 발생        ";
+    //         error(contentText);
+    //         console.log("updataEmp error", er);
+    //     });
+
+    // }
+
+    // //삭제 데이터 넣기
+    // const pushDeleteData = () => {
+    //     axios.post('http://192.168.2.91:5000/deleteTax ', {
+    //         vactNameListId: modifyData.modifyvactNameListId
+    //     }).then(function (response) {
+    //         console.log("delete_Vactcategory 값 ", response.data);
+    //         if (response.data) {
+    //             getData();
+    //             MdClose();
+    //             DeClose();
+    //             let contentText = " 휴가 삭제 완료";
+    //             success(contentText);
+    //         }
+    //         if (!response.data) {
+    //             let contentText = " 휴가 삭제 실패 , 다시 실행해주세요";
+    //             warning(contentText);
+    //         }
+    //     }).catch(function (er) {
+    //         console.log("delete_Vactcategory error", er);
+    //         let contentText = " 에러 발생 ";
+    //         error(contentText);
+    //     })
+    // }
+
  //모달 함수
-    const [DelShow, setMDelShow] = useState(false);
-    const [ModifyShow, setModifyShow] = useState(false);
-    const [show, setShow] = useState(false);   
-    const [SH, setSh] = useState(false);
-
+    //추가 모달
+    const addClose = () => {
+        setAddData({
+            "taxCode" : null,
+            "taxInfoID" : null,
+            "taxItem" : null,
+            "taxName" : null,
+            "taxNote" : null
+        });
+        setAdd(false);
+    }
+    const addShow = () => setAdd(true);
+    //삭제 모달
+    const [del, setDel] = useState(false);
+    const delClose = () => setDel(false);
+    const delShow = () => setDel(true);
+    //수정 모달
+    const [modify, setModify] = useState(false);
+    const modifyClose = () => setModify(false);
     
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const modifyShow = (e) => {
+        console.log("tax" ,e.taxInfoID);
+        axios.post('http://192.168.2.82:5000/updateTaxModal', {
+            taxInfoID : e.taxInfoID
+        }).then(function (response) {
+            setModifyData({
+                taxCode: response.data[0].taxCode,
+                taxInfoID: response.data[0].taxInfoID,
+                taxItem: response.data[0].taxItem,
+                taxName: response.data[0].taxName,
+                taxNote: response.data[0].taxNote
+            });
+        }).catch(function (er) {
+            console.log("readTaxCategory error", er);
+            let contentText = "데이터를 가져오는데 에러가 발생했어요 새로고침해주세요";
+            error(contentText);
+        });
+        setModify(true);
+    }
 
-    const DelClose = () => setMDelShow(false);
-    const DeShow = () => setMDelShow(true);
-
-    const MdClose = () => setModifyShow(false);
-    const MdShow = () => setModifyShow(true);
-
-    const ShClose = () => setSh(false);
-    const Shshow = () => setSh(true);
-
-
+    //돋보기
+    const [mag , setMag] = useState(false);
+    const magClose = ()=>setMag(false);
+    const magSelect =(e)=>{
+        console.log("taxItem " , e.taxItem);
+        if(add){
+            const temp = {...addData};
+            temp.taxItem = e.taxItem;
+            setAddData(temp);
+            console.log("temp 후 addData" , addData);
+        }
+        if(modify){
+            const temp = {...modifyData};
+            temp.taxItem = e.taxItem;
+            setModifyData(temp);
+        }
+        magClose();
+    
+    }
+    const magShow = ()=>{
+        axios.post('http://192.168.2.82:5000/readTaxCategory', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            console.log("magdata", response.data);
+            setMagData(response.data);
+        }).catch(function (er) {
+            console.log("readTaxCategory error", er);
+            let contentText = "데이터를 가져오는데 에러가 발생했어요 새로고침해주세요";
+            error(contentText);
+        });
+        setMag(true);
+    }
 
 
     return (
-        <div style={{width:'1400px' ,position:'relative'}}>
-             <h2  style={{color:' #2F58B8' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>수당 관리 </strong></h2>
-            <br/>
-            <br/>
-            <br/>
-           
+        <div style={{ width: '1400px', position: 'relative' }}>
+            {contextHolder}
+            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>세금관리</strong></h2>
+            <br />
+            <br />
+            <br />
+
 
             <Table striped bordered hover >
-                    <thead style={{height:'60px'}}>
-                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
-                       
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>세금 코드</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>세금명</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>세금 항목</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>비고</strong>
-                            </td>
-                         
-                         
-                        </tr>
-                    </thead>
-                    <tbody>
+                <thead style={{ height: '60px' }}>
+                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>세금 코드</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>세금명</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>세금 항목</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>비고</strong>
+                        </td>
+
+
+                    </tr>
+                </thead>
+                <tbody>
                     {
                         data && data.map((e, idx) =>
-                        <tr style={{height:'60px'}} >
-                          
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'22px',color:'#777777'}}><strong> {e.userId}</strong> </td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'22px',color:'#777777'}}><strong>  {e.userPw}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'22px',color:'#777777'}}><strong>{e.userName} </strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'22px',color:'#777777'}}><strong>{e.userName} </strong></td>
-                           
-                           
-                        </tr>
+                            <tr style={{ height: '60px' }} >
+
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong> {e.taxCode}</strong> </td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                    <Button variant="link" name={e.taxInfoID} onClick={() => modifyShow(e)}>
+                                        <strong>{e.taxName}</strong>
+                                    </Button>
+                                </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxItem} </strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxNote} </strong></td>
+
+
+                            </tr>
                         )
                     }
 
-                   
-                    </tbody>
-                    </Table>
 
+                </tbody>
+            </Table>
 
-                    <Grid item xs={12} ml={-3} mt={55}>
-                    <hr style={{width:'1440px'}}/>
-                    </Grid>
+            <Grid item xs={12} ml={-3} mt={55}>
+                <hr style={{ width: '1440px' }} />
+            </Grid>
 
-                <Box >
-              
-              <button   style={{position:'absolute' ,left:"0px",top:'600px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
-              <button style={{position:'absolute' ,left:"110px",top:'600px'}}onClick={MdShow} className="Atmp1">  <strong>수정</strong></button>
-              <button style={{position:'absolute' ,left:"220px",top:'600px'}} onClick={DeShow} className="Atmp1"> <strong>삭제</strong> </button>
-                
-              </Box>
-            
-
-
+            <Box >
+                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+            </Box>
 
 
             {/* 추가 */}
-                   {/* 등록 */}
-                   <Modal 
-             centered
-             size="xsm"
-         
-             
-            show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title style={{color:'#ffffff'}}><strong>부서관리</strong></Modal.Title>
+            <Modal
+                centered
+                size="xsm"
+
+
+                show={add} onHide={addClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f3f3f3',}}>
-             
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
+                    <Container>
+                        <Grid container spacing={4}>
 
 
+                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>세금코드</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12}>
+                            <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxCode' type="text" onChange={onChangeAddData}/>
+                            </Grid>
 
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>세금명</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxName' type="text" onChange={onChangeAddData}/>
+                            </Grid>
 
-                <Container>
-                    <Grid container spacing={4}>
-                  
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>세금항목</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <InputGroup style={{ width: '250px', height: '40px' }}>
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="taxItem"
+                                        value={addData.taxItem}
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '40px' }}
+                                        onChange={onChangeAddData}
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow}/></InputGroup.Text>
+                                </InputGroup>
 
-                        <Grid item xs={6} md={6} ml={3} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>세금코드</strong>
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>비고</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxNote' type="text" onChange={onChangeAddData}/>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={6} md={6} ml={-12}>
-                        {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                       name = 'adddepCode' type="text" />
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={3} mt={-2}style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>세금명</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name='adddepName' type="text" />
-                        </Grid>
-
-
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>세금항목</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name='adddepDetail' type="text"  />
-                        </Grid>
-
-                        
-                        <Grid item xs={6} md={6} ml={3}mt={-2} style={{fontSize:'20px',color:'#777777'}}>
-                            <strong>비고</strong>
-                        </Grid>
-                        <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                        <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon"
-                         name='adddepDetail' type="text"  />
-                        </Grid>
-
-                       
-                     </Grid>
-                </Container>
+                    </Container>
 
 
 
-                 
+
                 </Modal.Body>
-                <Modal.Footer style={{ backgroundColor:'#ffffff'}}>
-                <Button variant="secondary" onClick={handleClose}>
-                    <strong>취소</strong>
-                </Button>
-                <button className="addButton"  onClick={handleClose}>
-                    <strong>추가</strong>
-                </button>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={addClose}>
+                        <strong>취소</strong>
+                    </Button>
+                    <button className="addButton" onClick={pushAddData}>
+                        <strong>추가</strong>
+                    </button>
                 </Modal.Footer>
             </Modal>
 
-
-
             {/* 수정 */}
-         
+            <Modal
+                centered
+                size="xsm"
+
+
+                show={modify} onHide={modifyClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
+                    <Container>
+                        <Grid container spacing={4}>
+
+
+                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>세금코드</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12}>
+                            <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxCode' type="text" value={modifyData.taxCode} onChange={onChangeModifyData}/>
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>세금명</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxName' type="text" value={modifyData.taxName} onChange={onChangeModifyData}/>
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>세금항목</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+                                <InputGroup style={{ width: '250px', height: '40px' }}>
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="taxItem"
+                                        value={modifyData.taxItem}
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '40px' }}
+                                        onChange={onChangeModifyData}
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow}/></InputGroup.Text>
+                                </InputGroup>
+
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
+                                <strong>비고</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
+
+                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxNote' value={modifyData.taxNote} type="text" onChange={onChangeModifyData}/>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={addClose}>
+                        <strong>취소</strong>
+                    </Button>
+                    <button className="addButton" onClick={pushModifyData}>
+                        <strong>수정</strong>
+                    </button>
+                    <button className="addButton" onClick={delShow}>
+                        <strong>삭제</strong>
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
             {/* 삭제 */}
             <Modal
                 centered
                 size="xsm"
-                show={DelShow} onHide={DelClose} animation={false}>
+                show={del} onHide={delClose} animation={true}>
                 <Modal.Header closeButton style={{backgroundColor:'#005b9e',width:'500px'}}>
-                    <Modal.Title style={{color:'#ffffff',width:'500px'}}><strong>모바일 삭제</strong></Modal.Title>
+                    <Modal.Title style={{color:'#ffffff',width:'500px'}}><strong>세금삭제</strong></Modal.Title>
                 </Modal.Header>              
                 <Modal.Body style={{backgroundColor:'#f1f2f6', width:'500px',}}>
-                {/* {checkedItems.size} */}
-                    <strong>개 항목을 삭제하시겠습니까?</strong>
+                    <strong>{modifyData.taxName}을 삭제하시겠습니까?</strong>
                 </Modal.Body>
                 <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff'}}>
-                    <Button variant="secondary" onClick={DelClose}>
+                    <Button variant="secondary" onClick={delClose}>
                         닫기
                     </Button>
-                    <button className='addButton' variant="primary" onClick={DelClose}>
+                    <button className='addButton' variant="primary" onClick={pushDeleteData}>
                         삭제
                     </button>
                 </Modal.Footer>
             </Modal>
 
 
-            
+
 
             {/* 부서 코드 둗보기 모달 */}
             <Modal 
-                size="sm"
+                size="xsm"
                 centered
-                show={SH} onHide={ShClose}>
+                show={mag} onHide={magClose} animation={true}>
                 <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title  style={{color:'#ffffff'}}> <strong> 권한 부여</strong></Modal.Title>
+                <Modal.Title  style={{color:'#ffffff'}}> <strong>세금목록</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{backgroundColor:'#f1f2f6'}}> 
 
-                <br/><br/><br/><br/>
+        
                 <table style={{
                         textAlign:"center",
                         width:"100%",height:'200px', border:"1px solid gray" ,}} >
                     <tr style={{border:"1px solid gray",backgroundColor:'#a4b0be'}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}><strong> 비고</strong></td>
-                    <td style={{fontSize:'30px'}}> <strong> 권한명</strong></td>
+                    <td style={{border:"1px solid gray",fontSize:'30px'}}><strong></strong></td>
+                    <td style={{fontSize:'30px'}}> <strong>세금코드</strong></td>
+                    <td style={{fontSize:'30px'}}> <strong>세금항목</strong></td>
+                    <td style={{fontSize:'30px'}}> <strong>세금명</strong></td>
                     </tr>
-                    <tr style={{border:"1px solid gray"}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>1</td>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>Master</td>
-                    </tr>
-                    <tr style={{border:"1px solid gray"}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>2</td>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}>Manager</td>
-                    </tr>
+
+                    <tbody>
+                    {
+                        magData && magData.map((e, idx) =>
+                            <tr style={{ height: '60px' }} >
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong> {idx+1}</strong> </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxCode} </strong></td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                    <Button variant="link" name={e.taxInfoID} onClick={() => magSelect(e)}>
+                                        <strong>{e.taxItem}</strong>
+                                    </Button>
+                                </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxName} </strong></td>
+                            </tr>
+                        )
+                    }
+
+
+                </tbody>
                 </table>
-                <br/><br/><br/><br/><br/>    <br/><br/>
+
                 </Modal.Body>
 
                 </Modal>
