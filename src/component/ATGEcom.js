@@ -7,7 +7,7 @@ import axios from "axios";
 import SearchIcon from '@mui/icons-material/Search';
 import Container from '@mui/material/Container';
 import Rsearch from './Rsearch';
-import { Calendar } from 'antd';
+import { Calendar, DatePicker } from 'antd';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { UserOutlined } from '@ant-design/icons';
@@ -15,33 +15,123 @@ import { AutoComplete, Input } from 'antd';
 import Table from 'react-bootstrap/Table';
 import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { message, Space } from 'antd';
+
+
 const ATGEcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
-    const [DelShow, setMDelShow] = useState(false);
+    const [del, setDel] = useState(false);
     const [ModifyShow, setModifyShow] = useState(false);
     const [show, setShow] = useState(false);
+    const [SH, setSh] = useState(false);
     const [addData, setAddData] = useState({    //추가 관련 변수
-        saveId: '',
-        savePw: '',
-        saveUser: '',
-        saveAdvice: ''
     });
+    const [ modifyData , setModifyData] = useState({
+        modifyinOut_Note: null,//비고
+        modifycompCode: null,//회사코드
+        modifydeleteList: null,
+        modifydepName: null,//부서명
+        modifyempCode: null,//사원코드
+        modifyempName: null,//이름
+        modifyendDate: null,//사용안함
+        modifyinOutDate: null,//날짜
+        modifyinOutEnd: null,//퇴근시간
+        modifyinOutListId: null,//프라이머리키
+        modifyinOutOver: null,//초과시간
+        modifyinOutStart: null,//출근시간
+        modifystartDate: null,//사용안함
+        modifydepCode: null,//부서코드
+        modifyempRank: null,//직급
+    });
+    const [dateStart, setDateStart] = useState(); // 시작일
+    const [dateEnd, setDateEnd] = useState();    // 종료일
+    const [search, setSearch] = useState();     //이름
+
+    const ShClose = () => setSh(false);
+    const Shshow = () => setSh(true);
+    const delShow = () => setDel(true);
+    const delClose =()=> setDel(false);
+
+    const [messageApi, contextHolder] = message.useMessage();
+    //성공 alert
+    const success = (contentText) => {
+        messageApi.open({
+            type: 'success',
+            content: contentText,
+            style: {
+                marginTop: '20vh',
+            },
+        });
+    };
+    //실패 alert
+    const error = (contentText) => {
+        messageApi.open({
+            type: 'error',
+            content: contentText,
+        });
+    };
+    //주의 alert
+    const warning = (contentText) => {
+        messageApi.open({
+            type: 'warning',
+            content: contentText,
+        });
+    };
 
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
-        axios.post('http://192.168.2.82:5000/readUser', {
+        getData();
+    }, []);
+
+    const getData = () => {
+        axios.post('http://192.168.2.91:5000/read_inOutInfo', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
-        }).catch(function (error) {
-            console.log("readUser error", error);
+        }).catch(function (err) {
+            console.log("read_inOutInfo error", err);
         });
-    }, []);
+    }
 
+    const modifyAddData = () => {
+        console.log("modifyAddData try");
+        axios.post('http://192.168.2.91:5000/update_inOutInfo ', {
+            inOutListId: modifyData.modifyinOutListId,
+            inOut_Note: modifyData.modifyinOut_Note,
+            inOutStart: modifyData.modifyinOutStart,
+            inOutEnd: modifyData.modifyinOutEnd
+        }).then(function (response) {
+            console.log("responsedata 값 " , response.data);
+            if (response.data) {
+                let contentText = "출퇴근시간이 변경되었습니다.";
+                success(contentText);
+                getData();
+                MdClose();
+            }
+            if (!response.data) {
+                let contentText = "오류가 발생했습니다 새로고침 후 다시 실행하세요.";
+                warning(contentText);
+            }
+        }).catch(function (er) {
+            console.log("update_inOutInfo error", er);
+            let contentText = "서버 연동 에러 발생";
+            error(contentText);
+        });
+
+    }
+
+    const onChangeModifyData = (e) => {
+        const { value, name } = e.target;
+        setModifyData({
+            ...modifyData,
+            [name]: value
+        });
+        console.log(modifyData);
+    }
 
     //입력값 onChange 함수
-    const { saveId, savePw, saveUser, saveAdvice } = addData;
     const onChangeAddData = (e) => {
         const { value, name } = e.target;
         setAddData({
@@ -50,41 +140,6 @@ const ATGEcom = () => {
         });
         console.log(addData);
     }
-
-    //추가 모델에서 추가 눌렀을경우 함수
-    const pushAddData = () => {
-
-        if (addData.saveId == '' || addData.savePw == '' || addData.saveUser == '' || addData.saveAdvice == '') {
-            window.alert("공란은 입력할 수 없습니다.");
-        } else {
-            axios.post('http://192.168.2.82:5000/createUser', {
-                userId: addData.saveId,
-                userPw: addData.savePw,
-                userName: addData.saveUser,
-                userGrant: addData.saveAdvice,
-                compCode: sessionStorage.getItem("uid")
-            }).then(function (response) {
-                if (!response.data) {
-                    window.alert("중복 아이디는 추가할 수 없습니다.");
-                } else {
-                    window.alert("추가 완료");
-                    handleClose();
-                    setAddData({
-                        "saveId": '',
-                        "savePw": '',
-                        "saveUser": '',
-                        "saveAdvice": '',
-                    })
-                }
-            }).catch(function (error) {
-                console.log("createUser error :", error);
-            });
-
-        }
-
-    }
-
-
     //추가 모델에서 닫기 눌렀을 경우
     const closeAddData = () => {
         handleClose();
@@ -99,86 +154,174 @@ const ATGEcom = () => {
         }
     }
 
+    const searchAddData = () => {
+        axios.post('http://192.168.2.91:5000/search_inOutInfo', {
+            compCode: sessionStorage.getItem("uid"),
+            empName: search,//이름,
+            startDate: dateStart,//시작일 ,
+            endDate: dateEnd,//종료일자
+        }).then(function (response) {
+            console.log("search_inOutInfo data : ", response.data);
+            setData(response.data);
+        }).catch(function (err) {
+            console.log("search_inOutInfo error", err);
+        });
+    }
+    //추가 모델에서 추가 눌렀을경우 함수
+    const pushAddData = () => {
+        axios.post('http://192.168.2.91:5000/create_inOutInfo ', {
+            inOut_Note :addData.addinOut_Note,//비고
+            compCode : sessionStorage.getItem("uid"),//회사코드
+            depName : addData.adddepName,//부서명
+            empCode : addData.addempCode,//사원코드
+            empName : addData.addempName,//사원명
+            inOutDate : addData.addYear + "-" + addData.addMonth + "-" + addData.addDay,//날짜
+            inOutEnd : addData.addinOutEnd,//퇴근시간
+            inOutStart : addData.addinOutStart,//출근시간
+            depCode : addData.adddepCode,//부서코드
+            empRank : addData.addempRank,//직급
+        }).then(function (response) {
+            if (response.data) {
+                let contentText = "출퇴근 등록 완료.";
+                getData();
+                handleClose();
+                success(contentText);
+            }else{
+                let contentText = "오류가 발생했습니다 새로고침 후 다시 실행하세요.";
+                warning(contentText);
+            }
+        }).catch(function (er) {
+            console.log("update_inOutInfo error", er);
+            let contentText = "서버 연동 에러 발생";
+            error(contentText);
+        });
+
+    }
+    //모델에서 데이터 삭제할때 실행되는 함수
+    const delAddData = () =>{
+        axios.post('http://192.168.2.91:5000/delete_inOutInfo', {
+            inOutListId:modifyData.modifyinOutListId
+        }).then(function (response) {
+            console.log("삭제 데이터 값 " ,response.data);
+            if(response.data){
+                let contentText = "삭제완료";
+                getData();
+                delClose();
+                MdClose();
+                success(contentText);
+            }
+        }).catch(function (err) {
+            console.log("search_inOutInfo error", err);
+            let contentText = "출퇴근 삭제에 오류가 발생했습니다. 새로고침 후 다시 시도해주세요.";
+            success(contentText);
+        });
+    }
+
+
     //저장
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     //수정
-    const DelClose = () => setMDelShow(false);
-    const DeShow = () => setMDelShow(true);
+    const DelClose =()=> setDel(false);
+    const DelShow = () => setDel(true);
     //삭제
     const MdClose = () => setModifyShow(false);
-    const MdShow = () => setModifyShow(true);
+    const MdShow = (e) => {
+        axios.post('http://192.168.2.91:5000/modal_inOutInfo', {
+            inOutListId: e.inOutListId
+        }).then(function (response) {
+
+            setModifyData({
+                "modifyinOut_Note": response.data[0].inOut_Note, //비고
+                "modifycompCode": response.data[0].compCode, //회사코드
+                "modifydeleteList": response.data[0].deleteList,
+                "modifydepName": response.data[0].depName,//부서명
+                "modifyempCode": response.data[0].empCode,//사원코드
+                "modifyempName": response.data[0].empName,//이름
+                "modifyendDate": response.data[0].endDate,//사용안함
+                "modifyinOutDate": response.data[0].inOutDate,//날짜
+                "modifyinOutEnd": response.data[0].inOutEnd,//퇴근시간
+                "modifyinOutListId": response.data[0].inOutListId,//프라이머리키
+                "modifyinOutOver": response.data[0].inOutOver,//초과시간
+                "modifyinOutStart": response.data[0].inOutStart,//출근시간
+                "modifystartDate": response.data[0].startDate,//사용안함
+                "modifydepCode": response.data[0].depCode,//부서코드
+                "modifyempRank": response.data[0].empRank,//직급
+            });
+        }).catch(function (err) {
+            console.log("modal_inOutInfo error", err);
+            let contentText = "데이터 불러오는데 오류가 발생했습니다. 새로고침 후 다시 시도해주세요";
+            error(contentText);
+        });
+        setModifyShow(true);
+    }
     //권한
 
+    //달력
 
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setendDate] = useState(new Date());
 
-
-    //체크박스 관련 ---------------------------------------
-    const [isChecked, setIsChecked] = useState(false); //체크여부
-    const [checkedItems, setCheckedItems] = useState(new Set());
-
-    const checkHandler = ({ target }) => {
-        setIsChecked(!isChecked);
-        checkedItemHandle(target.value, target.checked);
-    }
-
-    const checkedItemHandle = (id, isChecked) => {
-        if (isChecked) {
-            checkedItems.add(id);
-            setCheckedItems(checkedItems);
-            console.log("if문 checked ", checkedItems);
-        } else if (!isChecked && checkedItems.has(id)) {
-            checkedItems.delete(id);
-            setCheckedItems(checkedItems);
-            console.log("else문 checked", checkedItems);
+    //시작일 onChange
+    const onChangeStart = (date) => {
+        let year = null;
+        let month = null;
+        let day = null;
+        let total = null;
+        if (date == null) {
+            setDateStart(date);
+        } else {
+            year = String(date.$y);
+            month = String(date.$M + 1);
+            day = String(date.$D);
+            if (date.$M < 10) {
+                month = "0" + String(date.$M + 1);
+            }
+            if (date.$D < 10) {
+                day = "0" + String(date.$D);
+            }
+            total = year + month + day;
+            console.log("year", year);
+            console.log("month", month);
+            console.log("day ", day);
+            setDateStart(total);
         }
-        return checkedItems;
     }
-    const onPanelChange = (value, mode) => {
-        console.log(value.format('YYYY-MM-DD'), mode);
-    };
-
-
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
-    const renderTitle = (title) => (
-        <span>
-            {title}
-            <a
-                style={{
-                    float: 'right',
-                }}
-                href="https://www.google.com/search?q=antd"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                more
-            </a>
-        </span>
-    );
-    const renderItem = (title, count) => ({
-        value: title,
-        label: (
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                }}
-            >
-                {title}
-                <span>
-                    <UserOutlined /> {count}
-                </span>
-            </div>
-        ),
-    });
-
+    //종료일 onChange
+    const onChangeEnd = (date) => {
+        let year = null;
+        let month = null;
+        let day = null;
+        let total = null;
+        if (date == null) {
+            setDateEnd(date);
+        } else {
+            year = String(date.$y);
+            month = String(date.$M + 1);
+            day = String(date.$D);
+            if (date.$M < 10) {
+                month = "0" + String(date.$M + 1);
+            }
+            if (date.$D < 10) {
+                day = "0" + String(date.$D);
+            }
+            total = year + month + day;
+            setDateEnd(total);
+        }
+    }
+    //이름 입력 onChange
+    const onChangeSearch = (e) => {
+        setSearch(e.target.value);
+    }
+    //엔터 입력 
+    const enterkey = () => {
+        if (window.event.keyCode == 13) {
+            searchAddData();
+        }
+    }
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
+             {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
             <br />
             <br />
@@ -186,152 +329,107 @@ const ATGEcom = () => {
 
 
             <Grid container style={{ width: '1400px' }}>
-                <Grid item sx ml={0}>
-                    <DropdownButton variant="Secondary" id="dropdown-basic-button" title="시간 날짜">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
+                <Grid><div style={{ fontSize: '22px' }}>시작 날짜</div></Grid>
+                <Grid>
+                    <div >
+                        <DatePicker
+                            selected={date => setStartDate}
+                            onChange={date => onChangeStart(date)}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            style={{ height: '40px' }}
+                        />
 
-                    </DropdownButton>
 
+                    </div>
                 </Grid>
-                <Grid item sx>
-                    <DropdownButton variant="Secondary" id="dropdown-basic-button" title="종료 날짜">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
-
-                    </DropdownButton>
+                <Grid ml={1}><div style={{ fontSize: '22px' }}>종료 날짜</div></Grid>
+                <Grid>
+                    <div>
+                        <DatePicker
+                            selected={endDate => setendDate}
+                            onChange={date => onChangeEnd(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            minDate={startDate}
+                            style={{ height: '40px' }}
+                        />
+                    </div>
                 </Grid>
 
-                <Grid item sx>
-                    <DropdownButton variant="Secondary" id="dropdown-basic-button" title="이름">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
-
-                    </DropdownButton>
-                </Grid>
 
 
-                <Grid item sx ml={98} >
-                    <AutoComplete
-                        popupClassName="certain-category-search-dropdown"
-                        dropdownMatchSelectWidth={500}
-                        style={{
-                            width: 250,
-                        }}
 
-                    >
-                        <Input.Search size="large" placeholder="검색" />
-                    </AutoComplete>
+                {/* 검색창 */}
+                <Grid item sx ml={1} >
+                    <InputGroup style={{ width: '250px', height: '10px' }}>
+
+                        <Form.Control
+                            type="text"
+                            name='search'
+                            aria-describedby="btnGroupAddon"
+                            onChange={onChangeSearch}
+                            style={{ height: '40px' }}
+                            onKeyUp={enterkey}
+
+                        />
+                        <InputGroup.Text id="btnGroupAddon" onClick={searchAddData} style={{ width: '50px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
+                    </InputGroup>
+
                 </Grid>
             </Grid>
             <br />
-
-            {/* <table style={{
-                width:"1000px",
-                // border:"1px",
-                // solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#bdc3c7' , }}>
-                    <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>날짜</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>성명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>부서</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>직급</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>출근시간</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>퇴근시간</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>초가 근무 시간</strong>
-                    </td>
-                </tr>  
-       
-                    
-
-                  {
-                        data && data.map((e, idx) =>
-                        <tr >
-                            <td style={{border:"1px solid gray"}}><Checkbox {...label} defaultChecked /></td>
-                            <td style={{border:"1px solid gray"}}>날짜 넣을거</td>
-                            <td style={{border:"1px solid gray"}}>휴가기간</td>
-                            <td style={{border:"1px solid gray"}}>항목 머시기 받아올거</td>
-                            <td style={{border:"1px solid gray"}}>싱세 머시기</td>
-                            <td style={{border:"1px solid gray"}}>상태 머시기 받아올거</td>
-                            <td style={{border:"1px solid gray"}}>비고 머시기</td>
-                            <td style={{border:"1px solid gray"}}>상태 머시기 받아올거</td>
-                 
-                        </tr>
-                        )
-                    }
-
-                */}
             <Table >
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#ecf0f1', border: "1px solid #f1f2f6" }}>
 
-                     
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                            <Checkbox {...label} defaultChecked />
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>날짜</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>성명</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>부서</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>직급</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>출근시간</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>퇴근시간</strong>
-                            </td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>
-                                <strong>초가 근무 시간</strong>
-                            </td>
 
 
-
-
-
-
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>날짜</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>부서</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>성명</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>직급</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>출근시간</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>퇴근시간</strong>
+                        </td>
+                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>초과근무시간</strong>
+                        </td>
                     </tr>
                 </thead>
-
-                {/* onClick={()=>ShBtn(e)} */}
                 <tbody>
 
-                 
-                {
+                    {
                         data && data.map((e, idx) =>
-                        <tr >
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}><Checkbox {...label} defaultChecked /></td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>날짜 넣을거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>휴가기간</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>항목 머시기 받아올거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>싱세 머시기</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>상태 머시기 받아올거</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>비고 머시기</td>
-                            <td style={{border:"1px solid #f1f2f6", color: '#777777', fontSize: '22px'}}>상태 머시기 받아올거</td>
-                 
-                        </tr>
+                            <tr >
+
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutDate}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.depName}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                    <Button style={{ fontSize: '22px' }} name={e.inOutListId} onClick={() => MdShow(e)} variant="link">
+                                        <strong>
+                                            {e.empName}
+                                        </strong>
+                                    </Button>
+                                </td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.empRank}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutStart}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutEnd}</td>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutOver}</td>
+                            </tr>
                         )
                     }
 
@@ -405,47 +503,116 @@ const ATGEcom = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {/* 수정 */}
+
+
+
+   
             <Modal
                 centered
-                size="xl"
-                show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                size="lg"
+                show={ModifyShow} onHide={MdClose} animation={false} id="ModifyModal">
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>출퇴근상세</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>수정</Modal.Body>
+                <Modal.Body style={{ backgroundColor: '' }}>
+
+                    <br />
+                    <Container>
+                        <Table >
+                            <thead style={{ height: '60px' }}>
+                                <tr style={{ backgroundColor: '#ecf0f1', color: '#777777', textAlign: "center", }}>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>날짜 </strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>사원명</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>사원코드</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>직급</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>부서명</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>부서코드</strong></td>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr style={{ textAlign: "center", }}>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> {modifyData && ModifyShow && modifyData.modifyinOutDate} </strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifyempName}</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifyempCode}</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifyempRank}</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifydepName}</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifydepCode}</strong></td>
+
+                                </tr>
+                            </tbody>
+
+                        </Table>
+                        <br></br>
+                        <Table  >
+                            <thead style={{ height: '60px' }}>
+                                <tr style={{ backgroundColor: '#ecf0f1', color: '#777777', textAlign: "center", }}>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>비고</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>출근시간</strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>퇴근시간</strong></td>
+
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>초과시간</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style={{ textAlign: "center", }}>
+                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}> <strong>  <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOut_Note" value={modifyData.modifyinOut_Note} type="text" onChange={onChangeModifyData} /></strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOutStart" value={modifyData.modifyinOutStart} type="text" onChange={onChangeModifyData} /></strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOutEnd" value={modifyData.modifyinOutEnd} type="text" onChange={onChangeModifyData} /></strong></td>
+                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> {modifyData && ModifyShow && modifyData.modifyinOutOver}</strong></td>
+
+
+                                </tr>
+                            </tbody>
+
+                        </Table>
+                        <Box md={3}></Box>
+
+                    </Container>
+                    <br />
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={MdClose}>
-                        Close
+                        닫기
                     </Button>
-                    <Button variant="primary" onClick={MdClose}>
-                        Save Changes
-                    </Button>
+                    <button className='addButton' variant="primary" onClick={DelShow}>
+                        삭제
+                    </button>
+                    <button className='addButton' variant="primary" onClick={modifyAddData}>
+                        수정
+                    </button>
                 </Modal.Footer>
             </Modal>
+
+
 
             {/* 삭제 */}
             <Modal
                 centered
-                size="xl"
-                show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>삭제</Modal.Title>
+                size="xsm"
+                show={del} onHide={DelClose} animation={true}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
+                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>삭제확인</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>삭제 내용</Modal.Body>
-                <Modal.Footer>
+                <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
+                    <strong>
+                        {modifyData && ModifyShow && modifyData.modifyempName}의 출/퇴근 현황을 삭제하시겠습니까?
+                        </strong>
+                </Modal.Body>
+                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={DelClose}>
-                        Close
+                        닫기
                     </Button>
-                    <Button variant="primary" onClick={DelClose}>
-                        Save Changes
-                    </Button>
+                    <button variant="primary" className='addButton' onClick = {delAddData}>
+                        삭제
+                    </button>
                 </Modal.Footer>
             </Modal>
 
 
 
-            {/* 검색  */}
+ 
 
 
 

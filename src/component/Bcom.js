@@ -69,13 +69,13 @@ const Bcom = (props) => {
     }
 
     //추가 입력값 onChange 함수
-    const { saveId, savePw, saveUser, saveAdvice } = addData;
     const onChangeAddData = (e) => {
         const { value, name } = e.target;
         setAddData({
             ...addData,
             [name]: value
         });
+        console.log(addData);
     }
 
     //추가 모델에서 추가 눌렀을경우 함수
@@ -92,7 +92,7 @@ const Bcom = (props) => {
                 compCode: sessionStorage.getItem("uid")
             }).then(function (response) {
                 if (!response.data) {
-                    window.alert("중복 아이디는 추가할 수 없습니다.");
+                    window.alert("이미 사용중인 아이디입니다. 다른 아이디를 선택해주세요.");
                 } else {
                     window.alert("추가 완료");
                     handleClose();
@@ -447,7 +447,8 @@ const [open, setOpen] = React.useState(
                       
                         <Form.Control
                             type="text"
-                            name='compNum'
+                            name='saveAdvice'
+                            onChange ={onChangeAddData}
                             aria-describedby="btnGroupAddon"
                             style={{height:'40px'}}
                             

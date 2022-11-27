@@ -12,78 +12,66 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 import { message, Space } from 'antd';
 
+
+
+// compCode: 회사 아이디
+// dailyId: PRIMARY KEY
+// dailyName: 성명
+// dailyCode: 일용직코드
+// dailyAddress: 주소
+// dailyPhone: 전화번호
+// dailySsn: 주민등록번호
+// dailyEmail: 이메일
+// dailyRank : 직급
+// dailyStart: 입사일
+// dailyEnd: 퇴사일
+// dailyEndDetail: 퇴사 사유
+// dailyBankName: 은행명
+// dailyBankNum: 계좌번호
+// dailyBankOwner: 예금주
+// dailyPay: 일용직 급여
+
+
 const OWAcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-    const [addCheck , setAddCheck] = useState(false);
-    const [modifyCheck , setModifyCheck] = useState(false);
+    const [addCheck, setAddCheck] = useState(false);
+    const [modifyCheck, setModifyCheck] = useState(false);
     const [data, setData] = useState(); //초기 데이터 들어있는 함수
-    const [addData, setAddData] = useState({
-            addempCode: null,//sessionStrage값
-            addempName: null,//사원명
-            addempNum: null,//사원번호
-            addempFirstSSN : null,  //주민등록번호 앞자리
-            addempSecondSSN : null, //주민등록번호 뒷자리
-            addempPhone: null,//전화번호
-            addempEmail : null,//이메일
-            addempFamilyNum: null,//부양가족수
-            addempAddress : null,//주소
-            adddepCode: null,//부서코드
-            adddepName : null,//부서명
-            addempRank: null,//직위/직급
-            addempStartYear : null,//입사일 년
-            addempStartMonth : null,//입사일 년 월
-            addempStartDay : null,//입사일 일
-            addtotalVacation: null,//휴가
-            addempEndYear: null,//퇴사년
-            addempEndMonth: null,//퇴사월
-            addempEndDay: null,//퇴사일
-            addempEndReason : null,//퇴사사유
-            addbankName: null,//은행
-            addbankNum : null,//계좌번호
-            addbankOwner: null,//예금주
-            addempPay : null,//연봉
-    });
+    const [addData, setAddData] = useState();  // 추가 데이터
     const [modifyData, setModifyData] = useState({
-            modifyempId : null, //PRIMARY KEY
-            modifyempName: null,//사원명
-            modifyempNum: null,//사원번호
-            modifyempFirstSSN : null,  //주민등록번호 앞자리
-            modifyempSecondSSN : null, //주민등록번호 뒷자리
-            modifyempPhone: null,//전화번호
-            modifyempEmail : null,//이메일
-            modifyempFamilyNum: null,//부양가족수
-            modifyempAddress : null,//주소
-            modifydepCode: null,//부서코드
-            modifydepName : null,//부서명
-            modifyempRank: null,//직위/직급
-            modifyempStartYear : null,//입사일 년
-            modifyempStartMonth : null,//입사일 년 월
-            modifyempStartDay : null,//입사일 일
-            modifytotalVacation: null,//휴가
-            modifyempEndYear: null,//퇴사년
-            modifyempEndMonth: null,//퇴사월
-            modifyempEndDay: null,//퇴사일
-            modifyempEndReason : null,//퇴사사유
-            modifybankName: null,//은행
-            modifybankNum : null,//계좌번호
-            modifybankOwner: null,//예금주
-            modifyempPay : null,//연봉
-            modifyremindVacation : null
-    });
-
-   
+        dailyId:null,
+        dailyName:null,
+        dailyCode: null,
+        dailyAddress: null,
+        dailyPhone: null,
+        dailyFirstSSN : null,
+        dailySecondSSN : null,
+        dailyEmail: null,
+        dailyRank: null,
+        dailyStartYear: null,
+        dailyStartMonth: null,
+        dailyStartDay: null,
+        dailyEndYear: null,
+        dailyEndMonth: null,
+        dailyEndDay: null,
+        dailyEndDetail: null,
+        dailyBankName: null,
+        dailyBankNum: null,
+        dailyBankOwner: null,
+        dailyPay : null
+    }); // 수정 데이터
     //alert 창
     const [messageApi, contextHolder] = message.useMessage();
-    
+
     //성공 alert
-    const success = (contentText) => {  
+    const success = (contentText) => {
         messageApi.open({
             type: 'success',
             content: contentText,
         });
     };
     //실패 alert
-    const error = (contentText) => {    
+    const error = (contentText) => {
         messageApi.open({
             type: 'error',
             content: contentText,
@@ -97,6 +85,7 @@ const OWAcom = () => {
         });
     };
 
+
     //초기 데이터 불러오는 useEffect
     useEffect(() => {
         getData();
@@ -104,597 +93,408 @@ const OWAcom = () => {
 
     //useEffect에서 실행되는 함수 ( axios )
     const getData = () => {
-        axios.post('http://192.168.2.82:5000/readEmp', {
+        axios.post('http://192.168.2.82:5000/readDailyEmp', {
             compCode: sessionStorage.getItem("uid")
-        }).then(function (response){
-            setData(response.data); 
+        }).then(function (response) {
+            setData(response.data);
         }).catch(function (er) {
-            console.log("readUser error", er);
+            console.log("readDailyEmp error", er);
             let contentText = "데이터를 가져오는데 에러가 발생했어요 새로고침해주세요";
             error(contentText);
         });
     }
 
-    //추가
-
+    //추가 onChange
     const onChangeAddData = (e) => {
         const { value, name } = e.target;
-        setAddData({
-            ...addData,
-            [name]: value
-        })
+        if (value == '') {
+            setAddData({
+                ...addData,
+                [name]: null
+            })
+        } else {
+            setAddData({
+                ...addData,
+                [name]: value
+            })
+        }
     }
 
-    const pushAddData = () => {
-            axios.post('http://192.168.2.82:5000/createEmp', {
-                compCode:sessionStorage.getItem("uid"),//sessionStrage값
-                empName:addData.addempName,//사원명
-                empNum:addData.addempNum,//사원번호
-                empFirstSSN :addData.addempFirstSSN,//주민등록번호 앞자리
-                empSecondSSN : addData.addempSecondSSN,
-                empPhone:addData.addempPhone,//전화번호
-                empEmail : addData.addempEmail,//이메일
-                empFamilyNum: addData.addempFamilyNum,//부양가족수
-                empAddress : addData.addempAddress,//주소
-                depCode: addData.adddepCode,//부서코드
-                depName : addData.adddepName,//부서명
-                empRank: addData.addempRank,//직위/직급
-                empStart :addData.addempStart,//입사일 
-                empStartYear : addData.addempStartYear,//입사년 
-                empStartMonth : addData.addempStartMonth,//입사월 
-                empStartDay : addData.addempStartDay,//입사일
-                totalVacation:addData.addtotalVacation,//휴가
-                empEndYear:addData.addempEndYear,//퇴사년
-                empEndMonth : addData.addempEndMonth,//퇴사월
-                empEndDay : addData.addempEndDay,//퇴사일
-                empEndReason :addData.addempEndReason,//퇴사사유
-                bankName:addData.addbankName,//은행
-                bankNum :addData.addbankNum,//계좌번호
-                bankOwner: addData.addbankOwner,//예금주
-                empPay : addData.addempPay//연봉
-            }).then(function (response) {
-                if (response.data) {
-                    let contentText = "        사원 추가 완료        ";
-                    getData();
-                    success(contentText);
-                    handleClose();
-                }
-                if(!response.data){
-                    let contentText = " 사원 추가 실패 다시 시도해주세요";
-                    warning(contentText);
-                    
-                }
-            }).catch(function (er) {
-                console.log("createEmp error", er);
-                let contentText = "서버 연동 에러 발생";
-                error(contentText);
-            });
-            
-        }
-
-
-    //수정
+    //수정 onChange
     const onChangeModifyData = (e) => {
         const { value, name } = e.target;
-        setModifyData({
-            ...modifyData,
-            [name]: value
-        })
-    }
-
-    //모달 함수
-    const [DelShow, setMDelShow] = useState(false);
-    const [ModifyShow, setModifyShow] = useState(false);
-    const [show, setShow] = useState(false);
-    const [SH, setSh] = useState(false);
-
-    const handleClose = () => {
-        setShow(false);
-        setAddData({
-            "addempCode": null,//sessionStrage값
-            "addempName": null,//사원명
-            "addempNum": null,//사원번호
-            "addempFirstSSN": null,  //주민등록번호 앞자리
-            "addempSecondSSN": null, //주민등록번호 뒷자리
-            "addempPhone": null,//전화번호
-            "addempEmail": null,//이메일
-            "addempFamilyNum": null,//부양가족수
-            "addempAddress": null,//주소
-            "adddepCode": null,//부서코드
-            "adddepName": null,//부서명
-            "addempRank": null,//직위/직급
-            "addempStartYear": null,//입사일 년
-            "addempStartMonth": null,//입사일 년 월
-            "addempStartDay": null,//입사일 일
-            "addtotalVacation": null,//휴가
-            "addempEndYear": null,//퇴사년
-            "addempEndMonth": null,//퇴사월
-            "addempEndDay": null,//퇴사일
-            "addempEndReason": null,//퇴사사유
-            "addbankName": null,//은행
-            "addbankNum": null,//계좌번호
-            "addbankOwner": null,//예금주
-            "addempPay": null,//연봉
-        })
-        setAddCheck(false);
-    }
-    const handleShow = () => {
-        setShow(true);
-        setAddCheck(true);
-    }
-
-    const DelClose = () => setMDelShow(false);
-    const DeShow = () => setMDelShow(true);
-
-    const MdClose = () => {
-        setModifyShow(false);
-        setModifyData({
-            "modifyempId" : null,
-            "modifyempName": null,//사원명
-            "modifyempNum": null,//사원번호
-            "modifyempFirstSSN": null,  //주민등록번호 앞자리
-            "modifyempSecondSSN": null, //주민등록번호 뒷자리
-            "modifyempPhone": null,//전화번호
-            "modifyempEmail": null,//이메일
-            "modifyempFamilyNum": null,//부양가족수
-            "modifyempAddress": null,//주소
-            "modifydepCode": null,//부서코드
-            "modifydepName": null,//부서명
-            "modifyempRank": null,//직위/직급
-            "modifyempStartYear": null,//입사일 년
-            "modifyempStartMonth": null,//입사일 년 월
-            "modifyempStartDay": null,//입사일 일
-            "modifytotalVacation": null,//휴가
-            "modifyempEndYear": null,//퇴사년
-            "modifyempEndMonth": null,//퇴사월
-            "modifyempEndDay": null,//퇴사일
-            "modifyempEndReason": null,//퇴사사유
-            "modifybankName": null,//은행
-            "modifybankNum": null,//계좌번호
-            "modifybankOwner": null,//예금주
-            "modifyempPay": null,//연봉
-            "modifyremindVacation" : null
-        });
-        setModifyCheck(false);
-    }
-
-    //-----------------------------------------------------
-    const MdShow = (e) => {
-        axios.post('http://192.168.2.82:5000/updateEmpModal',{
-            empId : e.empId
-        }).then(function (response){
-            let empFirstSSN=null;
-            let empSecondSSN =null;
-            let empStartYear =null;
-            let empStartMonth =null;
-            let empStartDay =null;
-            let empEndYear=null;
-            let empEndMonth=null;
-            let empEndDay=null;
-            if(response.data[0].empSSN != null){
-                empFirstSSN = response.data[0].empSSN.substr(0,6);
-                empSecondSSN = response.data[0].empSSN.substr(7);
-            }
-            if(response.data[0].empStart != null){
-                empStartYear = response.data[0].empStart.substr(0,4);
-                empStartMonth = response.data[0].empStart.substr(5,2);
-                empStartDay = response.data[0].empStart.substr(8);
-            }
-            if(response.data[0].empEnd !=null){
-                empEndYear = response.data[0].empEnd.substr(0,4);
-                empEndMonth = response.data[0].empEnd.substr(5,2);
-                empEndDay = response.data[0].empEnd.substr(8);
-            }
+        console.log("value" , value);
+        if(value==''){
             setModifyData({
-                "modifyempId" : response.data[0].empId,
-                "modifyempName": response.data[0].empName,//사원명
-                "modifyempNum": response.data[0].empNum,//사원번호
-                "modifyempFirstSSN": empFirstSSN,  //주민등록번호 앞자리
-                "modifyempSecondSSN": empSecondSSN, //주민등록번호 뒷자리
-                "modifyempPhone": response.data[0].empPhone,//전화번호
-                "modifyempEmail": response.data[0].empEmail,//이메일
-                "modifyempFamilyNum": response.data[0].empFamilyNum,//부양가족수
-                "modifyempAddress": response.data[0].empAddress,//주소
-                "modifydepCode": response.data[0].depCode,//부서코드
-                "modifydepName": response.data[0].depName,//부서명
-                "modifyempRank": response.data[0].empRank,//직위/직급
-                "modifyempStartYear": empStartYear,//입사일 년
-                "modifyempStartMonth": empStartMonth,//입사일 년 월
-                "modifyempStartDay": empStartDay,//입사일 일
-                "modifytotalVacation": response.data[0].totalVacation,//휴가
-                "modifyempEndYear": empEndYear,//퇴사년
-                "modifyempEndMonth": empEndMonth,//퇴사월
-                "modifyempEndDay": empEndDay,//퇴사일
-                "modifyempEndReason": response.data[0].empEndReason,//퇴사사유
-                "modifybankName": response.data[0].bankName,//은행
-                "modifybankNum": response.data[0].bankNum,//계좌번호
-                "modifybankOwner": response.data[0].bankOwner,//예금주
-                "modifyempPay": response.data[0].empPay,//연봉
-                "modifyremindVacation" : response.data[0].remindVacation
-            });
-        }).catch(function (er){
-            console.log("updataEmpModal error" , er);
-            let contentText = "데이터를 가져오는데 실패했어요 다시 시도해주세요";
-            error(contentText);
-        });
-        setModifyShow(true);
-        setModifyCheck(true);
+                ...modifyData,
+                [name] : null
+            })
+        }else{
+            setModifyData({
+                ...modifyData,
+                [name]: value
+            })
+        }
+    
     }
 
-    //-----------------------------------------------------
-    const [Right, setRight] = useState();
-
-    const ShBtn = (e) => {
-        if (modifyCheck) {
-            const temp = {...modifyData};
-            temp.modifydepCode = e.depCode;
-            temp.modifydepName = e.depName;
-            setModifyData(temp);
-        }
-        if (addCheck) {
-            const temp = {...addData};
-            temp.adddepCode = e.depCode;
-            temp.adddepName = e.depName;
-            setAddData(temp);
-        }
-        ShClose();
-    }
-    const ShClose = () => setSh(false);
-    const Shshow = () => {
-        axios.post('http://192.168.2.82:5000/readDep',{
-            compCode : sessionStorage.getItem("uid")
-        }).then(function(response){
-            setRight(response.data);
-        }).catch(function(er){
-            console.log("updateEmpPayModal error :", er);
-            let contentText = "부서 목록을 가져오는데 에러가 발생했습니다";
-            error(contentText);
-        });
-        
-        setSh(true);
-    };
-
-    const pushModifyData = ()=>{
-        axios.post('http://192.168.2.82:5000/updateEmp', {
-            empId : modifyData.modifyempId,
-            empName: modifyData.modifyempName,//사원명
-            empNum: modifyData.modifyempNum,//사원번호
-            empFirstSSN: modifyData.modifyempFirstSSN,  //주민등록번호 앞자리
-            empSecondSSN: modifyData.modifyempSecondSSN, //주민등록번호 뒷자리
-            empPhone: modifyData.modifyempPhone,//전화번호
-            empEmail: modifyData.modifyempEmail,//이메일
-            empFamilyNum: modifyData.modifyempFamilyNum,//부양가족수
-            empAddress: modifyData.modifyempAddress,//주소
-            depCode: modifyData.modifydepCode,//부서코드
-            depName: modifyData.modifydepName,//부서명
-            empRank: modifyData.modifyempRank,//직위/직급
-            empStartYear: modifyData.modifyempStartYear,//입사일 년
-            empStartMonth: modifyData.modifyempStartMonth,//입사일 년 월
-            empStartDay: modifyData.modifyempStartDay,//입사일 일
-            totalVacation: modifyData.modifytotalVacation,//휴가
-            empEndYear: modifyData.modifyempEndYear,//퇴사년
-            empEndMonth: modifyData.modifyempEndMonth,//퇴사월
-            empEndDay: modifyData.modifyempEndDay,//퇴사일
-            empEndReason: modifyData.modifyempEndReason,//퇴사사유
-            bankName: modifyData.modifybankName,//은행
-            bankNum: modifyData.modifybankNum,//계좌번호
-            bankOwner: modifyData.modifybankOwner,//예금주
-            empPay: modifyData.modifyempPay//연봉
+    const pushAddData = (e) =>{
+        axios.post('http://192.168.2.82:5000/createDailyEmp', {
+            compCode: sessionStorage.getItem("uid"),
+            dailyId: addData.dailyId,
+            dailyName: addData.dailyName,
+            dailyCode: addData.dailyCode,
+            dailyAddress: addData.dailyAddress,
+            dailyPhone: addData.dailyPhone,
+            dailySsn: String(addData.dailyFirstSSN)+String(addData.dailySecondSSN),
+            dailyEmail: addData.dailyEmail,
+            dailyRank: addData.dailyRank,
+            dailyStart: String(addData.dailyStartYear) + String(addData.dailyStartMonth) + String(addData.dailyStartDay),
+            dailyEnd: String(addData.dailyEndYear) + String(addData.dailyEndMonth) + String(addData.dailyEndDay),
+            dailyEndDetail: addData.dailyEndDetail,
+            dailyBankName: addData.dailyBankName,
+            dailyBankNum: addData.dailyBankNum,
+            dailyBankOwner: addData.dailyBankOwner,
+            dailyPay: addData.dailyPay,
         }).then(function (response) {
             if(response.data){
                 getData();
-                MdClose();
-                let contentText = "        수정 성공        ";
+                addClose();
+                let contentText = "일용직 등록 완료";
                 success(contentText);
-            }
-            if(!response.data){
-                let contentText = "        수정 오류        ";
+            }else{
+                let contentText ="일용직 등록 실패 다시 시도해주세요";
                 warning(contentText);
-
             }
-        }).catch(function(er){
-            let contentText = "        에러 발생        ";
+        }).catch(function (er) {
+            console.log("createDailyEmp error", er);
+            let contentText = "데이터 저장 실패 , 새로고침 후 다시 실행해주세요";
             error(contentText);
-            console.log("updataEmp error" , er);
         });
     }
 
-   
-    const pushDeleteData = () =>{
-        
-        axios.post('http://192.168.2.82:5000/deleteEmp',{
-            empId : modifyData.modifyempId
-        }).then(function(response){
+    const pushModifyData = (e)=>{
+       axios.post('http://192.168.2.82:5000/updateDailyEmp',{
+            compCode : sessionStorage.getItem("uid"),
+            dailyId : modifyData.dailyId,
+            dailyId: modifyData.dailyId,
+            dailyName: modifyData.dailyName,
+            dailyCode: modifyData.dailyCode,
+            dailyAddress:modifyData.dailyAddress,
+            dailyPhone: modifyData.dailyPhone,
+            dailySsn: String(modifyData.dailyFirstSSN)+String(modifyData.dailySecondSSN),
+            dailyEmail: modifyData.dailyEmail,
+            dailyRank: modifyData.dailyRank,
+            dailyStart: String(modifyData.dailyStartYear) + String(modifyData.dailyStartMonth) + String(modifyData.dailyStartDay),
+            dailyEnd: String(modifyData.dailyEndYear) + String(modifyData.dailyEndMonth) + String(modifyData.dailyEndDay),
+            dailyEndDetail: modifyData.dailyEndDetail,
+            dailyBankName: modifyData.dailyBankName,
+            dailyBankNum: modifyData.dailyBankNum,
+            dailyBankOwner: modifyData.dailyBankOwner,
+            dailyPay: modifyData.dailyPay,
+       }).then(function (response){
             if(response.data){
+                let contentText = "일용직 수정 완료";
                 getData();
-                MdClose();
-                DelClose();
-                let contentText = "삭제 성공";
                 success(contentText);
-
+                modifyClose();
+            }else{
+                let contentText = "공란은 입력할 수 없습니다.";
+                warning(contentText);
             }
-        }).catch(function(er){
-            console.log("deleteEmp error" , er);
-            let contentText = " 에러 발생 ";
+       }).catch(function(err){
+            console.log("updateDailyEmp error :" ,err);
+            let contentText  = "수정오류가 발생했습니다. 새로고침 후 다시 시도해주세요";
+            error(contentText);
+       })
+    }
+    const pushDeleteData = ()=>{
+        axios.post('http://192.168.2.82:5000/deleteDailyEmp',{
+            dailyId : modifyData.dailyId
+        }).then(function (response){
+            if(response.data){
+                let contentText = "삭제 완료";
+                getData();
+                delClose();
+                modifyClose();
+                success(contentText);
+            }else{
+                let contentText = " 삭제 실패";
+                warning(contentText);
+            }
+            console.log("삭제 response" , response.data);
+        }).catch(function(err){
+            console.log("deleteDailyEmp error :",err);
+            let contentText = "일용직 삭제에서 오류가 발생하였습니다.";
+            error(contentText);
+
+        })
+
+    }
+    //모달 함수
+    const [add, setAdd] = useState(false);
+    const [modify, setModify] = useState(false);
+    const [del, setDel] = useState(false);
+    //추가
+    const addShow = () => setAdd(true);
+    const addClose = () => {
+        setAdd(false);
+        setAddData({});
+    }
+    //수정
+    const modifyShow = (e) => {
+        axios.post('http://192.168.2.82:5000/updateDailyEmpModal', {
+            dailyId: e.dailyId
+        }).then(function (response) {
+            let dailyFirstSsn = null;
+            let dailySecondSsn = null;
+            let dailyfirst = null;
+            let dailysecond = null;
+            let dailyStart = null;
+            let startYear = null;
+            let startMonth = null;
+            let startDay = null;
+            let dailyEnd = null;
+            let endYear = null;
+            let endMonth = null;
+            let endDay = null;
+            if (response.data[0].dailySsn != null) {
+                dailyFirstSsn = response.data[0].dailySsn.substr(0, 6);
+                dailySecondSsn = response.data[0].dailySsn.substr(6);
+            }
+            if (response.data[0].dailyStart != null) {
+                dailyStart = response.data[0].dailyStart.split("-");
+                startYear = dailyStart[0];
+                startMonth = dailyStart[1];
+                startDay = dailyStart[2];
+            }
+            if (response.data[0].dailyEnd != null) {
+                dailyEnd = response.data[0].dailyEnd.split("-");
+                endYear = dailyEnd[0];
+                endMonth = dailyEnd[1];
+                endDay = dailyEnd[2];
+            }
+            setModifyData({
+                dailyId:response.data[0].dailyId,
+                dailyName:response.data[0].dailyName,
+                dailyCode: response.data[0].dailyCode,
+                dailyAddress: response.data[0].dailyAddress,
+                dailyPhone: response.data[0].dailyPhone,
+                dailyFirstSSN : dailyFirstSsn,
+                dailySecondSSN : dailySecondSsn,
+                dailyEmail: response.data[0].dailyEmail,
+                dailyRank: response.data[0].dailyRank,
+                dailyStartYear: startYear,
+                dailyStartMonth: startMonth,
+                dailyStartDay: startDay,
+                dailyEndYear: endYear,
+                dailyEndMonth: endMonth,
+                dailyEndDay: endDay,
+                dailyEndDetail: response.data[0].dailyEndDetail,
+                dailyBankName: response.data[0].dailyBankName,
+                dailyBankNum: response.data[0].dailyBankNum,
+                dailyBankOwner: response.data[0].dailyBankOwner,
+                dailyPay : response.data[0].dailyPay
+            });
+
+        }).catch(function (err) {
+            console.log("updateDailyEmpModal error :", err);
+            let contentText = "데이터를 가져오는데 오류가 발생했습니다. 새로고침 후 다시 시도해주세요";
             error(contentText);
         })
+        setModify(true);
+       
     }
+    const modifyClose = () => {
+        setModifyData({
+            "dailyId":null,
+            "dailyName":null,
+            "dailyCode": null,
+            "dailyAddress": null,
+            "dailyPhone": null,
+            "dailyFirstSSN" : null,
+            "dailySecondSSN": null,
+            "dailyEmail": null,
+            "dailyRank": null,
+            "dailyStartYear": null,
+            "dailyStartMonth": null,
+            "dailyStartDay": null,
+            "dailyEndYear": null,
+            "dailyEndMonth": null,
+            "dailyEndDay": null,
+            "dailyEndDetail": null,
+            "dailyBankName": null,
+            "dailyBankNum": null,
+            "dailyBankOwner": null,
+            "dailyPay" : null
+        })
+        setModify(false);
+    }
+
+    //삭제
+    const delShow = () => setDel(true);
+    const delClose = () => setDel(false);
+
+
+
 
 
     return (
-        <div style={{width:'1400px' ,position:'relative'}}>
-             <h2  style={{color:' #005b9e' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>일용직 등록 </strong></h2>
-            <br/>
-            <br/>
-            <br/>
+        <div style={{ width: '1400px', position: 'relative' }}>
+            {contextHolder}
+            <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>일용직 등록 </strong></h2>
+            <br />
+            <br />
+            <br />
 
-            {/* <table style={{
-                width:"1000px",
-                // border:'1px solid black',
-                
-                solid:"#fffff",
-                // backgroundColor:'#bdc3c7'
-                position:'absolute',
-                left:'100px'
-            }}>
-                <tr style={{backgroundColor:'#f1f2f6' , }}>
-                <td style={{border:"1px solid gray"}}>
-                    <Checkbox {...label} defaultChecked />
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>입사일자</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>사원번호</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>성명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>부서명</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>직위/직급</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>은행</strong>
-                    </td>
-                    <td style={{border:"1px solid gray"}}>
-                        <strong>계좌번호</strong>
-                    </td>
-                    {/* <td style={{border:"1px solid gray"}}>
-                        <strong>Email</strong>
-                    </td>
-                </tr>  
-       
-                    
-
-                  {
-                        data && data.map((e, idx) =>
-                        <tr >
-                            <td><Checkbox {...label} defaultChecked /></td>
-                            <td>입사일자 데이터 넣을곳</td>
-                            <td>입사일자 데이터 넣을곳</td>
-                            <td>성명 머시기 받아올거</td>
-                            <td>부서명 데이터 넣을곳 </td>
-                            <td>직위/직급 데이터 넣을곳</td>
-                            <td>은행 데이터 넣을곳</td>
-                            <td>계좌번호 데이터 넣을곳</td>
-                           
-                        </tr>
-                        )
-                    }
-                
-
-            </table>   */}
-
-                    
             <Table >
-                    <thead style={{height:'60px'}}>
+                <thead style={{ height: '60px' }}>
                     {/* #769FCD */}
                     {/* ecf0f1 */}
-                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
-                        <td style={{border:"1px solid #f1f2f6",fontSize:'22px'}}>
-                            <input type="checkbox" id="allCheck" value="allCheck" ></input>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>아이디</strong>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>비밀번호</strong>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>사용자명</strong>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>권한</strong>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>입사일자</strong>
+                        </td>
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>일용직번호</strong>
+                        </td>
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>성명</strong>
+                        </td>
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>직위/직급</strong>
+                        </td>
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>은행</strong>
+                        </td>
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>계좌번호</strong>
+                        </td>
+                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <strong>이메일</strong>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
                     {
+
                         data && data.map((e, idx) =>
-                        <tr style={{height:'60px'}} >
-                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><input type="checkbox" id={e.userId} value={e.userId} ></input></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong> </td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>  {e.userPw}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.userName} </strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userGrant}</strong></td>
-                        </tr>
+                            <tr style={{ height: '60px' }} >
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyStart}</strong> </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>  {e.dailyCode}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}>
+                                    <Button style={{ fontSize: '22px' }} name={e.dailyId} onClick={() => modifyShow(e)} variant="link">
+                                        <strong>
+                                        {e.dailyName}
+                                        </strong>
+                                    </Button>
+                                </td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyRank}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyBankName}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyBankNum}</strong></td>
+                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyEmail}</strong></td>
+                            </tr>
                         )
                     }
 
-                   
-                    </tbody>
-                    </Table>
+
+                </tbody>
+            </Table>
 
 
-                <div>
-                <button   style={{position:'absolute' ,left:"0px",top:'600px'}} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button> 
-                <button style={{position:'absolute' ,left:"110px",top:'600px'}} onClick={MdShow} className="Atmp1">  <strong>수정</strong></button>
-                <button style={{position:'absolute' ,left:"220px",top:'600px'}} onClick={DeShow} className="Atmp1"> <strong>삭제</strong> </button>
+            <div>
+                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={addShow} className="Atmp1">  <strong>등록</strong></button>
 
-                </div>
-            
+            </div>
 
 
-
-
-            {/* 추가 */}
-              {/* 등록 */}
-              <Modal
+            {/* 등록 */}
+            <Modal
                 centered
                 size="lg"
 
 
-                show={show} onHide={handleClose} animation={false}>
+                show={add} onHide={addClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}><strong> 사원 등록</strong></Modal.Title>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>일용직등록</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-
-
                     <br />
-
                     <Container>
                         <Grid container spacing={4}>
                             <Grid item xs={6} md={2} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>사원명</strong>
+                                <strong>성명</strong>
                             </Grid>
                             <Grid item xs={6} md={4} ml={2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempName' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyName' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={6} md={2} ml={-1} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>사원 번호</strong>
+                                <strong>일용직번호</strong>
                             </Grid>
                             <Grid item xs={6} md={4} ml={0}>
                                 {/* outline:'1px solid #777777'/ */}
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempNum' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyCode' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={6} md={3} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>주민등록번호</strong>
                             </Grid>
                             <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='addempFirstSSN' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='dailyFirstSSN' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={6} md={3} ml={-10} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>ㅡ</strong>
                             </Grid>
                             <Grid item xs={6} md={3} ml={-20.5} mt={-2} >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="password" name='addempSecondSSN' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '100px', height: '30px' }} type="password" name='dailySecondSSN' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
-
-
-
-
-
-
                             <Grid item xs={6} md={2} ml={-10} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>전화 번호</strong>
                             </Grid>
                             <Grid item xs={6} md={4} ml={0} mt={-2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempPhone' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyPhone' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
-
-
-
-
-
-
                             <Grid item xs={6} md={3} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>이메일</strong>
                             </Grid>
                             <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempEmail' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyEmail' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
-
-                            <Grid item xs={6} md={2} ml={6.5} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>부양 가족 수</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempFamilyNum' aria-describedby="btnGroupAddon" />
-                            </Grid>
-
-                            <Grid item xs={10} md={5} mt={-1.5} ml={-2} style={{ fontSize: '15px', color: '#777777' }} >
+                            <Grid item xs={10} md={5} mt={4} ml={-41.5} style={{ fontSize: '15px', color: '#777777' }} >
                                 <strong>주소</strong>
                             </Grid>
 
-                            <Grid item xs={6} md={7} ml={-21} mt={-2}  >
-
-
-
+                            <Grid item xs={6} md={7} ml={-21} mt={4}  >
                                 <InputGroup style={{ width: '600px', height: '30px' }}>
 
                                     <Form.Control
                                         type="text"
-                                        name='addempAddress'
+                                        name='dailyAddress'
                                         aria-describedby="btnGroupAddon"
                                         style={{ height: '30px' }}
-                                        
+                                        onChange={onChangeAddData} 
+
                                     />
-                                    <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '40px', height: '30px' }}></InputGroup.Text>
                                 </InputGroup>
                             </Grid>
-
-
                             <Grid item xs={12} ml={-5} mt={-2}>
                                 <hr style={{ width: '800px' }} />
                             </Grid>
-
-
-                            <Grid item xs={6} md={4} mt={-1} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>부서코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-
-
-                                <InputGroup style={{ width: '230px', height: '30px' }}>
-
-                                    <Form.Control
-                                        type="text"
-                                        name='adddepCode'
-                                        aria-describedby="btnGroupAddon"
-                                        value={addData.adddepCode}
-                                        style={{ height: '30px' }}
-                                       
-                                    />
-                                    <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                                </InputGroup>
-
-
-                            </Grid>
-                            <Grid item xs={6} md={2} ml={-1} mt={-1} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>부서명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='adddepName' value={addData.adddepName} aria-describedby="btnGroupAddon" />
-                            </Grid>
-
-
-                            <Grid item xs={6} md={4} mt={-1} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>쓰레기요</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
-                            </Grid>
-
                             <Grid item xs={6} md={2} ml={-1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>직위/직급</strong>
                             </Grid>
                             <Grid item xs={6} md={4} ml={0} mt={-2}  >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempRank' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyRank'onChange={onChangeAddData}  aria-describedby="btnGroupAddon" />
                             </Grid>
-
-
-
                             <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>입사일</strong>
                             </Grid>
                             <Grid item xs={2} md={1} mt={-2} ml={2}>
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='addempStartYear' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartYear' onChange={onChangeAddData}  aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
@@ -702,37 +502,20 @@ const OWAcom = () => {
                             </Grid>
 
                             <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='addempStartMonth' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartMonth' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
                             <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>/</strong>
                             </Grid>
                             <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='addempStartDay' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartDay' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
-
-
-
-                            <Grid item xs={6} md={2} ml={1} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>휴가</strong>
-                            </Grid>
-                            <Grid item xs={6} md={2} ml={-10} mt={-2}  >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='addtotalVacation' aria-describedby="btnGroupAddon" />
-                            </Grid>
-
-                            <Grid item xs={6} md={2} ml={-1} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>잔여 휴가</strong>
-                            </Grid>
-                            <Grid item xs={6} md={1} ml={-4} mt={-2} >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='addremindVacation' aria-describedby="btnGroupAddon" />
-                            </Grid >
-
 
                             <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>퇴사일</strong>
                             </Grid>
                             <Grid item xs={2} md={1} mt={-2} ml={2}>
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='addempEndYear' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyEndYear' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
@@ -740,20 +523,20 @@ const OWAcom = () => {
                             </Grid>
 
                             <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='addempEndMonth' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyEndMonth' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
                             <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>/</strong>
                             </Grid>
                             <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='addempEndDay' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyEndDay' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={6} md={2} ml={1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>퇴사 사유</strong>
                             </Grid>
                             <Grid item xs={6} md={4} ml={0} mt={-2}  >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addempEndReason' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyEndReason' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={12} ml={-5} mt={-4}>
@@ -766,7 +549,7 @@ const OWAcom = () => {
 
                             <Grid item xs={6} md={6} ml={-32} mt={-4}  >
 
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyBankName' onChange={onChangeAddData}  aria-describedby="btnGroupAddon" />
                             </Grid>
 
 
@@ -780,7 +563,7 @@ const OWAcom = () => {
                                 <strong> 계좌 번호</strong>
                             </Grid>
                             <Grid item xs={6} md={4} ml={-16} mt={-2} >
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='addbankNum' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyBankNum' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
 
@@ -788,196 +571,215 @@ const OWAcom = () => {
                                 <strong>예금주</strong>
                             </Grid>
                             <Grid item xs={6} md={6} ml={-31.5} mt={-5}  >
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='addbankOwner' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyBankOwner' onChange={onChangeAddData} aria-describedby="btnGroupAddon" />
                             </Grid>
 
                             <Grid item xs={6} md={6} ml={16} mt={-2} style={{ fontSize: '15px', color: '#777777' }} >
-                                <strong>연봉</strong>
+                                <strong>일급</strong>
                             </Grid>
 
                             <Grid item xs={6} md={6} ml={-31.5} mt={-2}  >
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='addempPay' aria-describedby="btnGroupAddon" />
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyPay' onChange={onChangeAddData}  aria-describedby="btnGroupAddon" />
                             </Grid>
-
-
-
                         </Grid>
                     </Container>
-
-
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={addClose}>
                         <strong>취소</strong>
                     </Button>
-                    <button className="addButton" onClick={handleClose}>
+                    <button className="addButton" onClick={pushAddData}>
                         <strong>추가</strong>
                     </button>
                 </Modal.Footer>
             </Modal>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {/* <Modal 
-             centered
-             size="xl"
-            show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',}}>
-                <Modal.Title style={{color:'#ffffff'}}><strong> 사원 등록</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f1f2f6'}}>
-             
-
-                <br/>
-              
-                    <Container>
-                    <Grid container spacing={4}>
-                    <Grid item xs={6} md={2}  style={{fontSize:'25px'}}>
-                        <strong>사원명</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}>
-                    <input style={{width:'250px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-                    <Grid item xs={6} md={2} style={{fontSize:'25px'}}>
-                        <strong>사원 번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} ml={-5}>
-                    <input style={{width:'290px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-                    
-                    <Grid item xs={6} md={3} style={{fontSize:'25px'}}>
-                       <strong>주민등록번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={3} ml={-11}>
-                    <input style={{width:'250px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-                    <Grid item xs={6} md={2} ml={11} style={{fontSize:'25px'}}>
-                        <strong>전화 번호</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4} ml={-5} >
-                    <input style={{width:'290px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-
-                    <Grid item xs={6} md={2} style={{fontSize:'25px'}}>
-                       <strong>부서코드</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}>
-                    <input style={{width:'250px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-                    <Grid item xs={6} md={2} ml={0} style={{fontSize:'25px'}}>
-                        <strong>일급</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}  ml={-5}  >
-                    <input style={{width:'290px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-                    
-                    <Grid item xs={6} md={2} style={{fontSize:'25px'}}>
-                       <strong>입사일</strong>
-                    </Grid>
-                    <Grid item xs={6} md={4}>
-                    <input style={{width:'250px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-
-                    <Grid item xs={6} md={6} ml={23} mt={5} style={{fontSize:'25px'}}>
-                      <strong> 은행</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={6} ml={-48}mt={5} >
-                    <input style={{width:'250px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-
-
-                    
-                    <Grid item xs={6} md={4}  style={{fontSize:'25px'}}>
-                       <strong> 급여 통장</strong>
-                    </Grid>
-
-                
-                    <Grid item xs={6} md={4} ml={-23}  style={{fontSize:'25px'}}>
-                       <strong> 계좌 번호</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={4} ml={-25} >
-                    <input style={{width:'250px',height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-
-
-                    <Grid item xs={6} md={6} ml={23} style={{fontSize:'25px'}} >
-                       <strong>예금주</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={6} ml={-48} >
-                    <input style={{width:'250px' ,height:'40px'}} name='compNum' type="text"></input>
-                    </Grid>
-
-
-                 
-                    
-                    <Grid item xs={6} md={3} style={{fontSize:'25px'}} >
-                      <strong>주소</strong>
-                    </Grid>
-
-                    <Grid item xs={6} md={10}  >
-                    <input style={{width:'1000px' ,height:'70px'}} name='compNum' type="text"></input>
-                    </Grid>
-                
-                    </Grid>
-                </Container>
-
-
-                </Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    취소
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                   추가
-                </Button>
-                </Modal.Footer>
-            </Modal> */}
-
             {/* 수정 */}
-            <Modal 
-             centered
-             size="lg"
-            show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+            <Modal
+                centered
+                size="lg"
+
+
+                show={modify} onHide={modifyClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>일용직정보</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>수정</Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={MdClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={MdClose}>
-                    Save Changes
-                </Button>
+                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
+                    <br />
+                    <Container>
+                        <Grid container spacing={4}>
+                            <Grid item xs={6} md={2} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>성명</strong>
+                            </Grid>
+                            <Grid item xs={6} md={4} ml={2} >
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyName' value={modifyData.dailyName } onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={6} md={2} ml={-1} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>일용직번호</strong>
+                            </Grid>
+                            <Grid item xs={6} md={4} ml={0}>
+                                {/* outline:'1px solid #777777'/ */}
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyCode' value={modifyData.dailyCode } onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={6} md={3} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>주민등록번호</strong>
+                            </Grid>
+                            <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
+                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='dailyFirstSSN' value={modifyData.dailyFirstSSN } onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={6} md={3} ml={-10} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>ㅡ</strong>
+                            </Grid>
+                            <Grid item xs={6} md={3} ml={-20.5} mt={-2} >
+                                <Form.Control style={{ width: '100px', height: '30px' }} type="password" name='dailySecondSSN' value={modifyData.dailySecondSSN } onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+                            <Grid item xs={6} md={2} ml={-10} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>전화 번호</strong>
+                            </Grid>
+                            <Grid item xs={6} md={4} ml={0} mt={-2} >
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyPhone' value={modifyData.dailyPhone} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+                            <Grid item xs={6} md={3} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>이메일</strong>
+                            </Grid>
+                            <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyEmail' value={modifyData.dailyEmail}  onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+                            <Grid item xs={10} md={5} mt={4} ml={-41.5} style={{ fontSize: '15px', color: '#777777' }} >
+                                <strong>주소</strong>
+                            </Grid>
+
+                            <Grid item xs={6} md={7} ml={-21} mt={4}  >
+                                <InputGroup style={{ width: '600px', height: '30px' }}>
+
+                                    <Form.Control
+                                        type="text"
+                                        name='dailyAddress'
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '30px' }}
+                                        onChange={onChangeModifyData} 
+                                        value = {modifyData.dailyAddress}
+
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '40px', height: '30px' }}></InputGroup.Text>
+                                </InputGroup>
+                            </Grid>
+                            <Grid item xs={12} ml={-5} mt={-2}>
+                                <hr style={{ width: '800px' }} />
+                            </Grid>
+                            <Grid item xs={6} md={2} ml={-1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>직위/직급</strong>
+                            </Grid>
+                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyRank' value = {modifyData.dailyRank} onChange={onChangeModifyData}  aria-describedby="btnGroupAddon" />
+                            </Grid>
+                            <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>입사일</strong>
+                            </Grid>
+                            <Grid item xs={2} md={1} mt={-2} ml={2}>
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartYear' value = {modifyData.dailyStartYear} onChange={onChangeModifyData}  aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>/</strong>
+                            </Grid>
+
+                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartMonth' value = {modifyData.dailyStartMonth} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>/</strong>
+                            </Grid>
+                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartDay' value = {modifyData.dailyStartDay} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>퇴사일</strong>
+                            </Grid>
+                            <Grid item xs={2} md={1} mt={-2} ml={2}>
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyEndYear'  value = {modifyData.dailyEndYear} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>/</strong>
+                            </Grid>
+
+                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyEndMonth' value = {modifyData.dailyEndMonth}onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>/</strong>
+                            </Grid>
+                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
+                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyEndDay' value = {modifyData.dailyEndDay} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={6} md={2} ml={1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong>퇴사 사유</strong>
+                            </Grid>
+                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
+                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyEndReason' value = {modifyData.dailyEndReason} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={12} ml={-5} mt={-4}>
+                                <hr style={{ width: '800px' }} />
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={16} mt={-3} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong> 은행</strong>
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={-32} mt={-4}  >
+
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyBankName' value = {modifyData.dailyBankName} onChange={onChangeModifyData}  aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+
+
+                            <Grid item xs={6} md={4} ml={-2} mt={2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <div ><strong> 급여 통장</strong></div>
+                            </Grid>
+
+
+                            <Grid item xs={6} md={4} ml={-13.5} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                                <strong> 계좌 번호</strong>
+                            </Grid>
+                            <Grid item xs={6} md={4} ml={-16} mt={-2} >
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyBankNum' value = {modifyData.dailyBankNum}  onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+
+                            <Grid item xs={6} md={6} ml={16} mt={-5} style={{ fontSize: '15px', color: '#777777' }} >
+                                <strong>예금주</strong>
+                            </Grid>
+                            <Grid item xs={6} md={6} ml={-31.5} mt={-5}  >
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyBankOwner' value = {modifyData.dailyBankOwner} onChange={onChangeModifyData} aria-describedby="btnGroupAddon" />
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={16} mt={-2} style={{ fontSize: '15px', color: '#777777' }} >
+                                <strong>일급</strong>
+                            </Grid>
+
+                            <Grid item xs={6} md={6} ml={-31.5} mt={-2}  >
+                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='dailyPay' value = {modifyData.dailyPay} onChange={onChangeModifyData}  aria-describedby="btnGroupAddon" />
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={modifyClose}>
+                        <strong>닫기</strong>
+                    </Button>
+                    <button className="addButton" onClick={delShow}>
+                        <strong>삭제</strong>
+                    </button>
+                    <button className="addButton" onClick={pushModifyData}>
+                        <strong>수정</strong>
+                    </button>
                 </Modal.Footer>
             </Modal>
 
@@ -985,14 +787,14 @@ const OWAcom = () => {
             <Modal
                 centered
                 size="xsm"
-                show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', width: '500px' }}>
-                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}>삭제확인</Modal.Title>
+                show={del} onHide={delClose} animation={true}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
+                    <Modal.Title style={{ color: '#ffffff', width: '500px' } }><strong>삭제확인</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
-                    <strong>{modifyData.modifyempName}의 정보를 삭제하시겠습니까?</strong></Modal.Body>
+                    <strong>{modifyData.dailyName}을 삭제하시겠습니까?</strong></Modal.Body>
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
-                    <Button variant="secondary" onClick={DelClose}>
+                    <Button variant="secondary" onClick={delClose}>
                         닫기
                     </Button>
                     <button variant="primary" className='addButton' onClick={pushDeleteData}>
@@ -1000,52 +802,6 @@ const OWAcom = () => {
                     </button>
                 </Modal.Footer>
             </Modal>
-
-
-            <Modal 
-                size="lg"
-                centered
-                show={SH} onHide={ShClose}>
-                <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title  style={{color:'#ffffff'}}> <strong>부서선택</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f1f2f6'}}> 
-
-         
-                <table style={{
-                        textAlign:"center",
-                        width:"100%", border:"1px solid gray" ,}} >
-                    <tr style={{border:"1px solid gray",backgroundColor:'#a4b0be'}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px',color:'#ffffff'}}><strong></strong></td>
-                    <td style={{border:"1px solid gray",fontSize:'30px',color:'#ffffff'}}><strong>부서코드</strong></td>
-                    <td style={{border:"1px solid gray",fontSize:'30px',color:'#ffffff'}}><strong>부서명</strong></td>
-                    <td style={{fontSize:'30px',color:'#ffffff'}}> <strong> 부서상세</strong></td>
-                    </tr>
-
-
-
-                    {
-                        Right && Right.map((e, idx) =>
-                        <tr style={{border:"1px solid gray"}}>
-                        <td style={{border:"1px solid gray",fontSize:'30px'}}>{idx+1}</td>
-                        <td style={{border:"1px solid gray",fontSize:'30px'}}>{e.depCode}</td>
-                        <Button  name={e.depCode} onClick={()=>ShBtn(e)}variant="link"><strong>{e.depName}</strong></Button>
-                        <td style={{border:"1px solid gray",fontSize:'30px'}}>{e.depDetail}</td>
-                        </tr>
-                        
-                        )
-                    }
-          
-                </table>
-                </Modal.Body>
-                </Modal>
-  
-
-       
-
-
-
-
         </div>
     );
 };
