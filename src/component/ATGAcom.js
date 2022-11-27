@@ -252,7 +252,7 @@ const ATGAcom = () => {
                 </tbody>
             </Table>
             <Box>
-                <button style={{ position: 'absolute', left: "0px", top: '550px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
+                <button style={{ position: 'absolute', left: "0px", button: '0px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
 
 
             </Box>

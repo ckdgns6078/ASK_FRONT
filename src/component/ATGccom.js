@@ -33,6 +33,8 @@ const ATGccom = () => {
         vactStartDate: null,
         vactState: null,
     });
+    //날짜 가져오기
+
 
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
@@ -76,7 +78,10 @@ const ATGccom = () => {
     };
 
     //저장
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setAddData({});
+        setShow(false);
+    }
     const handleShow = (e) => {
         axios.post('http://192.168.2.91:5000/modaldetail_Vactlist', {
             disposeVactListId: e.disposeVactListId
@@ -121,6 +126,40 @@ const ATGccom = () => {
 
     }
 
+    //전체목록
+    const allList = () =>{
+        getData();
+    }
+    //승인목록
+    const approvalList = () =>{
+        axios.post('http://192.168.2.91:5000/Approval_VactDispose', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (error) {
+            console.log("readUser error", error);
+        });
+    }
+    //요청목록
+    const requestList = () =>{
+        axios.post('http://192.168.2.91:5000/request_VactDispose', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (error) {
+            console.log("readUser error", error);
+        });
+    }
+    //미승인목록
+    const unapprovedList = () =>{
+        axios.post('http://192.168.2.91:5000/process_VactDispose', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (error) {
+            console.log("readUser error", error);
+        });
+    }
     //미승인처리
     const pushNonApproveData = () => {
         axios.post('http://192.168.2.91:5000/authority_VactDispose ', {
@@ -130,7 +169,9 @@ const ATGccom = () => {
             empName: addData.empName,
             empNum: addData.empNum,
             vactNote: addData.vactNote,
-            vactState: "미승인"
+            vactState: "미승인",
+            vactPeriod : addData.vactPeriod
+
         }).then(function (response) {
             if (response.data) {
                 console.log(response.data);
@@ -158,7 +199,8 @@ const ATGccom = () => {
             empName: addData.empName,
             empNum: addData.empNum,
             vactNote: addData.vactNote,
-            vactState: "승인"
+            vactState: "승인",
+            vactPeriod : addData.vactPeriod,
         }).then(function (response) {
             if (response.data) {
                 let contentText = "휴가 승인처리 완료되었습니다.";
@@ -180,14 +222,22 @@ const ATGccom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
+            <Box>
+                <button style={{ position: 'absolute', right:'310px',  }} onClick={allList} className="Atmp1"> <strong>전체목록</strong> </button>
+                <button style={{ position: 'absolute', right: "220px",  }} onClick={approvalList} className="Atmp1"> <strong>승인목록</strong> </button>
+                <button style={{ position: 'absolute', right: "130px",  }} onClick={requestList} className="Atmp1"> <strong>요청목록</strong> </button>
+                <button style={{ position: 'absolute', right: "0px", width:'120px' }} onClick={unapprovedList} className="Atmp1"> <strong>미승인목록</strong> </button>
+            </Box>
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong> 휴가 처리 </strong></h2>
             <br />
             <br />
             <br />
+          
+
             <Table >
                 <thead style={{ height: '60px' }}>
 
-                    <tr style={{ backgroundColor: '#ecf0f1', backgroundColor: '#ecf0f1' }}>
+                    <tr style={{ backgroundColor: '#ecf0f1',  }}>
                         <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가시작일</strong>
                         </td>
@@ -240,72 +290,77 @@ const ATGccom = () => {
 
                 </tbody>
             </Table>
-
+{/* 
             <Box>
                 <button style={{ position: 'absolute', left: "0px", top: '550px' }} onClick={DeShow} className="Atmp1"> <strong>승인</strong> </button>
                 <button style={{ position: 'absolute', left: "110px", top: '550px' }} onClick={DeShow} className="Atmp1"> <strong>요청</strong> </button>
                 <button style={{ position: 'absolute', left: "220px", top: '550px' }} onClick={DeShow} className="Atmp1"> <strong>미승인</strong> </button>
-            </Box>
-
+            </Box> */}
+      
             {/* 추가 */}
             <Modal
                 centered
-                size="lg"
+                size="xl"
                 show={show} onHide={handleClose} animation={false} id="AddModal" >
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>휴가정보</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
+                <Modal.Body style={{ backgroundColor: '' }}>
 
-                    <br />
+                    <br/>
                     <Container>
+                    <Grid item xs={6} md={6} ml={1} mt={-2}style={{ fontSize: '25px' }}>
+                                <strong>휴가 정보</strong>
+                            </Grid> 
+    
+
+                    <Table >
+                        <thead style={{height:'60px'}}>
+                            <tr style={{backgroundColor:'#ecf0f1' , color:'#777777' ,textAlign: "center", }}>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>이름</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>사원코드</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>부서</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가이름</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가상세</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가 시작일</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴거 종료일</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가 기간</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>상태</strong></td>
+                           
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                                <tr style={{textAlign: "center",}}>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.empName}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.empNum}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.depName}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactName}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactDetail}</strong></td>    
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactStartDate} </strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactEndDate}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactPeriod}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactState}</strong></td>
+                                </tr>
+                        </tbody>
+                    
+                    
+                    </Table>
+
                         <Grid container spacing={4}>
-                            <Grid item xs={6} md={5} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>이름 : {addData && show && addData.empName}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={5} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>사원코드 : {addData && show && addData.empNum}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>부서 :{addData && show && addData.depName}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>휴가상세 : {addData && show && addData.vactDetail}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>휴가종료일 : {addData && show && addData.vactEndDate}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>휴가이름 : {addData && show && addData.vactName}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>휴가기간 : {addData && show && addData.vactPeriod}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>휴가시작일 : {addData && show && addData.vactStartDate}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
-                                <strong>상태 : {addData && show && addData.vactState}</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={20} style={{ fontSize: '25px' }}>
+                            <Grid item xs={6} md={6} ml={1} mt={2}style={{ fontSize: '25px' }}>
                                 <strong>승인/미승인 사유</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-20}>
-                                <input style={{ width: '250px', height: '50px' }} name="vactNote" value={addData.vactNote} onChange={onChangeAddData} type="text" ></input>
+                            </Grid> 
+    
 
 
+                            <Grid item xs={6} md={6} ml={-68.5} mt={8}>
+                                <Form.Control style={{ width: '1060px', height: '60px' }} aria-describedby="btnGroupAddon"
+                                    name="vactNote" value={addData.vactNote} onChange={onChangeAddData} type="text" />
                             </Grid>
-                            <Grid item xs={6} md={6} ml={63} mt={-10}>
-                            </Grid>
+
+
+                            
                         </Grid>
 
                     </Container>
@@ -313,15 +368,15 @@ const ATGccom = () => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={onChangeAddData}>
+                    <Button variant="secondary" onClick={onChangeAddData} style={{width:'70px'}}>
                         닫기
                     </Button>
-                    <Button variant="primary" onClick={pushNonApproveData}>
+                    <button className='addButton' variant="primary" onClick={pushNonApproveData} style={{width:'70px'}}>
                         미승인
-                    </Button>
-                    <Button variant="primary" onClick={pushApproveData}>
+                    </button>
+                    <button className='addButton' variant="primary" onClick={pushApproveData} style={{width:'70px'}}>
                         승인
-                    </Button>
+                    </button>
                 </Modal.Footer>
             </Modal>
 

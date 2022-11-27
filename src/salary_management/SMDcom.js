@@ -209,7 +209,6 @@ const onPanelChange = (value, mode) => {
                     </DropdownButton>
                 </Grid>
                 
-
                 <Grid item sx ml={143} mt={-5} >
                 <AutoComplete
                     popupClassName="certain-category-search-dropdown"

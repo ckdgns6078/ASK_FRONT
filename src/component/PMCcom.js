@@ -250,7 +250,7 @@ const PMCcom = () => {
                 </tbody>
             </Table>
             <Box >
-                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={handleShow} className="Atmp1"><strong>등록</strong></button>
+                <button style={{ position: 'absolute', left: "0px", }} onClick={handleShow} className="Atmp1"><strong>등록</strong></button>
             </Box>
 
 

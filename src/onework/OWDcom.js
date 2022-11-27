@@ -7,7 +7,7 @@ import axios from "axios";
 import SearchIcon from '@mui/icons-material/Search';
 import Container from '@mui/material/Container';
 import Rsearch from '../component/Rsearch';
-import { Calendar } from 'antd';
+
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { UserOutlined } from '@ant-design/icons';
@@ -16,19 +16,30 @@ import Table from 'react-bootstrap/Table';
 import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
 const OWDcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
     const [DelShow, setMDelShow] = useState(false);
     const [ModifyShow, setModifyShow] = useState(false);
     const [show, setShow] = useState(false);
+
+
+    const [SH, setSh] = useState(false);
+    const ShClose = () => setSh(false);
+    const Shshow = () => setSh(true);
+
     const [addData, setAddData] = useState({    //추가 관련 변수
         saveId: '',
         savePw: '',
         saveUser: '',
         saveAdvice: ''
     });
+
+    //달력
+    const [value, onChange] = useState(new Date());
+    
 
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
@@ -189,10 +200,11 @@ const onPanelChange = (value, mode) => {
 
             <Grid container style={{width:'1400px'}}>
                 <Grid item sx ml={0}>
-                    <DropdownButton variant="Secondary" id="dropdown-basic-button" title="시간 날짜">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
+                    <button>
+                      <Calendar onChange={onChange} value={value}/>
+                     </button>
 
-                    </DropdownButton>
+                   
                   
                 </Grid>
                 <Grid item sx>
@@ -223,7 +235,8 @@ const onPanelChange = (value, mode) => {
                 </AutoComplete>
                 </Grid>
             </Grid>
-            <br/>
+
+
         
 
       
@@ -233,24 +246,7 @@ const onPanelChange = (value, mode) => {
                     <thead style={{height:'60px'}}>
               
                         <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
-                        {/* <td style={{border:"1px solid #f1f2f6",fontSize:'22px'}}>
-                            <input type="checkbox" id="allCheck" value="allCheck"></input>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>아이디</strong>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>비밀번호</strong>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>사용자명</strong>
-                            </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
-                                <strong>권한</strong>
-                            </td> */}
-
-
-
+           
                             <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
                             <input type="checkbox" id="allCheck" value="allCheck"></input>
                             </td>

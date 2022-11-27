@@ -306,7 +306,7 @@ const Ccom = () => {
                                 <strong>사용자명</strong>
                             </td>
                         </tr>
-                    </thead>
+                    </thead>  
                     <tbody>
                     {
                         data && data.map((e, idx) =>

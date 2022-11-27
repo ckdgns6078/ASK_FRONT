@@ -469,14 +469,14 @@ const PMAcom = () => {
                 {
                 data && data.map((e, idx) =>
                     <tr >
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.empStart}</td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.empNum}</td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}><Button  name={e.empId} onClick={()=>MdShow(e)}variant="link"><strong>{e.empName}</strong></Button></td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.depName}</td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.empRank}</td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.bankName}</td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.bankNum}</td>
-                        <td style={{border:"2px solid #f1f2f6", fontSize:'20px'}}>{e.empEmail}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.empStart}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.empNum}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}><Button  name={e.empId} onClick={()=>MdShow(e)}variant="link"><strong>{e.empName}</strong></Button></td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.depName}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.empRank}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.bankName}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.bankNum}</td>
+                        <td style={{border:"2px solid #f1f2f6", color:'#777777',fontSize:'22px'}}>{e.empEmail}</td>
                     </tr>
                 )
             }
@@ -487,7 +487,7 @@ const PMAcom = () => {
 
 
         <div>
-            <button  style={{position:'absolute' ,left:"0px",top:'600px' }}onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
+            <button  style={{position:'absolute' ,left:"0px", }}onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
 
 
         </div>
