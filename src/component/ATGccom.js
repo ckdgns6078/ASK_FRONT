@@ -223,9 +223,9 @@ const ATGccom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <Box>
-                <button style={{ position: 'absolute', right:'310px',  }} onClick={allList} className="Atmp1"> <strong>전체목록</strong> </button>
-                <button style={{ position: 'absolute', right: "220px",  }} onClick={approvalList} className="Atmp1"> <strong>승인목록</strong> </button>
-                <button style={{ position: 'absolute', right: "130px",  }} onClick={requestList} className="Atmp1"> <strong>요청목록</strong> </button>
+                <button style={{ position: 'absolute', right:'370px', width:'120px' }} onClick={allList} className="Atmp1"> <strong>전체목록</strong> </button>
+                <button style={{ position: 'absolute', right: "245px", width:'120px'   }} onClick={approvalList} className="Atmp1"> <strong>승인목록</strong> </button>
+                <button style={{ position: 'absolute', right: "125px", width:'110px'   }} onClick={requestList} className="Atmp1"> <strong>요청목록</strong> </button>
                 <button style={{ position: 'absolute', right: "0px", width:'120px' }} onClick={unapprovedList} className="Atmp1"> <strong>미승인목록</strong> </button>
             </Box>
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong> 휴가 처리 </strong></h2>
@@ -234,32 +234,32 @@ const ATGccom = () => {
             <br />
           
 
-            <Table >
+            <Table hover>
                 <thead style={{ height: '60px' }}>
 
-                    <tr style={{ backgroundColor: '#ecf0f1',  }}>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                    <tr style={{ backgroundColor: '#f7f7f7',  }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가시작일</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가종료일</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>이름</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가기간</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가항목</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가상세</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>상태</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>비고</strong>
                         </td>
                     </tr>
@@ -270,20 +270,20 @@ const ATGccom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr >
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactStartDate}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactEndDate}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactStartDate}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactEndDate}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>
                                     <Button name={e.disposeVactListId} onClick={() => handleShow(e)} variant="link">
                                         <strong>
                                             {e.empName}
                                         </strong>
                                     </Button>
                                 </td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactPeriod}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactName}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactDetail}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactState}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactNote}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactPeriod}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactDetail}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactState}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactNote}</td>
                             </tr>
                         )
                     }
@@ -314,33 +314,33 @@ const ATGccom = () => {
                             </Grid> 
     
 
-                    <Table >
+                    <Table  >
                         <thead style={{height:'60px'}}>
-                            <tr style={{backgroundColor:'#ecf0f1' , color:'#777777' ,textAlign: "center", }}>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>이름</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>사원코드</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>부서</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가이름</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가상세</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가 시작일</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴거 종료일</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>휴가 기간</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>상태</strong></td>
+                            <tr style={{backgroundColor:'#f7f7f7' , color:'#777777' ,textAlign: "center", }}>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>이름</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>사원코드</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>부서</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>휴가이름</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>휴가상세</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>휴가 시작일</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>휴거 종료일</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>휴가 기간</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}><strong>상태</strong></td>
                            
                             </tr>
 
                         </thead>
                         <tbody>
                                 <tr style={{textAlign: "center",}}>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.empName}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.empNum}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.depName}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactName}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactDetail}</strong></td>    
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactStartDate} </strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactEndDate}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactPeriod}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{addData && show && addData.vactState}</strong></td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.empName}</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.empNum}</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.depName}</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.vactName}</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.vactDetail}</td>    
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.vactStartDate} </td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.vactEndDate}</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.vactPeriod}</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#000',fontSize:'22px'}}>{addData && show && addData.vactState}</td>
                                 </tr>
                         </tbody>
                     
@@ -368,7 +368,7 @@ const ATGccom = () => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={onChangeAddData} style={{width:'70px'}}>
+                    <Button variant="secondary" onClick={handleClose} style={{width:'70px'}}>
                         닫기
                     </Button>
                     <button className='addButton' variant="primary" onClick={pushNonApproveData} style={{width:'70px'}}>

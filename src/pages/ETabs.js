@@ -70,36 +70,36 @@ export default function VerticalTabs() {
         <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >급여 관리</strong>  &nbsp; &nbsp; </h2>
         </div>
     
-        <Tab label="통합 급여 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/>
+        {/* <Tab label="통합 급여 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/> */}
         <Tab label=" 임직원 급여 관리" {...a11yProps(1)}style={{fontSize:'25px'}} />
         <Tab label=" 일용직 급여 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
         <Tab label=" 경비 관리" {...a11yProps(3)}style={{fontSize:'25px'}} />
-        <Tab label=" 경비 처리" {...a11yProps(4)} style={{fontSize:'25px'}}/>
+        {/* <Tab label=" 경비 처리" {...a11yProps(4)} style={{fontSize:'25px'}}/> */}
 
 
       </Tabs>
       <ETabs value={value} index={0}>
-       <SMAcom/>
+      <SMBcom/>
       </ETabs>
       
-      <ETabs value={value} index={2}>
+      {/* <ETabs value={value} index={2}>
       <SMAcom/>
-      </ETabs>
-      <ETabs value={value} index={3}>
+      </ETabs> */}
+      <ETabs value={value} index={2}>
       <SMBcom/>
       </ETabs>
 
     
-      <ETabs value={value} index={4}>
+      <ETabs value={value} index={3}>
       <SMCcom/>
       </ETabs>
 
-      <ETabs value={value} index={5}>
+      <ETabs value={value} index={4}>
        <SMDcom/>
       </ETabs>
-      <ETabs value={value} index={6}>
+      {/* <ETabs value={value} index={5}>
        <SMDFcom/>
-      </ETabs>
+      </ETabs> */}
 
 
 

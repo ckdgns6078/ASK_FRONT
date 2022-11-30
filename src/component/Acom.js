@@ -245,8 +245,8 @@ const Acom = () => {
 
             <Grid container style={{position:'absolute', bottom:'10px'}}>
     
-                <Grid  sx={{ml:-73}}item xs>  <button onClick={requestSave} className="AMo1">저장</button> </Grid>
-                <Grid  sx={{ml:-73}}item xs>  <button onClick={requestModify} className="AMo1">수정</button> </Grid>
+                <Grid  item  ml={0}>  <button onClick={requestSave} className="AMo1">저장</button> </Grid>
+                <Grid  item  ml={2}>  <button onClick={requestModify} className="AMo1">수정</button> </Grid>
                 
             </Grid>
 

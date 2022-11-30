@@ -289,7 +289,7 @@ const ATGDcom = () => {
             <br />
             <br />
             <br />
-            <Table >
+            <Table hover >
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#ecf0f1', border: "1px solid #f1f2f6" }}>
                         <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
@@ -342,7 +342,7 @@ const ATGDcom = () => {
                 </tbody>
             </Table>
             <div>
-                <button style={{ position: 'absolute', left: "110px", top: '550px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
+                <button style={{ position: 'absolute', left: "0",  }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
             </div>
 
 
@@ -362,25 +362,25 @@ const ATGDcom = () => {
                     <Container>         
                     <Table >
                         <thead style={{height:'60px'}}>
-                            <tr style={{backgroundColor:'#ecf0f1' , color:'#777777' ,textAlign: "center", }}>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>사원명</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>사원코드</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>직급</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>부서명</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>부서코드</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>날짜 </strong></td>
+                            <tr style={{backgroundColor:'#f7f7f7' , color:'#777777' ,textAlign: "center", border:"1px solid #d8d8d8" }}>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>사원명</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>사원코드</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>직급</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>부서명</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>부서코드</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>날짜 </strong></td>
                           
                             </tr>
 
                         </thead>
                         <tbody>
                                 <tr style={{textAlign: "center",}}>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{modifyData && ModifyShow && modifyData.modifyempName}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{modifyData && ModifyShow && modifyData.modifyempCode}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{modifyData && ModifyShow && modifyData.modifyempRank}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{modifyData && ModifyShow && modifyData.modifydepName}</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>{modifyData && ModifyShow && modifyData.modifydepCode}</strong></td>    
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong> {modifyData && ModifyShow && modifyData.modifyinOutDate} </strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>{modifyData && ModifyShow && modifyData.modifyempName}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>{modifyData && ModifyShow && modifyData.modifyempCode}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>{modifyData && ModifyShow && modifyData.modifyempRank}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>{modifyData && ModifyShow && modifyData.modifydepName}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>{modifyData && ModifyShow && modifyData.modifydepCode}</strong></td>    
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong> {modifyData && ModifyShow && modifyData.modifyinOutDate} </strong></td>
                             
                                 </tr>
                         </tbody>
@@ -416,23 +416,23 @@ const ATGDcom = () => {
                     
                     </Table> 
                     <br></br>
-                    <Table  >
-                            <thead style={{height:'60px'}}>
-                            <tr style={{backgroundColor:'#ecf0f1' , color:'#777777' ,textAlign: "center", }}>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>비고</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>출근시간</strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>퇴근시간</strong></td>
+                    <Table hover >
+                            <thead style={{height:'30px'}}>
+                            <tr style={{backgroundColor:'#f7f7f7' , color:'#777777' ,textAlign: "center" ,border:"1px solid #d8d8d8"}}>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>비고</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>출근시간</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong>퇴근시간</strong></td>
                               
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong>초가시간</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8" ,width:'150px'}}><strong>초가시간</strong></td>
                             </tr>
                             </thead>
                             <tbody>
                                 <tr style={{textAlign: "center",}}>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}> <strong>  <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOut_Note" value={modifyData.modifyinOut_Note} type="text" onChange={onChangeModifyData}/></strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong> <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOutStart" value={modifyData.modifyinOutStart} type="text" onChange={onChangeModifyData}/></strong></td>
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong> <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOutEnd" value={modifyData.modifyinOutEnd} type="text" onChange={onChangeModifyData}/></strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}> <strong>  <Form.Control style={{ width: '100%', height: '50px' }} name="modifyinOut_Note" value={modifyData.modifyinOut_Note} type="text" onChange={onChangeModifyData}/></strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong> <Form.Control style={{ width: '100%', height: '50px' }} name="modifyinOutStart" value={modifyData.modifyinOutStart} type="text" onChange={onChangeModifyData}/></strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong> <Form.Control style={{ width: '100%', height: '50px' }} name="modifyinOutEnd" value={modifyData.modifyinOutEnd} type="text" onChange={onChangeModifyData}/></strong></td>
                                 
-                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><strong> {modifyData && ModifyShow && modifyData.modifyinOutOver}</strong></td>
+                                <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px',border:"1px solid #d8d8d8"}}><strong> {modifyData && ModifyShow && modifyData.modifyinOutOver}</strong></td>
                                
                              
                                 </tr>
@@ -594,7 +594,7 @@ const ATGDcom = () => {
                 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={MdClose}>
                         닫기
                     </Button>
                     <Button variant="primary" onClick={pushAddData}>

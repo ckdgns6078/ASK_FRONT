@@ -293,29 +293,36 @@ const PMDcom = () => {
     }
 
 
+
+
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>세금관리</strong></h2>
+           
+            <Box >
+                <button style={{ position: 'absolute', right: "0px",  }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+            </Box>  
+
             <br />
             <br />
             <br />
 
 
-            <Table striped bordered hover >
+            <Table hover >
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', }}>
 
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>세금 코드</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>세금명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>세금 항목</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>비고</strong>
                         </td>
 
@@ -327,14 +334,14 @@ const PMDcom = () => {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
 
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong> {e.taxCode}</strong> </td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                <td style={{ border: "2px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong> {e.taxCode}</strong> </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
                                     <Button variant="link" name={e.taxInfoID} onClick={() => modifyShow(e)}>
                                         <strong>{e.taxName}</strong>
                                     </Button>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxItem} </strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxNote} </strong></td>
+                                <td style={{ border: "2px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong>{e.taxItem} </strong></td>
+                                <td style={{ border: "2px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong>{e.taxNote} </strong></td>
 
 
                             </tr>
@@ -349,70 +356,55 @@ const PMDcom = () => {
                 <hr style={{ width: '1440px' }} />
             </Grid>
 
-            <Box >
-                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
-            </Box>
+
 
 
             {/* 추가 */}
             <Modal
                 centered
-                size="xsm"
+                size="lg"
 
 
                 show={add} onHide={addClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-                    <Container>
-                        <Grid container spacing={4}>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
-                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>세금코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12}>
-                            <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxCode' type="text" onChange={onChangeAddData}/>
-                            </Grid>
 
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>세금명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxName' type="text" onChange={onChangeAddData}/>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>세금항목</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <InputGroup style={{ width: '250px', height: '40px' }}>
+                            <Table style={{textAlign:'center'}}>
+                                <tr>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' ,color:'#777777'}}>세금코드</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' ,width:'300px'}}>
+                                    <Form.Control style={{  height: '50px', fontSize: '15px',textAlign:'center' }} aria-describedby="btnGroupAddon" name='taxCode' type="text" onChange={onChangeAddData}/>
+                                    </td>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color:'#777777' }}>세금명</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>
+                                    <Form.Control style={{  height: '50px' , fontSize: '15px' ,textAlign:'center'}} aria-describedby="btnGroupAddon" name='taxName' type="text" onChange={onChangeAddData}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color:'#777777' }}>세금항목</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' ,textAlign:'center'}}>
+                                    <InputGroup >
                                     <Form.Control
                                         type="addpayCalc"
                                         name="taxItem"
                                         value={addData.taxItem}
                                         aria-describedby="btnGroupAddon"
-                                        style={{ height: '40px' }}
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
                                         onChange={onChangeAddData}
                                     />
                                     <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow}/></InputGroup.Text>
                                 </InputGroup>
-
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>비고</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxNote' type="text" onChange={onChangeAddData}/>
-                            </Grid>
-                        </Grid>
-                    </Container>
-
-
-
+                                    </td>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color:'#777777' }}>비고</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>
+                                    <Form.Control style={{  height: '50px' , fontSize: '15px',textAlign:'center'}} aria-describedby="btnGroupAddon" name='taxNote' type="text" onChange={onChangeAddData}/>
+                                    </td>
+                                </tr>
+                            </Table>
 
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
@@ -425,62 +417,59 @@ const PMDcom = () => {
                 </Modal.Footer>
             </Modal>
 
-            {/* 수정 */}
+            {/* 부서 관리 수정 */}
             <Modal
                 centered
-                size="xsm"
+                size="lg"
 
 
                 show={modify} onHide={modifyClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-                    <Container>
-                        <Grid container spacing={4}>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
-                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>세금코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12}>
-                            <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxCode' type="text" value={modifyData.taxCode} onChange={onChangeModifyData}/>
-                            </Grid>
 
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>세금명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxName' type="text" value={modifyData.taxName} onChange={onChangeModifyData}/>
-                            </Grid>
 
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>세금항목</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <InputGroup style={{ width: '250px', height: '40px' }}>
+                <Table style={{textAlign:'center'}}>
+                                <tr>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' ,color:'#777777'}}>세금코드</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' ,width:'300px'}}>
+                                    
+                                    <Form.Control style={{  height: '50px', fontSize: '15px',textAlign:'center' }} aria-describedby="btnGroupAddon" name='taxCode' type="text" value={modifyData.taxCode} onChange={onChangeModifyData}/>
+                                    </td>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color:'#777777' }}>세금명</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>
+                             
+                                    <Form.Control style={{  height: '50px' , fontSize: '15px' ,textAlign:'center'}}
+                                    aria-describedby="btnGroupAddon" name='taxName' type="text" value={modifyData.taxName} onChange={onChangeModifyData}/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color:'#777777' }}>세금항목</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' ,textAlign:'center'}}>
+      
+
+                                <InputGroup>
                                     <Form.Control
                                         type="addpayCalc"
                                         name="taxItem"
                                         value={modifyData.taxItem}
                                         aria-describedby="btnGroupAddon"
-                                        style={{ height: '40px' }}
+                                        style={{ height: '40px',fontSize:'15px' ,textAlign:'center' }}
                                         onChange={onChangeModifyData}
                                     />
                                     <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow}/></InputGroup.Text>
                                 </InputGroup>
+                                    </td>
+                                    <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color:'#777777' }}>비고</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>
 
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>비고</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon" name='taxNote' value={modifyData.taxNote} type="text" onChange={onChangeModifyData}/>
-                            </Grid>
-                        </Grid>
-                    </Container>
+                                    <Form.Control  style={{  height: '50px' , fontSize: '15px',textAlign:'center'}} aria-describedby="btnGroupAddon" name='taxNote' value={modifyData.taxNote} type="text" onChange={onChangeModifyData}/>
+                                    </td>
+                                </tr>
+                            </Table>
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={addClose}>
@@ -527,38 +516,40 @@ const PMDcom = () => {
                 <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
                 <Modal.Title  style={{color:'#ffffff'}}> <strong>세금목록</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{backgroundColor:'#f1f2f6'}}> 
+                <Modal.Body style={{backgroundColor:''}}> 
 
         
-                <table style={{
+                <Table 
+                        hover
+                        style={{
                         textAlign:"center",
-                        width:"100%",height:'200px', border:"1px solid gray" ,}} >
-                    <tr style={{border:"1px solid gray",backgroundColor:'#a4b0be'}}>
-                    <td style={{border:"1px solid gray",fontSize:'30px'}}><strong></strong></td>
-                    <td style={{fontSize:'30px'}}> <strong>세금코드</strong></td>
-                    <td style={{fontSize:'30px'}}> <strong>세금항목</strong></td>
-                    <td style={{fontSize:'30px'}}> <strong>세금명</strong></td>
+                      }} >
+                    <tr style={{border:"1px solid #d8d8d8",backgroundColor:'#f7f7f7'}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong></strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}>세금코드</td>
+                    <td style={{fontSize:'22px' ,color:'#777777'}}>세금항목</td>
+                    <td style={{fontSize:'22px '  ,color:'#777777'}}>세금명</td>
                     </tr>
 
                     <tbody>
                     {
                         magData && magData.map((e, idx) =>
-                            <tr style={{ height: '60px' }} >
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong> {idx+1}</strong> </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxCode} </strong></td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                            <tr  >
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}><strong> {idx+1}</strong> </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}><strong>{e.taxCode} </strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '17px' }}>
                                     <Button variant="link" name={e.taxInfoID} onClick={() => magSelect(e)}>
                                         <strong>{e.taxItem}</strong>
                                     </Button>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.taxName} </strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}><strong>{e.taxName} </strong></td>
                             </tr>
                         )
                     }
 
 
                 </tbody>
-                </table>
+                </Table>
 
                 </Modal.Body>
 

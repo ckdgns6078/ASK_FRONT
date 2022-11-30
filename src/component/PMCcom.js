@@ -217,20 +217,24 @@ const PMCcom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>부서관리</strong></h2>
+            <Box >
+                <button style={{ position: 'absolute', right: "0px", }} onClick={handleShow} className="Atmp1"><strong>등록</strong></button>
+            </Box>
+
             <br />
             <br />
             <br />
 
-            <Table >
+            <Table hover >
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#ecf0f1', border: "1px solid gray" }}>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부서코드</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부서명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부서상세</strong>
                         </td>
 
@@ -241,62 +245,48 @@ const PMCcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong> {e.depCode}</strong> </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><Button name={e.depId} onClick={() => MdShow(e)} variant="link"><strong>{e.depName}</strong></Button></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><strong>{e.depDetail}</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong> {e.depCode}</strong> </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.depId} onClick={() => MdShow(e)} variant="link"><strong>{e.depName}</strong></Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong>{e.depDetail}</strong></td>
                             </tr>
                         )
                     }
                 </tbody>
             </Table>
-            <Box >
-                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={handleShow} className="Atmp1"><strong>등록</strong></button>
-            </Box>
-
+     
 
             {/* 등록 */}
 
             <Modal
                 centered
-                size="xsm"
+                size="lg"
 
 
                 show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-
-                    <Container>
-                        <Grid container spacing={4}>
-
-
-                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>부서코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12}>
-                                {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                <Modal.Body style={{ backgroundColor: '', }}>
+                        <Table style={{textAlign:'center'}}>
+                            <tr>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>부서코드</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"
                                     type='text' name='adddepCode' onChange={onChangeAddData} />
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>부서명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,width:'80px'}}>부서명</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"
                                     type='text' name='adddepName' onChange={onChangeAddData} />
-                            </Grid>
-
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>부서상세</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>부서상세</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"
                                     type='text' name='adddepDetail' onChange={onChangeAddData} />
-                            </Grid>
-                        </Grid>
-                    </Container>
+                                </td>
+                            </tr>
+                        </Table>
+
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={handleClose}>
@@ -310,46 +300,40 @@ const PMCcom = () => {
 
 
 
-
+                    {/* 부서상세 */}
             <Modal
                 centered
-                size="xsm"
+                size="lg"
                 show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width:'500px' }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e' }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>부서상세</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-
-                    <Container>
-                        <Grid container spacing={4}>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
-                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>부서코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12}>
-                                {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                <Table style={{textAlign:'center'}}>
+                            <tr>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>부서코드</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                             
+                                        <Form.Control style={{ height: '57px' }} aria-describedby="btnGroupAddon"
                                     type='text' name='modifydepCode' value={modifyData.modifydepCode} onChange={onChangeModifyData} />
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>부서명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,width:'80px'}}>부서명</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                             
+                                       <Form.Control style={{ height: '57px' }} aria-describedby="btnGroupAddon"
                                     type='text' name='modifydepName' value={modifyData.modifydepName} onChange={onChangeModifyData} />
-                            </Grid>
-
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>부서상세</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                    
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>부서상세</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"
                                     type='text' name='modifydepDetail' value={modifyData.modifydepDetail} onChange={onChangeModifyData} />
-                            </Grid>
-                        </Grid>
-                    </Container>
+                                </td>
+                            </tr>
+                        </Table>
+
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={MdClose}>

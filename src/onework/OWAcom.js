@@ -343,35 +343,40 @@ const OWAcom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>일용직 등록 </strong></h2>
+            
+            <div>
+                <button style={{ position: 'absolute', right: "0px", }} onClick={addShow} className="Atmp1">  <strong>등록</strong></button>
+
+            </div>
             <br />
             <br />
             <br />
 
-            <Table >
+            <Table hover >
                 <thead style={{ height: '60px' }}>
                     {/* #769FCD */}
                     {/* ecf0f1 */}
-                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', }}>
 
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>입사일자</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>일용직번호</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>성명</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>직위/직급</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>은행</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>계좌번호</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>이메일</strong>
                         </td>
                     </tr>
@@ -381,19 +386,19 @@ const OWAcom = () => {
 
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyStart}</strong> </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>  {e.dailyCode}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}>{e.dailyStart} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyCode}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}>
                                     <Button style={{ fontSize: '22px' }} name={e.dailyId} onClick={() => modifyShow(e)} variant="link">
-                                        <strong>
+                                     
                                         {e.dailyName}
-                                        </strong>
+                                     
                                     </Button>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyRank}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyBankName}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyBankNum}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyEmail}</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyRank}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyBankName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyBankNum}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyEmail}</td>
                             </tr>
                         )
                     }
@@ -403,10 +408,6 @@ const OWAcom = () => {
             </Table>
 
 
-            <div>
-                <button style={{ position: 'absolute', left: "0px", top: '600px' }} onClick={addShow} className="Atmp1">  <strong>등록</strong></button>
-
-            </div>
 
 
             {/* 등록 */}
@@ -484,16 +485,16 @@ const OWAcom = () => {
                             <Grid item xs={12} ml={-5} mt={-2}>
                                 <hr style={{ width: '800px' }} />
                             </Grid>
-                            <Grid item xs={6} md={2} ml={-1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                            <Grid item xs={6} md={2} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>직위/직급</strong>
                             </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
+                            <Grid item xs={6} md={4} ml={2} mt={-2}  >
                                 <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyRank'onChange={onChangeAddData}  aria-describedby="btnGroupAddon" />
                             </Grid>
-                            <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
+                            <Grid item xs={2} md={2} ml={-1} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>입사일</strong>
                             </Grid>
-                            <Grid item xs={2} md={1} mt={-2} ml={2}>
+                            <Grid item xs={2} md={1} mt={-2} ml={0}>
                                 <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartYear' onChange={onChangeAddData}  aria-describedby="btnGroupAddon" />
                             </Grid>
 
@@ -670,16 +671,16 @@ const OWAcom = () => {
                             <Grid item xs={12} ml={-5} mt={-2}>
                                 <hr style={{ width: '800px' }} />
                             </Grid>
-                            <Grid item xs={6} md={2} ml={-1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
+                            <Grid item xs={6} md={2} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>직위/직급</strong>
                             </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
+                            <Grid item xs={6} md={4} ml={2} mt={-2}  >
                                 <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='dailyRank' value = {modifyData.dailyRank} onChange={onChangeModifyData}  aria-describedby="btnGroupAddon" />
                             </Grid>
-                            <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
+                            <Grid item xs={2} md={2} ml={-1} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
                                 <strong>입사일</strong>
                             </Grid>
-                            <Grid item xs={2} md={1} mt={-2} ml={2}>
+                            <Grid item xs={2} md={1} mt={-2} ml={0}>
                                 <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='dailyStartYear' value = {modifyData.dailyStartYear} onChange={onChangeModifyData}  aria-describedby="btnGroupAddon" />
                             </Grid>
 

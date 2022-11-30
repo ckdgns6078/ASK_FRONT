@@ -339,30 +339,48 @@ const [open, setOpen] = React.useState(
 
     return (
         <div style={{width:'1400px' ,position:'relative',}}>
-             <h2  style={{color:'#005b9e' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>사용자 관리 </strong></h2>
+            <Grid container>
+                <Grid item sx>
+                     <h2  style={{color:'#005b9e' ,position:'absolute' ,left:'0' ,top:'0px'}}><strong>사용자 관리 </strong></h2>
+                </Grid>
+                <Grid item ml={80}>
+                              
+                    <Box >
+                    
+                    <button   style={{position:'absolute' ,right:"180px",}} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
+                    <button style={{position:'absolute' ,right:"90px",}}onClick={modifyShow} className="Atmp1">  <strong>수정</strong></button>
+                    <button style={{position:'absolute' ,right:"0px",}} onClick={pushDeleteData} className="Atmp1"> <strong>삭제</strong> </button>
+                        
+                    </Box>
+
+                </Grid>
+            </Grid>
+             
+
+            
             <br/>
             <br/>
             <br/>
 
 
-            <Table >
-                    <thead style={{height:'60px'}}>
+            <Table  hover>
+                    <thead style={{height:'60px' }}>
                     {/* #769FCD */}
                     {/* ecf0f1 */}
-                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
-                        <td style={{border:"1px solid #f1f2f6",fontSize:'22px'}}>
+                        <tr  style={{backgroundColor:'#f7f7f7' ,  }}>
+                        <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}>
                             <input type="checkbox" id="allCheck" value="allCheck" onChange={(e) => allHandler(e)}></input>
                             </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>아이디</strong>
                             </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>비밀번호</strong>
                             </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>사용자명</strong>
                             </td>
-                            <td style={{border:"3px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>권한</strong>
                             </td>
                         </tr>
@@ -371,11 +389,11 @@ const [open, setOpen] = React.useState(
                     {
                         data && data.map((e, idx) =>
                         <tr style={{height:'60px'}} >
-                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong> </td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>  {e.userPw}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.userName} </strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userGrant}</strong></td>
+                           <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
+                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong> </td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>  {e.userPw}</strong></td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>{e.userName} </strong></td>
+                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.userGrant}</strong></td>
                         </tr>
                         )
                     }
@@ -384,18 +402,7 @@ const [open, setOpen] = React.useState(
                     </tbody>
                     </Table>
         
-                    <Grid item xs={12} ml={-3} mt={40}>
-                    <hr style={{width:'1440px'}}/>
-                    </Grid>
-                    
-                   
-                <Box >
-              
-                <button   style={{position:'absolute' ,left:"0px",top:'600px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button> 
-                <button style={{position:'absolute' ,left:"110px",top:'600px'}}onClick={modifyShow} className="Atmp1">  <strong>수정</strong></button>
-                <button style={{position:'absolute' ,left:"220px",top:'600px'}} onClick={pushDeleteData} className="Atmp1"> <strong>삭제</strong> </button>
-                  
-                </Box>
+       
               
 
 

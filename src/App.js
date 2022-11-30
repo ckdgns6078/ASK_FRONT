@@ -14,10 +14,12 @@ import Member from './pages/Member';
 import Login1 from './pages/Login1';
 import Acom from './component/Acom';
 import UserCom from './component/UserCom';
+import Salary from './statement/Salary';
+import Tax from './statement/Tax';
 function App() {
   return (
     <div className="App">
- 
+ {/* <div style={{width:'100%', maxWidth:'1920px'}}> */}
  <BrowserRouter>
  
   <Routes>
@@ -33,9 +35,13 @@ function App() {
     <Route path="Acom" element={<Acom/>}></Route>
     <Route path="TopBar" element={<TopBar/>}></Route>
     <Route path="UserCom" element={<UserCom/>}></Route>
+    <Route path="Salary" element={<Salary/>}></Route>
+    <Route path="Tax" element={<Tax/>}></Route>
+
+    
   </Routes>
 </BrowserRouter>
-
+{/* </div> */}
     </div>
   );
 }

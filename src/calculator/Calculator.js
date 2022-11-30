@@ -19,7 +19,9 @@ const Calculator = () => {
     "-",
     "0",
     "+",
-    "=",
+    "시급",
+    "일급",
+
   ];
   const [result, setResult] = useState("");
 
@@ -83,14 +85,7 @@ const Calculator = () => {
     <div className="container" style={{position:'relative'}}>
       <div className="calcu_container" style={{position:'absolute' ,left:'370px'}}>
 
-          <div>
-            <button className="addButton">
-              시급
-            </button>
-            <button className="addButton">
-              일급
-            </button>
-          </div>
+      
         <div className="calcu_result" style={{position:'absolute' , right:'350px'}}>
           <p>{result}</p>
         </div>

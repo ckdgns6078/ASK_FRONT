@@ -73,7 +73,7 @@ export default function VerticalTabs() {
     
         <Tab label="일용직 등록" {...a11yProps(0)}style={{fontSize:'25px'}} />
         <Tab label=" 수당 등록" {...a11yProps(1)} style={{fontSize:'25px'}}/>
-        <Tab label=" 출퇴근 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
+        {/* <Tab label=" 출퇴근 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/> */}
         <Tab label=" 출퇴근 현황" {...a11yProps(3)} style={{fontSize:'25px'}}/>
 
       </Tabs>
@@ -89,10 +89,10 @@ export default function VerticalTabs() {
       <DTabs value={value} index={3}>
         <OWBcom/>
       </DTabs>
-      <DTabs value={value} index={4}>
+      {/* <DTabs value={value} index={4}>
         <OWCcom/>
-      </DTabs>
-      <DTabs value={value} index={5}>
+      </DTabs> */}
+      <DTabs value={value} index={4}>
         <OWDcom/>
       </DTabs>
 

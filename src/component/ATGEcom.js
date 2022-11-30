@@ -17,6 +17,7 @@ import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { message, Space } from 'antd';
+import ReplayIcon from '@mui/icons-material/Replay';
 
 
 const ATGEcom = () => {
@@ -26,25 +27,9 @@ const ATGEcom = () => {
     const [ModifyShow, setModifyShow] = useState(false);
     const [show, setShow] = useState(false);
     const [SH, setSh] = useState(false);
-    const [addData, setAddData] = useState({    //추가 관련 변수
-    });
-    const [ modifyData , setModifyData] = useState({
-        modifyinOut_Note: null,//비고
-        modifycompCode: null,//회사코드
-        modifydeleteList: null,
-        modifydepName: null,//부서명
-        modifyempCode: null,//사원코드
-        modifyempName: null,//이름
-        modifyendDate: null,//사용안함
-        modifyinOutDate: null,//날짜
-        modifyinOutEnd: null,//퇴근시간
-        modifyinOutListId: null,//프라이머리키
-        modifyinOutOver: null,//초과시간
-        modifyinOutStart: null,//출근시간
-        modifystartDate: null,//사용안함
-        modifydepCode: null,//부서코드
-        modifyempRank: null,//직급
-    });
+    const [addData, setAddData] = useState();
+    const [prData, setPrData] = useState();
+    const [modifyData, setModifyData] = useState();
     const [dateStart, setDateStart] = useState(); // 시작일
     const [dateEnd, setDateEnd] = useState();    // 종료일
     const [search, setSearch] = useState();     //이름
@@ -52,7 +37,7 @@ const ATGEcom = () => {
     const ShClose = () => setSh(false);
     const Shshow = () => setSh(true);
     const delShow = () => setDel(true);
-    const delClose =()=> setDel(false);
+    const delClose = () => setDel(false);
 
     const [messageApi, contextHolder] = message.useMessage();
     //성공 alert
@@ -96,14 +81,15 @@ const ATGEcom = () => {
     }
 
     const modifyAddData = () => {
-        console.log("modifyAddData try");
         axios.post('http://192.168.2.91:5000/update_inOutInfo ', {
-            inOutListId: modifyData.modifyinOutListId,
-            inOut_Note: modifyData.modifyinOut_Note,
-            inOutStart: modifyData.modifyinOutStart,
-            inOutEnd: modifyData.modifyinOutEnd
+            inOutListId: modifyData.inOutListId,
+            inOut_Note: modifyData.inOut_Note,
+            inOutStart: modifyData.inOutStart,
+            inOutEnd: modifyData.inOutEnd,
+            payType : modifyData.payType,
+            payTypeNight : modifyData.payTypeNight,
+            inOut_Note : modifyData.inOut_Note
         }).then(function (response) {
-            console.log("responsedata 값 " , response.data);
             if (response.data) {
                 let contentText = "출퇴근시간이 변경되었습니다.";
                 success(contentText);
@@ -128,7 +114,6 @@ const ATGEcom = () => {
             ...modifyData,
             [name]: value
         });
-        console.log(modifyData);
     }
 
     //입력값 onChange 함수
@@ -138,7 +123,6 @@ const ATGEcom = () => {
             ...addData,
             [name]: value
         });
-        console.log(addData);
     }
     //추가 모델에서 닫기 눌렀을 경우
     const closeAddData = () => {
@@ -161,7 +145,6 @@ const ATGEcom = () => {
             startDate: dateStart,//시작일 ,
             endDate: dateEnd,//종료일자
         }).then(function (response) {
-            console.log("search_inOutInfo data : ", response.data);
             setData(response.data);
         }).catch(function (err) {
             console.log("search_inOutInfo error", err);
@@ -170,23 +153,23 @@ const ATGEcom = () => {
     //추가 모델에서 추가 눌렀을경우 함수
     const pushAddData = () => {
         axios.post('http://192.168.2.91:5000/create_inOutInfo ', {
-            inOut_Note :addData.addinOut_Note,//비고
-            compCode : sessionStorage.getItem("uid"),//회사코드
-            depName : addData.adddepName,//부서명
-            empCode : addData.addempCode,//사원코드
-            empName : addData.addempName,//사원명
-            inOutDate : addData.addYear + "-" + addData.addMonth + "-" + addData.addDay,//날짜
-            inOutEnd : addData.addinOutEnd,//퇴근시간
-            inOutStart : addData.addinOutStart,//출근시간
-            depCode : addData.adddepCode,//부서코드
-            empRank : addData.addempRank,//직급
+            inOut_Note: addData.addinOut_Note,//비고
+            compCode: sessionStorage.getItem("uid"),//회사코드
+            depName: addData.adddepName,//부서명
+            empCode: addData.addempCode,//사원코드
+            empName: addData.addempName,//사원명
+            inOutDate: addData.addYear + "-" + addData.addMonth + "-" + addData.addDay,//날짜
+            inOutEnd: addData.addinOutEnd,//퇴근시간
+            inOutStart: addData.addinOutStart,//출근시간
+            depCode: addData.adddepCode,//부서코드
+            empRank: addData.addempRank,//직급
         }).then(function (response) {
             if (response.data) {
                 let contentText = "출퇴근 등록 완료.";
                 getData();
                 handleClose();
                 success(contentText);
-            }else{
+            } else {
                 let contentText = "오류가 발생했습니다 새로고침 후 다시 실행하세요.";
                 warning(contentText);
             }
@@ -198,12 +181,11 @@ const ATGEcom = () => {
 
     }
     //모델에서 데이터 삭제할때 실행되는 함수
-    const delAddData = () =>{
+    const delAddData = () => {
         axios.post('http://192.168.2.91:5000/delete_inOutInfo', {
-            inOutListId:modifyData.modifyinOutListId
+            inOutListId: modifyData.inOutListId
         }).then(function (response) {
-            console.log("삭제 데이터 값 " ,response.data);
-            if(response.data){
+            if (response.data) {
                 let contentText = "삭제완료";
                 getData();
                 delClose();
@@ -216,38 +198,72 @@ const ATGEcom = () => {
             success(contentText);
         });
     }
+    const [modify, setModify] = useState(false);
+
+    //검색 모달함수 
+    const [Pr, setPr] = useState(false);
+    const PrClose = (e) => setPr(false);
+    const Prshow = () => {
+        axios.post('http://192.168.2.82:5000/readEmpPay', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setPrData(response.data);
+        }).catch(function (err) {
+            console.log("readDailyPay error : ", err);
+        })
+        setPr(true);
+    }
+    const [prNData, setPrNData] = useState();
+    const [PrN, setPrN] = useState(false);
+    const PrNClose = () => setPrN(false);
+    const PrNshow = () => {
+        axios.post('http://192.168.2.82:5000/readEmpPay', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setPrNData(response.data);
+        }).catch(function (err) {
+            console.log("readDailyPay error : ", err);
+        })
+        setPrN(true);
+    }
+
+
+
+
+    //연장시간 onClick
+    const onClickProvision1 = (e) => {
+        const temp = { ...modifyData };
+        temp.payType = e.payName;
+        setModifyData(temp);
+        PrClose();
+    }
+
+    const onClickProvision2 = (e) => {
+        const temp = { ...modifyData };
+        temp.payTypeNight = e.payName;
+        setModifyData(temp);
+        PrNClose();
+
+    }
 
 
     //저장
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     //수정
-    const DelClose =()=> setDel(false);
+    const DelClose = () => setDel(false);
     const DelShow = () => setDel(true);
     //삭제
-    const MdClose = () => setModifyShow(false);
+    const MdClose = () => {
+        setModifyData();
+        setModifyShow(false);
+    }
     const MdShow = (e) => {
         axios.post('http://192.168.2.91:5000/modal_inOutInfo', {
             inOutListId: e.inOutListId
         }).then(function (response) {
-
-            setModifyData({
-                "modifyinOut_Note": response.data[0].inOut_Note, //비고
-                "modifycompCode": response.data[0].compCode, //회사코드
-                "modifydeleteList": response.data[0].deleteList,
-                "modifydepName": response.data[0].depName,//부서명
-                "modifyempCode": response.data[0].empCode,//사원코드
-                "modifyempName": response.data[0].empName,//이름
-                "modifyendDate": response.data[0].endDate,//사용안함
-                "modifyinOutDate": response.data[0].inOutDate,//날짜
-                "modifyinOutEnd": response.data[0].inOutEnd,//퇴근시간
-                "modifyinOutListId": response.data[0].inOutListId,//프라이머리키
-                "modifyinOutOver": response.data[0].inOutOver,//초과시간
-                "modifyinOutStart": response.data[0].inOutStart,//출근시간
-                "modifystartDate": response.data[0].startDate,//사용안함
-                "modifydepCode": response.data[0].depCode,//부서코드
-                "modifyempRank": response.data[0].empRank,//직급
-            });
+            console.log(response.data[0]);
+            setModifyData(response.data[0]);
         }).catch(function (err) {
             console.log("modal_inOutInfo error", err);
             let contentText = "데이터 불러오는데 오류가 발생했습니다. 새로고침 후 다시 시도해주세요";
@@ -319,9 +335,16 @@ const ATGEcom = () => {
             searchAddData();
         }
     }
+
+
+    //새로고침
+    const hello = () => {
+        getData();
+    }
+
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
-             {contextHolder}
+            {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
             <br />
             <br />
@@ -329,8 +352,8 @@ const ATGEcom = () => {
 
 
             <Grid container style={{ width: '1400px' }}>
-                <Grid><div style={{ fontSize: '22px' }}>시작 날짜</div></Grid>
-                <Grid>
+                <Grid><div style={{ fontSize: '22px' }}> <strong>시작 날짜 </strong></div></Grid>
+                <Grid item sx ml={1}>
                     <div >
                         <DatePicker
                             selected={date => setStartDate}
@@ -344,8 +367,8 @@ const ATGEcom = () => {
 
                     </div>
                 </Grid>
-                <Grid ml={1}><div style={{ fontSize: '22px' }}>종료 날짜</div></Grid>
-                <Grid>
+                <Grid ml={1}><div style={{ fontSize: '22px' }}><strong> 종료 날짜</strong></div></Grid>
+                <Grid item sx ml={1}>
                     <div>
                         <DatePicker
                             selected={endDate => setendDate}
@@ -378,6 +401,10 @@ const ATGEcom = () => {
                         <InputGroup.Text id="btnGroupAddon" onClick={searchAddData} style={{ width: '50px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
                     </InputGroup>
 
+                </Grid>
+                {/* 로딩 버튼 */}
+                <Grid item sx ml={59}>
+                    <button className='addButton' style={{ width: '150px' }} onClick={hello}>새로고침 <ReplayIcon /></button>
                 </Grid>
             </Grid>
             <br />
@@ -435,11 +462,6 @@ const ATGEcom = () => {
 
                 </tbody>
             </Table>
-
-
-
-
-
 
 
 
@@ -506,7 +528,7 @@ const ATGEcom = () => {
 
 
 
-   
+            {/* 출퇴근상세 수정 */}
             <Modal
                 centered
                 size="lg"
@@ -517,59 +539,107 @@ const ATGEcom = () => {
                 <Modal.Body style={{ backgroundColor: '' }}>
 
                     <br />
+
                     <Container>
                         <Table >
-                            <thead style={{ height: '60px' }}>
-                                <tr style={{ backgroundColor: '#ecf0f1', color: '#777777', textAlign: "center", }}>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>날짜 </strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>사원명</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>사원코드</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>직급</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>부서명</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>부서코드</strong></td>
+                            <thead >
+                                <tr style={{ color: '#f7f7f7', textAlign: "center", }}>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7', width: '100px' }}>날짜</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', width: '150px' }}>{modifyData && ModifyShow && modifyData.inOutDate}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7', width: '100px' }}>사원명</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', width: '150px' }}>{modifyData && ModifyShow && modifyData.empName}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7', width: '100px' }}>사원코드</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', width: '150px' }}>{modifyData && ModifyShow && modifyData.empCode}</td>
 
                                 </tr>
 
                             </thead>
                             <tbody>
                                 <tr style={{ textAlign: "center", }}>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> {modifyData && ModifyShow && modifyData.modifyinOutDate} </strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifyempName}</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifyempCode}</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifyempRank}</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifydepName}</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>{modifyData && ModifyShow && modifyData.modifydepCode}</strong></td>
-
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>직급</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>{modifyData && ModifyShow && modifyData.empRank}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>부서명 </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>{modifyData && ModifyShow && modifyData.depName}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>부서코드</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px' }}>{modifyData && ModifyShow && modifyData.depCode}</td>
                                 </tr>
                             </tbody>
 
                         </Table>
                         <br></br>
-                        <Table  >
-                            <thead style={{ height: '60px' }}>
-                                <tr style={{ backgroundColor: '#ecf0f1', color: '#777777', textAlign: "center", }}>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>비고</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>출근시간</strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>퇴근시간</strong></td>
-
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong>초과시간</strong></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style={{ textAlign: "center", }}>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}> <strong>  <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOut_Note" value={modifyData.modifyinOut_Note} type="text" onChange={onChangeModifyData} /></strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOutStart" value={modifyData.modifyinOutStart} type="text" onChange={onChangeModifyData} /></strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> <Form.Control style={{ width: '170px', height: '50px' }} name="modifyinOutEnd" value={modifyData.modifyinOutEnd} type="text" onChange={onChangeModifyData} /></strong></td>
-                                    <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><strong> {modifyData && ModifyShow && modifyData.modifyinOutOver}</strong></td>
+                        <Table style={{ textAlign: 'center', width: '100%', border: "1px solid #d8d8d8" }} >
+                            <tr style={{ backgroundColor: '#f7f7f7', }}>
+                                <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }} >출근</td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }}>퇴근</td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }}>연장</td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }}>야간</td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>비교</td>
+                            </tr>
 
 
-                                </tr>
-                            </tbody>
+                            <tr style={{ backgroundColor: '', border: "1px solid #d8d8d8" }}>
+                                <td rowspan='2' style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px', }}> <Form.Control style={{ width: '100%', height: '100%', textAlign: "center" }} name="inOutStart" value={modifyData && modifyData.inOutStart} type="text" onChange={onChangeModifyData} /></td>
+                                <td rowspan='2' style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px' }}> <Form.Control style={{ width: '100%', height: '100%', textAlign: "center" }} name="inOutEnd" value={modifyData && modifyData.inOutEnd} type="text" onChange={onChangeModifyData} /></td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '15px' }}>{modifyData && modifyData.inOutOver}</td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '15px' }}>{modifyData && modifyData.inOutnight}</td>
+                                <td rowspan='2' style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>
+                                    <Form.Control style={{ width: '100%', height: '100%', textAlign: "center" }} name="inOut_Note" value={modifyData && modifyData.inOut_Note} type="text" onChange={onChangeModifyData} />
+                                </td>
+                            </tr>
+
+
+                            <tr style={{ backgroundColor: '', border: "1px solid #d8d8d8" }}>
+
+
+                                <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>
+                                    {modifyData && ModifyShow && modifyData.inOutOver != "00:00" &&
+                                        <InputGroup style={{ height: '60px' }}>
+
+                                            <Form.Control
+                                                type="addpayCalc"
+                                                name="payType"
+                                                aria-describedby="btnGroupAddon"
+                                                value={modifyData && ModifyShow && modifyData.payType}
+                                                style={{ height: '100%' }}
+                                                onChange={onChangeModifyData}
+
+                                            />
+                                            <InputGroup.Text id="btnGroupAddon" onClick={Prshow} style={{ width: '50px', height: '100%' }}>  <SearchIcon /></InputGroup.Text>
+                                        </InputGroup>
+                                    }
+
+
+                                </td>
+
+
+                                <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>
+                                    {modifyData && ModifyShow && modifyData.inOutnight != "00:00" &&
+                                        <InputGroup style={{ height: '60px' }}>
+
+                                            <Form.Control
+                                                type="addpayCalc"
+                                                name="payTypeNight"
+                                                aria-describedby="btnGroupAddon"
+                                                value={modifyData && ModifyShow && modifyData.payTypeNight}
+                                                style={{ height: '100%' }}
+                                                onChange={onChangeModifyData}
+
+                                            />
+                                            <InputGroup.Text id="btnGroupAddon" onClick={PrNshow} style={{ width: '50px', height: '100%' }}>  <SearchIcon /></InputGroup.Text>
+                                        </InputGroup>
+                                    }
+                                </td>
+
+                            </tr>
+
+
+
 
                         </Table>
                         <Box md={3}></Box>
 
                     </Container>
+
                     <br />
                 </Modal.Body>
                 <Modal.Footer>
@@ -597,25 +667,120 @@ const ATGEcom = () => {
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
                     <strong>
-                        {modifyData && ModifyShow && modifyData.modifyempName}의 출/퇴근 현황을 삭제하시겠습니까?
-                        </strong>
+                        {modifyData && ModifyShow && modifyData.empName}의 출/퇴근 현황을 삭제하시겠습니까?
+                    </strong>
                 </Modal.Body>
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={DelClose}>
                         닫기
                     </Button>
-                    <button variant="primary" className='addButton' onClick = {delAddData}>
+                    <button variant="primary" className='addButton' onClick={delAddData}>
                         삭제
                     </button>
                 </Modal.Footer>
             </Modal>
 
+            {/*  연장 */}
+            <Modal
+                size="lg"
+                centered
+                show={Pr} onHide={PrClose}>
+                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>지급유형</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
+
+                    <table style={{
+                        textAlign: "center",
+                        width: "100%", height: '200px', border: "1px solid gray",
+                    }} >
+                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong></strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>수당코드</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>수당명</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>비과세</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>지급유형</strong></td>
+                        </tr>
+                        <tbody>
+                            {
+                                prData && prData.map((e, idx) =>
+                                    <tr style={{ border: "1px solid gray" }}>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{idx + 1}</td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.payCode}</td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                            <Button variant="link" name={e.empPayID} onClick={() => onClickProvision1(e)}>
+                                                <strong>{e.payName}</strong>
+                                            </Button></td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.taxFreeName}</td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.payType}</td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </Modal.Body>
+                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={PrClose}>
+                        닫기
+                    </Button>
+                    <button variant="primary" className='addButton' onClick={PrClose}>
+                        완료
+                    </button>
+                </Modal.Footer>
+
+            </Modal>
 
 
- 
 
+            {/*  야간 */}
+            <Modal
+                size="lg"
+                centered
+                show={PrN} onHide={PrNClose}>
+                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>지급유형</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
 
+                    <table style={{
+                        textAlign: "center",
+                        width: "100%", height: '200px', border: "1px solid gray",
+                    }} >
+                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong></strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>수당코드</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>수당명</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>비과세</strong></td>
+                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>지급유형</strong></td>
+                        </tr>
+                        <tbody>
+                            {
+                                prNData && prNData.map((e, idx) =>
+                                    <tr style={{ border: "1px solid gray" }}>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{idx + 1}</td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.payCode}</td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                            <Button variant="link" name={e.empPayID} onClick={() => onClickProvision2(e)}>
+                                                <strong>{e.payName}</strong>
+                                            </Button></td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.taxFreeName}</td>
+                                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.payType}</td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </Modal.Body>
+                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
+                    <Button variant="secondary" onClick={PrNClose}>
+                        닫기
+                    </Button>
+                    <button variant="primary" className='addButton' onClick={PrNClose}>
+                        완료
+                    </button>
+                </Modal.Footer>
 
+            </Modal>
 
 
         </div>
