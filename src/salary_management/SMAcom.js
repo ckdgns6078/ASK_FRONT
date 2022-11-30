@@ -57,7 +57,7 @@ const SMAcom = () => {
                     <thead style={{height:'60px'}}>
                     {/* #769FCD */}
                     {/* ecf0f1 */}
-                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
+                        <tr  style={{backgroundColor:'#f7f7f7' ,  }}>
             
                          
                             <td style={{border:"1px solid #f1f2f6" ,color:'#777777',fontSize:'22px'}}>
@@ -104,7 +104,7 @@ const SMAcom = () => {
                         )
                     }
                             
-                <tr  style={{backgroundColor:'#f1f2f6' , }}>    
+                <tr  style={{backgroundColor:'#f7f7f7' , }}>    
                     <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong>합계</strong></td>
                     <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}></td>
                     <td style={{border:"1px solid #f1f2f6", fontSize:'20px',color:'#777777'}}></td>
@@ -171,13 +171,13 @@ const SMAcom = () => {
                     {
                         data && data.map((e, idx) =>
                         <tr >
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
+                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong></td>
                             {/* <td>이메일 데이터 넣을곳</td> */}
                         </tr>
                         )

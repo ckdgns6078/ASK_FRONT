@@ -5,6 +5,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import BAPAcom from '../bookingping_Accounting/BAPAcom';
+import BAPBcom from '../bookingping_Accounting/BAPBcom';
+import BKPCcom from '../bookingping_Accounting/BKPCcom';
 
 function FTabs(props) {
   const { children, value, index, ...other } = props;
@@ -81,10 +83,10 @@ export default function VerticalTabs() {
       <BAPAcom/>
       </FTabs>
       <FTabs value={value} index={3}>
-        Item Four
+       <BAPBcom/>
       </FTabs>
       <FTabs value={value} index={4}>
-        I시벌
+        <BKPCcom/>
       </FTabs>
       <FTabs value={value} index={5}>
         왜지?

@@ -211,6 +211,10 @@ const ATGAcom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong> 휴가항목 등록 </strong></h2>
+            <Box>
+                <button style={{ position: 'absolute', right: "0px", }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
+            </Box>
+
             <br />
             <br />
             <br />
@@ -219,17 +223,17 @@ const ATGAcom = () => {
 
 
 
-            <Table >
+            <Table hover>
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#ecf0f1', border: "1px solid #f1f2f6" }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
 
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가코드</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>휴가상세내용</strong>
                         </td>
 
@@ -242,66 +246,56 @@ const ATGAcom = () => {
                         data && data.map((e, idx) =>
                             <tr >
 
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactCode}</td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}><Button name={e.vactNameListId} onClick={() => MdShow(e)} variant="link"><strong>{e.vactName}</strong></Button></td>
-                                <td style={{ border: "1px solid #f1f2f6", fontSize: '22px', color: '#777777' }}>{e.vactDetail}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactCode}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.vactNameListId} onClick={() => MdShow(e)} variant="link"><strong>{e.vactName}</strong></Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactDetail}</td>
 
                             </tr>
                         )
                     }
                 </tbody>
             </Table>
-            <Box>
-                <button style={{ position: 'absolute', left: "0px", button: '0px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
-
-
-            </Box>
-
+          
 
 
 
             {/* 추가 */}
             <Modal
                 centered
-                size="xsm"
+                size="lg"
 
 
                 show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>휴가등록</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-
-                    <Container>
-                        <Grid container spacing={4}>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
-                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>휴가코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12}>
-                                {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                    
+
+                <Table style={{textAlign:'center'}}>
+                            <tr>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>휴가코드</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px' ,textAlign:'center'}} aria-describedby="btnGroupAddon"
                                     type='text' name='addvactCode' onChange={onChangeAddData} />
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>휴가명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,width:'80px'}}>휴가명</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px',textAlign:'center' }} aria-describedby="btnGroupAddon"
                                     type='text' name='addvactName' onChange={onChangeAddData} />
-                            </Grid>
-
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>휴가상세내용</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>휴가상세내용</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                                <Form.Control style={{  height: '57px',textAlign:'center' }} aria-describedby="btnGroupAddon"
                                     type='text' name='addvactDetail' onChange={onChangeAddData} />
-                            </Grid>
-                        </Grid>
-                    </Container>
+                                </td>
+                            </tr>
+                        </Table>
+
+
+
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={handleClose}>
@@ -316,45 +310,41 @@ const ATGAcom = () => {
             {/* 수정 */}
             <Modal
                 centered
-                size="xsm"
+                size="lg"
 
 
                 show={ModifyShow} onHide={MdClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>휴가정보</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-
-                    <Container>
-                        <Grid container spacing={4}>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
-                            <Grid item xs={6} md={6} ml={3} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>휴가코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12}>
-                                {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+
+                        
+                <Table style={{textAlign:'center'}}>
+                            <tr>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px',color: '#777777' }}>휴가코드</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
+                              
+
+                                <Form.Control style={{ height: '57px' ,textAlign:'center' }} aria-describedby="btnGroupAddon"
                                     type='text' name='modifyvactCode' value={modifyData.modifyvactCode} onChange={onChangeModifyData} />
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>휴가명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,width:'80px',color: '#777777'}}>휴가명</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
+                                <Form.Control style={{ height: '57px' ,textAlign:'center' }} aria-describedby="btnGroupAddon"
                                     type='text' name='modifyvactName' value={modifyData.modifyvactName} onChange={onChangeModifyData} />
-                            </Grid>
-
-
-                            <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
-                                <strong>휴가상세내용</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-12} mt={-2}>
-                                <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
+                                </td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px',color: '#777777' }}>휴가상세내용</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
+                                <Form.Control style={{ height: '57px' ,textAlign:'center' }}  aria-describedby="btnGroupAddon"
                                     type='text' name='modifyvactDetail' value={modifyData.modifyvactDetail} onChange={onChangeModifyData} />
-                            </Grid>
-                        </Grid>
-                    </Container>
+                                </td>
+                            </tr>
+                        </Table>
+
+
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={MdClose}>
@@ -368,6 +358,7 @@ const ATGAcom = () => {
                     </button>
                 </Modal.Footer>
             </Modal>
+
 
             {/* 삭제 */}
             <Modal
@@ -390,27 +381,7 @@ const ATGAcom = () => {
             </Modal>
 
 
-            {/* 삭제 */}
-            {/* <Modal
-                centered
-                size="xsm"
-                show={DelShow} onHide={DeClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
-                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>휴가삭제</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
-                  
-                    <strong>{modifyData.modifyvactName} 휴가항목을 삭제하시겠습니까?</strong>
-                </Modal.Body>
-                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
-                    <Button variant="secondary" onClick={DeClose}>
-                        닫기
-                    </Button>
-                    <button className='addButton' variant="primary" onClick={pushDeleteData}>
-                        삭제
-                    </button>
-                </Modal.Footer>
-            </Modal> */}
+    
 
 
         </div>

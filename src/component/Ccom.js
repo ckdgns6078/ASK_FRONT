@@ -284,25 +284,34 @@ const Ccom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' ,height:'600px'}}>
             <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>사용자 관리 </strong></h2>
+
+            <Box  >
+              
+              <button style={{ position: 'absolute', right: "180px" }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
+              <button style={{ position: 'absolute', right: "90px" }} onClick={modifyShow} className="Atmp1">  <strong>수정</strong></button>
+              <button style={{ position: 'absolute', right: "0px" }} onClick={pushDeleteDate} className="Atmp1"> <strong>삭제</strong> </button>
+
+          </Box>
+    
             <br />
             <br />
             <br />
-            <Table >
+            <Table hover>
                     <thead style={{height:'60px'}}>
-                        <tr  style={{backgroundColor:'#ecf0f1' ,  }}>
-                        <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                        <tr  style={{backgroundColor:'#f7f7f7' ,  }}>
+                        <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                             <input type="checkbox" id="allCheck" value="allCheck" onChange={(e) => allHandler(e)}></input>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>아이디</strong>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>비밀번호</strong>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>사원코드</strong>
                             </td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>
+                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>사용자명</strong>
                             </td>
                         </tr>
@@ -311,11 +320,11 @@ const Ccom = () => {
                     {
                         data && data.map((e, idx) =>
                         <tr style={{height:'60px'}} >
-                           <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><input type="checkbox" id={e.mb_id} value={e.mb_id} onChange={(e) => checkHandler(e)}/></td>
-                            <td style={{border:"2px solid #f1f2f6", fontSize:'20px',color:'#777777'}}><strong> {e.mb_id}</strong> </td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong> {e.mb_pw}</strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.mb_code} </strong></td>
-                            <td style={{border:"2px solid #f1f2f6",fontSize:'20px',color:'#777777'}}><strong>{e.mb_name}</strong></td>
+                           <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><input type="checkbox" id={e.mb_id} value={e.mb_id} onChange={(e) => checkHandler(e)}/></td>
+                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.mb_id}</strong> </td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong> {e.mb_pw}</strong></td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>{e.mb_code} </strong></td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>{e.mb_name}</strong></td>
                             
                         </tr>
                         )
@@ -329,14 +338,7 @@ const Ccom = () => {
 
         
            
-            <Box style={{position:'absolute',bottom:'0' }} >
-              
-                <button style={{ position: 'absolute', left: "0px" }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
-                <button style={{ position: 'absolute', left: "110px" }} onClick={modifyShow} className="Atmp1">  <strong>수정</strong></button>
-                <button style={{ position: 'absolute', left: "220px" }} onClick={pushDeleteDate} className="Atmp1"> <strong>삭제</strong> </button>
-
-            </Box>
-      
+         
           
 
 

@@ -23,7 +23,15 @@ const ATGBcom = () => {
     const [check , setCheck] = useState(false);
     const [value , setValue] = useState({});
 
-    
+    const [addData, setAddData] = useState({    //추가 관련 변수
+        adddepName: "",    //부서명
+        addempName: "",    //이름
+        addempNum: "",     //부서번호
+        addtotalVacation: "",  //총 휴가
+        addtakeVacation: "",   //사용휴가
+        addremindVacation: ""  //일반휴가
+    });
+
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
         getData();
@@ -33,7 +41,6 @@ const ATGBcom = () => {
         axios.post('http://192.168.2.91:5000/read_Vactlist', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
-            console.log(response.data);
             setData(response.data);
         }).catch(function (er) {
             console.log("readDep error :", error);
@@ -67,6 +74,14 @@ const ATGBcom = () => {
     //입력값 onChange 함수
 
 
+    const onChangeAddData = (e) => {
+        const { value, name } = e.target;
+        setAddData({
+            ...addData,
+            [name]: value
+        });
+        console.log(addData);
+    }
 
 
 
@@ -85,7 +100,6 @@ const ATGBcom = () => {
 
     const DeShow = (e) => {
         setValue(e);
-        console.log("e value :" , e);
         
         axios.post('http://192.168.2.91:5000/modal_Vaclist',{
             compCode : sessionStorage.getItem("uid"),
@@ -113,26 +127,26 @@ const ATGBcom = () => {
 
 
 
-            <Table >
+            <Table hover >
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#ecf0f1', textAlign: 'center', border: "1px solid #f1f2f6" }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', textAlign: 'center', border: "1px solid #d8d8d8" }}>
 
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부서명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>사원명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총휴가</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>사용휴가</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>잔여휴가</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>상세확인</strong>
                         </td>
 
@@ -142,12 +156,12 @@ const ATGBcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr style={{ border: "1px solid gray" }}>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.depName}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.empName}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.totalVacation}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.takeVacation}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.remindVacation}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}><Button variant="link" name={e.empNum} onClick={() => DeShow(e)}><strong>확인</strong></Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.depName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.empName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.totalVacation}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.takeVacation}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.remindVacation}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}><Button variant="link" name={e.empNum} onClick={() => DeShow(e)}><strong>확인</strong></Button></td>
                             </tr>
                         )
                     }
@@ -159,58 +173,66 @@ const ATGBcom = () => {
                 centered
                 size="xl"
                 show={DelShow} onHide={DelClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong> 상세 확인</strong> </Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
+
+                        <Table>
+                            <tr>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px' ,textAlign:'center' }}> 이름</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px',textAlign:'center' }}> {value &&DelShow && value.empName}</td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px' ,textAlign:'center'}}>  부서 </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' ,textAlign:'center'}}> { value && DelShow && value.depName}</td>
+                           
+                            </tr>
+                        </Table>
+
+
+{/* 
                         <Grid container>
-                        <Grid item xs style={{ fontSize: '20px' }}>
+                        <Grid item xs style={{ fontSize: '25px' }}>
                             <strong>
                                 이름 : {value &&DelShow && value.empName}
                             </strong>
                         </Grid>
-                        <Grid item xs style={{ fontSize: '20px' }}>
-                            <strong>
-                                사원코드 : {value &&DelShow && value.empNum}
-                            </strong>
-                        </Grid>
-                        <Grid item xs style={{ fontSize: '20px' }}>
+                        <Grid item xs style={{ fontSize: '25px' }}>
                             <strong> 부서 : { value && DelShow && value.depName}</strong>
                         </Grid>
-
-                        <Grid item xs style={{ fontSize: '20px' }}>
-                            <strong> 부서코드 : { value && DelShow && value.depCode}</strong>
-                        </Grid>
-                    </Grid>
+                    </Grid> */}
                     <br/>
-                    <div style={{ fontSize: '20px' }}><strong>휴가 내역</strong></div>
+                    <div style={{ fontSize: '25px' }}><strong>휴가 내역</strong></div>
 
 
-                    <table style={{
+                    <Table 
+                        hover
+                        style={{
                         width: "100%", textAlign: 'center'
                     }}>
-                        <tr style={{ border: "1px solid gray", backgroundColor: '#f1f2f6' }}>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>시작일</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>종료일</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가기간</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가항목</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong>휴가상세</strong></td>
+                        <thead>
+                        <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>시작일</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>종료일</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>휴가기간</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>휴가항목</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>휴가상세</strong></td>
                         </tr>
-
+                        </thead>
+                        <tbody>
                         {
                             Okdata && Okdata.map((e, idx) =>
-                                <tr style={{ border: "1px solid gray", fontSize: '20px' }}>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactStartDate}</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactEndDate}</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactPeriod}</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactDetail}</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.vactDetail}</td>
+                                <tr style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.vactStartDate}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.vactEndDate}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.vactPeriod}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.vactDetail}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.vactDetail}</td>
                                 </tr>
                             )
 
                         }
-                       
-                    </table>
+                       </tbody>
+                    </Table>
 
 
                     <br></br>
@@ -246,14 +268,14 @@ const ATGBcom = () => {
                             <Grid item xs={6} md={6} ml={-12}>
                                 {/* <input style={{width:'250px',height:'40px'}} name="saveId" type="text" onChange={onChangeAddData}></input> */}
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text'  />
+                                    type='text' name='adddepCode' onChange={onChangeAddData} />
                             </Grid>
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
                                 <strong>사원명</strong>
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text'  />
+                                    type='text' name='adddepName' onChange={onChangeAddData} />
                             </Grid>
 
 
@@ -262,14 +284,14 @@ const ATGBcom = () => {
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text'  />
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
                             </Grid>
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
                                 <strong>사용 휴가</strong>
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text'  />
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
                             </Grid>
 
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
@@ -277,7 +299,7 @@ const ATGBcom = () => {
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text'  />
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
                             </Grid>
 
                             <Grid item xs={6} md={6} ml={3} mt={-2} style={{ fontSize: '20px', color: '#777777' }}>
@@ -285,7 +307,7 @@ const ATGBcom = () => {
                             </Grid>
                             <Grid item xs={6} md={6} ml={-12} mt={-2}>
                                 <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                    type='text' />
+                                    type='text' name='adddepDetail' onChange={onChangeAddData} />
                             </Grid>
 
 

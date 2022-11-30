@@ -78,6 +78,9 @@ export default function VerticalTabs() {
         <Tab label=" 출퇴근 현황" {...a11yProps(4)} style={{fontSize:'25px'}}/>
 
       </Tabs>
+      <CTabs value={value} index={0}>
+        <ATGAcom/>
+      </CTabs>
       <CTabs value={value} index={2}>
         <ATGAcom/>
       </CTabs>

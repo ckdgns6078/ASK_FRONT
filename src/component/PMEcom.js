@@ -10,16 +10,32 @@ import { message, Space } from 'antd';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
-
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import PMTabs from './PMTabs';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 
+
+
+
+
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,14 +69,25 @@ function TabPanel(props) {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
+
   
 
+export default function PMEcom(props) {
+
+    const [TA, setTA] = useState(false);
 
 
+    const TaClose = () => setTA(false);
+    const Tashow = () => setTA(true);
+   
+
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
 
 
-
-const PMAcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [addCheck , setAddCheck] = useState(false);
     const [modifyCheck , setModifyCheck] = useState(false);
@@ -478,18 +505,21 @@ const PMAcom = () => {
     }
 
     
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
 
     //권한 부여 맵핑 함수
+  
+
+
+
+
+
+
+
+
 
     return (
-        
         <div style={{ width: '1400px', position: 'relative' }}>
-        {contextHolder}
+               {contextHolder}
         <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>사원 관리 </strong></h2>
         <div>
             <button  style={{position:'absolute' ,right:"0px", }}onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
@@ -933,7 +963,7 @@ const PMAcom = () => {
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#d8d8d8', width: '500px', }}>
                     <div>
-                        {/* <PMTabs/> */}
+                        <PMTabs/>
                      </div>
                 </Modal.Body>
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
@@ -945,9 +975,71 @@ const PMAcom = () => {
                     </button>
                 </Modal.Footer>
             </Modal>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <button onClick={TA}>asd</button>
 
+
+            <Modal
+                centered
+                size="sm"
+                show={Tashow} onHide={TaClose} animation={false}>
+                <Modal.Header closeButton style={{backgroundColor:'#2F58B8',width:'500px'}}>
+                    <Modal.Title  style={{color:'#ffffff',width:'500px'}}>사용자관리 삭제</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{backgroundColor:'#f1f2f6', width:'500px',}}>
+                <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Item One" {...a11yProps(0)} />
+          <Tab label="Item Two" {...a11yProps(1)} />
+     
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        Item One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+    </Box>
+                   </Modal.Body>
+                <Modal.Footer style={{width:'500px',backgroundColor:'#ffffff'}}>
+                    <Button variant="secondary" onClick={TaClose}>
+                        닫기
+                    </Button>
+                    <button variant="primary" className='addButton' onClick={TaClose}>
+                        삭제
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
+     
+            
         </div>
     );
-};
-
-export default PMAcom;
+}

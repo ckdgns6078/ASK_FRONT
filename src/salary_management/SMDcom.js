@@ -16,6 +16,8 @@ import Table from 'react-bootstrap/Table';
 import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import {  DatePicker } from 'antd';
+import ReplayIcon from '@mui/icons-material/Replay';
 
 const SMDcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -29,6 +31,39 @@ const SMDcom = () => {
         saveUser: '',
         saveAdvice: ''
     });
+
+    const [dateStart, setDateStart] = useState(); // 시작일
+    const [dateEnd, setDateEnd] = useState();    // 종료일
+    const [search, setSearch] = useState();     //이름
+
+   //초기 저장된 데이터베이스 값 가져오기
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        axios.post('http://192.168.2.91:5000/read_inOutInfo', {
+            compCode: sessionStorage.getItem("uid")
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (err) {
+            console.log("read_inOutInfo error", err);
+        });
+    }
+
+    
+    const searchAddData = () => {
+        axios.post('http://192.168.2.91:5000/search_inOutInfo', {
+            compCode: sessionStorage.getItem("uid"),
+            empName: search,//이름,
+            startDate: dateStart,//시작일 ,
+            endDate: dateEnd,//종료일자
+        }).then(function (response) {
+            setData(response.data);
+        }).catch(function (err) {
+            console.log("search_inOutInfo error", err);
+        });
+    }
 
     //초기 저장된 데이터베이스 값 가져오기
     useEffect(() => {
@@ -101,83 +136,92 @@ const closeAddData = () => {
     }
 }
 
-//저장
-const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
-//수정
-const DelClose = () => setMDelShow(false);
-const DeShow = () => setMDelShow(true);
-//삭제
-const MdClose = () => setModifyShow(false);
-const MdShow = () => setModifyShow(true);
-//권한
+    //저장
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    //수정
+    const DelClose = () => setMDelShow(false);
+    const DeShow = () => setMDelShow(true);
+    //삭제
+    const MdClose = () => setModifyShow(false);
+    const MdShow = () => setModifyShow(true);
+    //권한
 
 
 
 
-//체크박스 관련 ---------------------------------------
-const [isChecked, setIsChecked] = useState(false); //체크여부
-const [checkedItems, setCheckedItems] = useState(new Set());
 
-const checkHandler = ({ target }) => {
-    setIsChecked(!isChecked);
-    checkedItemHandle(target.value, target.checked);
-}
+        //달력
 
-const checkedItemHandle = (id, isChecked) => {
-    if (isChecked) {
-        checkedItems.add(id);
-        setCheckedItems(checkedItems);
-        console.log("if문 checked ", checkedItems);
-    } else if (!isChecked && checkedItems.has(id)) {
-        checkedItems.delete(id);
-        setCheckedItems(checkedItems);
-        console.log("else문 checked", checkedItems);
-    }
-    return checkedItems;
-}
-const onPanelChange = (value, mode) => {
-    console.log(value.format('YYYY-MM-DD'), mode);
-  };
-  
+        const [startDate, setStartDate] = useState(new Date());
+        const [endDate, setendDate] = useState(new Date());
 
-  const [age, setAge] = React.useState('');
+        //시작일 onChange
+        const onChangeStart = (date) => {
+            let year = null;
+            let month = null;
+            let day = null;
+            let total = null;
+            if (date == null) {
+                setDateStart(date);
+            } else {
+                year = String(date.$y);
+                month = String(date.$M + 1);
+                day = String(date.$D);
+                if (date.$M < 10) {
+                    month = "0" + String(date.$M + 1);
+                }
+                if (date.$D < 10) {
+                    day = "0" + String(date.$D);
+                }
+                total = year + month + day;
+                console.log("year", year);
+                console.log("month", month);
+                console.log("day ", day);
+                setDateStart(total);
+            }
+        }
+        //종료일 onChange
+        const onChangeEnd = (date) => {
+            let year = null;
+            let month = null;
+            let day = null;
+            let total = null;
+            if (date == null) {
+                setDateEnd(date);
+            } else {
+                year = String(date.$y);
+                month = String(date.$M + 1);
+                day = String(date.$D);
+                if (date.$M < 10) {
+                    month = "0" + String(date.$M + 1);
+                }
+                if (date.$D < 10) {
+                    day = "0" + String(date.$D);
+                }
+                total = year + month + day;
+                setDateEnd(total);
+            }
+        }
+        //이름 입력 onChange
+        const onChangeSearch = (e) => {
+            setSearch(e.target.value);
+        }
+        //엔터 입력 
+        const enterkey = () => {
+            if (window.event.keyCode == 13) {
+                searchAddData();
+            }
+        }
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
-  const renderTitle = (title) => (
-    <span>
-      {title}
-      <a
-        style={{
-          float: 'right',
-        }}
-        href="https://www.google.com/search?q=antd"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        more
-      </a>
-    </span>
-  );
-  const renderItem = (title, count) => ({
-    value: title,
-    label: (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        {title}
-        <span>
-          <UserOutlined /> {count}
-        </span>
-      </div>
-    ),
-  });
+        //새로고침
+        const hello = () => {
+            getData();
+        }
+
+
+
 
     return (
         <div style={{width:'1400px' ,position:'relative'}}>
@@ -187,40 +231,63 @@ const onPanelChange = (value, mode) => {
             <br/>
 
 
-            <Grid container style={{width:'1400px'}}>
-                <Grid item sx ml={0}>
-                    <DropdownButton variant="Secondary" id="dropdown-basic-button" title="시간 날짜">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
+            <Grid container style={{ width: '1400px' }}>
+                <Grid><div style={{ fontSize: '22px' }}> <strong>시작 날짜 </strong></div></Grid>
+                <Grid item sx ml={1}>
+                    <div >
+                        <DatePicker
+                            selected={date => setStartDate}
+                            onChange={date => onChangeStart(date)}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            style={{ height: '40px' }}
+                        />
 
-                    </DropdownButton>
-                  
-                </Grid>
-                <Grid item sx>
-                <DropdownButton variant="Secondary" id="dropdown-basic-button" title="종료 날짜">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
 
-                    </DropdownButton>
+                    </div>
+                </Grid>
+                <Grid ml={1}><div style={{ fontSize: '22px' }}><strong> 종료 날짜</strong></div></Grid>
+                <Grid item sx ml={1}>
+                    <div>
+                        <DatePicker
+                            selected={endDate => setendDate}
+                            onChange={date => onChangeEnd(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            minDate={startDate}
+                            style={{ height: '40px' }}
+                        />
+                    </div>
                 </Grid>
 
-                <Grid item sx>
-                <DropdownButton variant="Secondary" id="dropdown-basic-button" title="이름">
-                        <Dropdown.Item href="#/action-1">  <Calendar onPanelChange={onPanelChange} /></Dropdown.Item>
 
-                    </DropdownButton>
+          
+
+
+                {/* 검색창 */}
+                <Grid item sx ml={1} >
+                    <InputGroup style={{ width: '250px', height: '10px' }}>
+
+                        <Form.Control
+                            type="text"
+                            name='search'
+                            aria-describedby="btnGroupAddon"
+                            onChange={onChangeSearch}
+                            style={{ height: '40px' }}
+                            onKeyUp={enterkey}
+
+                        />
+                        <InputGroup.Text id="btnGroupAddon" onClick={searchAddData} style={{ width: '50px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
+                    </InputGroup>
+
                 </Grid>
-                
-                <Grid item sx ml={143} mt={-5} >
-                <AutoComplete
-                    popupClassName="certain-category-search-dropdown"
-                    dropdownMatchSelectWidth={500}
-                    style={{
-                    width: 250,
-                    }}
-                   
-                >
-                    <Input.Search size="large" placeholder="검색" />
-                </AutoComplete>
-                </Grid>
+
+                 {/* 로딩 버튼 */}
+                 <Grid item sx ml={59}>
+                    <button className='addButton' style={{ width: '150px' }} onClick={hello}>새로고침 <ReplayIcon /></button>
+                </Grid> 
             </Grid>
             <br/>
         
@@ -261,12 +328,12 @@ const onPanelChange = (value, mode) => {
                     {
                         data && data.map((e, idx) =>
                         <tr >
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}><Checkbox {...label} defaultChecked /></td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>날짜 넣을거</td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>휴가기간</td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>항목 머시기 받아올거</td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>싱세 머시기</td>
-                            <td style={{border:"1px solid #f1f2f6",color:'#777777',fontSize:'22px'}}>상태 머시기 받아올거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#000',fontSize:'22px'}}><Checkbox {...label} defaultChecked /></td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#000',fontSize:'22px'}}>날짜 넣을거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#000',fontSize:'22px'}}>휴가기간</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#000',fontSize:'22px'}}>항목 머시기 받아올거</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#000',fontSize:'22px'}}>싱세 머시기</td>
+                            <td style={{border:"1px solid #f1f2f6",color:'#000',fontSize:'22px'}}>상태 머시기 받아올거</td>
                       
                            
                  
