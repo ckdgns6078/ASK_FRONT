@@ -23,7 +23,7 @@ const advertisement_1 = () => {
                     <img src={main_2_img} className='main_2_img' />
                     <button className="button1" onClick={back} >ACCOUNTING 시작하기</button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} mt={-2}>
                 <img src={main_1_img} style={{width:'900px',height:'600px'}}/>
                 </Grid>
             </Grid>

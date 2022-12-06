@@ -7,16 +7,17 @@ import Box from '@mui/material/Box';
 import BAPAcom from '../bookingping_Accounting/BAPAcom';
 import BAPBcom from '../bookingping_Accounting/BAPBcom';
 import BKPCcom from '../bookingping_Accounting/BKPCcom';
+import Fbar from '../bar/Fbar';
 import BKPDcom from '../bookingping_Accounting/BKPDcom';
 
-function FTabs(props) {
+function BACbut(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
-      role="FTabs"
+      role="BACbut"
       hidden={value !== index}
-      id={`vertical-FTabs-${index}`}
+      id={`vertical-BACbut-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
@@ -29,7 +30,7 @@ function FTabs(props) {
   );
 }
 
-FTabs.propTypes = {
+BACbut.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -38,7 +39,7 @@ FTabs.propTypes = {
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-FTabs-${index}`,
+    'aria-controls': `vertical-BACbut-${index}`,
   };
 }
 
@@ -51,7 +52,7 @@ export default function VerticalTabs() {
 
   return (
     <div>
-        
+          <Fbar/>
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '700px' }}
     >
@@ -76,22 +77,22 @@ export default function VerticalTabs() {
         <Tab label=" 통계" {...a11yProps(3)}style={{fontSize:'25px'}} />
 
       </Tabs>
-      <FTabs value={value} index={0}>
-       <BAPAcom/>
-      </FTabs>
-    
-      <FTabs value={value} index={2}>
-      <BAPAcom/>
-      </FTabs>
-      <FTabs value={value} index={3}>
-       <BAPBcom/>
-      </FTabs>
-      {/* <FTabs value={value} index={4}>
-        <BKPCcom/>
-      </FTabs> */}
-      <FTabs value={value} index={4}>
+      <BACbut value={value} index={0}>
       <BKPDcom/>
-      </FTabs>
+      </BACbut>
+    
+      <BACbut value={value} index={2}>
+      <BAPAcom/>
+      </BACbut>
+      <BACbut value={value} index={3}>
+       <BAPBcom/>
+      </BACbut>
+      {/* <BACbut value={value} index={4}>
+        <BKPCcom/>
+      </BACbut> */}
+      <BACbut value={value} index={4}>
+        <BKPDcom/>
+      </BACbut>
 
 
     </Box>

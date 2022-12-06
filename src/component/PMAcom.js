@@ -11,7 +11,6 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Table from 'react-bootstrap/Table';
 
-import PMTabs from './PMTabs';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -236,9 +235,15 @@ const PMAcom = () => {
     const [show, setShow] = useState(false);
     const [SH, setSh] = useState(false);
 
+    const [TA, setTA] =useState(false);
+
+
+    const TAbClose = ()=> setTA(false);
+    const TAbShow = () => setTA(true);
+
 
     // 탭 모달 함수
-    const [Tabs, setTabs] = useState(false);
+    const [Tabes, setTabs] = useState(false);
 
     const TabClose = ()=> setTabs(false);
     const TabShow = () => setTabs(true);
@@ -480,7 +485,7 @@ const PMAcom = () => {
     
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
+    const HC = (event, newValue) => {
       setValue(newValue);
     };
 
@@ -493,7 +498,7 @@ const PMAcom = () => {
         <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>사원 관리 </strong></h2>
         <div>
             <button  style={{position:'absolute' ,right:"0px", }}onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
-            {/* <button  style={{position:'absolute' ,left:"500px", }}onClick={TabShow} className="Atmp1">  <strong>등록</strong></button> */}
+          
 
 
         </div>
@@ -569,10 +574,282 @@ const PMAcom = () => {
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong> 사원 등록</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
-      
+
+                    
+
+
+                <Box sx={{ width: '100%' }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={HC} aria-label="basic tabs example">
+                        <Tab label="사원정보" {...a11yProps(0)} />
+                        <Tab label="급여지급사항" {...a11yProps(1)} />
+                    
+                        </Tabs>
+                    </Box>
+
+                       {/* 사원정보 탭 */}
+                    <TabPanel value={value} index={0}  style={{backgroundColor:'' ,  }}>
+
+                    
+                     <Container >
+                     <Table style={{ border: "1px solid #d8d8d8",textAlign:'center'}}>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}><strong>사원명</strong></td>
+                                    <td colSpan='3'  style={{width:'50px'}}>
+                                    <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempName' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+                                    <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',width:'140px' ,fontSize:'15px'}}><strong>사원번호</strong></td>
+                                    <td style={{width:'200px'}}>
+                                    <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempNum' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',width:'140px',fontSize:'15px' }}><strong>주민등록번호</strong></td>
+                                    <td>
+                                    <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempFirstSSN' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+                                    <td>
+                                        -
+                                    </td>
+                                    <td>
+                                    <Form.Control style={{ width: '100%', height: '100%' ,fontSize:'15px'}} type="password" name='addempSecondSSN' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>전화번호</strong></td>
+                                    <td>
+                                    <Form.Control style={{ width: '100%', height: '100%' ,fontSize:'15px'}} type="text" name='addempPhone' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}><strong>이메일</strong></td>
+                                    <td  colSpan='3' style={{ border: "1px solid #d8d8d8"}}>
+                                    <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempEmail' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}><strong>부양 가족수</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8"}}>
+                                    <Form.Control style={{ width: '100%', height: '100%' ,fontSize:'15px'}} type="text" name='addempFamilyNum' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong> 주소</strong></td>
+                                    <td colSpan='5'style={{ border: "1px solid #d8d8d8"}}>
+                                    <InputGroup style={{ width: '100%', height: '50px' ,fontSize:'15px'}}>
+
+                                        <Form.Control
+                                            type="text"
+                                            name='addempAddress'
+                                            aria-describedby="btnGroupAddon"
+                                            style={{ height: '40px' }}
+                                            onChange={onChangeAddData}
+                                        />
+                                        <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
+                                        </InputGroup>
+                                    </td>
+                                  
+                                    
+                                </tr>
+                            </Table>
+
+                     
+                     
+                            
+
+
+
+                          
+
+
+
+                        <Table  style={{ border: "1px solid #d8d8d8" ,textAlign:'center'}}>
+                            <tr style={{ border: "1px solid #d8d8d8"}}>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px' ,width:'90px'}}><strong>부서코드</strong></td>
+                                <td colSpan='5'>
+                                <InputGroup style={{ width: '100%' }}>
+
+                                    <Form.Control
+                                        type="text"
+                                        name='adddepCode'
+                                        aria-describedby="btnGroupAddon"
+                                        value={addData.adddepCode}
+                                        style={{ height: '30px' }}
+                                        onChange={onChangeAddData}
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                                    </InputGroup>
+                                </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'90px'}}><strong> 부서명</strong></td>
+                                <td colSpan='5'>
+                                <Form.Control style={{ width: '100%', height: '45px' }} type="text" name='adddepName' value={addData.adddepName} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+
+                            </tr>
+                            <tr style={{ border: "1px solid #d8d8d8"}}>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}><strong>더미</strong></td>
+                                <td colSpan='5'>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
+                                </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>직위/직급</strong></td>
+                                <td colSpan='5'>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addempRank' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+
+                            </tr>
+                            <tr style={{ border: "1px solid #d8d8d8"}}>
+                            <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}><strong>입사일</strong></td>
+                                <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartYear' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td>/</td>
+                                <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartMonth' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td>/</td>
+                                <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartDay' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>휴가</strong></td>
+                                <td>
+                                <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addtotalVacation' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                                <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'100px'}}><strong>잔여휴가</strong></td>
+                                <td>
+                                <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addremindVacation' aria-describedby="btnGroupAddon" />
+                                </td>
+                            </tr>
+                            <tr style={{ border: "1px solid #d8d8d8"}}>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}><strong>퇴사일</strong></td>
+                                <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndYear' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td>/</td>
+                                <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndMonth' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td>/</td>
+                                <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndDay' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>퇴사사유</strong></td>
+                                <td colSpan='4'>
+                                <Form.Control style={{ width: '100%', height: '30px',height:'100%' }} type="text" name='addempEndReason' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                            </tr>
+
+                        </Table>
+
+
+                       
+                     </Container>
+               
+                    </TabPanel>
+
+
+
+                         {/* 급여지급 사항 탭 */}
+                    <TabPanel value={value} index={1} >
+                       <Table style={{border:"1px solid #d8d8d8",textAlign:'center'}}>
+
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>기본급</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>출산보육수당</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                </tr>
+                                <tr style={{ borderBottom: "1px solid #d8d8d8"}}>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>식대</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>부양가족수당</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%', borderBottom: "1px solid #d8d8d8" }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>차량유지비</td>
+                                    <td >
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                    <td style={{  border: "1px solid #d8d8d8",color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
+                                    <td style={{  border: "1px solid #d8d8d8",color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
+                                    
+
+                                </tr>
+
+
+
+
+
+
+
+
+                            {/* <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>기본급</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>출산보육수당</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>부양가족수당</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>식대</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>차량유지비</td>
+                                <td>
+                                      <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                </td>
+                            </tr> */}
+                       </Table>
+
+
+            
+
+                       <Table style={{border:"1px solid #d8d8d8",textAlign:'center'}} >
+                            <tr>
+                                <td rowSpan='4' style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>금여통장,</td>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>은행</td>
+                                <td> 
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>계좌번호</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankNum' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>예금주</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankOwner' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>연봉</td>
+                                <td>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addempPay' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                            </tr>
+                       </Table>
+
+                    </TabPanel>
+                    
+                    </Box>
+
+
 
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
@@ -927,16 +1204,45 @@ const PMAcom = () => {
             <Modal
                 centered
                 size="lg"
-                show={Tabs} onHide={TabClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px' }}>
-                    <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>삭제확인</strong></Modal.Title>
+                show={Tabes} onHide={TabClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e' }}>
+                    <Modal.Title style={{ color: '#ffffff',}}><strong>삭제확인</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#d8d8d8', width: '500px', }}>
+                <Modal.Body style={{ backgroundColor: '#d8d8d8' }}>
                     <div>
-                        {/* <PMTabs/> */}
+
+
+
+                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={HC} aria-label="basic tabs example">
+                        <Tab label="Item One" {...a11yProps(0)} />
+                        <Tab label="Item Two" {...a11yProps(1)} />
+                    
+                        </Tabs>
+                    </Box>
+                    <TabPanel value={value} index={0}>
+                            <Grid container>
+                                <Grid>asd</Grid>
+                                <Grid>asd</Grid>
+                            </Grid>
+                    
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        Item Two
+                    </TabPanel>
+                    
+                    </Box>
+
+
+
+
+
+
+                   
                      </div>
                 </Modal.Body>
-                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={TabClose}>
                         닫기
                     </Button>

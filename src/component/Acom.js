@@ -148,7 +148,7 @@ const Acom = () => {
 
 
     return (
-        <div style={{width:'1300px', position:'relative' ,height:'600px', top:'50px'}}>
+        <div style={{width:'1400px', position:'relative' ,height:'600px', top:'50px'}}>
             {contextHolder}
            <h2  style={{color:' #005b9e' ,position:'absolute' ,left:'0' ,top:'-50px'}}><strong>회사 설정</strong></h2>
           

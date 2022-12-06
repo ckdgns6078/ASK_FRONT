@@ -9,6 +9,9 @@ import Acom from '../component/Acom';
 import TopBar from './TopBar';
 import Bcom from '../component/Bcom';
 import Ccom from '../component/Ccom';
+import Navbar from 'react-bootstrap/Navbar';
+import Grid from '@mui/material/Grid';
+import abar from '../bar/Abar';
 function ATabs(props) {
   const { children, value, index, ...other } = props;
   
@@ -53,10 +56,13 @@ export default function VerticalTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+      
+
 
   return (
     <div>
-      
+
+
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '700px'  }}
     >

@@ -16,6 +16,8 @@ import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { message, Space } from 'antd';
+
+
 const BAPBcom = () => {
 
 
@@ -47,226 +49,404 @@ const BAPBcom = () => {
 
     //기본 데이터
     const [data, setData] = useState();
-    const [modifyData, setModifyData] = useState();
-    const [addData, setAddData] = useState({
-        compCode: null,
-        dailyListId: null,
-        dailyDate: null,
-        dailyCode: "",
-        dailyName: "",
-        dailyRank: "",
-        dailyInOutStart: null,
-        dailyInOutEnd: null,
-        dailyInOutDetail: null,
-        dailyInOutOver: null,
-        dailyYear: null,
-        dailyMonth: null,
-        dailyDay: null
+    const [modifyData, setModifyData] = useState({
+        purchaseId: "",
+        p_division: "",
+        p_date: "",
+        p_dateYear: "",
+        p_dateMonth: "",
+        p_dateDay: "",
+        p_taxType: "",
+        p_item: "",
+        p_iCount: "",
+        p_unitPrice: "",
+        p_supplyValue: "",
+        p_surTax: "",
+        p_totalPrice: "",
+        p_clientCompNum: "",
+        p_clientCompNum1: "",
+        p_clientCompNum2: "",
+        p_clientCompNum3: "",
+        p_clientName: "",
+        totalsupplyValue: "",
+        totalsurTax: "",
+        total: "",
+        taxBill : ""
     });
-    const [magData, setMagData] = useState();
-    const [prData, setPrData] = useState();
-    const [PrNData, setPrNData] = useState();
+    const [addData, setAddData] = useState({
+        purchaseId: "",
+        p_division: "",
+        p_date: "",
+        p_dateYear: "",
+        p_dateMonth: "",
+        p_dateDay: "",
+        p_taxType: "",
+        p_item: "",
+        p_iCount: "",
+        p_unitPrice: "",
+        p_supplyValue: "",
+        p_surTax: "",
+        p_totalPrice: "",
+        p_clientCompNum: "",
+        p_clientCompNum1: "",
+        p_clientCompNum2: "",
+        p_clientCompNum3: "",
+        p_clientName: "",
+        totalsupplyValue: "",
+        totalsurTax: "",
+        total: "",
+    });
 
-  
-
-    const [modify, setModify] = useState(false);
-    const [add, setAdd] = useState(false);
-    const [mag, setMag] = useState(false);
-    const [Pr, setPr] = useState(false);
-    const [PrN, setPrN] = useState(false);
 
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.post('http://192.168.2.82:5000/readDailyInOut', {
+        axios.post('http://192.168.2.91:5000/income_Read', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
+            console.log("income_Read", response.data);
             setData(response.data);
         }).catch(function (err) {
-            console.log("createDailyInOut error", error);
+            console.log("income_Read error", err);
         });
     }
 
 
 
     //추가 모델
-    const addShow = () => setAdd(true);
+    const [add, setAdd] = useState(false);
     const addClose = () => {
         setAddData({
-            "compCode": null,
-            "dailyListId": null,
-            "dailyDate": null,
-            "dailyCode": null,
-            "dailyName": null,
-            "dailyRank": null,
-            "dailyInOutStart": null,
-            "dailyInOutEnd": null,
-            "dailyInOutDetail": null,
-            "dailyInOutOver": null,
-            "dailyYear": null,
-            "dailyMonth": null,
-            "dailyDay": null
+            purchaseId: "",
+            p_division: "",
+            p_date: "",
+            p_dateYear: "",
+            p_dateMonth: "",
+            p_dateDay: "",
+            p_taxType: "",
+            p_item: "",
+            p_iCount: "",
+            p_unitPrice: "",
+            p_supplyValue: "",
+            p_surTax: "",
+            p_totalPrice: "",
+            p_clientCompNum: "",
+            p_clientCompNum1: "",
+            p_clientCompNum2: "",
+            p_clientCompNum3: "",
+            p_clientName: "",
+            totalsupplyValue: "",
+            totalsurTax: "",
+            total: "",
         })
         setAdd(false);
     }
-
-    //돋보기 모델
-    const magClose = (e) => setMag(false);
-    const magShow = () => {
-        axios.post('http://192.168.2.82:5000/searchDailyEmp', {
-            compCode: sessionStorage.getItem("uid")
-        }).then(function (response) {
-            console.log("마그데이터 ", response.data);
-            setMagData(response.data);
-        }).catch(function (err) {
-            console.log("searchDailyEmp error", error);
-        });
-        setMag(true);
-    }
-    const magSelect = (e) => {
-        const temp = { ...addData };
-        temp.dailyName = e.dailyName;
-        temp.dailyRank = e.dailyRank;
-        temp.dailyCode = e.dailyCode;
-        setAddData(temp);
-        magClose(false);
-    }
+    const addShow = () => setAdd(true);
 
     //수정 모델
+    const [modify, setModify] = useState(false);
     const modifyClose = () => setModify(false);
-    const modifyShow = (e) => {
-        axios.post('http://192.168.2.82:5000/updateDailyInOutModal', {
-            dailyListId: e.dailyListId
-        }).then(function (response) {
-            console.log(response.data[0]);
-            setModifyData(response.data[0]);
-        }).catch(function (err) {
-            console.log("updateDailyInOutModal err :", err);
-            let text = "데이터를 가져오는데 오류가 발생하였습니다.";
+    const modifyShow = (e) =>{
+        axios.post('http://192.168.2.91:5000/income_Modal',{
+            purchaseId : e.purchaseId
+        }).then (function ( response ){
+            let date = response.data[0].p_date.split('-');
+            setModifyData({
+                purchaseId: response.data[0].purchaseId ,
+                p_division: response.data[0].p_division ,
+                p_date: response.data[0].p_date ,
+                p_dateYear: date[0] ,
+                p_dateMonth: date[1] ,
+                p_dateDay: date[2] ,
+                p_taxType: response.data[0].p_taxType ,
+                p_item: response.data[0].p_item ,
+                p_iCount: response.data[0].p_iCount ,
+                p_unitPrice: response.data[0].p_unitPrice ,
+                p_supplyValue: response.data[0].p_supplyValue ,
+                p_surTax: response.data[0].p_surTax ,
+                p_totalPrice: response.data[0].p_totalPrice ,
+                p_clientCompNum: response.data[0].p_clientCompNum ,
+                p_clientCompNum1: response.data[0].p_clientCompNum.substr(0,3) ,
+                p_clientCompNum2: response.data[0].p_clientCompNum.substr(3,2) ,
+                p_clientCompNum3: response.data[0].p_clientCompNum.substr(5) ,
+                p_clientName: response.data[0].p_clientName ,
+                totalsupplyValue: response.data[0].totalsupplyValue ,
+                totalsurTax: response.data[0].totalsurTax ,
+                total: response.data[0].total ,
+                taxBill : response.data[0].taxBill
+            })
+        }).catch ( function ( err ){
+            console.log(" income_Modal  error : " , err);
+            let text = '데이터를 가져오는데 오류가 발생했습니다. 새로고침 후 다시 시도해주세요.';
             error(text);
         })
+
         setModify(true);
-    }
-    // 연장시간 모델
-    const PrClose = (e) => setPr(false);
-    const Prshow = () => {
-        axios.post('http://192.168.2.82:5000/readDailyPay', {
-            compCode: sessionStorage.getItem("uid")
-        }).then(function (response) {
-            setPrData(response.data);
-            console.log("response.data readDailyPay ", response.data);
-        }).catch(function (err) {
-            console.log("readDailyPay error : ", err);
-        })
-        setPr(true);
-    }
-    // 초과시간 모델
-    const PrNClose = (e) => setPrN(false);
-    const PrNShow = () => {
-        axios.post('http://192.168.2.82:5000/readDailyPay', {
-            compCode: sessionStorage.getItem("uid")
-        }).then(function (response) {
-            setPrNData(response.data);
-            console.log("response.data readDailyPay ", response.data);
-        }).catch(function (err) {
-            console.log("readDailyPay error : ", err);
-        })
-        setPrN(true);
-    }
+    } 
+
+    const [del, setDel] = useState(false);
+    const delClose = () => setDel(false);
+    const delShow = () => setDel(true);
+
+    //구분돋보기 모델
+    const [mag, setMag] = useState(false);
+    const magClose = (e) => setMag(false);
+    const magShow = () => setMag(true);
+
+    //유형돋보기 모델
+    const [mago, setMago] = useState(false);
+    const magoClose = (e) => setMago(false);
+    const magoShow = () => setMago(true);
+
+
+
+    const [ test1 , setTest1 ] = useState();
+
+
+
+
 
 
 
     //입력값 onChange 함수
-    const onChangeModifyData = (e) => {
+    const onChangeModify = (e) => {
         const { value, name } = e.target;
         setModifyData({
             ...modifyData,
             [name]: value
         });
+        if (name == 'p_unitPrice' || name == 'p_iCount') {
+            let temp = { ...modifyData }
+            temp = {
+                ...temp,
+                [name] : value
+            }
+            temp.p_supplyValue = temp.p_unitPrice * temp.p_iCount;
+            temp.p_surTax = temp.p_supplyValue / 10;
+            if (temp.p_taxType == '비과세') {
+                temp.p_surTax = 0
+            }
+            temp.p_totalPrice = temp.p_supplyValue + temp.p_surTax;
+            setModifyData(temp);
+        }
     }
-    const onChangeAddData = (e) => {
+
+
+    const onChangeAdd = (e) => {
         const { value, name } = e.target;
         setAddData({
             ...addData,
             [name]: value
         });
+        console.log(e.target , name , value);
     }
 
-    //연장시간 onClick
-    const onClickProvision = (e) => {
-        const temp = { ...modifyData };
-        temp.dailyPayType = e.dailyPayName;
-        setModifyData(temp);
-        PrClose();
-    }
-    //초과시간 onClick
-    const onClickProvisionN = (e) => {
-        const temp = { ...modifyData };
-        temp.dailyPayTypeNight = e.dailyPayName;
-        setModifyData(temp);
-        PrNClose();
-    }
-
-
-    //데이터 전송
     const pushAddData = () => {
-        if (addData.dailyYear == null || addData.dailyMonth == null || addData.dailyDay == null) {
-            let contentText = "날짜에 공란을 넣을 수 없습니다."
-            warning(contentText);
-        } else {
-            axios.post('http://192.168.2.82:5000/createDailyInOut', {
-                compCode: sessionStorage.getItem("uid"),
-                dailyCode: addData.dailyCode,
-                dailyName: addData.dailyName,
-                dailyRank: addData.dailyRank,
-                dailyInOutStart: addData.dailyInOutStart,
-                dailyInOutEnd: addData.dailyInOutEnd,
-                dailyInOutDetail: addData.dailyInOutDetail,
-                dailyDate: String(addData.dailyYear) + String(addData.dailyMonth) + String(addData.dailyDay)
-            }).then(function (response) {
-                if (response.data) {
-                    let text = "출퇴근 등록 완료"
-                    getData();
-                    addClose();
-                    success(text);
-                } else {
-                    let text = "출퇴근 등록 실패 , 공란이 있는지 확인해주세요."
-                    warning(text);
-                }
-            }).catch(function (err) {
-                console.log("createDailyInOut error", err);
-                let text = "출퇴근 등록 에러 발생 , 새로고침 후 다시 실행해주세요"
-                error(text);
-            });
-        }
-    }
-
-    const pushModifyData = () => {
-
-        axios.post('http://192.168.2.82:5000/updateDailyInOut', {
-            dailyListId: modifyData.dailyListId,
-            dailyInOutDetail: modifyData.dailyInOutDetail,
-            dailyInOutStart: modifyData.dailyInOutStart,
-            dailyInOutEnd: modifyData.dailyInOutEnd
+        axios.post('http://192.168.2.91:5000/income_Create', {
+            compCode : sessionStorage.getItem('uid'),
+            p_division: addData.p_division,
+            p_date: String(addData.p_dateYear) + String(addData.p_dateMonth) + String(addData.p_dateMonth),
+            p_taxType: addData.p_taxType,
+            p_item: addData.p_item,
+            p_iCount: addData.p_iCount,
+            p_unitPrice: addData.p_unitPrice,
+            p_supplyValue: addData.p_supplyValue,
+            p_surTax: addData.p_surTax,
+            p_totalPrice: addData.p_totalPrice,
+            p_clientCompNum: String(addData.p_clientCompNum1) +  String(addData.p_clientCompNum2) + String(addData.p_clientCompNum3),
+            p_clientName: addData.p_clientName
         }).then(function (response) {
             if (response.data) {
-                let text = "출퇴근 수정 완료"
-                getData();
-                modifyClose();
+                let text = "매입/매출 등록 완료";
                 success(text);
+                getData();
+                addClose();
             } else {
-                let text = "출퇴근 수정 실패 , 공란이 있는지 확인해주세요."
+                let text = "매입/매출 등록에 실패했습니다";
                 warning(text);
             }
         }).catch(function (err) {
-            console.log("updateDailyInOut error", err);
-            let text = "출퇴근 수정 에러 발생 , 새로고침 후 다시 실행해주세요"
+            console.log("clientCreate error :", err);
+            let text = "매입/매출 등록에서 오류가 발생했습니다. 새로고침 후 다시 실행해 주세요.";
             error(text);
         });
-
     }
+
+    const pushA = () =>{
+        if( addData.p_division == '매출'){
+            pushAddData()
+        }
+        else{
+
+            
+            const formData = new  FormData();
+            const fData ={
+                compCode : sessionStorage.getItem('uid'),
+                p_division: addData.p_division,
+                p_date: String(addData.p_dateYear) + String(addData.p_dateMonth) + String(addData.p_dateMonth),
+                p_taxType: addData.p_taxType,
+                p_item: addData.p_item,
+                p_iCount: addData.p_iCount,
+                p_unitPrice: addData.p_unitPrice,
+                p_supplyValue: addData.p_supplyValue,
+                p_surTax: addData.p_surTax,
+                p_totalPrice: addData.p_totalPrice,
+                p_clientCompNum: String(addData.p_clientCompNum1) +  String(addData.p_clientCompNum2) + String(addData.p_clientCompNum3),
+                p_clientName: addData.p_clientName
+            };
+        let file = document.getElementById('upload');
+        formData.append('file' , file.files[0]);
+        formData.append('request', new Blob([JSON.stringify(fData)], { type: "application/json" }));
+        
+        axios.post('http://192.168.2.91:5000/taxfile_create',formData,{
+            headers :{
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function ( response ){  
+            if (response.data) {
+                let text = "매입/매출 등록 완료";
+                success(text);
+                getData();
+                addClose();
+            } else {
+                let text = "매입/매출 등록에 실패했습니다";
+                warning(text);
+            }
+        }).catch ( function ( err ){
+            console.log("taxfile_create error : " ,err);
+            let text = "저장하는데 오류가 발생했습니다. 새로고침 후 다시 실행해주세요."
+            error(text);
+        })
+            
+    }
+}
+    const pushModifyData = () => {
+        axios.post('http://192.168.2.91:5000/income_Update', {
+            purchaseId: modifyData.purchaseId ,
+            p_division: modifyData.p_division ,
+            p_date: String(modifyData.p_dateYear) + String(modifyData.p_dateMonth) + String(modifyData.p_dateDay),
+            p_taxType: modifyData.p_taxType ,
+            p_item: modifyData.p_item ,
+            p_iCount: modifyData.p_iCount ,
+            p_unitPrice: modifyData.p_unitPrice ,
+            p_supplyValue: modifyData.p_supplyValue ,
+            p_surTax: modifyData.p_surTax ,
+            p_totalPrice: modifyData.p_totalPrice ,
+            p_clientCompNum: String(modifyData.p_clientCompNum1) + String(modifyData.p_clientCompNum2) + String(modifyData.p_clientCompNum3) ,
+            p_clientName: modifyData.p_clientName ,
+            totalsupplyValue: modifyData.totalsupplyValue ,
+            totalsurTax: modifyData.totalsurTax ,
+            total: modifyData.total ,
+        }).then(function (response) {
+            console.log(" response.data" , response.data);
+            if (response.data) {
+                let text = "거래처 수정 완료";
+                success(text);
+                getData();
+                modifyClose();
+            } else {
+                let text = "명세표 등록에 실패했습니다";
+                warning(text);
+            }
+        }).catch(function (err) {
+            console.log("clientUpdate error :", err);
+            let text = "명세표 저장에서 오류가 발생했습니다. 새로고침 후 다시 실행해 주세요.";
+            error(text);
+        });
+    }
+
+    const pushDeleteData = () => {
+        axios.post('http://192.168.2.82:5000/clientDelete', {
+            clientCompNum: String(modifyData.clientCompNum1) + String(modifyData.clientCompNum2) + String(modifyData.clientCompNum3)
+        }).then(function (response) {
+            if (response.data) {
+                let text = "거래처를 삭제했습니다.";
+                success(text);
+                getData();
+                delClose();
+                modifyClose();
+            } else {
+                let text = "거래처 삭제에 실패했습니다.";
+                warning(text);
+                delClose();
+            }
+        }).catch(function (err) {
+            console.log("clientDelete error :", err);
+            let text = "명세서 삭제에서 오류가 발생하였습니다.";
+            error(text);
+        })
+    }
+
+    //구분 버튼
+    const magBtn1 =(e) =>{
+        if(add){
+            const temp = { ...addData};
+            temp.p_division = e.target.innerText;
+            setAddData(temp);
+            magClose();
+
+        }
+        if(modify){
+            const temp = {...modifyData};
+            temp.p_division = e.target.innerText;
+            setModifyData(temp);
+            magClose();
+        }
+    }
+
+    //유형 버튼
+    const magBtn2 =(e)=>{
+        if(add){
+            const temp = { ...addData};
+            temp.p_taxType = e.target.innerText;
+            setAddData(temp);
+            magoClose();
+
+        }
+        if(modify){
+            const temp = {...modifyData};
+            temp.p_taxType = e.target.innerText;
+            setModifyData(temp);
+            magClose();
+        }
+    }
+
+    const allBtn = () => {
+        axios.post('http://192.168.2.91:5000/income_Read', {
+            compCode: sessionStorage.getItem('uid')
+        }).then(function (response) {
+            console.log("전체 : ",response.data)
+            setData(response.data);
+        }).catch(function (err) {
+            console.log(" income_Read error : ", err);
+        });
+    }
+    const buyBtn = () => {
+        axios.post('http://192.168.2.91:5000/income_only', {
+            compCode: sessionStorage.getItem('uid')
+        }).then(function (response) {
+            console.log(" 매입 :" , response.data)
+            setData(response.data);
+        }).catch(function (err) {
+            console.log(" income_only error : ", err);
+        });
+    }
+    const payBtn = () => {
+        axios.post('http://192.168.2.91:5000/outcome_only', {
+            compCode: sessionStorage.getItem('uid')
+        }).then(function (response) {
+            console.log(" 매출" , response.data)
+            setData(response.data);
+        }).catch(function (err) {
+            console.log(" outcome_only error : ", err);
+        });
+    }
+
+
+
+
 
 
 
@@ -280,11 +460,11 @@ const BAPBcom = () => {
         console.log("daily Name :", dateStart);
         console.log("daily Name :", dateEnd);
 
-        axios.post('http://192.168.2.82:5000/searchDailyInOut', {
+        axios.post('http://192.168.2.91:5000/income_Search', {
             compCode: sessionStorage.getItem("uid"),
-            dailyName: search,//이름,
-            dailyStartDate: dateStart,//시작일 ,
-            dailyEndDate: dateEnd,//종료일자
+            p_clientName : search,//이름,
+            startDate : dateStart,//시작일 ,
+            endDate : dateEnd,//종료일자
         }).then(function (response) {
             console.log("search_inOutInfo data : ", response.data);
             setData(response.data);
@@ -354,34 +534,25 @@ const BAPBcom = () => {
             searchAddData();
         }
     }
-    //모달
 
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
-    //추가 모델에서 닫기 눌렀을 경우
-    const closeAddData = () => {
-        handleClose();
-        if (show) {
-            console.log("if문 실행");
-            setAddData({
-                "saveId": '',
-                "savePw": '',
-                "saveUser": '',
-                "saveAdvice": '',
-            });
+    const [checkedItems, setCheckedItems] = useState(new Set());
+        //여러명 출력용
+        const printCheck = () =>{
+            let key = "";
+            for ( let i of checkedItems){
+              key+="&id="+i;
+            }
+            console.log(key);
+    
+            window.open('http://localhost:3000/Tax?id=1'+key);
         }
-    }
+    
 
-
-
-
+ 
 
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
+            {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>매입관리 </strong></h2>
             <br />
             <br />
@@ -423,7 +594,7 @@ const BAPBcom = () => {
 
                 {/* 검색창 */}
                 <Grid item sx ml={1} >
-                    <InputGroup style={{ width: '250px', height: '10px' }}>
+                    <InputGroup style={{ width: '200px', height: '10px' }}>
 
                         <Form.Control
                             type="text"
@@ -444,23 +615,20 @@ const BAPBcom = () => {
             <Table >
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
-                             <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}>
+                        <td style={{ border: "1px solid #d8d8d8", fontSize: '22px' }}>
                             <input type="checkbox" id="allCheck" value="allCheck"></input>
-                            </td>
-
-
-
-                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>구분</strong>
                         </td>
+
+
+
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>날짜</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>공급처명</strong>
+                            <strong>공급처</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>유형</strong>
+                            <strong>구분</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>품목</strong>
@@ -469,7 +637,10 @@ const BAPBcom = () => {
                             <strong>수량</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>단기</strong>
+                            <strong>단가</strong>
+                        </td>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                            <strong>유형</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>공급가액</strong>
@@ -477,9 +648,10 @@ const BAPBcom = () => {
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부가세</strong>
                         </td>
-                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                        <td colSpan ='2' style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>합계</strong>
                         </td>
+
 
                     </tr>
                 </thead>
@@ -490,129 +662,416 @@ const BAPBcom = () => {
                             <tr >
 
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}> <input type="checkbox" id="allCheck" value="allCheck"></input></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.p_date}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
-                                    <Button style={{ fontSize: '22px' }} name={e.inOutListId} onClick={() => modifyShow(e)} variant="link">
+                                    <Button style={{ fontSize: '22px' }} name={e.purchaseId} onClick={() => modifyShow(e)} variant="link">
                                         <strong>
-                                            {e.dailyName}
+                                            {e.p_clientName}
                                         </strong>
                                     </Button>
                                 </td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyRank}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutStart}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutEnd}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutOver}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutDetail}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutStart}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutEnd}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutOver}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.dailyInOutDetail}</td>
+                                {e.p_division == '매입' ?
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#E05326', fontSize: '22px' }}><strong>{e.p_division}</strong></td>
+                                    :
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#005B9E', fontSize: '22px' }}><strong>{e.p_division}</strong></td>
+
+                                }
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.p_item}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px'  }}>{e.p_iCount}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right'}}>{e.p_unitPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.p_taxType}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right'}}>{e.p_supplyValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right'}}>{e.p_surTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' ,width:'150px'}}>
+                                    {e.p_division == '매입' && e.p_totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px'  , textAlign: 'right',width:'150px'}}>
+                                    {e.p_division == '매출' && e.p_totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </td>
                             </tr>
                         )
                     }
 
-                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
-                        <td colSpan='11'></td>
+                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,}}>
+                        <td colSpan='8' style={{ fontSize: '22px' , textAlign:'right'}}> <strong>합계</strong></td>
+                        <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].totalsupplyValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                        <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].totalsurTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                        <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                        <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].total1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
 
                     </tr>
 
                 </tbody>
             </Table>
             <div>
-                <button style={{ position: 'absolute', right: "0px", top: '0px' }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
+                <button style={{ position: 'absolute', right: "550px", top: '65px' ,width:'100px' }} onClick={allBtn} className="Atmp1">  <strong>전체</strong></button>
+                <button style={{ position: 'absolute', right: "440px", top: '65px' ,width:'100px' }} onClick={buyBtn} className="Atmp1">  <strong>매입</strong></button>
+                <button style={{ position: 'absolute', right: "330px", top: '65px'  ,width:'100px'}} onClick={payBtn} className="Atmp1">  <strong>매출</strong></button>
+                <button style={{ position: 'absolute', right: "220px", top: '65px'  ,width:'100px'}} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+                <button style={{ position: 'absolute', right: "110px", top: '65px'  ,width:'100px'}} onClick={addShow} className="Atmp1">  <strong>삭제</strong></button>
+                <button style={{ position: 'absolute', right: "0px", top: '65px' ,width:'100px'}} onClick={printCheck} className="Atmp1">  <strong>인쇄/저장</strong></button>
             </div>
 
 
 
 
-        
 
-          {/* 추가 */}  
-          <Modal 
-             centered
-             size="xl"    
-             show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton style={{backgroundColor:'#005b9e',}}>
-                <Modal.Title style={{color:'#ffffff'}}><strong>부서관리</strong></Modal.Title>
+
+            {/* 추가 */}
+            <Modal
+                centered
+                size="xl"
+                show={add} onHide={addClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>매입/매출 등록</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{backgroundColor:'',}}>
-            
-                <Container>
-                    <Table style={{
-                        textAlign: "center",
-                        width: "100%", border: "1px solid #d8d8d8",
-                    }} >
-                    <tr>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px' ,width:'150px'  , backgroundColor: '#f7f7f7',color:'#777777'}}>구분</td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px'  ,width:'150px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px'  ,width:'150px', backgroundColor: '#f7f7f7',color:'#777777'}}>공급처명</td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px',width:'150px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px' ,width:'150px', backgroundColor: '#f7f7f7',color:'#777777'}}>연락처</td>
-                        <td colSpan='2' style={{border:'1px solid #d8d8d8 ', height:'40px',width:'150px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                    </tr>
-                  
+                <Modal.Body style={{ backgroundColor: '', }}>
 
-                    <tr>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>날짜</td>
-                        <td colSpan='2' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>사업자번호</td>
-                        <td colSpan='3' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                    </tr>
-                    <tr>
-                    <td rowSpan='2' style={{borderLeft:'1px solid #d8d8d8 ', height:'40px',borderBottom:'1px solid #d8d8d8 ', height:'40px' , backgroundColor: '#f7f7f7',color:'#777777'}}>통장</td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777' }}>품목</td>
-                        <td  style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>수량</td>
-                        <td  style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777',width:'150px'}}>단가</td>
-                        <td  style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                    </tr>
-                    <tr>
-                      
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>공급가액</td>
-                        <td  style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>부가세</td>
-                        <td  style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                        <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>합계</td>
-                        <td  style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" />
-                        </td>
-                    </tr>
-              
-                    </Table>
+                    <Container>
 
 
-                </Container>
-            </Modal.Body>
-                <Modal.Footer style={{ backgroundColor:'#ffffff'}}>
-                <Button variant="secondary" onClick={handleClose}>
-                    <strong>취소</strong>
-                </Button>
-                <button className="addButton"  onClick={pushAddData}>
-                    <strong>추가</strong>
-                </button>
+                        <Table style={{
+                            textAlign: "center",
+                            width: "100%", border: "1px solid #d8d8d8",
+                        }} >
+                            <tr>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>구분</td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '300px' }}>
+                                <InputGroup >
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="p_division"
+                                        value={addData.p_division}
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
+                                        onChage={onChangeAdd}
+                                     
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow}/></InputGroup.Text>
+                                </InputGroup>
+                                </td>
+                                    <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>날짜</td>
+                                   
+                                    <td>  <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateYear' onChange={onChangeAdd}/></td>
+                                    <td>/</td>
+                                    <td><Form.Control style={{ width: '150px', height: '100%' }} type="text" aria-describedby="btnGroupAddon" name='p_dateMonth' onChange={onChangeAdd}/></td>
+                                    <td>/</td>
+                                    <td> <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateDay' onChange={onChangeAdd}/></td>
+
+                            
+                            </tr>
+                            <tr>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' ,height:'60px'}}>공급처명</td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeAdd}/>
+                                </td>
+
+                                <td style={{ border: "1px solid #d8d8d8", height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>사업자번호</td>
+                                  
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeAdd}  /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
+
+                                   
+                            </tr>
+                        </Table>
+
+                        
+                        <Table style={{
+                            textAlign: "center",
+                            width: "100%", border: "1px solid #d8d8d8",
+                        }} >
+                            <tr>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>유형</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>품목</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>수량</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>단가</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>공급가액</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>부가세</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>합계</td>
+                            </tr>
+                            <tr>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <InputGroup >
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="p_taxType"
+                                        value={addData.p_taxType}
+                                        aria-describedby="btnGroupAddon"
+                                        onChange={onChangeAdd}
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
+                                     
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magoShow}/></InputGroup.Text>
+                                </InputGroup>
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_item' aria-describedby="btnGroupAddon" onChange={onChangeAdd}/>
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_iCount' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_unitPrice' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_supplyValue' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_surTax' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_totalPrice' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                </td>
+                            </tr>
+                        </Table>
+
+
+                    {
+                        addData.p_division == '매입' ? <input type='file' id ='upload' accept='image/*' /> : ''
+
+                    }
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <h5><strong> 유형 / 품목 / 수량 / 단가만 입력하면 자동 계산됩니다.</strong></h5>
+                    <Button variant="secondary" onClick={addClose}>
+                        <strong>취소</strong>
+                    </Button>
+                    <button className="addButton" onClick={pushA}>
+                        <strong>등록</strong>
+                    </button>
                 </Modal.Footer>
             </Modal>
-            
+
+            {/* 수정 */}
+            <Modal
+                centered
+                size="xl"
+                show={modify} onHide={modifyClose} animation={false}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>매입/매출 상세</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '', }}>
+
+                    <Container>
+
+
+                        <Table style={{
+                            textAlign: "center",
+                            width: "100%", border: "1px solid #d8d8d8",
+                        }} >
+                            <tr>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>구분</td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '300px' }}>
+                                <InputGroup >
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="p_division"
+                                        value={modifyData.p_division}
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
+                                        onChage={onChangeModify}
+                                     
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow}/></InputGroup.Text>
+                                </InputGroup>
+                                </td>
+                                    <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>날짜</td>
+                                   
+                                    <td>  <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateYear' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateYear}/></td>
+                                    <td>/</td>
+                                    <td><Form.Control style={{ width: '150px', height: '100%' }} type="text" aria-describedby="btnGroupAddon" name='p_dateMonth' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateMonth}/></td>
+                                    <td>/</td>
+                                    <td> <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateDay' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateDay}/></td>
+
+                            
+                            </tr>
+                            <tr>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' ,height:'60px'}}>공급처명</td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientName} />
+                                </td>
+
+                                <td style={{ border: "1px solid #d8d8d8", height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>사업자번호</td>
+                                  
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum1}  /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum2} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum3} /></td>
+
+                                   
+                            </tr>
+                        </Table>
+
+                        
+                        <Table style={{
+                            textAlign: "center",
+                            width: "100%", border: "1px solid #d8d8d8",
+                        }} >
+                            <tr>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>유형</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>품목</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>수량</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>단가</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>공급가액</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>부가세</td>
+                                <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>합계</td>
+                            </tr>
+                            <tr>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <InputGroup >
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="p_taxType"
+                                        aria-describedby="btnGroupAddon"
+                                        onChange={onChangeModify} 
+                                        value={modify && modifyData && modifyData.p_taxType}
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
+                                     
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magoShow}/></InputGroup.Text>
+                                </InputGroup>
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_item' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_item} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_iCount' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_iCount} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_unitPrice' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_unitPrice} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_supplyValue' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_supplyValue} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_surTax' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_surTax} />
+                                </td>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_totalPrice' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_totalPrice} />
+                                </td>
+                            </tr>
+                        </Table>
+                        {modifyData && modifyData.taxBill && <a href={modifyData.taxBill} target='_blank'>세금계산서</a> }
+
+
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#ffffff' }}>
+                    <h5><strong> 유형 / 품목 / 수량 / 단가만 입력하면 자동 계산됩니다.</strong></h5>
+                    <Button variant="secondary" onClick={modifyClose}>
+                        <strong>취소</strong>
+                    </Button>
+                    <button className="addButton" onClick={pushModifyData}>
+                        <strong>수정</strong>
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
+
+
+            {/* 구분 돋보기*/}
+            <Modal 
+                size="sm"
+                centered
+                show={mag} onHide={magClose} animation={true}>
+                <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
+                <Modal.Title  style={{color:'#ffffff'}}> <strong>구분</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{backgroundColor:''}}> 
+
+        
+                <Table 
+                        hover
+                        style={{
+                        textAlign:"center",
+                      }} >
+                        <thead>
+                    <tr style={{border:"1px solid #d8d8d8",backgroundColor:'#f7f7f7'}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong></strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}>구분목록</td>
+                 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style={{border:"1px solid #d8d8d8"}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong>1</strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}><Button variant="link" onClick={magBtn1}>매입</Button></td>
+              
+                    </tr>
+                    <tr style={{border:"1px solid #d8d8d8",}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong>2</strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}><Button variant="link" onClick={magBtn1}>매출</Button></td>
+              
+                    </tr>
+                    
+
+                
+             
+
+
+                </tbody>
+                </Table>
+
+                </Modal.Body>
+
+                </Modal>
+
+
+                      
+            {/* 유형 돋보기*/}
+            <Modal 
+                size="sm"
+                centered
+                show={mago} onHide={magoClose} animation={true}>
+                <Modal.Header closeButton  style={{backgroundColor:'#005b9e',}}>
+                <Modal.Title  style={{color:'#ffffff'}}> <strong>유형</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{backgroundColor:''}}> 
+
+        
+                <Table 
+                        hover
+                        style={{
+                        textAlign:"center",
+                      }} >
+                        <thead>
+                    <tr style={{border:"1px solid #d8d8d8",backgroundColor:'#f7f7f7'}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong></strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}>유형목록</td>
+                 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style={{border:"1px solid #d8d8d8"}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong>1</strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}><Button variant="link" onClick={magBtn2}>비과세</Button></td>
+              
+                    </tr>
+                    <tr style={{border:"1px solid #d8d8d8",}}>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong>2</strong></td>
+                    <td style={{fontSize:'22px'  ,color:'#777777'}}><Button variant="link" onClick={magBtn2}>과세</Button></td>
+              
+                    </tr>
+                    
+
+                
+             
+
+
+                </tbody>
+                </Table>
+
+                </Modal.Body>
+
+                </Modal>
+
+
+
 
 
 

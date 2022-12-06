@@ -535,16 +535,102 @@ const OWBcom = () => {
             {/* 수당관리상세 수정 모달 ShShow*/}
             <Modal
                 centered
-                size="xsm"
+                size="lg"
                 // style={{width:'500px'}}
                 show={ModifyShow} onHide={MdClose} animation={false}>
-                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', width: '500px', height: '70px' }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e'}}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>일용직수당상세</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', width: '500px' }}>
+                <Modal.Body >
+
+                        
+                       
+                <Table style={{textAlign:'center'}}>
+
+                <tr>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px',height: '60px'  }}>수당코드</td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px'}}>
+                <Form.Control style={{ width: '100%', height: '57px',textAlign:'center' }} aria-describedby="btnGroupAddon"
+                                    name="dailyPayCode" value={modifyData.dailyPayCode} onChange={onChangeModifyData} />
+                </td>
 
 
 
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px',height: '60px' }}>수당명</td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',}}> 
+          
+                                       <Form.Control style={{ width: '100%', height: '57px' ,textAlign:'center' }} aria-describedby="btnGroupAddon"
+                                    type="text" name="dailyPayName" value={modifyData.dailyPayName} onChange={onChangeModifyData} />
+                </td >
+
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px' }}>
+
+                </td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',}}></td>
+                </tr>
+                <tr>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7'}}>지급유형</td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px'}}>
+          
+
+                        <InputGroup >
+
+                        <Form.Control
+                            type="addpayCalc"
+                            name="neverChange"
+                            aria-describedby="btnGroupAddon"
+                            value={modifyData.dailyTaxFreeType}
+                            style={{ height: '40px',textAlign:'center' ,fontSize:'15px' }}
+                            onChange={onChangeModifyData}
+
+                        />
+                        <InputGroup.Text id="btnGroupAddon" onClick={Prshow} style={{ width: '50px', height: '40px' }}>  <SearchIcon /></InputGroup.Text>
+                        </InputGroup>
+
+
+
+
+                </td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7'}}>계산식</td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px' }}> 
+
+                <InputGroup >
+
+                <Form.Control
+                    type="addpayCalc"
+                    name="neverChange"
+                    aria-describedby="btnGroupAddon"
+                    value={modifyData.dailyTaxFreeCalc}
+                    style={{ height: '40px',textAlign:'center' ,fontSize:'15px' }}
+                    onChange={onChangeModifyData}
+
+                />
+                <InputGroup.Text id="btnGroupAddon" onClick={CFShow} style={{ width: '50px', height: '40px' }}>  <SearchIcon /></InputGroup.Text>
+                </InputGroup>
+
+
+                </td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7', width:'50px'}}>비과세</td>
+                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px'}}>
+                              
+                            <InputGroup>
+                                <Form.Control
+                                    type="text"
+                                    name="neverChange"
+                                    value={modifyData.dailyTaxFreeName}
+                                    aria-describedby="btnGroupAddon"
+                                    style={{ height: '40px',textAlign:'center' ,fontSize:'15px'  }}
+                                    onChange={onChangeModifyData}
+                                />
+                                <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '50px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
+                            </InputGroup>
+                     
+                </td>
+                </tr>
+                </Table>
+
+
+{/* 
                     <Container>
                         <Grid container spacing={4}>
 
@@ -574,7 +660,7 @@ const OWBcom = () => {
                             <strong>비과세</strong>
                         </Grid>
                         <Grid item xs={6} md={6} ml={19} mt={-5}>
-                            {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                         
                             <InputGroup style={{ width: '250px', height: '40px' }}>
                                 <Form.Control
                                     type="text"
@@ -593,7 +679,6 @@ const OWBcom = () => {
                                 <strong>지급유형</strong>
                             </Grid>
                             <Grid item xs={6} md={6} ml={0} mt={-5}>
-                                {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
                                 <InputGroup style={{ width: '250px', height: '40px' }}>
 
                                     <Form.Control
@@ -609,20 +694,14 @@ const OWBcom = () => {
                                 </InputGroup>
 
                             </Grid>
-                            {/* 
-                        
-                        <Grid item xs={6} md={6} ml={0} mt={-5}>
-                            <Form.Control style={{ width: '250px', height: '40px' }} aria-describedby="btnGroupAddon"
-                                type="text" name="modifypayType" value={modifyData.modifypayType} onChange={onChangeModifyData} />
-                        </Grid>
-*/}
+
 
                         </Grid>
                         <Grid item xs={6} md={6} ml={3} mt={3} style={{ fontSize: '20px', color: '#777777' }}>
                             <strong>계산식</strong>
                         </Grid>
                         <Grid item xs={6} md={6} ml={19} mt={-5}>
-                            {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
+                        
                             <InputGroup style={{ width: '250px', height: '40px' }}>
 
                                 <Form.Control
@@ -638,7 +717,7 @@ const OWBcom = () => {
                             </InputGroup>
 
                         </Grid>
-                    </Container>
+                    </Container> */}
 
                 </Modal.Body>
 
@@ -682,79 +761,49 @@ const OWBcom = () => {
                 size="xl"
                 centered
                 show={SH} onHide={ShClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}> <strong>비과세항목</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
-                    <table style={{
-                        textAlign: "center",
-                        width: "100%", height: '200px', border: "1px solid gray",
-                    }} >
-                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
-                            <td style={{ border: "1px solid gray", fontSize: '20px', width: '100px', height: '50px' }}><strong> 비과세코드</strong></td>
-                            <td style={{ border: "1px solid gray", fontSize: '20px' }}><strong> 비과세명</strong></td>
-                            <td style={{ fontSize: '20px' }}> <strong> 비과세상세</strong></td>
-                        </tr>
+                <Modal.Body style={{ backgroundColor: '' }}>
 
+                    <Table 
+                        hover
+                        style={{
+                        textAlign: "center",
+                        width: "100%", height: '200px'
+                    }} >
+                        <thead>                       
+                            <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px',  }}><strong> 비과세코드</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong> 비과세명</strong></td>
+                            <td style={{ fontSize: '20px' }}> <strong> 비과세상세</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>                    
                         {
                             Right && Right.map((e, idx) =>
-                                <tr style={{ border: "1px solid gray" }}>
+                                <tr style={{ border: "1px solid #d8d8d8" }}>
 
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.taxFreeCode}</td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.taxFreeCode}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>
                                         <Button name={e.taxFreeCode} onClick={() => ShBtn(e)} variant="link">
                                             <strong>{e.taxFreeName}</strong>
                                         </Button></td>
-                                    <td style={{ border: "1px solid gray", fontSize: '20px' }}>{e.taxFreeDetail}</td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>{e.taxFreeDetail}</td>
                                 </tr>
 
                             )
                         }
-                    </table>
+                        </tbody>
+ 
+                        
+                       
+                    </Table>
                 </Modal.Body>
 
             </Modal>
 
-            {/* 계산식 Modal */}
-            <Modal
-                size="sm"
-                centered
-                show={CH} onHide={ChClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}> <strong>수당계산</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
-
-                    <br /><br /><br /><br />
-                    <table style={{
-                        textAlign: "center",
-                        width: "100%", height: '200px', border: "1px solid gray",
-                    }} >
-                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}><strong> 비고</strong></td>
-                            <td style={{ fontSize: '30px' }}> <strong> 권한명</strong></td>
-                        </tr>
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>1</td>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>Master</td>
-                        </tr>
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>2</td>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>Manager</td>
-                        </tr>
-
-                    </table>
-                </Modal.Body>
-                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
-                    <Button variant="secondary" onClick={ChClose}>
-                        닫기
-                    </Button>
-                    <button variant="primary" className='addButton' onClick={ChClose}>
-                        완료
-                    </button>
-                </Modal.Footer>
-
-            </Modal>
+       
 
             {/* 계산식 모달 */}
             <Modal
@@ -771,11 +820,22 @@ const OWBcom = () => {
                             <h2><strong>*계산식</strong></h2>
                         </Grid>
                         <Grid item xs={3} mt={13} ml={-24}>
+                            
 
 
                             <Form.Control style={{ width: '300px', height: '60px', fontSize: '20px', outline: '#005b9e' }}
                                 type="text" value={input} />
                         </Grid>
+                        
+                        <Grid item xs={3}  ml={-23} mt={25}>
+                            <div style={{width:'300px'}}><strong>초과근무시간 : dailyInOutOver</strong></div>
+                        </Grid>
+
+                        <Grid item xs={3}  ml={-24} mt={30}>
+                            <div style={{width:'300px'}}><strong>지급유형 : dailyPayType</strong></div>
+                        </Grid>
+
+
 
                         <Grid item xs={6} ml={20} mt={3}>
                             <Table >
@@ -851,30 +911,36 @@ const OWBcom = () => {
                 size="xsm"
                 centered
                 show={Pr} onHide={PrClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}> <strong>지급유형</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
+                <Modal.Body style={{ backgroundColor: '' }}>
 
-                    <table style={{
+                    <Table 
+                        hover
+                        style={{
                         textAlign: "center",
-                        width: "100%", height: '200px', border: "1px solid gray",
+                        width: "100%",
                     }} >
-                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}><strong> 비고</strong></td>
-                            <td style={{ fontSize: '30px' }}> <strong> 지급유형</strong></td>
+                        <thead>
+                        <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' ,color:'#777777'}}><strong> 비고</strong></td>
+                            <td style={{ fontSize: '15px' ,color:'#777777'}}> <strong> 지급유형</strong></td>
                         </tr>
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>1</td>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}><Button onClick={(e) => onClickProvision(e)} value="change1" variant="link"><strong> 변동(일)</strong></Button></td>
+                        </thead>
+                        <tbody>
+                        <tr style={{ border: "1px solid #d8d8d8" }}>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' }}>1</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' }}><Button onClick={(e) => onClickProvision(e)} value="change1" variant="link"><strong> 변동(일)</strong></Button></td>
                         </tr>
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>2</td>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}><Button onClick={(e) => onClickProvision(e)} value="change2" variant="link"> <strong> 변동(시간)</strong></Button></td>
+                        <tr style={{ border: "1px solid #d8d8d8" }}>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' }}>2</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' }}><Button onClick={(e) => onClickProvision(e)} value="change2" variant="link"> <strong> 변동(시간)</strong></Button></td>
                         </tr>
+                        </tbody>
 
 
-                    </table>
+                    </Table>
                 </Modal.Body>
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={PrClose}>

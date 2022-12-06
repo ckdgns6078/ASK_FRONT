@@ -12,8 +12,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import axios from "axios";
 import { message, Space } from 'antd';
 import { textAlign } from '@mui/system';
-
-
+import { useNavigate, useNavigator} from 'react-router-dom';
 
 const SMBcom = () => {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -53,6 +52,8 @@ const SMBcom = () => {
         });
     };
     //초기 저장된 데이터베이스 값 가져오기
+
+    
     useEffect(() => {
         getData();
     }, []);
@@ -61,12 +62,15 @@ const SMBcom = () => {
         axios.post('http://192.168.2.82:5000/readMainSalary', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
-            console.log("@@@@@@@@@@@" , response.data);
             setData(response.data);
         }).catch(function (err) {
             console.log("read_inOutInfo error", err);
         });
     }
+
+
+
+    
     //모델창 띄우는 버튼 클릭
     const modifyClick = (e) => {
         axios.post('http://192.168.2.82:5000/readModalSalary', {
@@ -133,7 +137,6 @@ const SMBcom = () => {
         }
     }
 
-
     const pushAddData =()=>{
         axios.post('http://192.168.2.82:5000/createSalary' ,{
             compCode :sessionStorage.getItem("uid") ,
@@ -185,7 +188,6 @@ const SMBcom = () => {
             error(text);
         });
     }
-
 
     //계산 눌렀을때 발생하는 함수
     const pushCalculator = ()=>{
@@ -248,9 +250,6 @@ const SMBcom = () => {
     const delShow = () => setDel(true);
 
 
-
-
-
     //돋보기 
     const [mag , setMag] = useState(false);
     const [ magData , setMagData] = useState();
@@ -274,56 +273,119 @@ const SMBcom = () => {
         setAddData(select);
         magClose(false);
     }
-    
-
+    const navigate = useNavigate();
+    //한명 출력용
     const printBtn = () =>{
-        window.open('http://www.naver.com')
+        window.open('http://localhost:3000/Salary?id='+modifyData.payStatementId);
     }
 
+    //여러명 출력용
+    const printCheck = () =>{
+        let key = "";
+        for ( let i of checkedItems){
+          key+="&id="+i;
+        }
+        console.log(key);
+
+        window.open('http://localhost:3000/Salary?id=1'+key);
+    }
+
+
+
+    //체크박스
+    const [isChecked, setIsChecked] = useState(false); //체크여부
+    const [checkedItems, setCheckedItems] = useState(new Set());
+
+    const checkHandler = ({ target }) => {
+        setIsChecked(!isChecked);
+        checkedItemHandle(target.value, target.checked);
+    }
+
+    const checkedItemHandle = (id, isChecked) => {
+        if (isChecked) {
+            checkedItems.add(id);
+            setCheckedItems(checkedItems);
+        } else if (!isChecked && checkedItems.has(id)) {
+            checkedItems.delete(id);
+            setCheckedItems(checkedItems);
+        }
+        return checkedItems;
+    }
+
+    const [isAllChecked, setIsAllChecked] = useState(false);
+
+    const allHandler = ({ target }) => {
+        setIsAllChecked(!isAllChecked);
+        allCheckedHandler(target.checked);
+    }
+
+    const allCheckedHandler = (isChecked) => {
+        if (isChecked) {
+            for (let i = 0; i < data.length; i++) {
+                checkedItems.add(data[i].payStatementId);
+            }
+            for (let i = 0; i < data.length; i++) {
+                let checkedall = document.getElementById(data[i].payStatementId);
+                checkedall.checked = isChecked;
+            }
+        } else {
+            checkedItems.clear();
+            setCheckedItems(checkedItems);
+            setIsAllChecked(!isAllChecked);
+            for (let i = 0; i < data.length; i++) {
+                let checkedall = document.getElementById(data[i].payStatementId);
+                checkedall.checked = isChecked;
+            }
+        }
+        return checkedItems;
+    }
 
 
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>임직원급여 관리</strong></h2>
+            <button style={{ position: 'absolute', right: "10px",}} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+            <button style={{ position: 'absolute', right: "100px", }} onClick={printCheck} className="Atmp1">  <strong>출력</strong></button>
+
             <br />
             <br />
             <br />
 
-            <Table >
+            <Table hover >
                 <thead style={{ height: '60px' }}>
                     {/* #769FCD */}
                     {/* ecf0f1 */}
-                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', }}>
 
 
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
-                            <input name='allcheck' type="checkbox" ></input>
-
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                            <input type="checkbox" name='allcheck' id="allCheck" onChange={(e)=>allHandler(e)}  ></input>
+                            
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>급여명</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>사원코드</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>성명</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>기본급</strong>
                         </td>
 
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총 수당</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총 경비</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총 세액</strong>
                         </td>
-                        <td style={{ border: "3px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총액</strong>
                         </td>
                         
@@ -336,23 +398,23 @@ const SMBcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr >
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}>
-                                    <input type='checkbox'></input>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>
+                                <input type="checkbox" id={e.payStatementId} value={e.payStatementId} onChange={(e) => checkHandler(e)}></input>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.payTitle}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.empNum}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {e.payTitle}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {e.empNum}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>
                                     <Button style={{ fontSize: '22px' }} name={e.inOutListId} onClick={() => modifyClick(e)} variant="link">
                                         <strong>
                                             {e.empName}
                                         </strong>
                                     </Button>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {data && e.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
                                 {/* <td>이메일 데이터 넣을곳</td> */}
                             </tr>
                         )
@@ -360,8 +422,6 @@ const SMBcom = () => {
 
                 </tbody>
             </Table>
-            <button style={{ position: 'absolute', Right: "10px", top: '0px' }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
-            <button style={{ position: 'absolute', Right: "200px", top: '300px' }} onClick={printBtn} className="Atmp1">  <strong>출력</strong></button>
 
 
 
@@ -674,10 +734,12 @@ const SMBcom = () => {
                     <Button variant="secondary" onClick={modifyClose}>
                         닫기
                     </Button>
-
-                    <Button variant="primary" onClick={delShow}>
+                    <button  className='addButton' variant="primary" onClick={delShow}>
                         삭제
-                    </Button>
+                    </button>
+                    <button className='addButton' style={{width:'100px'}} variant="primary" onClick={printBtn}>
+                        출력/저장
+                    </button>
                     {/* <Button variant="primary" onClick={modifyClose}>
                         수정
                     </Button> */}

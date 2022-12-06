@@ -228,9 +228,14 @@ const OWCcom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 관리 </strong></h2>
+      
             <br />
             <br />
             <br />
+            <div>
+                <button  style={{ position: 'absolute', left: "0px",  top:'100px'}} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+                <button style={{ position: 'absolute', right: "100px", top: '70px' }}className="Atmp1"><strong>추가</strong></button>
+            </div>
             <Table >
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#f7f7f7'}}>
@@ -283,9 +288,7 @@ const OWCcom = () => {
                     }
                 </tbody>
             </Table>
-            <div>
-                <button  style={{ position: 'absolute', left: "0px", }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
-            </div>
+           
 
         {/*  출퇴근 등록 추가 */}
             <Modal
