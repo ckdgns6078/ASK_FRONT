@@ -17,28 +17,33 @@ const Cbar = () => {
                             <Grid container  >
                                 
                                 <Grid item  xs ml={39}>
-                                                <strong>휴가항목등록</strong>
+                                <Navbar.Brand  href="/ATGAbut">  <strong>휴가항목등록</strong> </Navbar.Brand>     
+                                               
                                 </Grid>
                                
                                 <Grid item xs ml={2}>
-                                                <strong>보유휴가현황</strong>
+                                <Navbar.Brand  href="/ATGBbut">    <strong>보유휴가현황</strong> </Navbar.Brand>     
+                                             
                                 </Grid>
                                
                                 <Grid item  xs ml={2}>
-                                                <strong>휴가처리</strong> 
+                                <Navbar.Brand  href="/ATGCbut">    <strong>휴가처리</strong>  </Navbar.Brand>     
+                                             
                                 </Grid>
                                 <Grid item  xs ml={2}>
-                                                <strong>출퇴근관리</strong> 
+                                <Navbar.Brand  href="/ATGDbut">     <strong>출퇴근관리</strong> </Navbar.Brand>     
+                                            
                                 </Grid>
                                 <Grid item  xs ml={2}>
-                                                <strong>출퇴근현황</strong> 
+                                <Navbar.Brand  href="/ATGEbut">  <strong>출퇴근현황</strong>  </Navbar.Brand>     
+                                               
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>
               
                 </Navbar>
               
-                <CTabs/>
+                {/* <CTabs/> */}
                 
         </div>
     );

@@ -16,27 +16,27 @@ const Dbar = () => {
                     <Navbar.Brand href="#" style={{position:'absolute',}}>
                             <Grid container  >
                                 
-                                <Grid item  xs ml={93}>
-                                                <strong>일용직등록</strong>
+                                <Grid item  xs ml={98}>
+                                <Navbar.Brand  href="/OWAbut">    <strong>일용직등록</strong> </Navbar.Brand>     
+                                              
                                 </Grid>
                                
                                 <Grid item xs ml={2}>
-                                                <strong>수당등록</strong>
+                                <Navbar.Brand  href="/OWBbut">  <strong>수당등록</strong> </Navbar.Brand>     
+                                               
                                 </Grid>
-                               
-                                <Grid item  xs ml={2}>
-                                                <strong>출퇴근관리</strong> 
-                                </Grid>
+                    
                         
                                 <Grid item  xs ml={2}>
-                                                <strong>출퇴근현황</strong> 
+                                <Navbar.Brand  href="/OWCbut">  <strong>출퇴근현황</strong>  </Navbar.Brand>     
+                                               
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>
               
                 </Navbar>
               
-                <DTabs/>
+                {/* <DTabs/> */}
                 
         </div>
     );

@@ -15,24 +15,29 @@ const Bbar = () => {
                     <Navbar.Brand href="#" style={{position:'absolute',left:'300px'}}>
                             <Grid container>
                                 <Grid item  xs >
-                                     <strong>사원 관리</strong>
+                                <Navbar.Brand  href="/PMAbut"> <strong>사원 관리</strong> </Navbar.Brand>     
+                                   
                                 </Grid>
                                 <Grid item xs ml={2}>
-                                    <strong>수당관리</strong>
+                                <Navbar.Brand  href="/PMBbut">   <strong>수당관리</strong> </Navbar.Brand>     
+                                  
                                 </Grid>
                                 <Grid item  xs ml={2}>
-                                    <strong>부서관리</strong>
+                                <Navbar.Brand  href="/PMCbut">    <strong>부서관리</strong> </Navbar.Brand>     
+                                   
                                 </Grid>
                                 <Grid item  xs  ml={2}>
-                                    <strong>세금관리</strong>
+                                <Navbar.Brand  href="/PMDbut">    <strong>부서관리</strong> </Navbar.Brand>     
+                                   
+                                
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>
               
                 </Navbar>
               
-                <BTabs/>
-                
+                {/* <BTabs/>
+                 */}
         </div>
     );
 };

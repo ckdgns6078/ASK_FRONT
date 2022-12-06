@@ -7,22 +7,22 @@ const MiddleBar = () => {
 
 
   const Apage = () => {
-    window.location.href="/Apage"
+    window.location.href="/Abut"
   }
   const Bpage = () => {
-    window.location.href="/Bpage"
+    window.location.href="/PMAbut"
   }
   const Cpage = () => {
-    window.location.href="/Cpage"
+    window.location.href="/ATGAbut"
   }
   const Dpage = () => {
-    window.location.href="/Dpage"
+    window.location.href="/OWAbut"
   }
   const Epage = () => {
-    window.location.href="/Epage"
+    window.location.href="/SMAbut"
   }
   const Fpage = () => {
-    window.location.href="/Fpage"
+    window.location.href="/BAAbut"
   }
 
 

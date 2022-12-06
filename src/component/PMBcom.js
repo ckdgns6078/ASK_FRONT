@@ -739,46 +739,7 @@ const PMBcom = () => {
 
             </Modal>
 
-            {/* 계산식 Modal */}
-            <Modal
-                size="sm"
-                centered
-                show={CH} onHide={ChClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}> <strong>수당계산</strong></Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f1f2f6' }}>
-
-                    <br /><br /><br /><br />
-                    <table style={{
-                        textAlign: "center",
-                        width: "100%", height: '200px', border: "1px solid gray",
-                    }} >
-                        <tr style={{ border: "1px solid gray", backgroundColor: '#a4b0be' }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}><strong> 비고</strong></td>
-                            <td style={{ fontSize: '30px' }}> <strong> 권한명</strong></td>
-                        </tr>
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>1</td>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>Master</td>
-                        </tr>
-                        <tr style={{ border: "1px solid gray" }}>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>2</td>
-                            <td style={{ border: "1px solid gray", fontSize: '30px' }}>Manager</td>
-                        </tr>
-
-                    </table>
-                </Modal.Body>
-                <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
-                    <Button variant="secondary" onClick={ChClose}>
-                        닫기
-                    </Button>
-                    <button variant="primary" className='addButton' onClick={ChClose}>
-                        완료
-                    </button>
-                </Modal.Footer>
-
-            </Modal>
+          
 
             {/* 계산식 모달 */}
             <Modal

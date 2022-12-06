@@ -358,6 +358,10 @@ const OWDcom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
+            <div>
+                <button style={{ position: 'absolute', right: "0px", top: '65px' }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+            </div>
+
             <br />
             <br />
             <br />
@@ -470,10 +474,7 @@ const OWDcom = () => {
 
                 </tbody>
             </Table>
-            <div>
-                <button style={{ position: 'absolute', right: "0px", top: '0px' }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
-            </div>
-
+           
 
             {/* 추가 */}
 

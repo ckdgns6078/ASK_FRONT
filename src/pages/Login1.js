@@ -48,7 +48,32 @@ const Login1 = () => {
                         console.log("getMaster error" , error);
                     });
                     sessionStorage.setItem("id",id);
-                    window.location.href = "http://localhost:3000/Apage?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    // window.location.href = "http://localhost:3000/Apage?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/Abut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/Bbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/Ccut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+
+                    window.location.href = "http://localhost:3000/PMAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/PMBbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/PMCbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/PMDbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+
+                    window.location.href = "http://localhost:3000/ATGAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/ATGBbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/ATGCbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/ATGDbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/ATGEbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+
+                    window.location.href = "http://localhost:3000/SMAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/SMBbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/SMCbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+
+                    window.location.href = "http://localhost:3000/BAAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/BABbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/BACbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    
+                    window.location.href = "http://localhost:3000/Abut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+
                 }else{
                     window.alert("로그인 정보가 없습니다.");
                 }
@@ -145,13 +170,13 @@ const Login1 = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 3 }}
-                        style={{ backgroundColor: '#2F58B8', height: '55px', fontSize: '20px' }}
+                        style={{ backgroundColor: '#', height: '55px', fontSize: '20px' }}
                     >
                         <strong>로그인</strong>
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
+                            <Link href="#005b9e" variant="body2">
                                 아이디 찾기
                             </Link>
                         </Grid>

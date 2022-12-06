@@ -283,7 +283,7 @@ const Ccom = () => {
 
     return (
         <div style={{ width: '1400px', position: 'relative' ,height:'600px'}}>
-            <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>사용자 관리 </strong></h2>
+            <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>모바일 관리 </strong></h2>
 
             <Box  >
               

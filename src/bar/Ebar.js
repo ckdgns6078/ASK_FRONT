@@ -16,27 +16,28 @@ const Ebar = () => {
                     <Navbar.Brand href="#" style={{position:'absolute'}}>
                             <Grid container  >
                                 
-                                <Grid item  xs ml={118}>
-                                                <strong>통합급여관리</strong>
+                                <Grid item  xs ml={125}>
+                                <Navbar.Brand  href="/SMAbut">  <strong>임직원급여관리</strong> </Navbar.Brand>     
+                                
                                 </Grid>
                                
-                                <Grid item xs ml={2}>
-                                                <strong>임직원급여관리</strong>
-                                </Grid>
+                            
                                
                                 <Grid item  xs  ml={2}>
-                                                <strong>일용직관리</strong> 
+                                <Navbar.Brand  href="/SMBbut">  <strong>일용직관리</strong> </Navbar.Brand>     
+                                                
                                 </Grid>
                         
                                 <Grid item  xs  ml={2}>
-                                                <strong>경비관리</strong> 
+                                <Navbar.Brand  href="/SMCbut">  <strong>경비관리</strong>  </Navbar.Brand>     
+                                               
                                 </Grid>
                             </Grid>
                     </Navbar.Brand>
               
                 </Navbar>
               
-                <ETabs/>
+                {/* <ETabs/> */}
                 
         </div>
     );

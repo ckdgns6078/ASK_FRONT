@@ -291,26 +291,26 @@ const ATGDcom = () => {
             <br />
             <Table hover >
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#ecf0f1', border: "1px solid #f1f2f6" }}>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>날짜</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>성명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부서</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>출근시간</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>퇴근시간</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>초과 근무 시간</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>비고</strong>
                         </td>
                     </tr>
@@ -322,19 +322,19 @@ const ATGDcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr >
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutDate}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.inOutDate}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
                                     <Button style={{ fontSize: '22px' }} name={e.inOutListId} onClick={() => MdShow(e)} variant="link">
                                         <strong>
                                             {e.empName}
                                         </strong>
                                     </Button>
                                 </td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.depName}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutStart}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutEnd}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOutOver}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>{e.inOut_Note}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.depName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.inOutStart}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.inOutEnd}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.inOutOver}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.inOut_Note}</td>
 
                             </tr>
                         )

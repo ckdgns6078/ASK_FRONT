@@ -16,27 +16,27 @@ const Fbar = () => {
                     <Navbar.Brand href="#" style={{position:'absolute'}}>
                             <Grid container  >
                                 
-                                <Grid item  xs ml={155}> 
-                                                <strong>거래처관리</strong>
+                                <Grid item  xs ml={165} mt={0.6}> 
+                                <Navbar.Brand  href="/BAAbut">    <strong>거래관리</strong> </Navbar.Brand>     
+                                              
                                 </Grid>
                                
-                                <Grid item xs ml={2}>
-                                                <strong>매입관리</strong>
-                                </Grid>
                                
-                                <Grid item  xs  ml={2}>
-                                                <strong>매출관리</strong> 
-                                </Grid>
-                        
-                                <Grid item  xs  ml={2}>
-                                                <strong>조회</strong> 
-                                </Grid>
+                                <Navbar.Brand  href="/BABbut">   <strong>매입/매출 </strong> </Navbar.Brand>     
+                                              
+                              
+                               
+                           
+                              
+                                <Navbar.Brand  href="/BACbut">  <strong>통계</strong> </Navbar.Brand>     
+                                               
+                               
                             </Grid>
                     </Navbar.Brand>
               
                 </Navbar>
               
-                <FTabs/>
+                {/* <FTabs/> */}
                 
         </div>
     );

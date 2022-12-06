@@ -4,19 +4,21 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import BAPAcom from '../bookingping_Accounting/BAPAcom';
-import BAPBcom from '../bookingping_Accounting/BAPBcom';
-import BKPCcom from '../bookingping_Accounting/BKPCcom';
-import BKPDcom from '../bookingping_Accounting/BKPDcom';
+import PMAcom from '../component/PMAcom';
+import PMBcom from '../component/PMBcom';
+import PMCcom from '../component/PMCcom';
+import PMDcom from '../component/PMDcom';
+import Bbar from '../bar/Bbar';
 
-function FTabs(props) {
+
+function PMCbut(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
-      role="FTabs"
+      role="PMCbut"
       hidden={value !== index}
-      id={`vertical-FTabs-${index}`}
+      id={`vertical-PMCbut-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
@@ -29,7 +31,7 @@ function FTabs(props) {
   );
 }
 
-FTabs.propTypes = {
+PMCbut.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -38,7 +40,7 @@ FTabs.propTypes = {
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-FTabs-${index}`,
+    'aria-controls': `vertical-PMCbut-${index}`,
   };
 }
 
@@ -51,6 +53,7 @@ export default function VerticalTabs() {
 
   return (
     <div>
+        <Bbar/>
         
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '700px' }}
@@ -63,36 +66,32 @@ export default function VerticalTabs() {
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
-        style={{width:'300px'}}
       >
-        <br/>
-            <div>
-        <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >경리/회계</strong>  &nbsp; &nbsp; </h2>
+          <div>
+            <br/>
+            <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >인사 관리</strong>  &nbsp; &nbsp; </h2>
         </div>
-    
-        <Tab label="거래 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/>
-        <Tab label=" 매입/매출 관리" {...a11yProps(1)}style={{fontSize:'25px'}} />
-        {/* <Tab label=" 매출 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/> */}
-        <Tab label=" 통계" {...a11yProps(3)}style={{fontSize:'25px'}} />
+        <Tab label="사원 관리" {...a11yProps(1)} style={{fontSize:'25px'}}/>
+        <Tab label=" 수당 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/>
+        <Tab label=" 부서 관리" {...a11yProps(3)} style={{fontSize:'25px'}}/>
+        <Tab label=" 세금 관리" {...a11yProps(4)} style={{fontSize:'25px'}}/>
 
       </Tabs>
-      <FTabs value={value} index={0}>
-       <BAPAcom/>
-      </FTabs>
-    
-      <FTabs value={value} index={2}>
-      <BAPAcom/>
-      </FTabs>
-      <FTabs value={value} index={3}>
-       <BAPBcom/>
-      </FTabs>
-      {/* <FTabs value={value} index={4}>
-        <BKPCcom/>
-      </FTabs> */}
-      <FTabs value={value} index={4}>
-      <BKPDcom/>
-      </FTabs>
-
+      <PMCbut value={value} index={0}>
+      <PMCcom/>
+      </PMCbut>
+      <PMCbut value={value} index={1}>
+      <PMAcom/>
+      </PMCbut>
+      <PMCbut value={value} index={2}>
+        <PMBcom/>
+      </PMCbut>
+      <PMCbut value={value} index={3}>
+       <PMCcom/>
+      </PMCbut>
+      <PMCbut value={value} index={4}>
+       <PMDcom/>
+      </PMCbut>
 
     </Box>
     </div>
