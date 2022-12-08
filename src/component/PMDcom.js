@@ -298,7 +298,7 @@ const PMDcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>세금관리</strong></h2>
+            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' , color:'#005b9e'}}><strong>세금 관리</strong></h2>
            
             <Box >
                 <button style={{ position: 'absolute', right: "0px",  }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
@@ -314,16 +314,16 @@ const PMDcom = () => {
                     <tr style={{ backgroundColor: '#f7f7f7', }}>
 
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>세금 코드</strong>
+                            세금 코드
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>세금명</strong>
+                            세금명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>세금 항목</strong>
+                            세금 항목
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>비고</strong>
+                            비고
                         </td>
 
 
@@ -334,14 +334,14 @@ const PMDcom = () => {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
 
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong> {e.taxCode}</strong> </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.taxCode} </td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>
-                                    <Button variant="link" name={e.taxInfoID} onClick={() => modifyShow(e)}>
-                                        <strong>{e.taxName}</strong>
+                                    <Button variant="link" style={{ fontSize:'22px' }}name={e.taxInfoID} onClick={() => modifyShow(e)}>
+                                        {e.taxName}
                                     </Button>
                                 </td>
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong>{e.taxItem} </strong></td>
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong>{e.taxNote} </strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.taxItem} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.taxNote} </td>
 
 
                             </tr>
@@ -526,23 +526,23 @@ const PMDcom = () => {
                       }} >
                     <tr style={{border:"1px solid #d8d8d8",backgroundColor:'#f7f7f7'}}>
                     <td style={{border:"1px solid #d8d8d8",fontSize:'22px'}}><strong></strong></td>
-                    <td style={{fontSize:'22px'  ,color:'#777777'}}>세금코드</td>
-                    <td style={{fontSize:'22px' ,color:'#777777'}}>세금항목</td>
-                    <td style={{fontSize:'22px '  ,color:'#777777'}}>세금명</td>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'18px'  ,color:'#777777'}}>세금코드</td>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'18px' ,color:'#777777'}}>세금항목</td>
+                    <td style={{border:"1px solid #d8d8d8",fontSize:'18px '  ,color:'#777777'}}>세금명</td>
                     </tr>
 
                     <tbody>
                     {
                         magData && magData.map((e, idx) =>
                             <tr  >
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}><strong> {idx+1}</strong> </td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}><strong>{e.taxCode} </strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}> {idx+1} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}>{e.taxCode} </td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '17px' }}>
-                                    <Button variant="link" name={e.taxInfoID} onClick={() => magSelect(e)}>
-                                        <strong>{e.taxItem}</strong>
+                                    <Button variant="link" style={{ fontSize:'17px'}}name={e.taxInfoID} onClick={() => magSelect(e)}>
+                                        {e.taxItem}
                                     </Button>
                                 </td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}><strong>{e.taxName} </strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '17px', color: '#000' }}>{e.taxName} </td>
                             </tr>
                         )
                     }

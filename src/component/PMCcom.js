@@ -216,7 +216,7 @@ const PMCcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>부서관리</strong></h2>
+            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' ,color :'#005b9e'}}><strong>부서 관리</strong></h2>
             <Box >
                 <button style={{ position: 'absolute', right: "0px", }} onClick={handleShow} className="Atmp1"><strong>등록</strong></button>
             </Box>
@@ -229,13 +229,13 @@ const PMCcom = () => {
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>부서코드</strong>
+                            부서코드
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>부서명</strong>
+                            부서명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>부서상세</strong>
+                            부서상세
                         </td>
 
                     </tr>
@@ -245,9 +245,9 @@ const PMCcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong> {e.depCode}</strong> </td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.depId} onClick={() => MdShow(e)} variant="link"><strong>{e.depName}</strong></Button></td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><strong>{e.depDetail}</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.depCode} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.depId} style = {{ fontSize:'22px'}}onClick={() => MdShow(e)} variant="link">{e.depName}</Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.depDetail}</td>
                             </tr>
                         )
                     }
@@ -264,7 +264,7 @@ const PMCcom = () => {
 
                 show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}><strong>부서관리</strong></Modal.Title>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong>부서등록</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '', }}>
                         <Table style={{textAlign:'center'}}>
@@ -316,19 +316,19 @@ const PMCcom = () => {
                                 <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>부서코드</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                              
-                                        <Form.Control style={{ height: '57px' }} aria-describedby="btnGroupAddon"
+                                        <Form.Control style={{ height: '57px' , textAlign:'center'}} aria-describedby="btnGroupAddon"
                                     type='text' name='modifydepCode' value={modifyData.modifydepCode} onChange={onChangeModifyData} />
                                 </td>
                                 <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,width:'80px'}}>부서명</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                              
-                                       <Form.Control style={{ height: '57px' }} aria-describedby="btnGroupAddon"
+                                       <Form.Control style={{ height: '57px' , textAlign:'center'}} aria-describedby="btnGroupAddon"
                                     type='text' name='modifydepName' value={modifyData.modifydepName} onChange={onChangeModifyData} />
                                     
                                 </td>
                                 <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'80px' }}>부서상세</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                                <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"
+                                <Form.Control style={{  height: '57px' , textAlign:'center'}} aria-describedby="btnGroupAddon"
                                     type='text' name='modifydepDetail' value={modifyData.modifydepDetail} onChange={onChangeModifyData} />
                                 </td>
                             </tr>

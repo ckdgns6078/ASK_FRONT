@@ -120,7 +120,7 @@ const ATGBcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>보유휴가 현황 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>보유휴가 현황 </strong></h2>
             <br />
             <br />
             <br />
@@ -132,22 +132,22 @@ const ATGBcom = () => {
                     <tr style={{ backgroundColor: '#f7f7f7', textAlign: 'center', border: "1px solid #d8d8d8" }}>
 
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>부서명</strong>
+                            부서명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>사원명</strong>
+                            사원명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>총휴가</strong>
+                            총휴가
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>사용휴가</strong>
+                            사용휴가
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>잔여휴가</strong>
+                            잔여휴가
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>상세확인</strong>
+                            상세확인
                         </td>
 
                     </tr>
@@ -161,7 +161,7 @@ const ATGBcom = () => {
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.totalVacation}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.takeVacation}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.remindVacation}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}><Button variant="link" name={e.empNum} onClick={() => DeShow(e)}><strong>확인</strong></Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}><Button variant="link" style={{ fontSize:'22px'}} name={e.empNum} onClick={() => DeShow(e)}><strong>확인</strong></Button></td>
                             </tr>
                         )
                     }
@@ -174,15 +174,15 @@ const ATGBcom = () => {
                 size="xl"
                 show={DelShow} onHide={DelClose} animation={false}>
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}><strong> 상세 확인</strong> </Modal.Title>
+                    <Modal.Title style={{ color: '#ffffff' }}><strong> 상세확인</strong> </Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
 
                         <Table>
                             <tr>
-                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px' ,textAlign:'center' }}> 이름</td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px' ,textAlign:'center' , fontSize : '22px',color: '#777777'}}> 이름</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px',textAlign:'center' }}> {value &&DelShow && value.empName}</td>
-                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px' ,textAlign:'center'}}>  부서 </td>
+                                <td style={{ backgroundColor: '#f7f7f7',border: "1px solid #d8d8d8" ,width:'120px' ,textAlign:'center' , fontSize:'22px' , color: '#777777'}}>  부서 </td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' ,textAlign:'center'}}> { value && DelShow && value.depName}</td>
                            
                             </tr>
@@ -201,7 +201,7 @@ const ATGBcom = () => {
                         </Grid>
                     </Grid> */}
                     <br/>
-                    <div style={{ fontSize: '25px' }}><strong>휴가 내역</strong></div>
+                    <div style={{ fontSize: '25px' }}><strong>휴가내역</strong></div>
 
 
                     <Table 
@@ -211,11 +211,11 @@ const ATGBcom = () => {
                     }}>
                         <thead>
                         <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>시작일</strong></td>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>종료일</strong></td>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>휴가기간</strong></td>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>휴가항목</strong></td>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong>휴가상세</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' , color: '#777777' }}>시작일</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' , color: '#777777' }}>종료일</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' , color: '#777777' }}>휴가기간</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' , color: '#777777' }}>휴가항목</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' , color: '#777777' }}>휴가상세</td>
                         </tr>
                         </thead>
                         <tbody>

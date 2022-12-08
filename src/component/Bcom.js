@@ -40,7 +40,6 @@ const Bcom = (props) => {
         saveId: '',
         savePw: '',
         saveUser: '',
-        saveAdvice: ''
     });
     const [modifyData, setModifyData] = useState({
         preUserId: null,
@@ -48,7 +47,6 @@ const Bcom = (props) => {
         userId: null,
         userPw: null,
         userName: null,
-        userGrant: null,
     });
     const [arr, setArr] = useState([]);
     const [allcheckarr, setAllcheckarr] = useState([]);
@@ -62,11 +60,14 @@ const Bcom = (props) => {
         axios.post('http://192.168.2.82:5000/readUser', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
+            console.log(response.data);
             setData(response.data);
+
         }).catch(function (error) {
             console.log("readUser error", error);
         });
     }
+
 
     //추가 입력값 onChange 함수
     const onChangeAddData = (e) => {
@@ -81,14 +82,13 @@ const Bcom = (props) => {
     //추가 모델에서 추가 눌렀을경우 함수
     const pushAddData = () => {
         console.log("addData값 ",addData);
-        if (addData.saveId == '' || addData.savePw == '' || addData.saveUser == '' || addData.saveAdvice == '') {
+        if (addData.saveId == '' || addData.savePw == '' || addData.saveUser == '') {
             window.alert("공란은 입력할 수 없습니다.");
         } else {
             axios.post('http://192.168.2.82:5000/createUser', {
                 userId: addData.saveId,
                 userPw: addData.savePw,
                 userName: addData.saveUser,
-                userGrant: addData.saveAdvice,
                 compCode: sessionStorage.getItem("uid")
             }).then(function (response) {
                 if (!response.data) {
@@ -150,7 +150,7 @@ const Bcom = (props) => {
                     "userId": response.data[0].userId,
                     "userPw": response.data[0].userPw,
                     "userName": response.data[0].userName,
-                    "userGrant": response.data[0].userGrant,
+                    
                 });
             }).catch(function (error) {
                 console.log("updateUserModal error :", error);
@@ -177,7 +177,6 @@ const Bcom = (props) => {
             userId: modifyData.userId,
             userPw: modifyData.userPw,
             userName: modifyData.userName,
-            userGrant: modifyData.userGrant,
             preUserId: modifyData.preUserId
         }).then(function (response) {
             if (response.data) {
@@ -380,9 +379,9 @@ const [open, setOpen] = React.useState(
                             <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>사용자명</strong>
                             </td>
-                            <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
+                            {/* <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px'}}>
                                 <strong>권한</strong>
-                            </td>
+                            </td> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -392,21 +391,11 @@ const [open, setOpen] = React.useState(
                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000' , width:'50px'}}><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
                             <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000' , width:'370px'}}><strong> {e.userId}</strong> </td>
                             <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000', width:'370px'}}>
-                                {/* <Form.Control style={{ width: '100%', height: '100%',fontSize:'20px' ,textAlign:'center'}} type="password" autoComplete="current-password" value={e.userPw}/> */}
-                                <TextField
-                      
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    
-                    />
+                                <Form.Control style={{ width: '100%', height: '100%',fontSize:'20px' ,textAlign:'center'}} type="password" autoComplete="current-password" value={e.userPw}/>
+
                                 </td>
                             <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000' , width:'370px'}}><strong>{e.userName} </strong></td>
-                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.userGrant}</strong></td>
+                            {/* <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.userGrant}</strong></td> */}
                         </tr>
                         )
                     }
@@ -458,12 +447,12 @@ const [open, setOpen] = React.useState(
                         {/* <input style={{width:'250px',height:'40px'}}name="saveUser" type="text" onChange={onChangeAddData}></input> */}
                         <Form.Control style={{width:'250px',height:'40px'}}  aria-describedby="btnGroupAddon" name="saveUser" type="text" onChange={onChangeAddData}/>
                         </Grid>
-                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                        {/* <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
                             <strong>권한</strong>
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={6} md={6} ml={-12} mt={-2}>
                         {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
-                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                        {/* <InputGroup   style={{width:'250px' ,height:'40px'}}>
                       
                         <Form.Control
                             type="text"
@@ -474,7 +463,7 @@ const [open, setOpen] = React.useState(
                             
                         />
                             <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
-                        </InputGroup>
+                        </InputGroup> */}
                         </Grid>
                      
                     </Grid>
@@ -537,12 +526,12 @@ const [open, setOpen] = React.useState(
                         </Grid>
 
                    
-                        <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
+                        {/* <Grid item xs={6} md={6} ml={3} mt={-2} style={{fontSize:'20px',color:'#777777'}}>
                             <strong>권한</strong>
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={6} md={6} ml={-12} mt={-2}>
                         {/* <input style={{width:'250px',height:'40px'}}name="saveAdvice" type="text" onChange={onChangeAddData}></input> */}
-                        <InputGroup   style={{width:'250px' ,height:'40px'}}>
+                        {/* <InputGroup   style={{width:'250px' ,height:'40px'}}>
                       
                         <Form.Control
                             type="text"
@@ -553,7 +542,7 @@ const [open, setOpen] = React.useState(
                             value={modifyData.userGrant}       
                         />
                             <InputGroup.Text id="btnGroupAddon"   onClick={Shshow} style={{width:'50px' ,height:'40px'}}> <SearchIcon/></InputGroup.Text>
-                        </InputGroup>
+                        </InputGroup> */}
                         </Grid>
 
 

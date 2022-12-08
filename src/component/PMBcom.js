@@ -421,7 +421,7 @@ const PMBcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>수당 관리 </strong></h2>
+            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' , color:'#005b9e'}}><strong>수당 관리 </strong></h2>
             <Box >
                 <button style={{ position: 'absolute', right: "0px",  }} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
             </Box>
@@ -435,19 +435,19 @@ const PMBcom = () => {
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#f7f7f7', }}>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>수당코드</strong>
+                            수당코드
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>수당명</strong>
+                            수당명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>비과세</strong>
+                            비과세
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>지급유형</strong>
+                            지급유형
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>계산식</strong>
+                            계산식
                         </td>
                     </tr>
                 </thead>
@@ -455,11 +455,11 @@ const PMBcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><strong> {e.payCode}</strong> </td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><Button name={e.empPayID} onClick={() => MdShow(e)} variant="link"><strong>{e.payName}</strong></Button></td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><strong>  {e.taxFreeName}</strong></td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><strong>{e.payType} </strong></td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><strong> {e.payCalc}</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.payCode} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><Button name={e.empPayID} style = {{fontSize:'20px'}}onClick={() => MdShow(e)} variant="link">{e.payName}</Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}>  {e.taxFreeName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}>{e.payType} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.payCalc}</td>
                             </tr>
                         )
                     }
@@ -492,7 +492,7 @@ const PMBcom = () => {
                         <tr>
                          <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px',height: '60px'  }}>수당코드</td>
                          <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px'}}>
-                                    <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"  
+                                    <Form.Control style={{  height: '57px' , textAlign:'center'}} aria-describedby="btnGroupAddon"  
                                         type="text" name='addpayCode' onChange={onChangeAddData} />
                         </td>
                  
@@ -500,7 +500,7 @@ const PMBcom = () => {
 
                         <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px',height: '60px' }}>수당명</td>
                         <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',}}> 
-                        <Form.Control style={{  height: '57px' }} aria-describedby="btnGroupAddon"  
+                        <Form.Control style={{  height: '57px' , textAlign:'center' }} aria-describedby="btnGroupAddon"  
                                     type="text" name='addpayName' onChange={onChangeAddData} />
                         </td >
 
@@ -593,12 +593,12 @@ const PMBcom = () => {
                         <tr>
                             <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px',height: '60px'  }}>수당코드</td>
                             <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px'}}>
-                                <Form.Control aria-describedby="btnGroupAddon" style={{width:'100%', height:'57px'}}
+                                <Form.Control aria-describedby="btnGroupAddon" style={{width:'100%', height:'57px' , textAlign:'center'}}
                                     name="modifypayCode" value={modifyData.modifypayCode} onChange={onChangeModifyData} />
                             </td>
                             <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px',height: '60px' }}>수당명</td>
                             <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px'}}>
-                                <Form.Control aria-describedby="btnGroupAddon" style={{width:'100%', height:'57px'}}
+                                <Form.Control aria-describedby="btnGroupAddon" style={{width:'100%', height:'57px' , textAlign:'center'}}
                                     type="text" name="modifypayName" value={modifyData.modifypayName} onChange={onChangeModifyData} />
                             </td >
                             <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor: '#f7f7f7',width:'80px'}}>
@@ -700,7 +700,7 @@ const PMBcom = () => {
                 size="xl"
                 centered
                 show={SH} onHide={ShClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#f7f7f7' }}> <strong>비과세항목</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
@@ -713,9 +713,9 @@ const PMBcom = () => {
                     }} >
                         <thead>
                         <tr style={{backgroundColor: '#f7f7f7' }}>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', width: '120px', height: '50px' }}><strong> 비과세코드</strong></td>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong> 비과세명</strong></td>
-                            <td style={{ fontSize: '20px' , border: "1px solid #d8d8d8"}}> <strong> 비과세상세</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', width: '120px', height: '50px' , color:'#777777' }}><strong> 비과세코드</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' , color:'#777777'}}><strong> 비과세명</strong></td>
+                            <td style={{ fontSize: '20px' , border: "1px solid #d8d8d8" , color:'#777777'}}> <strong> 비과세상세</strong></td>
                         </tr>
                         </thead>
                         <tbody>
@@ -764,11 +764,11 @@ const PMBcom = () => {
                           
 
                         <Grid item xs={3}  ml={-23} mt={25}>
-                            <div style={{width:'300px'}}><strong>초과근무시간 : dailyInOutOver</strong></div>
+                            <div style={{width:'300px'}}><strong>초과근무시간 : InOutOver</strong></div>
                         </Grid>
 
                         <Grid item xs={3}  ml={-24} mt={30}>
-                            <div style={{width:'300px'}}><strong>지급유형 : dailyPayType</strong></div>
+                            <div style={{width:'300px'}}><strong>지급유형 : PayType</strong></div>
                         </Grid>
 
 

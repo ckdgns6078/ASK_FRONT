@@ -27,7 +27,7 @@ const Bbar = () => {
                                    
                                 </Grid>
                                 <Grid item  xs  ml={2}>
-                                <Navbar.Brand  href="/PMDbut">    <strong>부서관리</strong> </Navbar.Brand>     
+                                <Navbar.Brand  href="/PMDbut">    <strong>세금관리</strong> </Navbar.Brand>     
                                    
                                 
                                 </Grid>

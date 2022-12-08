@@ -495,7 +495,7 @@ const PMAcom = () => {
         
         <div style={{ width: '1400px', position: 'relative' }}>
         {contextHolder}
-        <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>사원 관리 </strong></h2>
+        <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' , color:'#005b9e' }}><strong>사원 관리 </strong></h2>
         <div>
             <button  style={{position:'absolute' ,right:"0px", }}onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
           
@@ -512,28 +512,28 @@ const PMAcom = () => {
                 <thead style={{height:'60px'}}>
                 <tr  style={{backgroundColor:'#f7f7f7' ,  }}>
                 <td style={{ border: "1px solid #d8d8d8" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>입사일자</strong>
+                    입사일자
                 </td>
                 <td style={{ border: "1px solid #d8d8d8" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>사원번호</strong>
+                    사원번호
                 </td>
                 <td style={{ border: "1px solid #d8d8d8",color:'#777777',fontSize:'22px' }}>
-                    <strong>사원명</strong>
+                    사원명
                 </td>
                 <td style={{ border: "1px solid #d8d8d8" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>부서명</strong>
+                    부서명
                 </td>
                 <td style={{ border: "1px solid #d8d8d8" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>직위/직급</strong>
+                    직위/직급
                 </td>
                 <td style={{ border: "1px solid #d8d8d8" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>은행</strong>
+                    은행
                 </td>
                 <td style={{ border: "1px solid #d8d8d8",color:'#777777',fontSize:'22px' }}>
-                    <strong>계좌번호</strong>
+                    계좌번호
                 </td>
                 <td style={{ border: "1px solid #d8d8d8" ,color:'#777777',fontSize:'22px'}}>
-                    <strong>Email</strong>
+                    Email
                 </td>
             </tr>
                 </thead>
@@ -597,18 +597,18 @@ const PMAcom = () => {
                      <Container >
                      <Table style={{ border: "1px solid #d8d8d8",textAlign:'center'}}>
                                 <tr>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}><strong>사원명</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}>사원명</td>
                                     <td colSpan='3'  style={{width:'50px'}}>
                                     <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempName' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
-                                    <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',width:'140px' ,fontSize:'15px'}}><strong>사원번호</strong></td>
+                                    <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',width:'140px' ,fontSize:'15px'}}>사원번호</td>
                                     <td style={{width:'200px'}}>
                                     <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempNum' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
                                     
                                 </tr>
                                 <tr>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',width:'140px',fontSize:'15px' }}><strong>주민등록번호</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',width:'140px',fontSize:'15px' }}>주민등록번호</td>
                                     <td>
                                     <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempFirstSSN' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
@@ -619,25 +619,25 @@ const PMAcom = () => {
                                     <Form.Control style={{ width: '100%', height: '100%' ,fontSize:'15px'}} type="password" name='addempSecondSSN' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
 
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>전화번호</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>전화번호</td>
                                     <td>
                                     <Form.Control style={{ width: '100%', height: '100%' ,fontSize:'15px'}} type="text" name='addempPhone' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
                                     
                                 </tr>
                                 <tr>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}><strong>이메일</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}>이메일</td>
                                     <td  colSpan='3' style={{ border: "1px solid #d8d8d8"}}>
                                     <Form.Control style={{ width: '100%', height: '100%',fontSize:'15px' }} type="text" name='addempEmail' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}><strong>부양 가족수</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7',fontSize:'15px' }}>부양 가족수</td>
                                     <td style={{ border: "1px solid #d8d8d8"}}>
                                     <Form.Control style={{ width: '100%', height: '100%' ,fontSize:'15px'}} type="text" name='addempFamilyNum' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                     </td>
                                     
                                 </tr>
                                 <tr>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong> 주소</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}> 주소</td>
                                     <td colSpan='5'style={{ border: "1px solid #d8d8d8"}}>
                                     <InputGroup style={{ width: '100%', height: '50px' ,fontSize:'15px'}}>
 
@@ -668,7 +668,7 @@ const PMAcom = () => {
 
                         <Table  style={{ border: "1px solid #d8d8d8" ,textAlign:'center'}}>
                             <tr style={{ border: "1px solid #d8d8d8"}}>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px' ,width:'90px'}}><strong>부서코드</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px' ,width:'90px'}}>부서코드</td>
                                 <td colSpan='5'>
                                 <InputGroup style={{ width: '100%' }}>
 
@@ -683,48 +683,48 @@ const PMAcom = () => {
                                     <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
                                     </InputGroup>
                                 </td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'90px'}}><strong> 부서명</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'90px'}}> 부서명</td>
                                 <td colSpan='5'>
                                 <Form.Control style={{ width: '100%', height: '45px' }} type="text" name='adddepName' value={addData.adddepName} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                 </td>
 
                             </tr>
                             <tr style={{ border: "1px solid #d8d8d8"}}>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}><strong>더미</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>더미</td>
                                 <td colSpan='5'>
                                 <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
                                 </td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>직위/직급</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>직위/직급</td>
                                 <td colSpan='5'>
                                 <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addempRank' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                 </td>
 
                             </tr>
                             <tr style={{ border: "1px solid #d8d8d8"}}>
-                            <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}><strong>입사일</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>입사일</td>
                                 <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartYear' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 <td>/</td>
                                 <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartMonth' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 <td>/</td>
                                 <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartDay' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>휴가</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>휴가</td>
                                 <td>
                                 <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addtotalVacation' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                 </td>
-                                <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'100px'}}><strong>잔여휴가</strong></td>
+                                <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'100px'}}>잔여휴가</td>
                                 <td>
                                 <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addremindVacation' aria-describedby="btnGroupAddon" />
                                 </td>
                             </tr>
                             <tr style={{ border: "1px solid #d8d8d8"}}>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}><strong>퇴사일</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>퇴사일</td>
                                 <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndYear' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 <td>/</td>
                                 <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndMonth' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 <td>/</td>
                                 <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndDay' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}><strong>퇴사사유</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>퇴사사유</td>
                                 <td colSpan='4'>
                                 <Form.Control style={{ width: '100%', height: '30px',height:'100%' }} type="text" name='addempEndReason' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                 </td>
@@ -774,44 +774,6 @@ const PMAcom = () => {
                                     
 
                                 </tr>
-
-
-
-
-
-
-
-
-                            {/* <tr>
-                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>기본급</td>
-                                <td>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>출산보육수당</td>
-                                <td>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>부양가족수당</td>
-                                <td>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>식대</td>
-                                <td>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'22px',backgroundColor:'#f7f7f7'}}>차량유지비</td>
-                                <td>
-                                      <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                </td>
-                            </tr> */}
                        </Table>
 
 
@@ -819,7 +781,7 @@ const PMAcom = () => {
 
                        <Table style={{border:"1px solid #d8d8d8",textAlign:'center'}} >
                             <tr>
-                                <td rowSpan='4' style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>금여통장,</td>
+                                <td rowSpan='4' style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>급여통장</td>
                                 <td style={{border:"1px solid #d8d8d8",color:'#777777',fontSize:'15px',backgroundColor:'#f7f7f7'}}>은행</td>
                                 <td> 
                                 <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
@@ -870,256 +832,244 @@ const PMAcom = () => {
                 <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>사원정보</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '#f3f3f3', }}>
-
-      
-
-
-               
-
-                    <Container>
-                        <Grid container spacing={4}>
-                            <Grid item xs={6} md={2} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>사원명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempName' value={modifyData.modifyempName} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={6} md={2} ml={-1} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>사원 번호</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0}>
-                                {/* outline:'1px solid #777777'/ */}
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempNum'  value={modifyData.modifyempNum} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={6} md={3} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>주민등록번호</strong>
-                            </Grid>
-                            <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='modifyempFirstSSN' value={modifyData.modifyempFirstSSN} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={6} md={3} ml={-10} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>ㅡ</strong>
-                            </Grid>
-                            <Grid item xs={6} md={3} ml={-20.5} mt={-2} >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="password" name='modifyempSecondSSN' value={modifyData.modifyempSecondSSN} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-
-
-                            <Grid item xs={6} md={2} ml={-10} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>전화 번호</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempPhone' value={modifyData.modifyempPhone} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-
-
-
-                            <Grid item xs={6} md={3} ml={-2} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>이메일</strong>
-                            </Grid>
-                            <Grid item xs={6} md={3} ml={-5.5} mt={-2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempEmail' value={modifyData.modifyempEmail} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={6} md={2} ml={6.5} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>부양 가족 수</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempFamilyNum'value={modifyData.modifyempFamilyNum} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={10} md={5} mt={-1.5} ml={-2} style={{ fontSize: '15px', color: '#777777' }} >
-                                <strong>주소</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={7} ml={-21} mt={-2}  >
-
-
-
-                                <InputGroup style={{ width: '600px', height: '30px' }}>
-
-                                    <Form.Control
-                                        type="text"
-                                        name='modifyempAddress'
-                                        value={modifyData.modifyempAddress}
-                                        aria-describedby="btnGroupAddon"
-                                        style={{ height: '30px' }}
-                                        onChange={onChangeModifyData}
-                                    />
-                                    <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                                </InputGroup>
-                            </Grid>
-
-
-                            <Grid item xs={12} ml={-5} mt={-2}>
-                                <hr style={{ width: '800px' }} />
-                            </Grid>
-
-
-                            <Grid item xs={6} md={4} mt={-1} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>부서코드</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-
-
-                                <InputGroup style={{ width: '230px', height: '30px' }}>
-
-                                    <Form.Control
-                                        type="text"
-                                        name='modifydepCode'
-                                        value={modifyData.modifydepCode}
-                                        aria-describedby="btnGroupAddon"
-                                        style={{ height: '30px' }}
-                                        onChange={onChangeModifyData}
-                                    />
-                                    <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
-                                </InputGroup>
-
-
-                            </Grid>
-                            <Grid item xs={6} md={2} ml={-1} mt={-1} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>부서명</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifydepName' value={modifyData.modifydepName} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-
-                            <Grid item xs={6} md={4} mt={-1} ml={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>쓰레기요</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} mt={-2} ml={-13.5} >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
-                            </Grid>
-
-                            <Grid item xs={6} md={2} ml={-1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>직위/직급</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempRank' value={modifyData.modifyempRank} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-
-
-                            <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>입사일</strong>
-                            </Grid>
-                            <Grid item xs={2} md={1} mt={-2} ml={2}>
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='modifyempStartYear' value={modifyData.modifyempStartYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>/</strong>
-                            </Grid>
-
-                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='modifyempStartMonth' value={modifyData.modifyempStartMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>/</strong>
-                            </Grid>
-                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='modifyempStartDay' value={modifyData.modifyempStartDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
+                <Modal.Body style={{ backgroundColor: '', }}>
 
 
 
 
 
-                            <Grid item xs={6} md={2} ml={1} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>휴가</strong>
-                            </Grid>
-                            <Grid item xs={6} md={2} ml={-10} mt={-2}  >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='modifytotalVacation' value={modifyData.modifytotalVacation} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
 
-                            <Grid item xs={6} md={2} ml={-1} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>잔여 휴가</strong>
-                            </Grid>
-                            <Grid item xs={6} md={1} ml={-4} mt={-2} >
-                                <Form.Control style={{ width: '100px', height: '30px' }} type="text" name='modifyremindVacation' value={modifyData.modifyremindVacation}aria-describedby="btnGroupAddon" />
-                            </Grid >
+                    <Box sx={{ width: '100%' }}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs value={value} onChange={HC} aria-label="basic tabs example">
+                                <Tab label="사원정보" {...a11yProps(0)} />
+                                <Tab label="급여지급사항" {...a11yProps(1)} />
 
+                            </Tabs>
+                        </Box>
 
-                            <Grid item xs={2} md={2} ml={-2} mt={-1.5} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>퇴사일</strong>
-                            </Grid>
-                            <Grid item xs={2} md={1} mt={-2} ml={2}>
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='modifyempEndYear' value={modifyData.modifyempEndYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>/</strong>
-                            </Grid>
-
-                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='modifyempEndMonth' value={modifyData.modifyempEndMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-                            <Grid item xs={2} md={1} ml={1} mt={-1.8} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>/</strong>
-                            </Grid>
-                            <Grid item xs={2} md={1} ml={-6} mt={-2} >
-                                <Form.Control style={{ width: '60px', height: '30px' }} type="text" name='modifyempEndDay' value={modifyData.modifyempEndDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={6} md={2} ml={1} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong>퇴사 사유</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={0} mt={-2}  >
-                                <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempEndReason' value={modifyData.modifyempEndReason} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
-
-                            <Grid item xs={12} ml={-5} mt={-4}>
-                                <hr style={{ width: '800px' }} />
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={16} mt={-3} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong> 은행</strong>
-                            </Grid>
-
-                            <Grid item xs={6} md={6} ml={-32} mt={-4}  >
-
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='modifybankName' value={modifyData.modifybankName} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
+                        {/* 사원정보 탭 */}
+                        <TabPanel value={value} index={0} style={{ backgroundColor: '', }}>
 
 
+                            <Container >
+                                <Table style={{ border: "1px solid #d8d8d8", textAlign: 'center' }}>
+                                    <tr>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>사원명</td>
+                                        <td colSpan='3' style={{ width: '50px' }}>
+                                            <Form.Control style={{ width: '100%', height: '100%', fontSize: '15px' }} type="text" name='modifyempName' value={modifyData.modifyempName} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', width: '140px', fontSize: '15px' }}>사원번호</td>
+                                        <td style={{ width: '200px' }}>
+                                            <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='modifyempNum'  value={modifyData.modifyempNum} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
+                                        </td>
 
-                            <Grid item xs={6} md={4} ml={-2} mt={2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <div ><strong> 급여 통장</strong></div>
-                            </Grid>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', width: '140px', fontSize: '15px' }}>주민등록번호</td>
+                                        <td>
+                                            <Form.Control style={{ width: '100%', height: '100%', fontSize: '15px' }} type="text" name='modifyempFirstSSN' value={modifyData.modifyempFirstSSN} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+                                        <td>
+                                            -
+                                        </td>
+                                        <td>
+                                            <Form.Control style={{ width: '100%', height: '100%', fontSize: '15px' }} type="password" name='modifyempSecondSSN' value={modifyData.modifyempSecondSSN} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>전화번호</td>
+                                        <td>
+                                            <Form.Control style={{ width: '100%', height: '100%', fontSize: '15px' }} type="text" name='modifyempPhone' value={modifyData.modifyempPhone} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>이메일</td>
+                                        <td colSpan='3' style={{ border: "1px solid #d8d8d8" }}>
+                                            <Form.Control style={{ width: '100%', height: '100%', fontSize: '15px' }} type="text" name='modifyempEmail' value={modifyData.modifyempEmail} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>부양 가족수</td>
+                                        <td style={{ border: "1px solid #d8d8d8" }}>
+                                            <Form.Control style={{ width: '100%', height: '100%', fontSize: '15px' }} type="text" name='modifyempFamilyNum'value={modifyData.modifyempFamilyNum} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}> 주소</td>
+                                        <td colSpan='5' style={{ border: "1px solid #d8d8d8" }}>
+                                            <InputGroup style={{ width: '100%', height: '50px', fontSize: '15px' }}>
+
+                                                <Form.Control
+                                                    type="text"
+                                                    name='modifyempAddress'
+                                                    value={modifyData.modifyempAddress}
+                                                    aria-describedby="btnGroupAddon"
+                                                    style={{ height: '30px' }}
+                                                    onChange={onChangeModifyData}
+                                                />
+                                                <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
+                                            </InputGroup>
+                                        </td>
 
 
-                            <Grid item xs={6} md={4} ml={-13.5} mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
-                                <strong> 계좌 번호</strong>
-                            </Grid>
-                            <Grid item xs={6} md={4} ml={-16} mt={-2} >
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='modifybankNum' value={modifyData.modifybankNum} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
+                                    </tr>
+                                </Table>
 
 
-                            <Grid item xs={6} md={6} ml={16} mt={-5} style={{ fontSize: '15px', color: '#777777' }} >
-                                <strong>예금주</strong>
-                            </Grid>
-                            <Grid item xs={6} md={6} ml={-31.5} mt={-5}  >
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='modifybankOwner' value={modifyData.modifybankOwner} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
 
-                            <Grid item xs={6} md={6} ml={16} mt={-2} style={{ fontSize: '15px', color: '#777777' }} >
-                                <strong>연봉</strong>
-                            </Grid>
 
-                            <Grid item xs={6} md={6} ml={-31.5} mt={-2}  >
-                                <Form.Control style={{ width: '280px', height: '30px' }} type="text" name='modifyempPay' value={modifyData.modifyempPay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/>
-                            </Grid>
 
-                        </Grid>
-                    </Container>
+
+
+
+
+
+
+                                <Table style={{ border: "1px solid #d8d8d8", textAlign: 'center' }}>
+                                    <tr style={{ border: "1px solid #d8d8d8" }}>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', width: '90px' }}>부서코드</td>
+                                        <td colSpan='5'>
+                                            <InputGroup style={{ width: '100%' }}>
+
+                                                <Form.Control
+                                                    type="text"
+                                                    name='modifydepCode'
+                                                    value={modifyData.modifydepCode}
+                                                    aria-describedby="btnGroupAddon"
+                                                    style={{ height: '30px' }}
+                                                    onChange={onChangeModifyData}
+                                                />
+                                                <InputGroup.Text id="btnGroupAddon" onClick={Shshow} style={{ width: '40px', height: '30px' }}> <SearchIcon /></InputGroup.Text>
+                                            </InputGroup>
+                                        </td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', width: '90px' }}> 부서명</td>
+                                        <td colSpan='5'>
+                                            <Form.Control style={{ width: '100%', height: '45px' }} type="text" name='modifydepName' value={modifyData.modifydepName} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+
+                                    </tr>
+                                    <tr style={{ border: "1px solid #d8d8d8" }}>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>더미</td>
+                                        <td colSpan='5'>
+                                            <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
+                                        </td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>직위/직급</td>
+                                        <td colSpan='5'>
+                                            <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifyempRank' value={modifyData.modifyempRank} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+
+                                    </tr>
+                                    <tr style={{ border: "1px solid #d8d8d8" }}>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>입사일</td>
+                                        <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartYear' value={modifyData.modifyempStartYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        <td>/</td>
+                                        <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartMonth' value={modifyData.modifyempStartMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/></td>
+                                        <td>/</td>
+                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartDay' value={modifyData.modifyempStartDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>휴가</td>
+                                        <td>
+                                            <Form.Control style={{ width: '100px', height: '30px', height: '100%' }} type="text" name='modifytotalVacation' value={modifyData.modifytotalVacation} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', width: '100px' }}>잔여휴가</td>
+                                        <td>
+                                            <Form.Control style={{ width: '100px', height: '30px', height: '100%' }} type="text" name='modifyremindVacation' value={modifyData.modifyremindVacation}aria-describedby="btnGroupAddon" />
+                                        </td>
+                                    </tr>
+                                    <tr style={{ border: "1px solid #d8d8d8" }}>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>퇴사일</td>
+                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndYear' value={modifyData.modifyempEndYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        <td>/</td>
+                                        <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndMonth' value={modifyData.modifyempEndMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        <td>/</td>
+                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndDay' value={modifyData.modifyempEndDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>퇴사사유</td>
+                                        <td colSpan='4'>
+                                            <Form.Control style={{ width: '100%', height: '30px', height: '100%' }} type="text" name='modifyempEndReason' value={modifyData.modifyempEndReason} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                        </td>
+                                    </tr>
+
+                                </Table>
+
+
+
+                            </Container>
+
+                        </TabPanel>
+
+
+
+                        {/* 급여지급 사항 탭 */}
+                        <TabPanel value={value} index={1} >
+                            <Table style={{ border: "1px solid #d8d8d8", textAlign: 'center' }}>
+
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>기본급</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>출산보육수당</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                </tr>
+                                <tr style={{ borderBottom: "1px solid #d8d8d8" }}>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>식대</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>부양가족수당</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%', borderBottom: "1px solid #d8d8d8" }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>차량유지비</td>
+                                    <td >
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                    </td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
+
+
+                                </tr>
+                            </Table>
+
+
+
+
+                            <Table style={{ border: "1px solid #d8d8d8", textAlign: 'center' }} >
+                                <tr>
+                                    <td rowSpan='4' style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>금여통장,</td>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>은행</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifybankName' value={modifyData.modifybankName} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>계좌번호</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifybankNum' value={modifyData.modifybankNum} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>예금주</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifybankOwner' value={modifyData.modifybankOwner} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>연봉</td>
+                                    <td>
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifyempPay' value={modifyData.modifyempPay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
+                                    </td>
+                                </tr>
+                            </Table>
+
+                        </TabPanel>
+
+                    </Box>
+
 
 
                 </Modal.Body>

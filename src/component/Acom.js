@@ -230,7 +230,6 @@ const Acom = () => {
                     <td style={{textAlign:'left'}}>
                         {/* <input style={{width:'300px' ,}} name='compAddress' type="text" onChange={onChangeInput} value={input.compAddress}></input> */}
                         <Form.Control style={{width:'300px',height:'40px'}} type="text" name='lunchTime' aria-describedby="btnGroupAddon" onChange={onChangeInput} value={input.lunchTime}/>
-
                     </td>
                 </tr>
             </table>
