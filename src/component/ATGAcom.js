@@ -210,7 +210,7 @@ const ATGAcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong> 휴가항목 등록 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong> 휴가항목 등록 </strong></h2>
             <Box>
                 <button style={{ position: 'absolute', right: "0px", }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
             </Box>
@@ -228,13 +228,13 @@ const ATGAcom = () => {
                     <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
 
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>휴가코드</strong>
+                            휴가코드
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>휴가명</strong>
+                            휴가명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>휴가상세내용</strong>
+                            휴가상세내용
                         </td>
 
                     </tr>
@@ -247,7 +247,7 @@ const ATGAcom = () => {
                             <tr >
 
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactCode}</td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.vactNameListId} onClick={() => MdShow(e)} variant="link"><strong>{e.vactName}</strong></Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.vactNameListId} style={{ fontSize:'22px'}}onClick={() => MdShow(e)} variant="link"><strong>{e.vactName}</strong></Button></td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.vactDetail}</td>
 
                             </tr>

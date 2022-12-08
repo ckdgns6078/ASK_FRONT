@@ -367,7 +367,7 @@ const OWBcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>수당 관리 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>수당 관리 </strong></h2>
             <Box >
                 <button style={{ position: 'absolute', right: "0px", }} onClick={handleShow} className="Atmp1">  <strong>등록</strong></button>
             </Box>
@@ -383,19 +383,19 @@ const OWBcom = () => {
                 <thead style={{ height: '60px' }}>
                     <tr style={{ backgroundColor: '#f7f7f7', }}>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>수당코드</strong>
+                            수당코드
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>수당명</strong>
+                            수당명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>비과세</strong>
+                            비과세
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>지급유형</strong>
+                            지급유형
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>계산식</strong>
+                            계산식
                         </td>
                     </tr>
                 </thead>
@@ -403,11 +403,11 @@ const OWBcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyPayCode} </td>
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '20px', color: '#000' }}><Button name={e.dailyPayId} onClick={() => MdShow(e)} variant="link">{e.dailyPayName}</Button></td>
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '20px', color: '#000' }}>  {e.dailyTaxFreeName}</td>
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '20px', color: '#000' }}>{e.dailyTaxFreeType} </td>
-                                <td style={{ border: "2px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.dailyTaxFreeCalc}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyPayCode} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}><Button name={e.dailyPayId} style={{ fontSize:'22px'}}onClick={() => MdShow(e)} variant="link">{e.dailyPayName}</Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>  {e.dailyTaxFreeName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>{e.dailyTaxFreeType} </td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyTaxFreeCalc}</td>
                             </tr>
                         )
                     }
@@ -774,9 +774,9 @@ const OWBcom = () => {
                     }} >
                         <thead>                       
                             <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px',  }}><strong> 비과세코드</strong></td>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}><strong> 비과세명</strong></td>
-                            <td style={{ fontSize: '20px' }}> <strong> 비과세상세</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px',  }}> 비과세코드</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> 비과세명</td>
+                            <td style={{ fontSize: '20px' }}>  비과세상세</td>
                             </tr>
                         </thead>
                         <tbody>                    
@@ -810,7 +810,7 @@ const OWBcom = () => {
                 size="lg"
                 centered
                 show={CF} onHide={CFClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}> <strong>계산기</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', height: '350px' }}>
@@ -924,8 +924,8 @@ const OWBcom = () => {
                     }} >
                         <thead>
                         <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
-                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' ,color:'#777777'}}><strong> 비고</strong></td>
-                            <td style={{ fontSize: '15px' ,color:'#777777'}}> <strong> 지급유형</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '15px' ,color:'#777777'}}> 비고</td>
+                            <td style={{ fontSize: '15px' ,color:'#777777'}}>  지급유형</td>
                         </tr>
                         </thead>
                         <tbody>

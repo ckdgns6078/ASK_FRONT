@@ -357,7 +357,7 @@ const OWDcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
             <div>
                 <button style={{ position: 'absolute', right: "0px", top: '65px' }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
             </div>
@@ -427,25 +427,25 @@ const OWDcom = () => {
 
 
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>날짜</strong>
+                            날짜
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>성명</strong>
+                            성명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>직급</strong>
+                            직급
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>출근시간</strong>
+                            출근시간
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>퇴근시간</strong>
+                            퇴근시간
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>초과근무시간</strong>
+                            초과근무시간
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>비고</strong>
+                            비고
                         </td>
                     </tr>
                 </thead>

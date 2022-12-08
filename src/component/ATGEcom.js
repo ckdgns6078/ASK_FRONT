@@ -345,7 +345,7 @@ const ATGEcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 현황 </strong></h2>
             <br />
             <br />
             <br />
@@ -415,25 +415,25 @@ const ATGEcom = () => {
 
 
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>날짜</strong>
+                            날짜
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>부서</strong>
+                            부서
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>성명</strong>
+                            성명
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>직급</strong>
+                            직급
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>출근시간</strong>
+                            출근시간
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>퇴근시간</strong>
+                            퇴근시간
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
-                            <strong>초과근무시간</strong>
+                            초과근무시간
                         </td>
                     </tr>
                 </thead>
@@ -685,10 +685,10 @@ const ATGEcom = () => {
                 size="lg"
                 centered
                 show={Pr} onHide={PrClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}> <strong>지급유형</strong></Modal.Title>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>연장수당</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '' }}>
+                <Modal.Body style={{  }}>
 
                     <Table
                         hover 
@@ -698,25 +698,25 @@ const ATGEcom = () => {
                     }} >
                         <thead>
                         <tr style={{backgroundColor: '#f7f7f7' }}>
-                            <td style={{ border: "1px solid #f1f2f6'", fontSize: '20px', color: '#777777' }}><strong></strong></td>
-                            <td style={{ border: "1px solid #f1f2f6'", fontSize: '20px', color: '#777777' }}><strong>수당코드</strong></td>
-                            <td style={{ border: "1px solid #f1f2f6'", fontSize: '20px', color: '#777777' }}><strong>수당명</strong></td>
-                            <td style={{ border: "1px solid #f1f2f6'", fontSize: '20px', color: '#777777' }}><strong>비과세</strong></td>
-                            <td style={{ border: "1px solid #f1f2f6'", fontSize: '20px', color: '#777777' }}><strong>지급유형</strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong></strong></td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>수당코드</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>수당명</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>비과세</td>
+                            <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>지급유형</td>
                         </tr>
                         </thead>
                         <tbody>
                             {
                                 prData && prData.map((e, idx) =>
                                     <tr style={{ border: "1px solid , color: '#f1f2f6'" }}>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{idx + 1}</td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.payCode}</td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>
-                                            <Button variant="link" name={e.empPayID} onClick={() => onClickProvision1(e)}>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{idx + 1}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{e.payCode}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>
+                                            <Button variant="link" style={{fontSize:'20px'}} name={e.empPayID} onClick={() => onClickProvision1(e)}>
                                                 <strong>{e.payName}</strong>
                                             </Button></td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.taxFreeName}</td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.payType}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{e.taxFreeName}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{e.payType}</td>
                                     </tr>
                                 )
                             }
@@ -741,10 +741,10 @@ const ATGEcom = () => {
                 size="lg"
                 centered
                 show={PrN} onHide={PrNClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
-                    <Modal.Title style={{ color: '#ffffff' }}> <strong>지급유형</strong></Modal.Title>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>야간수당</strong></Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ backgroundColor: '' }}>
+                <Modal.Body style={{ }}>
 
                     <Table
                         hover 
@@ -753,26 +753,26 @@ const ATGEcom = () => {
                         width: "100%", height: '200px'
                     }} >
                         <thead>
-                        <tr style={{ border: "1px solid #f1f2f6", backgroundColor: '#f7f7f7' }}>
-                            <td style={{ border: "1px solid #f1f2f6",color: '#777777', fontSize: '20px' }}><strong></strong></td>
-                            <td style={{ border: "1px solid #f1f2f6",color: '#777777', fontSize: '20px' }}><strong>수당코드</strong></td>
-                            <td style={{ border: "1px solid #f1f2f6",color: '#777777', fontSize: '20px' }}><strong>수당명</strong></td>
-                            <td style={{ border: "1px solid #f1f2f6",color: '#777777', fontSize: '20px' }}><strong>비과세</strong></td>
-                            <td style={{ border: "1px solid #f1f2f6",color: '#777777', fontSize: '20px' }}><strong>지급유형</strong></td>
+                        <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
+                            <td style={{ border: "1px solid #d8d8d8",color: '#777777', fontSize: '20px' }}><strong></strong></td>
+                            <td style={{ border: "1px solid #d8d8d8",color: '#777777', fontSize: '20px' }}>수당코드</td>
+                            <td style={{ border: "1px solid #d8d8d8",color: '#777777', fontSize: '20px' }}>수당명</td>
+                            <td style={{ border: "1px solid #d8d8d8",color: '#777777', fontSize: '20px' }}>비과세</td>
+                            <td style={{ border: "1px solid #d8d8d8",color: '#777777', fontSize: '20px' }}>지급유형</td>
                         </tr>
                         </thead>
                         <tbody>
                             {
                                 prNData && prNData.map((e, idx) =>
-                                    <tr style={{ border: "1px solid #f1f2f6" }}>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{idx + 1}</td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.payCode}</td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>
-                                            <Button variant="link" name={e.empPayID} onClick={() => onClickProvision2(e)}>
+                                    <tr style={{ border: "1px solid #d8d8d8" }}>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{idx + 1}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{e.payCode}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>
+                                            <Button variant="link" style={{fontSize:'20px'}} name={e.empPayID} onClick={() => onClickProvision2(e)}>
                                                 <strong>{e.payName}</strong>
                                             </Button></td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.taxFreeName}</td>
-                                        <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.payType}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{e.taxFreeName}</td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '20px' }}>{e.payType}</td>
                                     </tr>
                                 )
                             }
