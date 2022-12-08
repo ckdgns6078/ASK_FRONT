@@ -148,6 +148,7 @@ const SMDcom = () => {
             startDate: dateStart,//시작일 ,
             endDate: dateEnd,//종료일자
         }).then(function (response) {
+            console.log(response.data);
             setData(response.data);
         }).catch(function (err) {
             console.log("search_inOutInfo error", err);

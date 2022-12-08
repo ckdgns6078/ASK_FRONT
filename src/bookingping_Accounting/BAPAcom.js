@@ -639,7 +639,7 @@ const BAPAcom = () => {
                         수정
                     </button>
                     <button  className='addButton' onClick={taxShow} style={{width:'100px'}}>
-                       명세버튼
+                       상세
                     </button>
                 </Modal.Footer>
 
@@ -776,7 +776,7 @@ const BAPAcom = () => {
                         닫기
                     </Button>
                     <button variant="primary" className='addButton' onClick={printCheck} >
-                        세금계산서 발행
+                        발행
                     </button>
                 </Modal.Footer>
             </Modal>

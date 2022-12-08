@@ -161,7 +161,7 @@ const Salary = () => {
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>식대</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.foodPay ? e.foodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>추가경비</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>@@@@@@&nbsp;</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.expense ? e.foodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                     </tr>
                     <tr>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>차량유지비</td>

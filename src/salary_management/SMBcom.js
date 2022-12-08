@@ -138,6 +138,7 @@ const SMBcom = () => {
     }
 
     const pushAddData =()=>{
+        console.log(addData.overtimePay)
         axios.post('http://192.168.2.82:5000/createSalary' ,{
             compCode :sessionStorage.getItem("uid") ,
             payStatementId : addData.payStatementId,
@@ -191,7 +192,6 @@ const SMBcom = () => {
 
     //계산 눌렀을때 발생하는 함수
     const pushCalculator = ()=>{
-        console.log()
         axios.post('http://192.168.2.82:5000/setSalary',{
             payTitle : addData.payTitle,
             payDay : String(addData.payDayYear) + String(addData.payDayMonth) + String(addData.payDayDay),
@@ -546,7 +546,7 @@ const SMBcom = () => {
                                 <td rowspan='2' style={{border:"3px solid #f1f2f6", width:'100px',fontSize:'12px'}}>사원명</td> */}
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px' , textAlign:'right'}} name='empPay'aria-describedby="btnGroupAddon" value={ add && addData &&addData.empPay} onChange={onChangeAddData}/></td>
                                     {/* <td> <input type='text' style={{height:'40px',width:'100px',fontSize:'12px'}}></input></td> */}
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='nightTimePay' value={ add && addData &&addData.nightTimePay} aria-describedby="btnGroupAddon" onChange={onChangeAddData} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='overtimePay' value={ add && addData &&addData.overtimePay} aria-describedby="btnGroupAddon" onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='weekendPay' aria-describedby="btnGroupAddon" value={ add && addData && addData.weekendPay} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='annualAllowance' aria-describedby="btnGroupAddon" value={ add && addData && addData.annualAllowance} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='chldbChalw' aria-describedby="btnGroupAddon" value={ add && addData && addData.chldbChalw} onChange={onChangeAddData} /></td>
@@ -703,7 +703,7 @@ const SMBcom = () => {
 <td rowspan='2' style={{border:"3px solid #f1f2f6", width:'100px',fontSize:'12px'}}>사원명</td> */}
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' , width: '100px', height: '40px', fontSize: '12px' }}>{ modify && modifyData && modifyData.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } </td>
                                     {/* <td> <input type='text' style={{height:'40px',width:'100px',fontSize:'12px'}}></input></td> */}
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.nightTimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.overtimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.weekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.annualAllowance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.chldbChalw.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>

@@ -3,7 +3,11 @@ import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import axios from "axios";
+import { CategoryScale } from 'chart.js';
+import { Chart as ChartJS, registerables } from 'chart.js';
 
+
+ChartJS.register(...registerables);
 const BKPDcom = () => {
   
   const [income, setIncom] = useState("");
@@ -77,10 +81,10 @@ const getOutcome = async() => {
       ],
     };
     
-	return (
-    	<div>
+   return (
+       <div>
 
-        	<Line style={{width:'1300px'}} type="line" data={data} />
+           <Line style={{width:'1300px'}} type="line" data={data} />
         </div>
     );
     
