@@ -320,11 +320,11 @@ const Ccom = () => {
                     {
                         data && data.map((e, idx) =>
                         <tr style={{height:'60px'}} >
-                           <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><input type="checkbox" id={e.mb_id} value={e.mb_id} onChange={(e) => checkHandler(e)}/></td>
-                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.mb_id}</strong> </td>
-                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong> {e.mb_pw}</strong></td>
-                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>{e.mb_code} </strong></td>
-                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>{e.mb_name}</strong></td>
+                           <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000' , width:'50px'}}><input type="checkbox" id={e.mb_id} value={e.mb_id} onChange={(e) => checkHandler(e)}/></td>
+                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000' , width:'370px'}}><strong> {e.mb_id}</strong> </td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000' , width:'370px'}}><Form.Control style={{ width: '100%', height: '100%',fontSize:'20px' ,textAlign:'center'}} type="password" value={e.mb_pw}/></td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000' , width:'370px'}}><strong>{e.mb_code} </strong></td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000' , width:'370px'}}><strong>{e.mb_name}</strong></td>
                             
                         </tr>
                         )

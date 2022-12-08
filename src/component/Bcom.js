@@ -389,10 +389,23 @@ const [open, setOpen] = React.useState(
                     {
                         data && data.map((e, idx) =>
                         <tr style={{height:'60px'}} >
-                           <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
-                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.userId}</strong> </td>
-                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>  {e.userPw}</strong></td>
-                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000'}}><strong>{e.userName} </strong></td>
+                           <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000' , width:'50px'}}><input type="checkbox" id={e.userId} value={e.userId} onChange={(e) => checkHandler(e)}></input></td>
+                            <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000' , width:'370px'}}><strong> {e.userId}</strong> </td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000', width:'370px'}}>
+                                {/* <Form.Control style={{ width: '100%', height: '100%',fontSize:'20px' ,textAlign:'center'}} type="password" autoComplete="current-password" value={e.userPw}/> */}
+                                <TextField
+                      
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                    
+                    />
+                                </td>
+                            <td style={{border:"1px solid #d8d8d8",fontSize:'20px',color:'#000' , width:'370px'}}><strong>{e.userName} </strong></td>
                             <td style={{border:"1px solid #d8d8d8", fontSize:'20px',color:'#000'}}><strong> {e.userGrant}</strong></td>
                         </tr>
                         )

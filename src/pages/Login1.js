@@ -33,8 +33,17 @@ const Login1 = () => {
         SetPw(e.target.value);
     };
 
+
+    //엔터키
+    const enterEvent = (e) =>{
+        if(e.key == 'Enter'){
+            signUp();
+        }
+    }
+
+
     // 로그인
-    const signUp = () => {
+    const  signUp = () => {
             axios.post('http://192.168.2.82:5000/login', {
                 userId: id,
                 userPw: pw,
@@ -49,30 +58,30 @@ const Login1 = () => {
                     });
                     sessionStorage.setItem("id",id);
                     // window.location.href = "http://localhost:3000/Apage?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/Abut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/Bbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/Ccut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/Abut";
+                    window.location.href = "http://localhost:3000/Bbut";
+                    window.location.href = "http://localhost:3000/Ccut";
 
-                    window.location.href = "http://localhost:3000/PMAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/PMBbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/PMCbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/PMDbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/PMAbut";
+                    window.location.href = "http://localhost:3000/PMBbut";
+                    window.location.href = "http://localhost:3000/PMCbut";
+                    window.location.href = "http://localhost:3000/PMDbut";
 
-                    window.location.href = "http://localhost:3000/ATGAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/ATGBbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/ATGCbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/ATGDbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/ATGEbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/ATGAbut";
+                    window.location.href = "http://localhost:3000/ATGBbut";
+                    window.location.href = "http://localhost:3000/ATGCbut";
+                    window.location.href = "http://localhost:3000/ATGDbut";
+                    window.location.href = "http://localhost:3000/ATGEbut";
 
-                    window.location.href = "http://localhost:3000/SMAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/SMBbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/SMCbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/SMAbut";
+                    window.location.href = "http://localhost:3000/SMBbut";
+                    window.location.href = "http://localhost:3000/SMCbut";
 
-                    window.location.href = "http://localhost:3000/BAAbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/BABbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
-                    window.location.href = "http://localhost:3000/BACbut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/BAAbut";
+                    window.location.href = "http://localhost:3000/BABbut";
+                    window.location.href = "http://localhost:3000/BACbut";
                     
-                    window.location.href = "http://localhost:3000/Abut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+                    window.location.href = "http://localhost:3000/Abut";
 
                 }else{
                     window.alert("로그인 정보가 없습니다.");
@@ -156,6 +165,7 @@ const Login1 = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onKeyPress= {enterEvent}
                     />
                     <br />
 
@@ -175,7 +185,7 @@ const Login1 = () => {
                         <strong>로그인</strong>
                     </Button>
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link href="#005b9e" variant="body2">
                                 아이디 찾기
                             </Link>
@@ -184,7 +194,7 @@ const Login1 = () => {
                             <Link href="#" variant="body2">
                                 {"비밀번호 찾기"}
                             </Link>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Box>
             </Box>

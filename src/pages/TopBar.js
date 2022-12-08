@@ -10,16 +10,27 @@ import Abar from '../bar/Abar';
 
 const TopBar = () => {
 
+    //로그아웃 함수
+    const logOut = ()=>{
+        sessionStorage.clear(); //session 삭제하는 함수
+        window.location.href = '/'
+    }
+    
+    const goMain = ()=>{
+        window.location.href = "http://localhost:3000/Abut?id="+sessionStorage.getItem("id")+"?uId="+sessionStorage.getItem("uId");
+    }
+
+
     return (
         <div>
              
              <Navbar>
                 <Container>
-                    <Navbar.Brand href="#home"><img src={ask} style={{width:'200px'}}/></Navbar.Brand>
+                    <Navbar.Brand href="#home"><img src={ask} onClick = {goMain} style={{width:'200px'}}/></Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                    <Button variant="light"><LogoutIcon/>로그아웃</Button>{' '}
+                    <Button variant="light" onClick = {logOut}><LogoutIcon/>로그아웃</Button>{' '}
                         <AccountCircleIcon style={{width:'100px',height:'50px'}}/>
                     </Navbar.Text>
                     </Navbar.Collapse>

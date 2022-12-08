@@ -612,25 +612,26 @@ const BAPBcom = () => {
             </Grid>
 
             <br />
-            <Table >
+            <Table 
+            hover>
                 <thead style={{ height: '60px' }}>
-                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" ,width:'100px'}}>
                         <td style={{ border: "1px solid #d8d8d8", fontSize: '22px' }}>
                             <input type="checkbox" id="allCheck" value="allCheck"></input>
                         </td>
 
 
 
-                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' ,width:'150px'}}>
                             <strong>날짜</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>공급처</strong>
                         </td>
-                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' ,width:'80px'}}>
                             <strong>구분</strong>
                         </td>
-                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' ,width:'120px'}}>
                             <strong>품목</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
@@ -639,7 +640,7 @@ const BAPBcom = () => {
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>단가</strong>
                         </td>
-                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px',width:'100px' }}>
                             <strong>유형</strong>
                         </td>
                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
@@ -679,7 +680,7 @@ const BAPBcom = () => {
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.p_item}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px'  }}>{e.p_iCount}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right'}}>{e.p_unitPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.p_taxType}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000지급', fontSize: '22px' }}>{e.p_taxType}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right'}}>{e.p_supplyValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right'}}>{e.p_surTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' ,width:'150px'}}>
@@ -697,19 +698,19 @@ const BAPBcom = () => {
                         <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].totalsupplyValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
                         <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].totalsurTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
                         <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                        <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].total1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                        <td  style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' , textAlign: 'right' }}> <strong>{ data && data[0].total2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
 
                     </tr>
 
                 </tbody>
             </Table>
             <div>
-                <button style={{ position: 'absolute', right: "550px", top: '65px' ,width:'100px' }} onClick={allBtn} className="Atmp1">  <strong>전체</strong></button>
-                <button style={{ position: 'absolute', right: "440px", top: '65px' ,width:'100px' }} onClick={buyBtn} className="Atmp1">  <strong>매입</strong></button>
-                <button style={{ position: 'absolute', right: "330px", top: '65px'  ,width:'100px'}} onClick={payBtn} className="Atmp1">  <strong>매출</strong></button>
-                <button style={{ position: 'absolute', right: "220px", top: '65px'  ,width:'100px'}} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
-                <button style={{ position: 'absolute', right: "110px", top: '65px'  ,width:'100px'}} onClick={addShow} className="Atmp1">  <strong>삭제</strong></button>
-                <button style={{ position: 'absolute', right: "0px", top: '65px' ,width:'100px'}} onClick={printCheck} className="Atmp1">  <strong>인쇄/저장</strong></button>
+                <button style={{ position: 'absolute', right: "330px", top: '65px' ,width:'100px' }} onClick={allBtn} className="Atmp1">  <strong>전체</strong></button>
+                <button style={{ position: 'absolute', right: "220px", top: '65px' ,width:'100px' }} onClick={buyBtn} className="Atmp1">  <strong>매입</strong></button>
+                <button style={{ position: 'absolute', right: "110px", top: '65px'  ,width:'100px'}} onClick={payBtn} className="Atmp1">  <strong>매출</strong></button>
+                <button style={{ position: 'absolute', right: "0px", top: '65px'  ,width:'100px'}} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
+                {/* <button style={{ position: 'absolute', right: "110px", top: '65px'  ,width:'100px'}} onClick={addShow} className="Atmp1">  <strong>삭제</strong></button>
+                <button style={{ position: 'absolute', right: "0px", top: '65px' ,width:'100px'}} onClick={printCheck} className="Atmp1">  <strong>인쇄/저장</strong></button> */}
             </div>
 
 
