@@ -281,13 +281,19 @@ const SMBcom = () => {
 
     //여러명 출력용
     const printCheck = () =>{
-        let key = "";
-        for ( let i of checkedItems){
-          key+="&id="+i;
+        if(checkedItems.size ==0){
+            const text = "체크박스에 체크된 항목이 없습니다. 체크 후 출력해주세요.";
+            error(text);
         }
-        console.log(key);
-
-        window.open('http://localhost:3000/Salary?id=1'+key);
+        else{
+            let key = "";
+            for ( let i of checkedItems){
+              key+="&id="+i;
+            }
+            console.log(key);
+    
+            window.open('http://localhost:3000/Salary?id=1'+key);
+        }
     }
 
 
@@ -398,23 +404,23 @@ const SMBcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr >
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>
                                 <input type="checkbox" id={e.payStatementId} value={e.payStatementId} onChange={(e) => checkHandler(e)}></input>
                                 </td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {e.payTitle}</strong></td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {e.empNum}</strong></td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {e.payTitle}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {e.empNum}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}>
                                     <Button style={{ fontSize: '22px' }} name={e.inOutListId} onClick={() => modifyClick(e)} variant="link">
-                                        <strong>
-                                            {e.empName}
-                                        </strong>
+                                        
+                                            <strong>{e.empName}</strong>
+                                        
                                     </Button>
                                 </td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
-                                <td style={{ border: "px solid #d8d8d8", fontSize: '20px', color: '#777777' }}><strong> {data && e.totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.totalAddPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.actlPymnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 {/* <td>이메일 데이터 넣을곳</td> */}
                             </tr>
                         )
@@ -519,13 +525,13 @@ const SMBcom = () => {
                                     {/* <td  style={{border:"3px solid #f1f2f6", width:'100px' ,fontSize:'10px'}}rowspan='2'><strong>사원번호</strong></td>
                                 <td rowspan='2' style={{border:"3px solid #f1f2f6",color:'#777777',width:'70px',fontSize:'10px'}}>사원명</td> */}
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}> 기본급 </td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>야근수당</td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>연장수당</td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>야간수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>주말근무수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>연차수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>출산보육수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>부양사족수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>식대</td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>차량유지비</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px' }}>지급총액</td>
                                     <td rowspan='2' style={{ width: '150px', fontSize: '12px' }}> 실지급액</td>
                                 </tr>
@@ -538,7 +544,7 @@ const SMBcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>고용보험</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>장기요양</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>경비</td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>차량유지비</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>공제총액</td>
                                 </tr>
                                 <tr style={{ border: "1px solid #d8d8d8" }}>
@@ -547,12 +553,12 @@ const SMBcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px' , textAlign:'right'}} name='empPay'aria-describedby="btnGroupAddon" value={ add && addData &&addData.empPay} onChange={onChangeAddData}/></td>
                                     {/* <td> <input type='text' style={{height:'40px',width:'100px',fontSize:'12px'}}></input></td> */}
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='overtimePay' value={ add && addData &&addData.overtimePay} aria-describedby="btnGroupAddon" onChange={onChangeAddData} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='carStatePay' aria-describedby="btnGroupAddon" value={ add && addData && addData.nightTimePay} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='weekendPay' aria-describedby="btnGroupAddon" value={ add && addData && addData.weekendPay} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='annualAllowance' aria-describedby="btnGroupAddon" value={ add && addData && addData.annualAllowance} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='chldbChalw' aria-describedby="btnGroupAddon" value={ add && addData && addData.chldbChalw} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='dpndnAlwnc' aria-describedby="btnGroupAddon" value={ add && addData && addData.dpndnAlwnc} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='foodPay' aria-describedby="btnGroupAddon" value={ add && addData && addData.foodPay} onChange={onChangeAddData} /></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='carStatePay' aria-describedby="btnGroupAddon" value={ add && addData && addData.carStatePay} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='totalPay' aria-describedby="btnGroupAddon" value={ add && addData && addData.totalPay} onChange={onChangeAddData} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", fontSize: '12px' }} rowspan='2'>{add && addData && addData.actlPymnt}</td>
                                 </tr>
@@ -565,7 +571,7 @@ const SMBcom = () => {
                                     <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='empIns' aria-describedby="btnGroupAddon" value={ add && addData &&addData.empIns} onChange = {onChangeAddData} /></td>
                                     <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='lngTrmCrIns' aria-describedby="btnGroupAddon" value={ add && addData &&addData.lngTrmCrIns} onChange = {onChangeAddData} /></td>
                                     <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='expense' aria-describedby="btnGroupAddon" value={ add && addData &&addData.expense} onChange = {onChangeAddData} /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" disabled/></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='carStatePay' value={ add && addData && addData.carStatePay} onChange={onChangeAddData}/></td>
                                     <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} name='ddctn' aria-describedby="btnGroupAddon" value={ add && addData &&addData.ddctn} onChange = {onChangeAddData} /></td>
                                 </tr>
                             </Table>
@@ -594,7 +600,7 @@ const SMBcom = () => {
                 centered
                 size="xl"
                 show={modify} onHide={modifyClose} animation={false}>
-               <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+               <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>상세급여</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -677,12 +683,12 @@ const SMBcom = () => {
 <td rowspan='2' style={{border:"3px solid #f1f2f6",color:'#777777',width:'70px',fontSize:'10px'}}>사원명</td> */}
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}> 기본급 </td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>야근수당</td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>야간수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>주말근무수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>연차수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>출산보육수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>부양가족수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>식대</td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>차량유지비</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px' }}>지급총액</td>
                                     <td rowspan='2' style={{ width: '150px', fontSize: '12px' }}> 실지급액</td>
                                 </tr>
@@ -695,7 +701,7 @@ const SMBcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>고용보험</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>장기요양</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>경비</td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>차량유지비</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>공제총액</td>
                                 </tr>
                                 <tr style={{ border: "1px solid #d8d8d8" }}>
@@ -704,12 +710,12 @@ const SMBcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' , width: '100px', height: '40px', fontSize: '12px' }}>{ modify && modifyData && modifyData.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } </td>
                                     {/* <td> <input type='text' style={{height:'40px',width:'100px',fontSize:'12px'}}></input></td> */}
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.overtimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.nightTimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.weekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.annualAllowance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.chldbChalw.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dpndnAlwnc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.foodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.carStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td rowSpan='2' style={{ border: "1px solid #d8d8d8", fontSize: '12px' }}>{ modify && modifyData && modifyData.actlPymnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } 원</td>
                                 </tr>
@@ -722,7 +728,7 @@ const SMBcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.empIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.lngTrmCrIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.expense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.carStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.ddctn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }&nbsp;&nbsp;</td>
                                 </tr>
                             </Table>

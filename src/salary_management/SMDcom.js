@@ -304,27 +304,27 @@ const SMDcom = () => {
             <Table >
                 <thead style={{ height: '60px' }}>
 
-                    <tr style={{ backgroundColor: '#ecf0f1', }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', }}>
 
 
 
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>날짜</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>부서명</strong>
                         </td>
 
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>사원명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>항목</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>승인여부</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>금액</strong>
                         </td>
 
@@ -336,16 +336,18 @@ const SMDcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr >
-                                <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.expenseDate}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.depName}</td>
-                                <Button style={{ fontSize: '22px' }} name={e.expenseListId} onClick={() => modifyClick(e)} variant="link">
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.expenseDate}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.depName}</td>
+                                <td>
+                                    <Button style={{ fontSize: '22px' }} name={e.expenseListId} onClick={() => modifyClick(e)} variant="link">
                                     <strong>
                                         {e.empName}
                                     </strong>
                                 </Button>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.expenseName}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.approval}</td>
-                                <td style={{ border: "1px solid #f1f2f6", color: '#000', fontSize: '22px' }}>{e.price}</td>
+                                </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.expenseName}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.approval}</td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#000', fontSize: '22px' }}>{e.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
 
 
 
@@ -374,7 +376,7 @@ const SMDcom = () => {
                 centered
                 size="lg"
                 show={modify} onHide={modifyClose} animation={false} id="AddModal">
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>경비상세</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '' }}>
@@ -399,9 +401,8 @@ const SMDcom = () => {
 
                         <Table style={{ border: "1px solid #d8d8d8", textAlign: 'center' }}>
                             <tr style={{ height: '40px' }}>
-                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }} >날짜</td>
+                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" , width:'130px'}} >날짜</td>
                                 <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>가게명</td>
-                                <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>사업자번호</td>
                                 <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>항목</td>
                                 <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>승인여부</td>
                                 <td style={{ backgroundColor: '#f7f7f7', border: "1px solid #d8d8d8" }}>가격</td>
@@ -409,7 +410,6 @@ const SMDcom = () => {
                             </tr>
                             <tr style={{ border: "1px solid #d8d8d8" }}>
                                 <td style={{ border: "1px solid #d8d8d8" }}>{modify && modifyData && modifyData.expenseDate}</td>
-                                <td style={{ border: "1px solid #d8d8d8" }}>{modify && modifyData && modifyData.shopName}</td>
                                 <td style={{ border: "1px solid #d8d8d8" }}>{modify && modifyData && modifyData.shopName}</td>
                                 <td style={{ border: "1px solid #d8d8d8" }}>{modify && modifyData && modifyData.expenseName}</td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '150px' }}>
@@ -428,8 +428,14 @@ const SMDcom = () => {
                                         />
                                         <InputGroup.Text id="btnGroupAddon" onClick={magShow} style={{ width: '40px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
                                     </InputGroup></td>
-                                <td style={{ border: "1px solid #d8d8d8" }}>{modify && modifyData && modifyData.price}</td>
+                                <td style={{ border: "1px solid #d8d8d8" }}>{modify && modifyData && modifyData.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</td>
 
+                            </tr>
+                            <tr>
+                                <td style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7', height: '45px' }}>주소</td>
+                                <td colSpan='5' style={{ border: "1px solid #d8d8d8" , textAlign:'left'}}>
+                                    &nbsp;&nbsp;{modify && modifyData && modifyData.shopAddress}
+                                </td>
                             </tr>
                             <tr>
                                 <td style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7', height: '45px' }}>비고</td>
@@ -437,8 +443,12 @@ const SMDcom = () => {
                                     <Form.Control style={{ width: '100%', height: '40px' }} type="text" name='history' aria-describedby="btnGroupAddon" value={modify && modifyData && modifyData.history} onChange={onChangeModifyData} />
                                 </td>
                             </tr>
-                        </Table>
 
+                        </Table>
+                        {/* {modifyData && modifyData.taxBill && <a href={modifyData.taxBill} target='_blank'>세금계산서</a> } */}
+                        <Grid item ml={75  }>
+                        {modifyData && modifyData.documentation && <a style={{fontSize : '20px' }} href={modifyData.documentation} target='_blank'>영수증 확인</a> }
+                         </Grid>
                     </Container>
                     <br />
 
@@ -448,9 +458,9 @@ const SMDcom = () => {
                     <Button variant="secondary" onClick={modifyClose}>
                         닫기
                     </Button>
-                    <Button variant="primary" onClick={pushModifyData}>
+                    <button className='addButton' onClick={pushModifyData}>
                         수정
-                    </Button>
+                    </button>
                 </Modal.Footer>
             </Modal>
 

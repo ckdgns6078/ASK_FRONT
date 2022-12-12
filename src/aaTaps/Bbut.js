@@ -83,7 +83,7 @@ function Bbut(props) {
     
         
             <Tab label="회사 설정" {...a11yProps(0)} style={{fontSize:'25px'}}  />
-            <Tab label=" 시용자 관리" {...a11yProps(1)} style={{fontSize:'25px'}} />
+            <Tab label=" 사용자 관리" {...a11yProps(1)} style={{fontSize:'25px'}} />
             <Tab label=" 모바일관리" {...a11yProps(2)}  style={{fontSize:'25px'}}/>
 
         </Tabs>

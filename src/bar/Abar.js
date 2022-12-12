@@ -26,7 +26,7 @@ const Abar = () => {
                                 </Grid>
                                
                                 <Grid item xs>
-                                <Navbar.Brand href="/Bbut"> <strong>시용자 관리</strong></Navbar.Brand>      
+                                <Navbar.Brand href="/Bbut"> <strong>사용자 관리</strong></Navbar.Brand>      
                                 </Grid>
                                
                                 <Grid item  xs>

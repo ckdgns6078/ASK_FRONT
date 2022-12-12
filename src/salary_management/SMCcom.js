@@ -42,9 +42,9 @@ const SMCcom = () => {
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [data, setData] = useState();
-    const [addData , setAddData] = useState();
-    const [ modifyData , setModifyData ] = useState();
-    const [ temp , setTemp] = useState();
+    const [addData, setAddData] = useState();
+    const [modifyData, setModifyData] = useState();
+    const [temp, setTemp] = useState();
 
     useEffect(() => {
         getData();
@@ -55,7 +55,7 @@ const SMCcom = () => {
         axios.post('http://192.168.2.82:5000/readDailyMainSalary', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
-            console.log( "초기 data : "  , response.data);
+            console.log("response.data value " , response.data)
             setData(response.data);
         }).catch(function (err) {
             console.log("read_inOutInfo error", err);
@@ -67,7 +67,7 @@ const SMCcom = () => {
         axios.post('http://192.168.2.82:5000/readDailyModalSalary', {
             statementId: e.statementId
         }).then(function (response) {
-            console.log(" @@@@@@@ response value :" , response.data[0]);
+            console.log(" @@@@@@@ response value :", response.data[0]);
             setModifyData(response.data[0]);
             let getStart = response.data[0].dailyStartDate.split('-');
             let getEnd = response.data[0].dailyEndDate.split('-');
@@ -84,13 +84,13 @@ const SMCcom = () => {
                 dailypayDayDay: getPayDay[2]
             }
             setModifyData(Object.assign(response.data[0], wallet));
-           
+
         }).catch(function (err) {
             console.log("readModalSalary error :", err);
         })
         modifyShow();
-        console.log("modifydata " , modifyData);
-    
+        console.log("modifydata ", modifyData);
+
     }
 
 
@@ -111,7 +111,7 @@ const SMCcom = () => {
                 [name]: onlyNumber
             })
         }
-        console.log( name , value);
+        console.log(name, value);
         console.log(addData);
     }
 
@@ -133,10 +133,10 @@ const SMCcom = () => {
     }
 
     //데이터 등록 버튼 함수
-    const pushAddData =()=>{
-        axios.post('http://192.168.2.82:5000/createDailySalary' ,{
-            compCode :sessionStorage.getItem("uid") ,
-            dailyPayTitle  :addData.dailyPayTitle ,
+    const pushAddData = () => {
+        axios.post('http://192.168.2.82:5000/createDailySalary', {
+            compCode: sessionStorage.getItem("uid"),
+            dailyPayTitle: addData.dailyPayTitle,
             //   @@@@@@@@@@@@@@@@ 시작일만 있음 종료일이 존재하지않음
             dailyStartDate: String(addData.dailyStartYear) + String(addData.dailyStartMonth) + String(addData.dailyStartDay),
             dailyEndDate: String(addData.dailyEndYear) + String(addData.dailyEndMonth) + String(addData.dailyEndDay),
@@ -144,41 +144,41 @@ const SMCcom = () => {
             dailyCode: addData.dailyCode,
             dailyName: addData.dailyName,
             dailyRank: addData.dailyRank,    //(부서 -> 직급)
-            dailyPay : addData.dailyPay,
-            dailyWeeklyPay : addData.dailyWeeklyPay,
-            dailyNightTimePay : addData.dailyNightTimePay,
-            dailyOvertimePay : addData.dailyOvertimePay,
-            dailyWeekendPay : addData.dailyWeekendPay,
-            dailyAnnual : addData.dailyAnnual,
-            dpndnAlwnc : addData.dpndnAlwnc,   //(부양가족수 필요없음)
-            dailyIncomeTax : addData.dailyIncomeTax,
-            dailyLocalTaxes : addData.dailyLocalTaxes,
-            dailyNtnlPnsn : addData.dailyNtnlPnsn,
-            dailyHlthInsrn : addData.dailyHlthInsrn,
-            dailyEmpIns : addData.dailyEmpIns,
-            dailyLngTrmCrIns : addData.dailyLngTrmCrIns,
-            chldbChalw : addData.chldbChalw,   //(출산보육수당 필요없음)
-            dailyFoodPay : addData.dailyFoodPay,
+            dailyPay: addData.dailyPay,
+            dailyWeeklyPay: addData.dailyWeeklyPay,
+            dailyNightTimePay: addData.dailyNightTimePay,
+            dailyOvertimePay: addData.dailyOvertimePay,
+            dailyWeekendPay: addData.dailyWeekendPay,
+            dailyAnnual: addData.dailyAnnual,
+            dpndnAlwnc: addData.dpndnAlwnc,   //(부양가족수 필요없음)
+            dailyIncomeTax: addData.dailyIncomeTax,
+            dailyLocalTaxes: addData.dailyLocalTaxes,
+            dailyNtnlPnsn: addData.dailyNtnlPnsn,
+            dailyHlthInsrn: addData.dailyHlthInsrn,
+            dailyEmpIns: addData.dailyEmpIns,
+            dailyLngTrmCrIns: addData.dailyLngTrmCrIns,
+            chldbChalw: addData.chldbChalw,   //(출산보육수당 필요없음)
+            dailyFoodPay: addData.dailyFoodPay,
             dailyCarStatePay: addData.dailyCarStatePay,
-            dailyExpense : addData.dailyExpense,
-            dailyTotalPay : addData.dailyTotalPay,
-            dailyDdctn : addData.dailyDdctn,
-            dailyActlPymnt : addData.dailyActlPymnt,
-            dailyTotalAddPay : addData.dailyTotalAddPay,
-            dailyTotalAddTax : addData.dailyTotalAddTax,
-            dailySumTotalAdd : addData.dailySumTotalAdd
-        }).then(function(response){
-            if(response.data){
+            dailyExpense: addData.dailyExpense,
+            dailyTotalPay: addData.dailyTotalPay,
+            dailyDdctn: addData.dailyDdctn,
+            dailyActlPymnt: addData.dailyActlPymnt,
+            dailyTotalAddPay: addData.dailyTotalAddPay,
+            dailyTotalAddTax: addData.dailyTotalAddTax,
+            dailySumTotalAdd: addData.dailySumTotalAdd
+        }).then(function (response) {
+            if (response.data) {
                 let text = "명세표 저장완료";
                 success(text);
                 getData();
                 addClose();
-            }else{
+            } else {
                 let text = "명세표 저장에 실패했습니다";
                 warning(text);
             }
-        }).catch(function(err){
-            console.log("createSalary error :" , err);
+        }).catch(function (err) {
+            console.log("createSalary error :", err);
             let text = "명세표 저장에서 오류가 발생했습니다.";
             error(text);
         });
@@ -204,23 +204,23 @@ const SMCcom = () => {
     }
 
 
-    const pushDeleteData =()=>{
-        axios.post('http://192.168.2.82:5000/deleteDailySalary',{
-            statementId : modifyData.statementId
-        }).then(function(response){
-            if(response.data){
+    const pushDeleteData = () => {
+        axios.post('http://192.168.2.82:5000/deleteDailySalary', {
+            statementId: modifyData.statementId
+        }).then(function (response) {
+            if (response.data) {
                 let text = "명세서를 삭제했습니다.";
                 success(text);
                 getData();
                 delClose();
                 modifyClose();
-            }else{
+            } else {
                 let text = "명세서 삭제에 실패했습니다.";
                 warning(text);
                 delClose();
             }
-        }).catch(function(err){
-            console.log("deleteSalary error :" ,err);
+        }).catch(function (err) {
+            console.log("deleteSalary error :", err);
             let text = "명세서 삭제에서 오류가 발생하였습니다.";
             error(text);
         })
@@ -257,14 +257,14 @@ const SMCcom = () => {
     const delShow = () => setDel(true);
 
     //돋보기
-    const [ mag , setMag ] = useState(false);
-    const [ magData , setMagData] = useState();
+    const [mag, setMag] = useState(false);
+    const [magData, setMagData] = useState();
     const magClose = () => setMag(false);
     const magShow = () => {
         axios.post('http://192.168.2.82:5000/readDailyEmp', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
-            console.log("magData" , response.data);
+            console.log("magData", response.data);
             setMagData(response.data);
         }).catch(function (err) {
             console.log("searchDailyEmp error", error);
@@ -357,38 +357,39 @@ const SMCcom = () => {
             <br />
             <br />
 
-            <Table >
+            <Table hover>
                 <thead style={{ height: '60px' }}>
 
-                    <tr style={{ backgroundColor: '#ecf0f1', }}>
-                    <input type="checkbox" name='allcheck' id="allCheck" onChange={(e)=>allHandler(e)}  ></input>
-
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                    <tr style={{ backgroundColor: '#f7f7f7', }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
+                            <input type="checkbox" name='allcheck' id="allCheck" onChange={(e) => allHandler(e)}  ></input>
+                        </td>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>명세서명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>일용직코드</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>성명</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>일급</strong>
                         </td>
 
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총 수당</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총 경비</strong>
 
 
 
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총 세액</strong>
                         </td>
-                        <td style={{ border: "1px solid #f1f2f6", color: '#777777', fontSize: '22px' }}>
+                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px' }}>
                             <strong>총액</strong>
                         </td>
 
@@ -401,23 +402,23 @@ const SMCcom = () => {
                     {
                         data && data.map((e, idx) =>
                             <tr >
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}>
-                                <input type="checkbox" id={e.statementId} value={e.statementId} onChange={(e) => checkHandler(e)}></input>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>
+                                    <input type="checkbox" id={e.statementId} value={e.statementId} onChange={(e) => checkHandler(e)}></input>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyPayTitle}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyCode}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyPayTitle}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyCode}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}>
                                     <Button style={{ fontSize: '22px' }} name={e.inOutListId} onClick={() => modifyClick(e)} variant="link">
-                                        <strong>
-                                            {e.dailyName}
-                                        </strong>
+
+                                        {e.dailyName}
+
                                     </Button>
                                 </td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyPay}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyTotalAddPay}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyExpense}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailyTotalAddTax}</strong></td>
-                                <td style={{ border: "2px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong> {e.dailySumTotalAdd}</strong></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyTotalAddPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailyTotalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#000' }}> {e.dailySumTotalAdd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 {/* <td>이메일 데이터 넣을곳</td> */}
                             </tr>
                         )
@@ -458,7 +459,7 @@ const SMCcom = () => {
                             <tr>
                                 <td style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>급여대장명칭</td>
                                 <td colSpan='6' style={{ border: "1px solid #d8d8d8", width: '50px', fontSize: '12px', }}>
-                                    <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name = 'dailyPayTitle' onChange={onChangeAddData} />
+                                    <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyPayTitle' onChange={onChangeAddData} />
 
                                 </td>
                             </tr>
@@ -466,19 +467,19 @@ const SMCcom = () => {
                                 <td style={{ border: "1px solid #d8d8d8", width: '110px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>대상기간</td>
                                 <td colSpan='3'>
                                     <Grid container>
-                                        <Grid item ml={1} ><Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center', }} type="text" name='dailyStartYear' value ={add && addData && addData.dailyStartYear} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1} ><Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center', }} type="text" name='dailyStartYear' value={add && addData && addData.dailyStartYear} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                         <Grid item ml={1} mt={1} style={{ color: '#777777' }}>/</Grid>
-                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyStartMonth' value ={add && addData && addData.dailyStartMonth} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyStartMonth' value={add && addData && addData.dailyStartMonth} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                         <Grid item ml={1} mt={1} style={{ color: '#777777' }}>/</Grid>
-                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyStartDay' value ={add &&addData &&  addData.dailyStartDay} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyStartDay' value={add && addData && addData.dailyStartDay} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
 
                                         <Grid item mt={0} ml={1} style={{ color: '#777777', fontSize: '25px' }}><strong>~</strong>  </Grid>
 
-                                        <Grid item ml={2}  ><Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyEndYear' value ={add && addData && addData.dailyEndYear} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={2}  ><Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyEndYear' value={add && addData && addData.dailyEndYear} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                         <Grid item ml={1} mt={1}>/</Grid>
-                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyEndMonth' value ={add && addData &&  addData.dailyEndMonth} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyEndMonth' value={add && addData && addData.dailyEndMonth} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                         <Grid item ml={1} mt={1}>/</Grid>
-                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyEndDay' value ={add && addData && addData.dailyEndDay} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyEndDay' value={add && addData && addData.dailyEndDay} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                     </Grid>
 
 
@@ -488,11 +489,11 @@ const SMCcom = () => {
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', }}>
 
                                     <Grid container>
-                                        <Grid item ml={1} ><Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyPayDayYear' value = {add && addData && addData.payDayYear} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1} ><Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyPayDayYear' value={add && addData && addData.payDayYear} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                         <Grid item ml={1} mt={1}>/</Grid>
-                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyPayDayMonth' value = {add && addData && addData.payDayMonth} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyPayDayMonth' value={add && addData && addData.payDayMonth} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                         <Grid item ml={1} mt={1}>/</Grid>
-                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyPayDayDay' value = {add && addData && addData.payDayDay} onChange = { onChangeAddData } aria-describedby="btnGroupAddon" /></Grid>
+                                        <Grid item ml={1}> <Form.Control style={{ width: '70px', height: '40px', fontSize: '13px', textAlign: 'center' }} type="text" name='dailyPayDayDay' value={add && addData && addData.payDayDay} onChange={onChangeAddData} aria-describedby="btnGroupAddon" /></Grid>
                                     </Grid>
                                 </td>
                             </tr>
@@ -504,7 +505,7 @@ const SMCcom = () => {
                                             type="text"
                                             name='dailyName'
                                             onChage={onChangeAddData}
-                                            value = {add && addData && addData.dailyName}
+                                            value={add && addData && addData.dailyName}
                                             aria-describedby="btnGroupAddon"
                                             style={{ height: '40px' }}
 
@@ -514,11 +515,11 @@ const SMCcom = () => {
                                 </td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '80px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>일용직코드</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', }}>
-                                    <Form.Control style={{ height: '57px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" value = {add && addData && addData.dailyCode} onChange = {onChangeAddData} name ='dailyCode'/>
+                                    <Form.Control style={{ height: '57px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" value={add && addData && addData.dailyCode} onChange={onChangeAddData} name='dailyCode' />
                                 </td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '50px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>직책</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', }}>
-                                    <Form.Control style={{ height: '57px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" value = {add && addData && addData.dailyRank} onChange = {onChangeAddData} name='dailyRank'/>
+                                    <Form.Control style={{ height: '57px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" value={add && addData && addData.dailyRank} onChange={onChangeAddData} name='dailyRank' />
                                 </td>
                             </tr>
                         </Table>
@@ -540,8 +541,8 @@ const SMCcom = () => {
                                 <tr style={{ backgroundColor: '#f7f7f7', }}>
                                     {/* <td  style={{border:"3px solid #f1f2f6", width:'100px' ,fontSize:'10px'}}rowspan='2'><strong>사원번호</strong></td>
                                     <td rowspan='2' style={{border:"3px solid #f1f2f6",color:'#777777',width:'70px',fontSize:'10px'}}>사원명</td> */}
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}> 지급총액 </td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}>연장수당</td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}> 지출총액 </td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}>일급</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}>야근수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}>주말근무수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px', color: '#777777' }}>연차수당</td>
@@ -565,28 +566,28 @@ const SMCcom = () => {
                                 </tr>
                                 <tr style={{ border: "1px solid #d8d8d8" }}>
 
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px' }} aria-describedby="btnGroupAddon" name = 'dailyTotalPay'  onChange={onChangeAddData} value={ add && addData && addData.dailyTotalPay }/></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon"  name='dailyPay' onChange={onChangeAddData} value={ add && addData && addData.dailyOvertimePay }/></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyOvertimePay' onChange={onChangeAddData} value={ add && addData && addData.dailyNightTimePay }/> </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailydailyWeekendPay'  onChange={onChangeAddData} value={ add && addData && addData.dailydailyWeekendPay }/></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name = 'dailyAnnual' onChange={onChangeAddData} value={add && addData && addData.dailyAnnual} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px' }} aria-describedby="btnGroupAddon" name='dailyTotalPay' onChange={onChangeAddData} value={add && addData && addData.dailyTotalPay} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyPay' onChange={onChangeAddData} value={add && addData && addData.dailyPay} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyOvertimePay' onChange={onChangeAddData} value={add && addData && addData.dailyOvertimePay} /> </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailydailyWeekendPay' onChange={onChangeAddData} value={add && addData && addData.dailydailyWeekendPay} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyAnnual' onChange={onChangeAddData} value={add && addData && addData.dailyAnnual} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" /></td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" /></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name = 'dailyFoodPay' onChange={onChangeAddData} value={add && addData && addData.dailyFoodPay} /></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name = 'dailyCarStatePay' onChange={onChangeAddData} value={add && addData && addData.dailyCarStatePay} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyFoodPay' onChange={onChangeAddData} value={add && addData && addData.dailyFoodPay} /></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' }}><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyCarStatePay' onChange={onChangeAddData} value={add && addData && addData.dailyCarStatePay} /></td>
                                     <td style={{ border: "1px solid #d8d8d8", fontSize: '12px' }} rowspan='2'>{add && addData && addData.dailyActlPymnt}</td>
                                 </tr>
                                 <tr>
 
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailydailyDdctn' onChange={onChangeAddData} value={ add && addData && addData.dailyDdctn } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyIncomeTax' onChange={onChangeAddData} value={ add && addData && addData.dailyIncomeTax } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyLocalTaxes' onChange={onChangeAddData} value={ add && addData && addData.dailyLocalTaxes } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyNtnlPnsn' onChange={onChangeAddData} value={ add && addData && addData.dailyNtnlPnsn } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyHlthInsrn' onChange={onChangeAddData} value={ add && addData && addData.dailyHlthInsrn } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyEmpIns' onChange={onChangeAddData} value={ add && addData && addData.dailyEmpIns } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyIngTrmCrIns' onChange={onChangeAddData} value={ add && addData && addData.dailyIngTrmCrIns } /></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyExpense' onChange={onChangeAddData} value={ add && addData && addData.dailyExpense }/></td>
-                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon"  /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailydailyDdctn' onChange={onChangeAddData} value={add && addData && addData.dailyDdctn} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyIncomeTax' onChange={onChangeAddData} value={add && addData && addData.dailyIncomeTax} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyLocalTaxes' onChange={onChangeAddData} value={add && addData && addData.dailyLocalTaxes} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyNtnlPnsn' onChange={onChangeAddData} value={add && addData && addData.dailyNtnlPnsn} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyHlthInsrn' onChange={onChangeAddData} value={add && addData && addData.dailyHlthInsrn} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyEmpIns' onChange={onChangeAddData} value={add && addData && addData.dailyEmpIns} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='dailyIngTrmCrIns' onChange={onChangeAddData} value={add && addData && addData.dailyIngTrmCrIns} /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" /></td>
+                                    <td><Form.Control style={{ height: '40px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" /></td>
                                 </tr>
                             </Table>
                         </Container>
@@ -614,7 +615,7 @@ const SMCcom = () => {
                 centered
                 size="xl"
                 show={modify} onHide={modifyClose} animation={false}>
-               <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}><strong>상세급여</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -624,56 +625,56 @@ const SMCcom = () => {
                         <Table style={{ textAlign: 'center' }}>
                             <tr>
                                 <td style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>급여대장명칭</td>
-                                <td colSpan='6' style={{ border: "1px solid #d8d8d8", width: '50px', fontSize: '12px', textAlign:'left' }}>
-                                 &nbsp;{ modify && modifyData && modifyData.dailyPayTitle}
+                                <td colSpan='6' style={{ border: "1px solid #d8d8d8", width: '50px', fontSize: '12px', textAlign: 'left' }}>
+                                    &nbsp;{modify && modifyData && modifyData.dailyPayTitle}
                                 </td>
                             </tr>
                             <tr>
                                 <td style={{ border: "1px solid #d8d8d8", width: '110px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777', textAlign: 'center' }}>대상기간</td>
                                 <td colSpan='3'>
                                     <Grid container>
-                                        <Grid item ml={1} > { modify && modifyData && modifyData.dailyStartYear}</Grid>
+                                        <Grid item ml={1} > {modify && modifyData && modifyData.dailyStartYear}</Grid>
                                         <Grid item ml={1} style={{ color: '#777777' }}>/</Grid>
-                                        <Grid item ml={1}> { modify && modifyData && modifyData.dailyStartMonth}</Grid>
+                                        <Grid item ml={1}> {modify && modifyData && modifyData.dailyStartMonth}</Grid>
                                         <Grid item ml={1} style={{ color: '#777777' }}>/</Grid>
-                                        <Grid item ml={1}> { modify && modifyData && modifyData.dailyStartDay}</Grid>
+                                        <Grid item ml={1}> {modify && modifyData && modifyData.dailyStartDay}</Grid>
 
                                         <Grid item mt={0} ml={1} style={{ color: '#777777' }}><strong>~</strong>  </Grid>
 
-                                        <Grid item ml={2}  >{ modify && modifyData && modifyData.dailyEndYear} </Grid>
+                                        <Grid item ml={2}  >{modify && modifyData && modifyData.dailyEndYear} </Grid>
                                         <Grid item ml={1}>/</Grid>
-                                        <Grid item ml={1}> { modify && modifyData && modifyData.dailyEndMonth}</Grid>
+                                        <Grid item ml={1}> {modify && modifyData && modifyData.dailyEndMonth}</Grid>
                                         <Grid item ml={1} >/</Grid>
-                                        <Grid item ml={1}> { modify && modifyData && modifyData.dailyEndDay}</Grid>
+                                        <Grid item ml={1}> {modify && modifyData && modifyData.dailyEndDay}</Grid>
                                     </Grid>
 
 
                                 </td>
 
                                 <td style={{ border: "1px solid #d8d8d8", width: '80px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}> 지급일 </td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', textAlign: 'center' , width :'310px'}}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', textAlign: 'center', width: '310px' }}>
 
                                     <Grid container >
-                                        <Grid item ml={1} >{ modifyShow && modifyData && modifyData.dailypayDayYear}</Grid>
+                                        <Grid item ml={1} >{modifyShow && modifyData && modifyData.dailypayDayYear}</Grid>
                                         <Grid item ml={1} >/</Grid>
-                                        <Grid item ml={1}>{ modifyShow && modifyData && modifyData.dailypayDayMonth}</Grid>
+                                        <Grid item ml={1}>{modifyShow && modifyData && modifyData.dailypayDayMonth}</Grid>
                                         <Grid item ml={1} >/</Grid>
-                                        <Grid item ml={1}> { modifyShow && modifyData && modifyData.dailypayDayDay}</Grid>
+                                        <Grid item ml={1}> {modifyShow && modifyData && modifyData.dailypayDayDay}</Grid>
                                     </Grid>
                                 </td>
                             </tr>
                             <tr>
                                 <td style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>사원명</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', width: '250px' }}>
-                                { modifyShow && modifyData && modifyData.dailyName}
+                                    {modifyShow && modifyData && modifyData.dailyName}
                                 </td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '80px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>사원번호</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', }}>
-                                { modifyShow && modifyData && modifyData.dailyCode}
+                                    {modifyShow && modifyData && modifyData.dailyCode}
                                 </td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '50px', fontSize: '12px', backgroundColor: '#f7f7f7', color: '#777777' }}>직급</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '12px', }}>
-                                { modifyShow && modifyData && modifyData.dailyRank}
+                                    {modifyShow && modifyData && modifyData.dailyRank}
                                 </td>
                             </tr>
                         </Table>
@@ -721,29 +722,29 @@ const SMCcom = () => {
                                 <tr style={{ border: "1px solid #d8d8d8" }}>
                                     {/* <td rowspan='2' style={{border:"3px solid #f1f2f6", width:'100px',fontSize:'12px'}}>사원번호</td>
 <td rowspan='2' style={{border:"3px solid #f1f2f6", width:'100px',fontSize:'12px'}}>사원명</td> */}
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right' , width: '100px', height: '40px', fontSize: '12px' }}>{ modify && modifyData && modifyData.dailyPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', width: '100px', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>
                                     {/* <td> <input type='text' style={{height:'40px',width:'100px',fontSize:'12px'}}></input></td> */}
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyOvertimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyWeekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyAnnual.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}> &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}> &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyFoodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyCarStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyTotalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp;</td>
-                                    <td rowSpan='2' style={{ border: "1px solid #d8d8d8", fontSize: '12px' }}>{ modify && modifyData && modifyData.dailyActlPymnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } 원</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyNightTimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyWeekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyAnnual.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}> &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}> &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyFoodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyCarStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyTotalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
+                                    <td rowSpan='2' style={{ border: "1px solid #d8d8d8", fontSize: '12px' }}>{modify && modifyData && modifyData.dailyActlPymnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</td>
                                 </tr>
                                 <tr>
 
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyIncomeTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyLocalTaxes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyNtnlPnsn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyHlthInsrn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyEmpIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyIngTrmCrIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}></td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height:'40px', fontSize:'12px' }}>{ modify && modifyData && modifyData.dailyDdctn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }&nbsp;&nbsp;</td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyIncomeTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyLocalTaxes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyNtnlPnsn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyHlthInsrn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyEmpIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyIngTrmCrIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyDdctn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}&nbsp;&nbsp;</td>
                                 </tr>
                             </Table>
                         </Container>
@@ -754,12 +755,12 @@ const SMCcom = () => {
                     <Button variant="secondary" onClick={modifyClose}>
                         닫기
                     </Button>
-                    <Button variant="primary" onClick={delShow}>
+                    <button className='addButton' onClick={delShow}>
                         삭제
-                    </Button>
-                    {/* <Button variant="primary" onClick={printBtn}>
-                        출력/저장
-                    </Button> */}
+                    </button>
+                    <button className='addButton' onClick={printBtn}>
+                        출력
+                    </button>
                     {/* <Button variant="primary" onClick={modifyClose}>
                         수정
                     </Button> */}
@@ -778,7 +779,7 @@ const SMCcom = () => {
                     <Modal.Title style={{ color: '#ffffff', width: '500px' }}><strong>명세서삭제</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', width: '500px', }}>
-                    <strong> { modify && modifyData && modifyData.dailyName}의 명세서를 삭제하시겠습니까?</strong></Modal.Body>
+                    <strong> {modify && modifyData && modifyData.dailyName}의 명세서를 삭제하시겠습니까?</strong></Modal.Body>
                 <Modal.Footer style={{ width: '500px', backgroundColor: '#ffffff' }}>
                     <Button variant="secondary" onClick={delClose}>
                         닫기
@@ -789,8 +790,9 @@ const SMCcom = () => {
                 </Modal.Footer>
             </Modal>
 
-             {/*추가 돋보기 모델 사원목록 */}
-             <Modal
+            \
+            {/*추가 돋보기 모델 사원목록 */}
+            <Modal
                 size="lg"
                 centered
                 show={mag} onHide={magClose}>
@@ -845,4 +847,4 @@ const SMCcom = () => {
     );
 };
 
-export default SMCcom;
+export default SMCcom;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
