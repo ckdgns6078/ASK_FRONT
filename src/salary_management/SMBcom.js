@@ -418,7 +418,7 @@ const SMBcom = () => {
                                 </td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.totalAddPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.expense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.totalAddTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px' }}> {data && e.actlPymnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 {/* <td>이메일 데이터 넣을곳</td> */}
