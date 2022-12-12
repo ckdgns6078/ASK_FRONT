@@ -89,6 +89,7 @@ const OWCcom = () => {
         axios.post('http://192.168.2.82:5000/updateDailyInOutModal',{
             dailyListId : e.dailyListId
         }).then(function(response){
+            console.log("modifyData " , response.data[0]);
             setModifyData(response.data[0]);
         }).catch(function(err){
             console.log("updateDailyInOutModal err :" ,err);
@@ -422,7 +423,7 @@ const OWCcom = () => {
                                 <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }}>퇴근</td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }}>연장</td>
                                 <td style={{ border: "1px solid #d8d8d8", width: '60px', height: '50px', fontSize: '12px' }}>야간</td>
-                                <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>비교</td>
+                                <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>비고</td>
                             </tr>
                             <tr style={{ backgroundColor: '', border: "1px solid #d8d8d8" }}>
                                 <td rowspan='2' style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px', }}> <Form.Control style={{ width: '100%', height: '100%', textAlign: "center" }} name="dailyInOutStart" value={modifyData && modify && modifyData.dailyInOutStart} type="text" onChange={onChangeModifyData} /></td>
@@ -437,8 +438,9 @@ const OWCcom = () => {
 
                             <tr style={{ backgroundColor: '', border: "1px solid #d8d8d8" }}>
                                
-                               
+
                                 <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}> 
+                                {modifyData && modify && modify.dailyInOutOver != "00:00" &&
                                   <InputGroup style={{ height: '60px' }}>
 
                                     <Form.Control
@@ -448,14 +450,16 @@ const OWCcom = () => {
                                         // value={modifyData.modifypayCalc}
                                         style={{ height: '100%' }}
                                         onChange={onChangeModifyData}
-
-                                    />
+                                        
+                                        />
                                     <InputGroup.Text id="btnGroupAddon" onClick={Prshow}  style={{ width: '50px', height: '100%' }}>  <SearchIcon /></InputGroup.Text>
                                 </InputGroup>
+                                }
                                 </td>
 
 
                                 <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>    
+                                {modifyData && modify && modify.dailyInOutNight != "00:00" &&
                                 <InputGroup style={{ height: '60px' }}>
 
                                     <Form.Control
@@ -469,6 +473,7 @@ const OWCcom = () => {
                                     />
                                     <InputGroup.Text id="btnGroupAddon" onClick={Prshow}   style={{ width: '50px', height: '100%' }}>  <SearchIcon /></InputGroup.Text>
                                 </InputGroup>
+                                }
                                 </td>
             
                             </tr>

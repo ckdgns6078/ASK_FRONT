@@ -201,7 +201,7 @@ const ATGBcom = () => {
                         </Grid>
                     </Grid> */}
                     <br/>
-                    <div style={{ fontSize: '25px' }}><strong>휴가내역</strong></div>
+                    <div style={{ fontSize: '25px' }}>휴가내역</div>
 
 
                     <Table 

@@ -286,6 +286,7 @@ const ATGDcom = () => {
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
             <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 관리 </strong></h2>
+            <button style={{ position: 'absolute', right: "0",  }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
             <br />
             <br />
             <br />
@@ -341,9 +342,7 @@ const ATGDcom = () => {
                     }
                 </tbody>
             </Table>
-            <div>
-                <button style={{ position: 'absolute', left: "0",  }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
-            </div>
+
 
 
 
@@ -571,7 +570,7 @@ const ATGDcom = () => {
                             <Grid item xs={4} md={0} ml={-15.5}mt={-2} style={{ fontSize: '15px', color: '#777777' }}>
                                 출근시간
                             </Grid>
-                            <Grid item xs={6} md={0} ml={-9.5} mt={-2}>
+                            <Grid item xs={6} md={0} ml={-8.7} mt={-2}>
                                 <Form.Control style={{ width: '230px', height: '30px' }} type="text" name='addinOutStart' aria-describedby="btnGroupAddon" onChange={onChangeAddData} />
                             </Grid>
 
