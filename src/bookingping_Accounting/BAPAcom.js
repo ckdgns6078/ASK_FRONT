@@ -420,7 +420,7 @@ const BAPAcom = () => {
                         data && data.map((e, idx) =>
                         <tr  style={{border:"1px solid gray"}} >
                             {/* <td style={{border:"1px solid #d8d8d8", color: '#d8d8d8', fontSize: '22px'}}><Checkbox {...label} defaultChecked /></td> */}
-                            <td style={{border:"1px solid #d8d8d8", color: '#000', fontSize: '22px'}}><Button  variant="link" onClick={()=>modifyShow(e)}><strong>{e.clientName}</strong></Button></td>
+                            <td style={{border:"1px solid #d8d8d8", color: '#000', fontSize: '22px'}}><Button  variant="link" style={{ fontSize:'22px'}}onClick={()=>modifyShow(e)}><strong>{e.clientName}</strong></Button></td>
                             <td style={{border:"1px solid #d8d8d8", color: '#000', fontSize: '22px'}}><strong>{e.clientCEO}</strong></td>
                             <td style={{border:"1px solid #d8d8d8", color: '#000', fontSize: '22px'}}><strong>{e.clientCompNum}</strong></td>
                             <td style={{border:"1px solid #d8d8d8", color: '#000', fontSize: '22px'}}><strong>{e.clientPhone}</strong></td>
@@ -452,11 +452,11 @@ const BAPAcom = () => {
                         <td style={{ height:'40px' ,width:'150px'  , backgroundColor: '#f7f7f7',color:'#777777'}}>사업자등록번호</td>
                         <td style={{ border: "1px solid #d8d8d8",height:'40px'  ,width:'320px'}}>
                         <Grid container>
-                            <Grid item ml={1} > <Form.Control style={{ height: '40px', width: '70px', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCompNum1' onChange={onChangeAdd}/></Grid>
+                            <Grid item ml={1} > <Form.Control style={{ height: '40px', width: '70px', fontSize: '12px', textAlign: 'center' }} aria-describedby="btnGroupAddon" name='clientCompNum1' onChange={onChangeAdd}/></Grid>
                             <Grid item ml={1.5} mt={1}><strong>ㅡ</strong></Grid>
-                            <Grid item ml={1}>  <Form.Control style={{ height: '40px', width: '70px', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCompNum2' onChange={onChangeAdd}/></Grid>
+                            <Grid item ml={1}>  <Form.Control style={{ height: '40px', width: '70px', fontSize: '12px', textAlign: 'center' }} aria-describedby="btnGroupAddon" name='clientCompNum2' onChange={onChangeAdd}/></Grid>
                             <Grid item ml={1.5} mt={1}><strong>ㅡ</strong></Grid>
-                            <Grid item ml={1}>  <Form.Control style={{ height: '40px', width: '70px', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCompNum3' onChange={onChangeAdd}/></Grid>
+                            <Grid item ml={1}>  <Form.Control style={{ height: '40px', width: '70px', fontSize: '12px', textAlign: 'center' }} aria-describedby="btnGroupAddon" name='clientCompNum3' onChange={onChangeAdd}/></Grid>
                         </Grid>
 
                        
@@ -465,56 +465,56 @@ const BAPAcom = () => {
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'  ,width:'150px', backgroundColor: '#f7f7f7',color:'#777777'}}>사업자명</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '100%', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientCEO' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '100%', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCEO' onChange={onChangeAdd}/>
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px' ,width:'150px', backgroundColor: '#f7f7f7',color:'#777777'}}>연락처</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '100%', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientPhone' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '100%', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientPhone' onChange={onChangeAdd}/>
                         </td>
                     </tr>
                     <tr>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>상호</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientName'  onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientName'  onChange={onChangeAdd}/>
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>종목</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon"  name='clientevent' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon"  name='clientevent' onChange={onChangeAdd}/>
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>업태</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientstate' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientstate' onChange={onChangeAdd}/>
                         </td>
                     </tr>
 
                     <tr>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>이메일</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientEmail' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientEmail' onChange={onChangeAdd}/>
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>주소</td>
                         <td colSpan='3' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientAddress' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientAddress' onChange={onChangeAdd}/>
                         </td>
                     </tr>
                     <tr>
                     <td rowSpan='3' style={{borderLeft:'1px solid #d8d8d8 ', height:'40px',borderBottom:'1px solid #d8d8d8 ', height:'40px' , backgroundColor: '#f7f7f7',color:'#777777'}}>통장</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>은행</td>
                         <td colSpan='4' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientBankName' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientBankName' onChange={onChangeAdd}/>
                         </td>
                     </tr>
                     <tr>
                       
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>계좌번호</td>
                         <td colSpan='4' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientBankNum' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientBankNum' onChange={onChangeAdd}/>
                         </td>
                     </tr>
                     <tr>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>예금주</td>
                         <td colSpan='4' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientBankOwner' onChange={onChangeAdd}/>
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientBankOwner' onChange={onChangeAdd}/>
                         </td>
                     </tr>
                     </Table>
@@ -553,15 +553,15 @@ const BAPAcom = () => {
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'  ,width:'320px'}}>
                         <Grid container>
                             <Grid>
-                            <Form.Control style={{ height: '40px', width: '75px', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCompNum1' onChange={onChangeModify} value={modifyData.clientCompNum1}/>
+                            <Form.Control style={{ height: '40px', width: '75px', fontSize: '12px', textAlign: 'center' }} aria-describedby="btnGroupAddon" name='clientCompNum1' onChange={onChangeModify} value={modifyData.clientCompNum1}/>
                          </Grid>
                             <Grid item ml={1.5} mt={1}><strong>ㅡ</strong></Grid>
                             <Grid item ml={1}>  
-                            <Form.Control style={{ height: '40px', width: '75px', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCompNum2' onChange={onChangeModify} value={modifyData.clientCompNum2}/>
+                            <Form.Control style={{ height: '40px', width: '75px', fontSize: '12px', textAlign: 'center' }} aria-describedby="btnGroupAddon" name='clientCompNum2' onChange={onChangeModify} value={modifyData.clientCompNum2}/>
                             </Grid>
                             <Grid item ml={1.5} mt={1}><strong>ㅡ</strong></Grid>
                             <Grid item ml={1}> 
-                            <Form.Control style={{ height: '40px', width: '75px', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCompNum3' onChange={onChangeModify} value={modifyData.clientCompNum3}/>
+                            <Form.Control style={{ height: '40px', width: '75px', fontSize: '12px', textAlign: 'center' }} aria-describedby="btnGroupAddon" name='clientCompNum3' onChange={onChangeModify} value={modifyData.clientCompNum3}/>
                             </Grid>
                          </Grid>
 
@@ -570,56 +570,56 @@ const BAPAcom = () => {
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'  ,width:'150px', backgroundColor: '#f7f7f7',color:'#777777'}}>사업자명</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientCEO' onChange={onChangeModify} value={ modifyData.clientCEO } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientCEO' onChange={onChangeModify} value={ modifyData.clientCEO } />
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px' ,width:'150px', backgroundColor: '#f7f7f7',color:'#777777'}}>연락처</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientPhone' onChange={onChangeModify} value={ modifyData.clientPhone } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientPhone' onChange={onChangeModify} value={ modifyData.clientPhone } />
                         </td>
                     </tr>
                     <tr>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>상호</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientName'  onChange={onChangeModify} value={ modifyData.clientName } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientName'  onChange={onChangeModify} value={ modifyData.clientName } />
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>종목</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientevent' onChange={onChangeModify} value={ modifyData.clientevent } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientevent' onChange={onChangeModify} value={ modifyData.clientevent } />
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>업태</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientstate' onChange={onChangeModify} value={ modifyData.clientstate } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientstate' onChange={onChangeModify} value={ modifyData.clientstate } />
                         </td>
                     </tr>
 
                     <tr>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>이메일</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientEmail' onChange={onChangeModify} value={ modifyData.clientEmail } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientEmail' onChange={onChangeModify} value={ modifyData.clientEmail } />
                         </td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>주소</td>
                         <td colSpan='3' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientAddress' onChange={onChangeModify} value={ modifyData.clientAddress } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientAddress' onChange={onChangeModify} value={ modifyData.clientAddress } />
                         </td>
                     </tr>
                     <tr>
                     <td rowSpan='3' style={{borderLeft:'1px solid #d8d8d8 ', height:'40px',borderBottom:'1px solid #d8d8d8 ', height:'40px' , backgroundColor: '#f7f7f7',color:'#777777'}}>통장</td>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>은행</td>
                         <td colSpan='4' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientBankName' onChange={onChangeModify} value={ modifyData.clientBankName } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientBankName' onChange={onChangeModify} value={ modifyData.clientBankName } />
                         </td>
                     </tr>
                     <tr>
                       
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>계좌번호</td>
                         <td colSpan='4' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientBankNum' onChange={onChangeModify} value={ modifyData.clientBankNum } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientBankNum' onChange={onChangeModify} value={ modifyData.clientBankNum } />
                         </td>
                     </tr>
                     <tr>
                         <td style={{border:'1px solid #d8d8d8 ', height:'40px', backgroundColor: '#f7f7f7',color:'#777777'}}>예금주</td>
                         <td colSpan='4' style={{border:'1px solid #d8d8d8 ', height:'40px'}}>
-                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'right' }} aria-describedby="btnGroupAddon" name='clientBankOwner' onChange={onChangeModify} value={ modifyData.clientBankOwner } />
+                        <Form.Control style={{ height: '50px', width: '100%', fontSize: '12px', textAlign: 'left' }} aria-describedby="btnGroupAddon" name='clientBankOwner' onChange={onChangeModify} value={ modifyData.clientBankOwner } />
                         </td>
                     </tr>
                     </Table>

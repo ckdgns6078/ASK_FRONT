@@ -197,7 +197,7 @@ const BAPBcom = () => {
 
     //유형돋보기 모델
     const [mago, setMago] = useState(false);
-    const magoClose = (e) => setMago(false);
+    const magoClose = () => setMago(false);
     const magoShow = () => setMago(true);
 
 
@@ -409,7 +409,7 @@ const BAPBcom = () => {
             const temp = {...modifyData};
             temp.p_taxType = e.target.innerText;
             setModifyData(temp);
-            magClose();
+            magoClose();
         }
     }
 
@@ -753,27 +753,27 @@ const BAPBcom = () => {
                                 </td>
                                     <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>날짜</td>
                                    
-                                    <td>  <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateYear' onChange={onChangeAdd}/></td>
+                                    <td>  <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateYear' onChange={onChangeAdd}/></td>
                                     <td>/</td>
-                                    <td><Form.Control style={{ width: '150px', height: '100%' }} type="text" aria-describedby="btnGroupAddon" name='p_dateMonth' onChange={onChangeAdd}/></td>
+                                    <td><Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" aria-describedby="btnGroupAddon" name='p_dateMonth' onChange={onChangeAdd}/></td>
                                     <td>/</td>
-                                    <td> <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateDay' onChange={onChangeAdd}/></td>
+                                    <td> <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_dateDay' onChange={onChangeAdd}/></td>
 
                             
                             </tr>
                             <tr>
                                 <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' ,height:'60px'}}>공급처명</td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeAdd}/>
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeAdd}/>
                                 </td>
 
                                 <td style={{ border: "1px solid #d8d8d8", height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>사업자번호</td>
                                   
-                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeAdd}  /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeAdd}  /></td>
                                 <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
-                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
                                 <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
-                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
 
                                    
                             </tr>
@@ -801,7 +801,7 @@ const BAPBcom = () => {
                                         name="p_taxType"
                                         value={addData.p_taxType}
                                         aria-describedby="btnGroupAddon"
-                                        onChange={onChangeAdd}
+                                        
                                         style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
                                      
                                     />
@@ -809,22 +809,22 @@ const BAPBcom = () => {
                                 </InputGroup>
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_item' aria-describedby="btnGroupAddon" onChange={onChangeAdd}/>
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_item' aria-describedby="btnGroupAddon" onChange={onChangeAdd}/>
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_iCount' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text" name='p_iCount' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_unitPrice' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text" name='p_unitPrice' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_supplyValue' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text" name='p_supplyValue' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_surTax' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_surTax' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_totalPrice' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text" name='p_totalPrice' aria-describedby="btnGroupAddon" onChange={onChangeAdd} />
                                 </td>
                             </tr>
                         </Table>
@@ -882,27 +882,27 @@ const BAPBcom = () => {
                                 </td>
                                     <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>날짜</td>
                                    
-                                    <td>  <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateYear' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateYear}/></td>
+                                    <td>  <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_dateYear' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateYear}/></td>
                                     <td>/</td>
-                                    <td><Form.Control style={{ width: '150px', height: '100%' }} type="text" aria-describedby="btnGroupAddon" name='p_dateMonth' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateMonth}/></td>
+                                    <td><Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" aria-describedby="btnGroupAddon" name='p_dateMonth' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateMonth}/></td>
                                     <td>/</td>
-                                    <td> <Form.Control style={{ width: '150px', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_dateDay' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateDay}/></td>
+                                    <td> <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_dateDay' onChange={onChangeModify} value={modify && modifyData && modifyData.p_dateDay}/></td>
 
                             
                             </tr>
                             <tr>
                                 <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' ,height:'60px'}}>공급처명</td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientName} />
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientName} />
                                 </td>
 
                                 <td style={{ border: "1px solid #d8d8d8", height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>사업자번호</td>
                                   
-                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum1}  /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum1}  /></td>
                                 <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
-                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum2} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum2} /></td>
                                 <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
-                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' }} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum3} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientCompNum3} /></td>
 
                                    
                             </tr>
@@ -938,22 +938,22 @@ const BAPBcom = () => {
                                 </InputGroup>
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_item' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_item} />
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_item' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_item} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_iCount' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_iCount} />
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text" name='p_iCount' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_iCount} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_unitPrice' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_unitPrice} />
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_unitPrice' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_unitPrice} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_supplyValue' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_supplyValue} />
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_supplyValue' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_supplyValue} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_surTax' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_surTax} />
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_surTax' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_surTax} />
                                 </td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='p_totalPrice' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_totalPrice} />
+                                <Form.Control style={{ width: '100%', height: '100%', textAlign:'center' }} type="text" name='p_totalPrice' aria-describedby="btnGroupAddon" onChange={onChangeModify} value={modify && modifyData && modifyData.p_totalPrice} />
                                 </td>
                             </tr>
                         </Table>
