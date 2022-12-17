@@ -38,7 +38,7 @@ const ATGBcom = () => {
     }, []);
 
     const getData = () => {    //초기값 가져오는 함수
-        axios.post('http://192.168.2.91:5000/read_Vactlist', {
+        axios.post('http://192.168.2.82:5000/read_Vactlist', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -101,7 +101,7 @@ const ATGBcom = () => {
     const DeShow = (e) => {
         setValue(e);
         
-        axios.post('http://192.168.2.91:5000/modal_Vaclist',{
+        axios.post('http://192.168.2.82:5000/modal_Vaclist',{
             compCode : sessionStorage.getItem("uid"),
             empNum : e.empNum
         }).then(function(response){

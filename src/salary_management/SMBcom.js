@@ -588,7 +588,7 @@ const SMBcom = () => {
                     </button>
                     <button className='addButton' variant="primary" onClick={pushAddData}>
                         저장
-                    </button>
+                    </button>상세급여
                 </Modal.Footer>
             </Modal>
 

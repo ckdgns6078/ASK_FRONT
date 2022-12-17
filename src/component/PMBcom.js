@@ -456,7 +456,7 @@ const PMBcom = () => {
                         data && data.map((e, idx) =>
                             <tr style={{ height: '60px' }} >
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.payCode} </td>
-                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><Button name={e.empPayID} style = {{fontSize:'20px'}}onClick={() => MdShow(e)} variant="link">{e.payName}</Button></td>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}><strong><Button name={e.empPayID} style = {{fontSize:'20px'}}onClick={() => MdShow(e)} variant="link">{e.payName}</Button></strong></td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}>  {e.taxFreeName}</td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}>{e.payType} </td>
                                 <td style={{ border: "1px solid #d8d8d8", fontSize: '20px', color: '#000' }}> {e.payCalc}</td>
@@ -746,7 +746,7 @@ const PMBcom = () => {
                 size="lg"
                 centered
                 show={CF} onHide={CFClose}>
-                <Modal.Header closeButton style={{ backgroundColor: '#2F58B8', }}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
                     <Modal.Title style={{ color: '#ffffff' }}> <strong>계산기</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ backgroundColor: '#f1f2f6', height: '350px' }}>
