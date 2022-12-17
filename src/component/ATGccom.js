@@ -50,7 +50,7 @@ const ATGccom = () => {
     }, []);
 
     const getData = () => {
-        axios.post('http://192.168.2.91:5000/read_VactDispose', {
+        axios.post('http://192.168.2.82:5000/read_VactDispose', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -93,7 +93,7 @@ const ATGccom = () => {
     }
     const handleShow = (e) => {
 
-        axios.post('http://192.168.2.91:5000/modaldetail_Vactlist', {
+        axios.post('http://192.168.2.82:5000/modaldetail_Vactlist', {
             disposeVactListId: e.disposeVactListId
         }).then(function (response) {
             setAddData({
@@ -154,7 +154,7 @@ const ATGccom = () => {
     }
     //승인목록
     const approvalList = () => {
-        axios.post('http://192.168.2.91:5000/Approval_VactDispose', {
+        axios.post('http://192.168.2.82:5000/Approval_VactDispose', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -164,7 +164,7 @@ const ATGccom = () => {
     }
     //요청목록
     const requestList = () => {
-        axios.post('http://192.168.2.91:5000/request_VactDispose', {
+        axios.post('http://192.168.2.82:5000/request_VactDispose', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -174,7 +174,7 @@ const ATGccom = () => {
     }
     //미승인목록
     const unapprovedList = () => {
-        axios.post('http://192.168.2.91:5000/process_VactDispose', {
+        axios.post('http://192.168.2.82:5000/process_VactDispose', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -189,7 +189,7 @@ const ATGccom = () => {
         if (!dateCheck) {
 
 
-            axios.post('http://192.168.2.91:5000/authority_VactDispose ', {
+            axios.post('http://192.168.2.82:5000/authority_VactDispose ', {
                 depName: addData.depName,
                 compCode: addData.compCode,
                 disposeVactListId: addData.disposeVactListId,
@@ -225,7 +225,7 @@ const ATGccom = () => {
 
 
 
-            axios.post('http://192.168.2.91:5000/authority_VactDispose ', {
+            axios.post('http://192.168.2.82:5000/authority_VactDispose ', {
                 depName: addData.depName,
                 compCode: addData.compCode,
                 disposeVactListId: addData.disposeVactListId,

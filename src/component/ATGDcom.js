@@ -20,6 +20,10 @@ const ATGDcom = () => {
     const [show, setShow] = useState(false);
     const [MH, setMh] = useState(false);
     const [ mhData , setMhData] = useState();
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth()+1;
+    const date = today.getDate();
     const [addData, setAddData] = useState({
         addinOut_Note: null,//비고
         addcompCode: null,//회사코드
@@ -64,8 +68,10 @@ const ATGDcom = () => {
     }, []);
 
     const getData = () => {
-        axios.post('http://192.168.2.91:5000/read_inOutInfo', {
-            compCode: sessionStorage.getItem("uid")
+        console.log("read inout info");
+        axios.post('http://192.168.2.82:5000/read_inOutInfo', {
+            compCode: sessionStorage.getItem("uid"),
+            today : String(year) + String(month) + String(date)
         }).then(function (response) {
             setData(response.data);
         }).catch(function (err) {
@@ -120,7 +126,7 @@ const ATGDcom = () => {
 
     //추가 모델에서 추가 눌렀을경우 함수
     const pushAddData = () => {
-        axios.post('http://192.168.2.91:5000/create_inOutInfo ', {
+        axios.post('http://192.168.2.82:5000/create_inOutInfo ', {
             inOut_Note :addData.addinOut_Note,//비고
             compCode : sessionStorage.getItem("uid"),//회사코드
             depName : addData.adddepName,//부서명
@@ -151,7 +157,7 @@ const ATGDcom = () => {
     
 
     const modifyAddData = () => {
-        axios.post('http://192.168.2.91:5000/update_inOutInfo ', {
+        axios.post('http://192.168.2.82:5000/update_inOutInfo ', {
             inOutListId: modifyData.modifyinOutListId,
             inOut_Note: modifyData.modifyinOut_Note,
             inOutStart: modifyData.modifyinOutStart,
@@ -226,7 +232,7 @@ const ATGDcom = () => {
         setModifyShow(false);
     }
     const MdShow = (e) => {
-        axios.post('http://192.168.2.91:5000/modal_inOutInfo', {
+        axios.post('http://192.168.2.82:5000/modal_inOutInfo', {
             inOutListId: e.inOutListId
         }).then(function (response) {
             setModifyData({
@@ -285,7 +291,7 @@ const ATGDcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>출퇴근 관리 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong> 출퇴근 관리[ {year+"년" + month +"월"+ date+"일"} ]</strong></h2>
             <button style={{ position: 'absolute', right: "0",  }} onClick={handleShow} className="Atmp1">  <strong>추가</strong></button>
             <br />
             <br />

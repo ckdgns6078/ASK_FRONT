@@ -299,14 +299,10 @@ const Member = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                아이디 찾기
-              </Link>
+
             </Grid>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                {"비밀번호 찾기"}
-              </Link>
+
             </Grid>
           </Grid>
         </Box>

@@ -71,7 +71,7 @@ const ATGEcom = () => {
     }, []);
 
     const getData = () => {
-        axios.post('http://192.168.2.91:5000/read_inOutInfo', {
+        axios.post('http://192.168.2.82:5000/read_inOutInfo', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -81,7 +81,7 @@ const ATGEcom = () => {
     }
 
     const modifyAddData = () => {
-        axios.post('http://192.168.2.91:5000/update_inOutInfo ', {
+        axios.post('http://192.168.2.82:5000/update_inOutInfo ', {
             inOutListId: modifyData.inOutListId,
             inOut_Note: modifyData.inOut_Note,
             inOutStart: modifyData.inOutStart,
@@ -139,7 +139,7 @@ const ATGEcom = () => {
     }
 
     const searchAddData = () => {
-        axios.post('http://192.168.2.91:5000/search_inOutInfo', {
+        axios.post('http://192.168.2.82:5000/search_inOutInfo', {
             compCode: sessionStorage.getItem("uid"),
             empName: search,//이름,
             startDate: dateStart,//시작일 ,
@@ -152,7 +152,7 @@ const ATGEcom = () => {
     }
     //추가 모델에서 추가 눌렀을경우 함수
     const pushAddData = () => {
-        axios.post('http://192.168.2.91:5000/create_inOutInfo ', {
+        axios.post('http://192.168.2.82:5000/create_inOutInfo ', {
             inOut_Note: addData.addinOut_Note,//비고
             compCode: sessionStorage.getItem("uid"),//회사코드
             depName: addData.adddepName,//부서명
@@ -182,7 +182,7 @@ const ATGEcom = () => {
     }
     //모델에서 데이터 삭제할때 실행되는 함수
     const delAddData = () => {
-        axios.post('http://192.168.2.91:5000/delete_inOutInfo', {
+        axios.post('http://192.168.2.82:5000/delete_inOutInfo', {
             inOutListId: modifyData.inOutListId
         }).then(function (response) {
             if (response.data) {
@@ -259,7 +259,7 @@ const ATGEcom = () => {
         setModifyShow(false);
     }
     const MdShow = (e) => {
-        axios.post('http://192.168.2.91:5000/modal_inOutInfo', {
+        axios.post('http://192.168.2.82:5000/modal_inOutInfo', {
             inOutListId: e.inOutListId
         }).then(function (response) {
             console.log(response.data[0]);

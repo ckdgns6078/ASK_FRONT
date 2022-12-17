@@ -63,7 +63,7 @@ const ATGAcom = () => {
     }, []);
 
     const getData = () => {    //초기값 가져오는 함수
-        axios.post('http://192.168.2.91:5000/read_Vactcategory', {
+        axios.post('http://192.168.2.82:5000/read_Vactcategory', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             setData(response.data);
@@ -109,7 +109,7 @@ const ATGAcom = () => {
     //수정
     const MdClose = () => setModifyShow(false);
     const MdShow = (e) => {
-        axios.post('http://192.168.2.91:5000/modal_Vactcategory ', {
+        axios.post('http://192.168.2.82:5000/modal_Vactcategory ', {
             vactNameListId: e.vactNameListId
         }).then(function (response) {
 
@@ -132,7 +132,7 @@ const ATGAcom = () => {
 
     //추가 데이터 넣기 함수
     const pushAddData = () => {
-        axios.post('http://192.168.2.91:5000/create_Vactcategory ', {
+        axios.post('http://192.168.2.82:5000/create_Vactcategory ', {
             compCode: sessionStorage.getItem("uid"),
             vactCode: addData.addvactCode,
             vactDetail: addData.addvactDetail,
@@ -157,7 +157,7 @@ const ATGAcom = () => {
 
     //수정 데이터 넣기
     const pushModifyData = () => {
-        axios.post('http://192.168.2.91:5000/update_Vactcategory', {
+        axios.post('http://192.168.2.82:5000/update_Vactcategory', {
             compCode: sessionStorage.getItem("uid"),
             vactNameListId: modifyData.modifyvactNameListId,
             vactCode: modifyData.modifyvactCode,
@@ -185,7 +185,7 @@ const ATGAcom = () => {
     //삭제 데이터 넣기
     const pushDeleteData = () => {
         console.log("modifyData.vact" , modifyData.modifyvactNameListId);
-        axios.post('http://192.168.2.91:5000/delete_Vactcategory ', {
+        axios.post('http://192.168.2.82:5000/delete_Vactcategory ', {
             vactNameListId: modifyData.modifyvactNameListId
         }).then(function (response) {
             console.log("delete_Vactcategory 값 ", response.data);

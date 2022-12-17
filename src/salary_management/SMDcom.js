@@ -434,7 +434,8 @@ const SMDcom = () => {
                             <tr>
                                 <td style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7', height: '45px' }}>주소</td>
                                 <td colSpan='5' style={{ border: "1px solid #d8d8d8" , textAlign:'left'}}>
-                                    &nbsp;&nbsp;{modify && modifyData && modifyData.shopAddress}
+                                <Form.Control style={{ width: '100%', height: '40px' }} type="text" name='shopAddress' aria-describedby="btnGroupAddon" value={modify && modifyData && modifyData.shopAddress} onChange={onChangeModifyData} />
+                                    {/* &nbsp;&nbsp;{modify && modifyData && modifyData.shopAddress} */}
                                 </td>
                             </tr>
                             <tr>

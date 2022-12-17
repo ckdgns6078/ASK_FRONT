@@ -16,10 +16,11 @@ import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { message, Space } from 'antd';
-
+import Stack from '@mui/material/Stack';
+import BButton from '@mui/material/Button';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const BAPBcom = () => {
-
 
     const [messageApi, contextHolder] = message.useMessage();
     //성공 alert
@@ -46,7 +47,7 @@ const BAPBcom = () => {
             content: contentText,
         });
     };
-
+    
     //기본 데이터
     const [data, setData] = useState();
     const [modifyData, setModifyData] = useState({
@@ -96,14 +97,15 @@ const BAPBcom = () => {
         totalsurTax: "",
         total: "",
     });
-
-
+    const [ test  , setTest] = useState("");
+    
+    
     useEffect(() => {
         getData();
     }, []);
-
+    
     const getData = () => {
-        axios.post('http://192.168.2.91:5000/income_Read', {
+        axios.post('http://192.168.2.82:5000/income_Read', {
             compCode: sessionStorage.getItem("uid")
         }).then(function (response) {
             console.log("income_Read", response.data);
@@ -112,9 +114,9 @@ const BAPBcom = () => {
             console.log("income_Read error", err);
         });
     }
-
-
-
+    
+    
+    
     //추가 모델
     const [add, setAdd] = useState(false);
     const addClose = () => {
@@ -147,11 +149,18 @@ const BAPBcom = () => {
 
     //수정 모델
     const [modify, setModify] = useState(false);
-    const modifyClose = () => setModify(false);
+    const modifyClose = () => {
+
+        setModify(false);
+        setTest(null);
+    }
+    
     const modifyShow = (e) =>{
-        axios.post('http://192.168.2.91:5000/income_Modal',{
+        console.log("e value : " , e.p_division);
+        axios.post('http://192.168.2.82:5000/income_Modal',{
             purchaseId : e.purchaseId
         }).then (function ( response ){
+            console.log("modify Data " , response.data[0]);
             let date = response.data[0].p_date.split('-');
             setModifyData({
                 purchaseId: response.data[0].purchaseId ,
@@ -177,6 +186,7 @@ const BAPBcom = () => {
                 total: response.data[0].total ,
                 taxBill : response.data[0].taxBill
             })
+            setTest(response.data[0].p_division);
         }).catch ( function ( err ){
             console.log(" income_Modal  error : " , err);
             let text = '데이터를 가져오는데 오류가 발생했습니다. 새로고침 후 다시 시도해주세요.';
@@ -194,7 +204,23 @@ const BAPBcom = () => {
     const [mag, setMag] = useState(false);
     const magClose = (e) => setMag(false);
     const magShow = () => setMag(true);
+    
+    const [magData2 , setMagData2] = useState();
+    const [mag2, setMag2] = useState(false);
+    const magClose2 = () => setMag2(false);
+    const magShow2 = () => {
+        axios.post('http://192.168.2.82:5000/clientRead',{
+            compCode : sessionStorage.getItem("uid")
+        }).then(function(response){
+            console.log("clientRead " , response.data)
+            setMagData2(response.data);
+        }).catch(function(err){
+            let text = "공급처 목록을 가져오는데 오류가 발생하였습니다."
+            error(text);
+        })
 
+        setMag2(true);
+    }
     //유형돋보기 모델
     const [mago, setMago] = useState(false);
     const magoClose = () => setMago(false);
@@ -244,7 +270,7 @@ const BAPBcom = () => {
     }
 
     const pushAddData = () => {
-        axios.post('http://192.168.2.91:5000/income_Create', {
+        axios.post('http://192.168.2.82:5000/income_Create', {
             compCode : sessionStorage.getItem('uid'),
             p_division: addData.p_division,
             p_date: String(addData.p_dateYear) + String(addData.p_dateMonth) + String(addData.p_dateMonth),
@@ -279,8 +305,6 @@ const BAPBcom = () => {
             pushAddData()
         }
         else{
-
-            
             const formData = new  FormData();
             const fData ={
                 compCode : sessionStorage.getItem('uid'),
@@ -300,7 +324,7 @@ const BAPBcom = () => {
         formData.append('file' , file.files[0]);
         formData.append('request', new Blob([JSON.stringify(fData)], { type: "application/json" }));
         
-        axios.post('http://192.168.2.91:5000/taxfile_create',formData,{
+        axios.post('http://192.168.2.82:5000/taxfile_create',formData,{
             headers :{
                 'Content-Type': 'multipart/form-data'
             }
@@ -323,38 +347,82 @@ const BAPBcom = () => {
     }
 }
     const pushModifyData = () => {
-        axios.post('http://192.168.2.91:5000/income_Update', {
-            purchaseId: modifyData.purchaseId ,
-            p_division: modifyData.p_division ,
+        const formData = new FormData();
+        const fData = {
+            compCode : sessionStorage.getItem("uid"),
+            purchaseId: modifyData.purchaseId,
+            p_division: modifyData.p_division,
             p_date: String(modifyData.p_dateYear) + String(modifyData.p_dateMonth) + String(modifyData.p_dateDay),
-            p_taxType: modifyData.p_taxType ,
-            p_item: modifyData.p_item ,
-            p_iCount: modifyData.p_iCount ,
-            p_unitPrice: modifyData.p_unitPrice ,
-            p_supplyValue: modifyData.p_supplyValue ,
-            p_surTax: modifyData.p_surTax ,
-            p_totalPrice: modifyData.p_totalPrice ,
-            p_clientCompNum: String(modifyData.p_clientCompNum1) + String(modifyData.p_clientCompNum2) + String(modifyData.p_clientCompNum3) ,
-            p_clientName: modifyData.p_clientName ,
-            totalsupplyValue: modifyData.totalsupplyValue ,
-            totalsurTax: modifyData.totalsurTax ,
-            total: modifyData.total ,
-        }).then(function (response) {
-            console.log(" response.data" , response.data);
+            p_taxType: modifyData.p_taxType,
+            p_item: modifyData.p_item,
+            p_iCount: modifyData.p_iCount,
+            p_unitPrice: modifyData.p_unitPrice,
+            p_supplyValue: modifyData.p_supplyValue,
+            p_surTax: modifyData.p_surTax,
+            p_totalPrice: modifyData.p_totalPrice,
+            p_clientCompNum: String(modifyData.p_clientCompNum1) + String(modifyData.p_clientCompNum2) + String(modifyData.p_clientCompNum3),
+            p_clientName: modifyData.p_clientName,
+            totalsupplyValue: modifyData.totalsupplyValue,
+            totalsurTax: modifyData.totalsurTax,
+            total: modifyData.total,
+        };
+        let file = document.getElementById('modifyfile');
+        formData.append('file' , file.files[0]);
+        formData.append('request', new Blob([JSON.stringify(fData)], { type: "application/json" }));
+
+        axios.post('http://192.168.2.82:5000/income_Update',formData,{
+            headers :{
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function ( response ){  
             if (response.data) {
-                let text = "거래처 수정 완료";
+                let text = "매입/매출 수정 완료";
                 success(text);
                 getData();
                 modifyClose();
             } else {
-                let text = "명세표 등록에 실패했습니다";
+                let text = "매입/매출 수정에 실패했습니다";
                 warning(text);
             }
-        }).catch(function (err) {
-            console.log("clientUpdate error :", err);
-            let text = "명세표 저장에서 오류가 발생했습니다. 새로고침 후 다시 실행해 주세요.";
+        }).catch ( function ( err ){
+            console.log("taxfile_create error : " ,err);
+            let text = "저장하는데 오류가 발생했습니다. 새로고침 후 다시 실행해주세요."
             error(text);
-        });
+        })
+
+
+        // axios.post('http://192.168.2.82:5000/income_Update', {
+        //     purchaseId: modifyData.purchaseId ,
+        //     p_division: modifyData.p_division ,
+        //     p_date: String(modifyData.p_dateYear) + String(modifyData.p_dateMonth) + String(modifyData.p_dateDay),
+        //     p_taxType: modifyData.p_taxType ,
+        //     p_item: modifyData.p_item ,
+        //     p_iCount: modifyData.p_iCount ,
+        //     p_unitPrice: modifyData.p_unitPrice ,
+        //     p_supplyValue: modifyData.p_supplyValue ,
+        //     p_surTax: modifyData.p_surTax ,
+        //     p_totalPrice: modifyData.p_totalPrice ,
+        //     p_clientCompNum: String(modifyData.p_clientCompNum1) + String(modifyData.p_clientCompNum2) + String(modifyData.p_clientCompNum3) ,
+        //     p_clientName: modifyData.p_clientName ,
+        //     totalsupplyValue: modifyData.totalsupplyValue ,
+        //     totalsurTax: modifyData.totalsurTax ,
+        //     total: modifyData.total ,
+        // }).then(function (response) {
+        //     console.log(" response.data" , response.data);
+        //     if (response.data) {
+        //         let text = "거래처 수정 완료";
+        //         success(text);
+        //         getData();
+        //         modifyClose();
+        //     } else {
+        //         let text = "명세표 등록에 실패했습니다";
+        //         warning(text);
+        //     }
+        // }).catch(function (err) {
+        //     console.log("clientUpdate error :", err);
+        //     let text = "명세표 저장에서 오류가 발생했습니다. 새로고침 후 다시 실행해 주세요.";
+        //     error(text);
+        // });
     }
 
     const pushDeleteData = () => {
@@ -414,7 +482,7 @@ const BAPBcom = () => {
     }
 
     const allBtn = () => {
-        axios.post('http://192.168.2.91:5000/income_Read', {
+        axios.post('http://192.168.2.82:5000/income_Read', {
             compCode: sessionStorage.getItem('uid')
         }).then(function (response) {
             console.log("전체 : ",response.data)
@@ -424,7 +492,7 @@ const BAPBcom = () => {
         });
     }
     const buyBtn = () => {
-        axios.post('http://192.168.2.91:5000/income_only', {
+        axios.post('http://192.168.2.82:5000/income_only', {
             compCode: sessionStorage.getItem('uid')
         }).then(function (response) {
             console.log(" 매입 :" , response.data)
@@ -434,7 +502,7 @@ const BAPBcom = () => {
         });
     }
     const payBtn = () => {
-        axios.post('http://192.168.2.91:5000/outcome_only', {
+        axios.post('http://192.168.2.82:5000/outcome_only', {
             compCode: sessionStorage.getItem('uid')
         }).then(function (response) {
             console.log(" 매출" , response.data)
@@ -444,7 +512,28 @@ const BAPBcom = () => {
         });
     }
 
+    const magBtn3 = (e) =>{
+        console.log(e);
 
+        if(add){
+            const temp = { ...addData};
+            temp.p_clientName = e.clientName;
+            temp.p_clientCompNum1 =e.clientCompNum.substr(0,3);
+            temp.p_clientCompNum2 = e.clientCompNum.substr(3,2);
+            temp.p_clientCompNum3 = e.clientCompNum.substr(5);
+            setAddData(temp);
+            magClose2();
+        }
+        if(modify){
+            const temp = {...modifyData};
+            temp.p_clientName = e.clientName;
+            temp.p_clientCompNum1 =e.clientCompNum.substr(0,3);
+            temp.p_clientCompNum2 = e.clientCompNum.substr(3,2);
+            temp.p_clientCompNum3 = e.clientCompNum.substr(5);
+            setModifyData(temp);
+            magClose2();
+        }
+    }
 
 
 
@@ -460,7 +549,7 @@ const BAPBcom = () => {
         console.log("daily Name :", dateStart);
         console.log("daily Name :", dateEnd);
 
-        axios.post('http://192.168.2.91:5000/income_Search', {
+        axios.post('http://192.168.2.82:5000/income_Search', {
             compCode: sessionStorage.getItem("uid"),
             p_clientName : search,//이름,
             startDate : dateStart,//시작일 ,
@@ -553,7 +642,7 @@ const BAPBcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>매입관리 </strong></h2>
+            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>매입/매출 관리 </strong></h2>
             <br />
             <br />
             <br />
@@ -763,17 +852,31 @@ const BAPBcom = () => {
                             </tr>
                             <tr>
                                 <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' ,height:'60px'}}>공급처명</td>
-                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeAdd}/>
+                                <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '300px' }}>
+                                <InputGroup >
+                                    <Form.Control
+                                        type="addpayCalc"
+                                        name="p_clientName"
+                                        value={addData.p_clientName}
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
+                                        onChage={onChangeAdd}
+                                     
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow2}/></InputGroup.Text>
+                                </InputGroup>
                                 </td>
+                                {/* <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
+                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeAdd}/>
+                                </td> */}
 
                                 <td style={{ border: "1px solid #d8d8d8", height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>사업자번호</td>
                                   
-                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum1' aria-describedby="btnGroupAddon" onChange={onChangeAdd}  /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}>  <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum1' value={addData.p_clientCompNum1} aria-describedby="btnGroupAddon" onChange={onChangeAdd}  /></td>
                                 <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
-                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum2' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}><Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum2' value={addData.p_clientCompNum2} aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
                                 <td style={{borderTop: "1px solid #d8d8d8"}}>─</td>
-                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum3' aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
+                                <td style={{borderTop: "1px solid #d8d8d8"}}> <Form.Control style={{ width: '150px', height: '100%' , textAlign:'center'}} type="text" name='p_clientCompNum3' value={addData.p_clientCompNum3} aria-describedby="btnGroupAddon" onChange={onChangeAdd} /></td>
 
                                    
                             </tr>
@@ -893,7 +996,20 @@ const BAPBcom = () => {
                             <tr>
                                 <td style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' ,height:'60px'}}>공급처명</td>
                                 <td  style={{ border: '1px solid #d8d8d8 ', height: '40px', width: '150px' }}>
-                                <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientName} />
+                                <InputGroup >
+                                    <Form.Control
+                                        type="text"
+                                        name="p_clientName"
+                                        value={modify && modifyData && modifyData.p_clientName}
+                                        aria-describedby="btnGroupAddon"
+                                        style={{ height: '40px' ,fontSize:'15px',textAlign:'center'}}
+                                        onChage={onChangeModify}
+                                     
+                                    />
+                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '50px', height: '40px' }}> <SearchIcon onClick= {magShow2}/></InputGroup.Text>
+                                </InputGroup>
+
+                                {/* <Form.Control style={{ width: '100%', height: '100%' , textAlign:'center'}} type="text"  aria-describedby="btnGroupAddon" name='p_clientName' onChange={onChangeModify} value={modify && modifyData && modifyData.p_clientName} /> */}
                                 </td>
 
                                 <td style={{ border: "1px solid #d8d8d8", height: '40px', width: '150px', backgroundColor: '#f7f7f7', color: '#777777' }}>사업자번호</td>
@@ -957,7 +1073,27 @@ const BAPBcom = () => {
                                 </td>
                             </tr>
                         </Table>
-                        {modifyData && modifyData.taxBill && <a href={modifyData.taxBill} target='_blank'>세금계산서</a> }
+                        {modifyData && modifyData.taxBill !=null && <a href={modifyData.taxBill} target='_blank'>세금계산서 확인</a>}
+                        {modifyData &&  modifyData.p_division == "매입" && modifyData.taxBill ==null&&
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                                <BButton variant="contained" component="label">
+                                    세금계산서등록
+                                    <input hidden accept="image/*" type="file" id="modifyfile" />
+                                </BButton>
+                            </Stack>
+                        }
+{/* 
+                        { test == "매입" &&  modifyData.taxBill ?
+                            <a href={modifyData.taxBill} target='_blank'>세금계산서 확인</a>
+                            :
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                            <BButton variant="contained" component="label">
+                                세금계산서등록
+                                <input hidden accept="image/*" type="file" id = "modifyfile"/>
+                            </BButton>
+                            </Stack>
+
+                        } */}
 
 
                     </Container>
@@ -1073,7 +1209,49 @@ const BAPBcom = () => {
 
 
 
+            {/* 공급처명 돋보기*/}
+            <Modal
+                size="lg"
+                centered
+                show={mag2} onHide={magClose2} animation={true}>
+                <Modal.Header closeButton style={{ backgroundColor: '#005b9e', }}>
+                    <Modal.Title style={{ color: '#ffffff' }}> <strong>거래처목록</strong></Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '' }}>
 
+
+                    <Table
+                        hover
+                        style={{
+                            textAlign: "center",
+                        }} >
+                        <thead>
+                            <tr style={{ border: "1px solid #d8d8d8", backgroundColor: '#f7f7f7' }}>
+                                <td style={{ border: "1px solid #d8d8d8", fontSize: '22px' }}><strong></strong></td>
+                                <td style={{  border: "1px solid #d8d8d8" ,fontSize: '22px', color: '#777777' }}>거래처명</td>
+                                <td style={{  border: "1px solid #d8d8d8", fontSize: '22px', color: '#777777' }}>대표명</td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {magData2 && magData2.map((e, idx) =>
+
+                                <tr style={{ border: "1px solid #d8d8d8" }}>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '22px' }}><strong>{ idx +1 }</strong></td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#777777' }}><Button variant="link" style={{fontSize:'22px'}} onClick={() => magBtn3(e)}>{e.clientName}</Button></td>
+                                    <td style={{ border: "1px solid #d8d8d8", fontSize: '22px', color: '#777777' }}>{e.clientCEO}</td>
+                                </tr>
+
+                            )
+                            }
+
+                        </tbody>
+                    </Table>
+
+                </Modal.Body>
+
+            </Modal>
 
 
 

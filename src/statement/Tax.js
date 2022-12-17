@@ -40,7 +40,7 @@ const Tax = () => {
     const getData = () => {
         console.log("session" , sessionStorage.getItem('uid'))
         console.log('arr : ', arr);
-        axios.post('http://192.168.2.91:5000/taxPaper', {
+        axios.post('http://192.168.2.82:5000/taxPaper', {
             compCode: sessionStorage.getItem('uid'),
             purchaseList: arr
         }).then(function (response) {
@@ -149,7 +149,7 @@ const Tax = () => {
                     <tr>
                         <td colSpan='4' style={{ border: "1px solid blue", color: 'blue' }}>작 성</td>
                         <td colSpan='13' style={{ border: "1px solid blue", color: 'blue' }}>공 급 가 액</td>
-                        <td colSpan='10' style={{ border: "1px solid blue", color: 'blue' }}>세 엑</td>
+                        <td colSpan='10' style={{ border: "1px solid blue", color: 'blue' }}>세 액</td>
                         <td colSpan='5' style={{ border: "1px solid blue", color: 'blue' }}>비 고</td>
                     </tr>
                     <tr>
@@ -353,7 +353,7 @@ const Tax = () => {
                     <tr>
                         <td colSpan='4' style={{ border: "1px solid red", color: 'red' }}>작 성</td>
                         <td colSpan='13' style={{ border: "1px solid red", color: 'red' }}>공 급 가 액</td>
-                        <td colSpan='10' style={{ border: "1px solid red", color: 'red' }}>세 엑</td>
+                        <td colSpan='10' style={{ border: "1px solid red", color: 'red' }}>세 액</td>
                         <td colSpan='5' style={{ border: "1px solid red", color: 'red' }}>비 고</td>
                     </tr>
                     <tr>

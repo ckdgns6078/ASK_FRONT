@@ -283,17 +283,24 @@ const SMCcom = () => {
 
     //출력 관련 함수
     const printBtn = () => {
-        window.open('http://localhost:3000/OW?id=' + modifyData.payStatementId);
+        window.open('http://localhost:3000/OW?id=' + modifyData.statementId);
     }
     //여러명 출력용
     const printCheck = () => {
-        let key = "";
-        for (let i of checkedItems) {
-            key += "&id=" + i;
-        }
-        console.log(key);
+        console.log("size " , checkedItems.size);
+        if (checkedItems.size == 0) {
+            console.log("if문 실행");
+            const text = "체크박스에 체크된 항목이 없습니다. 체크 후 출력해주세요.";
+            error(text);
+        } else {
+            let key = "";
+            for (let i of checkedItems) {
+                key += "&id=" + i;
+            }
+            console.log(key);
 
-        window.open('http://localhost:3000/OW?id=1' + key);
+            window.open('http://localhost:3000/OW?id=1' + key);
+        }
     }
 
     //체크 박스
@@ -347,6 +354,7 @@ const SMCcom = () => {
 
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
+            {contextHolder}
             <h2 style={{ color: ' #005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>일용직급여 관리</strong></h2>
             <div>
                 <button style={{ position: 'absolute', right: "0" }} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
@@ -423,17 +431,7 @@ const SMCcom = () => {
                             </tr>
                         )
                     }
-                    {/* <tr style={{ backgroundColor: '#f1f2f6', }}>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>합계</strong></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}> <strong>기본급123</strong></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>추가수당123</strong></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>세금 경비123</strong></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>합계123</strong></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>세금 경비123</strong></td>
-                        <td style={{ border: "1px solid #f1f2f6", fontSize: '20px', color: '#777777' }}><strong>합계123</strong></td>
-                    </tr> */}
+
 
 
 
@@ -696,14 +694,14 @@ const SMCcom = () => {
                                 <tr style={{ backgroundColor: '#f7f7f7', }}>
                                     {/* <td  style={{border:"3px solid #f1f2f6", width:'100px' ,fontSize:'10px'}}rowspan='2'><strong>사원번호</strong></td>
 <td rowspan='2' style={{border:"3px solid #f1f2f6",color:'#777777',width:'70px',fontSize:'10px'}}>사원명</td> */}
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}> 기본급 </td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>야근수당</td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}> 일급 </td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>연장수당</td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>야간수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>주말근무수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>연차수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>출산보육수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>부양가족수당</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>식대</td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>차량유지비</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '50px', height: '50px', fontSize: '12px' }}>지급총액</td>
                                     <td rowspan='2' style={{ width: '150px', fontSize: '12px' }}> 실지급액</td>
                                 </tr>
@@ -716,7 +714,7 @@ const SMCcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>고용보험</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>장기요양</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>경비</td>
-                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>차량유지비</td>
                                     <td style={{ border: "1px solid #d8d8d8", width: '100px', height: '50px', fontSize: '12px' }}>공제총액</td>
                                 </tr>
                                 <tr style={{ border: "1px solid #d8d8d8" }}>
@@ -724,13 +722,13 @@ const SMCcom = () => {
 <td rowspan='2' style={{border:"3px solid #f1f2f6", width:'100px',fontSize:'12px'}}>사원명</td> */}
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', width: '100px', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>
                                     {/* <td> <input type='text' style={{height:'40px',width:'100px',fontSize:'12px'}}></input></td> */}
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyOvertimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyNightTimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyWeekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyAnnual.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}> &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}> &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyFoodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyCarStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyTotalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
                                     <td rowSpan='2' style={{ border: "1px solid #d8d8d8", fontSize: '12px' }}>{modify && modifyData && modifyData.dailyActlPymnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</td>
                                 </tr>
@@ -743,7 +741,7 @@ const SMCcom = () => {
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyEmpIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyIngTrmCrIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp; </td>
-                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}></td>
+                                    <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyCarStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} &nbsp;</td>
                                     <td style={{ border: "1px solid #d8d8d8", textAlign: 'right', height: '40px', fontSize: '12px' }}>{modify && modifyData && modifyData.dailyDdctn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}&nbsp;&nbsp;</td>
                                 </tr>
                             </Table>

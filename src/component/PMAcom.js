@@ -89,6 +89,10 @@ const PMAcom = () => {
             addbankNum : null,//계좌번호
             addbankOwner: null,//예금주
             addempPay : null,//연봉
+            addmealPay : null,  // 식대
+            addcarPay : null,   //차량 유지비
+            addchildPay : null, // 출산보육수당
+            adddpndnAlwnc : null   // 부양가족수당
     });
     const [modifyData, setModifyData] = useState({
             modifyempId : null, //PRIMARY KEY
@@ -115,7 +119,11 @@ const PMAcom = () => {
             modifybankNum : null,//계좌번호
             modifybankOwner: null,//예금주
             modifyempPay : null,//연봉
-            modifyremindVacation : null
+            modifyremindVacation : null,
+            modifymealPay : null,  // 식대
+            modifycarPay : null,   //차량 유지비
+            modifychildPay : null, // 출산보육수당
+            modifydpndnAlwnc : null   // 부양가족수당
     });
 
    
@@ -199,7 +207,10 @@ const PMAcom = () => {
                 bankName:addData.addbankName,//은행
                 bankNum :addData.addbankNum,//계좌번호
                 bankOwner: addData.addbankOwner,//예금주
-                empPay : addData.addempPay//연봉
+                empPay : addData.addempPay,//연봉
+                carPay : addData.addcarPay,   //차량 유지비
+                childPay : addData.addchildPay, // 출산보육수당
+                dpndnAlwnc : addData.adddpndnAlwnc   // 부양가족수당
             }).then(function (response) {
                 if (response.data) {
                     let contentText = "        사원 추가 완료        ";
@@ -278,6 +289,10 @@ const PMAcom = () => {
             "addbankNum": null,//계좌번호
             "addbankOwner": null,//예금주
             "addempPay": null,//연봉
+            "addmealPay" : null,  // 식대
+            "addcarPay" : null,   //차량 유지비
+            "addchildPay" : null, // 출산보육수당
+            "adddpndnAlwnc" : null   ,// 부양가족수당
         })
         setAddCheck(false);
     }
@@ -316,7 +331,11 @@ const PMAcom = () => {
             "modifybankNum": null,//계좌번호
             "modifybankOwner": null,//예금주
             "modifyempPay": null,//연봉
-            "modifyremindVacation" : null
+            "modifyremindVacation" : null,
+            "modifycarPay" : null,   //차량 유지비
+            "modifychildPay" : null, // 출산보육수당
+            "modifydpndnAlwnc" : null,   // 부양가족수당
+            "modifymealPay" : null    //식비
         });
         setModifyCheck(false);
     }
@@ -373,7 +392,11 @@ const PMAcom = () => {
                 "modifybankNum": response.data[0].bankNum,//계좌번호
                 "modifybankOwner": response.data[0].bankOwner,//예금주
                 "modifyempPay": response.data[0].empPay,//연봉
-                "modifyremindVacation" : response.data[0].remindVacation
+                "modifyremindVacation" : response.data[0].remindVacation,
+                "modifycarPay" : response.data[0].carPay,   //차량 유지비
+                "modifychildPay" : response.data[0].childPay, // 출산보육수당
+                "modifydpndnAlwnc" : response.data[0].dpndnAlwnc,   // 부양가족수당
+                "modifymealPay" : response.data[0].mealPay    //식비
             });
         }).catch(function (er){
             console.log("updataEmpModal error" , er);
@@ -442,7 +465,11 @@ const PMAcom = () => {
             bankName: modifyData.modifybankName,//은행
             bankNum: modifyData.modifybankNum,//계좌번호
             bankOwner: modifyData.modifybankOwner,//예금주
-            empPay: modifyData.modifyempPay//연봉
+            empPay: modifyData.modifyempPay,//연봉
+            carPay : modifyData.addcarPay,   //차량 유지비
+            childPay : modifyData.addchildPay, // 출산보육수당
+            dpndnAlwnc : modifyData.adddpndnAlwnc   // 부양가족수당
+            
         }).then(function (response) {
             if(response.data){
                 getData();
@@ -545,7 +572,7 @@ const PMAcom = () => {
                     <tr >
                         <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}>{e.empStart}</td>
                         <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}>{e.empNum}</td>
-                        <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}><Button  name={e.empId} style={{fontSize:'22px'}}onClick={()=>MdShow(e)} variant="link">{e.empName}</Button></td>
+                        <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}><strong><Button  name={e.empId} style={{fontSize:'22px'}}onClick={()=>MdShow(e)} variant="link">{e.empName}</Button></strong></td>
                         <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}>{e.depName}</td>
                         <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}>{e.empRank}</td>
                         <td style={{border:"1px solid #d8d8d8", color:'#000',fontSize:'22px'}}>{e.bankName}</td>
@@ -745,30 +772,27 @@ const PMAcom = () => {
                     <TabPanel value={value} index={1} >
                        <Table style={{border:"1px solid #d8d8d8",textAlign:'center'}}>
 
-                                <tr>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>기본급</td>
-                                    <td>
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                    </td>
+                                <tr>                                                         
+
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>출산보육수당</td>
                                     <td>
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addchildPay' aria-describedby="btnGroupAddon" value={ addData.addchildPay }onChange={onChangeAddData} />
                                     </td>
                                 </tr>
                                 <tr style={{ borderBottom: "1px solid #d8d8d8"}}>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>식대</td>
                                     <td>
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addmealPay' aria-describedby="btnGroupAddon" value={ addData.addmealPay }onChange={onChangeAddData} />
                                     </td>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>부양가족수당</td>
                                     <td>
-                                        <Form.Control style={{ width: '100%', height: '100%', borderBottom: "1px solid #d8d8d8" }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%', borderBottom: "1px solid #d8d8d8" }} type="text" name='adddpndnAlwnc' aria-describedby="btnGroupAddon" value={ addData.adddpndnAlwnc }onChange={onChangeAddData} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>차량유지비</td>
                                     <td >
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addcarPay' aria-describedby="btnGroupAddon" value={ addData.addcarPay }onChange={onChangeAddData} />
                                     </td>
                                     <td style={{  border: "1px solid #d8d8d8",color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
                                     <td style={{  border: "1px solid #d8d8d8",color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
@@ -1002,30 +1026,26 @@ const PMAcom = () => {
                         <TabPanel value={value} index={1} >
                             <Table style={{ border: "1px solid #d8d8d8", textAlign: 'center' }}>
 
-                                <tr>
-                                    <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>기본급</td>
-                                    <td>
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
-                                    </td>
+                                <tr>                                                                           
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>출산보육수당</td>
                                     <td>
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifychildPay' aria-describedby="btnGroupAddon" onChange={onChangeModifyData} value = { modifyData.modifychildPay }/>
                                     </td>
                                 </tr>
                                 <tr style={{ borderBottom: "1px solid #d8d8d8" }}>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>식대</td>
                                     <td>
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifymealPay' aria-describedby="btnGroupAddon" onChange={onChangeModifyData} value = { modifyData.modifymealPay }/>
                                     </td>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>부양가족수당</td>
                                     <td>
-                                        <Form.Control style={{ width: '100%', height: '100%', borderBottom: "1px solid #d8d8d8" }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%', borderBottom: "1px solid #d8d8d8" }} type="text" name='modifydpndnAlwnc' aria-describedby="btnGroupAddon" onChange={onChangeModifyData} value = { modifyData.modifydpndnAlwnc }/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>차량유지비</td>
                                     <td >
-                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addbankName' aria-describedby="btnGroupAddon" />
+                                        <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifycarPay' aria-describedby="btnGroupAddon" onChange={onChangeModifyData} value = { modifyData.modifycarPay }/>
                                     </td>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}></td>

@@ -103,55 +103,55 @@ const Ow = () => {
                     </tr>
                     <tr>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>기본급</td>
-                        <td style={{border: "1px solid #000" ,textAlign:'right'}}>{e.dailyPay ? e.empPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :""}&nbsp;</td>
+                        <td style={{border: "1px solid #000" ,textAlign:'right'}}>{e.dailyPay ? e.dailyPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :""}&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>소득세</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyIncomeTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>야간수당</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyNightTimePay ? e.dailyNightTimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):"" }&nbsp;</td>
+                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>연장수당</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyOvertimePay ? e.dailyOvertimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):"" }&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>지방소득세</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyLocalTaxes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>주말근무수당</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyWeekendPay ? e.dailyWeekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):""}&nbsp;</td>
+                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>야간수당</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyNightTimePay ? e.dailyNightTimePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):""}&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>국민연금</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyNtnlPnsn ? e.dailyNtnlPnsn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>연차수당</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyAnnual ? e.dailyAnnual.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
+                    <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>주말근무수당</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyWeekendPay ? e.dailyWeekendPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):""}&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>건강보험</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyHlthInsrn ? e.dailyHlthInsrn.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>출산보육수당</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.chldbChalw ? e.chldbChalw.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
+                    <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>연차수당</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyAnnual ? e.dailyAnnual.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>고용보험</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyEmpIns ? e.dailyEmpIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>부양가족수당</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dpndnAlwnc ? e.dpndnAlwnc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
+                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>출산보육수당</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.chldbChalw ? e.chldbChalw.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>장기요양</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyIngTrmCrIns ? e.dailyIngTrmCrIns.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>식대</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyFoodPay ? e.dailyFoodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1'}}>추가경비</td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}>@@@@@@&nbsp;</td>
+                    <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>부양가족수당</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dpndnAlwnc ? e.dpndnAlwnc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
+                        <td style={{border: "1px solid #000",}}></td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}></td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>차량유지비</td>
+                         <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>식대</td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyCarStatePay ? e.dailyCarStatePay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                         <td style={{border: "1px solid #000"}}></td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}></td>
                     </tr>
                     <tr>
-                        <td style={{border: "1px solid #000",height:'60px'}}></td>
-                        <td style={{border: "1px solid #000",textAlign:'right'}}></td>
+                        <td style={{border: "1px solid #000",backgroundColor: '#ecf0f1',height:'60px'}}>차량유지비</td>
+                        <td style={{border: "1px solid #000",textAlign:'right'}}>{e.dailyFoodPay ? e.dailyFoodPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ""}&nbsp;</td>
                         <td style={{border: "1px solid #000"}}></td>
                         <td style={{border: "1px solid #000",textAlign:'right'}}></td>
                     </tr>
