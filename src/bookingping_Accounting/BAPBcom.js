@@ -642,7 +642,7 @@ const BAPBcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>매입/매출 관리 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>매입/매출 관리 </strong></h2>
             <br />
             <br />
             <br />

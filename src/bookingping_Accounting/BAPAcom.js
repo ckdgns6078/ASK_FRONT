@@ -377,7 +377,7 @@ const BAPAcom = () => {
     return (
         <div style={{ width: '1400px', position: 'relative' }}>
             {contextHolder}
-            <h2 style={{ color: ' #2F58B8', position: 'absolute', left: '0', top: '0px' }}><strong>거래처 관리 </strong></h2>
+            <h2 style={{ color: '#005b9e', position: 'absolute', left: '0', top: '0px' }}><strong>거래처 관리 </strong></h2>
             <Box >
                     
                     <button   style={{position:'absolute' ,right:"180px",}} onClick={addShow} className="Atmp1">  <strong>추가</strong></button>
