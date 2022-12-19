@@ -17,7 +17,7 @@ const Fbar = () => {
                             <Grid container  >
                                 
                                 <Grid item  xs ml={165} mt={0.6}> 
-                                <Navbar.Brand  href="/BAAbut">    <strong>거래관리</strong> </Navbar.Brand>     
+                                <Navbar.Brand  href="/BAAbut">    <strong>거래처관리</strong> </Navbar.Brand>     
                                               
                                 </Grid>
                                
