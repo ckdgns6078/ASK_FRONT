@@ -469,18 +469,17 @@ const OWAcom = () => {
                             </Grid>
 
                             <Grid item xs={6} md={7} ml={-21} mt={4}  >
-                                <InputGroup style={{ width: '600px', height: '30px' }}>
+                               
 
                                     <Form.Control
                                         type="text"
                                         name='dailyAddress'
                                         aria-describedby="btnGroupAddon"
-                                        style={{ height: '30px' }}
+                                        style={{ height: '30px',width:'145%' }}
                                         onChange={onChangeAddData} 
 
                                     />
-                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '40px', height: '30px' }}></InputGroup.Text>
-                                </InputGroup>
+                               
                             </Grid>
                             <Grid item xs={12} ml={-5} mt={-2}>
                                 <hr style={{ width: '800px' }} />
@@ -655,19 +654,18 @@ const OWAcom = () => {
 
                             <Grid item xs={6} md={7} ml={-21} mt={4}  >
                                 
-                                <InputGroup style={{ width: '600px', height: '30px' }}>
+                             
 
                                     <Form.Control
                                         type="text"
                                         name='dailyAddress'
                                         aria-describedby="btnGroupAddon"
-                                        style={{ height: '30px' }}
+                                        style={{ height: '30px',width:'145%' }}
                                         onChange={onChangeModifyData} 
                                         value = {modifyData.dailyAddress}
 
                                     />
-                                    <InputGroup.Text id="btnGroupAddon" style={{ width: '40px', height: '30px' }}></InputGroup.Text>
-                                </InputGroup>
+                                  
                             </Grid>
                             <Grid item xs={12} ml={-5} mt={-2}>
                                 <hr style={{ width: '800px' }} />
