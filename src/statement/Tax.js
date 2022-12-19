@@ -65,7 +65,7 @@ const Tax = () => {
                 <Table style={{ width: "700px", border: "1px solid blue" }}>
                     <tr style={{ border: "1px solid blue", color: 'blue' }}>
                         <td colspan='15' rowspan='2' style={{ height: '30px', width: '50px', fontSize: '25px', }}> 세 금 계 산 서 </td>
-                        <td colSpan='7' rowspan='2' style={{ width: '10px', height: '30px' }}>공급받는자 보관용</td>
+                        <td colSpan='7' rowspan='2' style={{ width: '10px', height: '30px' }}>공급자 보관용</td>
                         <td colSpan='4' style={{ border: "1px solid blue", color: 'blue', width: '100px', height: '10px' }}>책 번 호</td>
                         <td colSpan='3' style={{ border: "1px solid blue", color: 'blue', textAlign: 'right' }}>권</td>
                         <td colSpan='3' style={{ border: "1px solid blue", color: 'blue', textAlign: 'right' }}>호</td>
