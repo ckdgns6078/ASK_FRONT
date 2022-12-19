@@ -72,7 +72,7 @@ export default function VerticalTabs() {
         <h2  style={{color:'#005b9e'}}> &nbsp; &nbsp; <strong >경리/회계</strong>  &nbsp; &nbsp; </h2>
         </div>
     
-        <Tab label="거래 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/>
+        <Tab label="거래처 관리" {...a11yProps(0)} style={{fontSize:'25px'}}/>
         <Tab label=" 매입/매출 관리" {...a11yProps(1)}style={{fontSize:'25px'}} />
         {/* <Tab label=" 매출 관리" {...a11yProps(2)} style={{fontSize:'25px'}}/> */}
         <Tab label=" 통계" {...a11yProps(3)}style={{fontSize:'25px'}} />
