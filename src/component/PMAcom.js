@@ -210,7 +210,8 @@ const PMAcom = () => {
                 empPay : addData.addempPay,//연봉
                 carPay : addData.addcarPay,   //차량 유지비
                 childPay : addData.addchildPay, // 출산보육수당
-                dpndnAlwnc : addData.adddpndnAlwnc   // 부양가족수당
+                dpndnAlwnc : addData.adddpndnAlwnc,   // 부양가족수당
+                mealPay : addData.addmealPay
             }).then(function (response) {
                 if (response.data) {
                     let contentText = "        사원 추가 완료        ";
@@ -345,6 +346,7 @@ const PMAcom = () => {
         axios.post('http://192.168.2.82:5000/updateEmpModal',{
             empId : e.empId
         }).then(function (response){
+            console.log("response.data modify" , response.data);
             let empFirstSSN=null;
             let empSecondSSN =null;
             let empStartYear =null;
@@ -441,6 +443,7 @@ const PMAcom = () => {
     };
 
     const pushModifyData = ()=>{
+
         axios.post('http://192.168.2.82:5000/updateEmp', {
             empId : modifyData.modifyempId,
             empName: modifyData.modifyempName,//사원명
@@ -466,10 +469,10 @@ const PMAcom = () => {
             bankNum: modifyData.modifybankNum,//계좌번호
             bankOwner: modifyData.modifybankOwner,//예금주
             empPay: modifyData.modifyempPay,//연봉
-            carPay : modifyData.addcarPay,   //차량 유지비
-            childPay : modifyData.addchildPay, // 출산보육수당
-            dpndnAlwnc : modifyData.adddpndnAlwnc   // 부양가족수당
-            
+            carPay : modifyData.modifycarPay,   //차량 유지비
+            childPay : modifyData.modifychildPay, // 출산보육수당
+            dpndnAlwnc : modifyData.modifydpndnAlwnc,   // 부양가족수당
+            mealPay : modifyData.modifymealPay
         }).then(function (response) {
             if(response.data){
                 getData();
@@ -717,11 +720,17 @@ const PMAcom = () => {
                                 </td>
 
                             </tr>
+                            {/* 더미 삭제 퇴사일 일 입사일 수정 */}
                             <tr style={{ border: "1px solid #d8d8d8"}}>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>더미</td>
-                                <td colSpan='5'>
-                                <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
-                                </td>
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>입사일</td>
+                            
+                                <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartYear' value={addData.addempStartYear} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td>/</td>
+                                <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartMonth' value={addData.addempStartMonth} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                                <td>/</td>
+                                <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartDay'  value={addData.addempStartDay} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
+                               
+                      
                                 <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>직위/직급</td>
                                 <td colSpan='5'>
                                 <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addempRank' value={addData.addempRank} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
@@ -729,31 +738,28 @@ const PMAcom = () => {
 
                             </tr>
                             <tr style={{ border: "1px solid #d8d8d8"}}>
-                            <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>입사일</td>
-                                <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartYear' value={addData.addempStartYear} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
-                                <td>/</td>
-                                <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartMonth' value={addData.addempStartMonth} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
-                                <td>/</td>
-                                <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempStartDay'  value={addData.addempStartDay} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>휴가</td>
-                                <td>
-                                <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addtotalVacation' value={addData.addtotalVacation} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
-                                </td>
-                                <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'100px'}}>잔여휴가</td>
-                                <td>
-                                <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addremindVacation' value={addData.addremindVacation} aria-describedby="btnGroupAddon" />
-                                </td>
-                            </tr>
-                            <tr style={{ border: "1px solid #d8d8d8"}}>
-                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>퇴사일</td>
+                            <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',height:'40px'}}>퇴사일</td>
+
                                 <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndYear' value={addData.addempEndYear} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 <td>/</td>
                                 <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndMonth' value={addData.addempEndMonth} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 <td>/</td>
                                 <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='addempEndDay' value={addData.addempEndDay} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/></td>
                                 
+                                <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>휴가</td>
+                                <td>
+                                <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='addtotalVacation' value={addData.addtotalVacation} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
+                                </td>
+                                <td  style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px',width:'100px'}}>잔여휴가</td>
+                                <td>
+                                <Form.Control style={{ width: '100px', height: '30px',height:'100%' }} type="text" name='add' aria-describedby="btnGroupAddon" onChange={onChangeAddData} disabled/>
+                                </td>
+                            </tr>
+                            <tr style={{ border: "1px solid #d8d8d8"}}>
+                           
+                           
                                 <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7' ,fontSize:'15px'}}>퇴사사유</td>
-                                <td colSpan='4'>
+                                <td colSpan='9'>
                                 <Form.Control style={{ width: '100%', height: '30px',height:'100%' }} type="text" name='addempEndReason' value={addData.addempEndReason} aria-describedby="btnGroupAddon" onChange={onChangeAddData}/>
                                 </td>
                             </tr>
@@ -775,7 +781,7 @@ const PMAcom = () => {
                                 <tr>                                                         
 
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>출산보육수당</td>
-                                    <td>
+                                    <td colSpan='3'>
                                         <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='addchildPay' aria-describedby="btnGroupAddon" value={ addData.addchildPay }onChange={onChangeAddData} />
                                     </td>
                                 </tr>
@@ -972,10 +978,15 @@ const PMAcom = () => {
 
                                     </tr>
                                     <tr style={{ border: "1px solid #d8d8d8" }}>
-                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>더미</td>
-                                        <td colSpan='5'>
-                                            <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='sdasdsa' aria-describedby="btnGroupAddon" />
-                                        </td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>입사일</td>
+                                     
+                                        <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartYear' value={modifyData.modifyempStartYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        <td>/</td>
+                                        <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartMonth' value={modifyData.modifyempStartMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/></td>
+                                        <td>/</td>
+                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartDay' value={modifyData.modifyempStartDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        
+
                                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>직위/직급</td>
                                         <td colSpan='5'>
                                             <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifyempRank' value={modifyData.modifyempRank} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
@@ -983,13 +994,16 @@ const PMAcom = () => {
 
                                     </tr>
                                     <tr style={{ border: "1px solid #d8d8d8" }}>
-                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>입사일</td>
-                                        <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartYear' value={modifyData.modifyempStartYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>퇴사일</td>
+                                  
+                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndYear' value={modifyData.modifyempEndYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
                                         <td>/</td>
-                                        <td><Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartMonth' value={modifyData.modifyempStartMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData}/></td>
+                                        <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndMonth' value={modifyData.modifyempEndMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
                                         <td>/</td>
-                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempStartDay' value={modifyData.modifyempStartDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
-                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>휴가</td>
+                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndDay' value={modifyData.modifyempEndDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
+
+                                        
+                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>휴가</td>          
                                         <td>
                                             <Form.Control style={{ width: '100px', height: '30px', height: '100%' }} type="text" name='modifytotalVacation' value={modifyData.modifytotalVacation} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
                                         </td>
@@ -998,16 +1012,12 @@ const PMAcom = () => {
                                             <Form.Control style={{ width: '100px', height: '30px', height: '100%' }} type="text" name='modifyremindVacation' value={modifyData.modifyremindVacation}aria-describedby="btnGroupAddon" />
                                         </td>
                                     </tr>
-                                    <tr style={{ border: "1px solid #d8d8d8" }}>
-                                        <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px', height: '40px' }}>퇴사일</td>
-                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndYear' value={modifyData.modifyempEndYear} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
-                                        <td>/</td>
-                                        <td>  <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndMonth' value={modifyData.modifyempEndMonth} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
-                                        <td>/</td>
-                                        <td> <Form.Control style={{ width: '60px', height: '100%' }} type="text" name='modifyempEndDay' value={modifyData.modifyempEndDay} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} /></td>
 
+                                    <tr style={{ border: "1px solid #d8d8d8" }}>
+                                      
+                                 
                                         <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '22px', backgroundColor: '#f7f7f7', fontSize: '15px' }}>퇴사사유</td>
-                                        <td colSpan='4'>
+                                        <td colSpan='9'>
                                             <Form.Control style={{ width: '100%', height: '30px', height: '100%' }} type="text" name='modifyempEndReason' value={modifyData.modifyempEndReason} aria-describedby="btnGroupAddon" onChange={onChangeModifyData} />
                                         </td>
                                     </tr>
@@ -1028,7 +1038,7 @@ const PMAcom = () => {
 
                                 <tr>                                                                           
                                     <td style={{ border: "1px solid #d8d8d8", color: '#777777', fontSize: '15px', backgroundColor: '#f7f7f7' }}>출산보육수당</td>
-                                    <td>
+                                    <td colSpan='3'>
                                         <Form.Control style={{ width: '100%', height: '100%' }} type="text" name='modifychildPay' aria-describedby="btnGroupAddon" onChange={onChangeModifyData} value = { modifyData.modifychildPay }/>
                                     </td>
                                 </tr>

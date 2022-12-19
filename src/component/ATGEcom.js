@@ -398,7 +398,7 @@ const ATGEcom = () => {
                             onKeyUp={enterkey}
 
                         />
-                        <InputGroup.Text id="btnGroupAddon" onClick={searchAddData} style={{ width: '50px', height: '40px' }}> <SearchIcon /></InputGroup.Text>
+                        <InputGroup.Text id="btnGroupAddon" onClick={searchAddData} style={{ width: '50px', height: '40px' }}> <SearchIcon onClick={searchAddData}/></InputGroup.Text>
                     </InputGroup>
 
                 </Grid>

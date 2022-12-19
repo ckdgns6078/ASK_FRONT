@@ -52,6 +52,7 @@ const Login1 = () => {
                     axios.post('http://192.168.2.82:5000/getMaster', {
                         userId : id
                     }).then(function(response){
+                        console.log("response "  , response.data[0]);
                         sessionStorage.setItem("uid" , response.data);
                     }).catch(function(error){
                         console.log("getMaster error" , error);

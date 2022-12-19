@@ -58,11 +58,12 @@ const Acom = () => {
             window.location.href = "http://localhost:3000/Login";
         }
         getData();
+        
     }, []);
 
     const getData = () =>{
         axios.post('http://192.168.2.82:5000/readCompany', {
-            id: sessionStorage.getItem("id")
+            id: sessionStorage.getItem("uid")
 
         }).then(function (response) {
             console.log("response.data" ,response.data);

@@ -122,11 +122,22 @@ const PMBcom = () => {
     const MdClose = () => {
         setModifyShow(false);
         setModifyCheck(false);
+        setModifyData({
+            "modifyempPayID": null, //수당 리스트 PRIMARYKEY
+            "modifycompCode": null, // 회사 코드 (관리자 아이디)
+            "modifypayCode": null,  // 수당 코드
+            "modifypayName": null,  // 수당명
+            "modifytaxFreeCode": null, // 비과세 코드
+            "modifytaxFreeName": null, // 비과세 명
+            "modifypayType": null,  // 지급 유형
+            "modifypayCalc": null,  // 계산식
+        })
     }
     const MdShow = (e) => {
         axios.post('http://192.168.2.82:5000/updateEmpPayModal ', {
             empPayID: e.empPayID
         }).then(function (response) {
+            console.log("modify" , response.data[0]);
             setModifyData({
                 "modifyempPayID": response.data[0].empPayID, //수당 리스트 PRIMARYKEY
                 "modifycompCode": response.data[0].compCode, // 회사 코드 (관리자 아이디)
@@ -135,10 +146,7 @@ const PMBcom = () => {
                 "modifytaxFreeCode": response.data[0].taxFreeCode, // 비과세 코드
                 "modifytaxFreeName": response.data[0].taxFreeName, // 비과세 명
                 "modifypayType": response.data[0].payType,  // 지급 유형
-                "modifypayCalc": response.data[0].payCalc,  // 계산식
-
-
-                
+                "modifypayCalc": response.data[0].taxFreeCalc,  // 계산식
             });
         }).catch(function (er) {
             console.log("updataEmpModal error", er);
@@ -308,6 +316,7 @@ const PMBcom = () => {
             let contentText = "비과세 항목에 없는 데이터를 입력하셨습니다. 비과세항목에 맞는 데이터를 넣어주세요";
             warning(contentText);
         } else {
+            console.log("계산식" , modifyData.modifypayCalc)
             axios.post('http://192.168.2.82:5000/updateEmpPay', {
                 empPayID: modifyData.modifyempPayID,
                 compCode: modifyData.modifycompCode,
@@ -316,7 +325,7 @@ const PMBcom = () => {
                 taxFreeCode: modifyData.modifytaxFreeCode,
                 taxFreeName: modifyData.modifytaxFreeName,
                 payType: modifyData.modifypayType,
-                taxFreeCalC: modifyData.modifypayCalc
+                taxFreeCalc: modifyData.modifypayCalc
             }).then(function (response) {
                 if (response.data) {
                     getData();
